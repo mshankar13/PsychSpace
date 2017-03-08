@@ -1,4 +1,4 @@
-appengine-skeleton
+PsychSpace by Space Cadet
 =============================
 
-This is a generated application from the appengine-skeleton archetype.
+This web app seeks to help individuals develop healthy habits and achieve personal goals through self-discipline. 
