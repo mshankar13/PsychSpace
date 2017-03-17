@@ -1,22 +1,129 @@
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
+
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Hello App Engine</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script type="text/javascript">
+        angular.module('PsychSpace', ['ngMaterial'])
+                .controller('navController', navController);
+
+        function navController($scope, $mdMenu) {
+//            'use strict';
+
+//            function AppCtrl($scope) {
+                $scope.currentNavItem = 'home-page';
+//            }
+            var originatorEv;
+
+            this.menuHref = "http://www.google.com/design/spec/components/menus.html#menus-specs";
+
+            this.openMenu = function ($mdMenu, ev) {
+                originatorEv = ev;
+                $mdMenu.open(ev);
+            };
+
+            this.announceClick = function (index) {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .title('You clicked!')
+                        .textContent('You clicked the menu item at index ' + index)
+                        .ok('Nice')
+                        .targetEvent(originatorEv)
+                );
+                originatorEv = null;
+            };
+        }
+    </script>
   </head>
 
-  <body>
-    <h1>Hello App Engine!</h1>
-  
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href='/hello'>The servlet</a></td>
-      </tr>
-    </table>
+  <body ng-app="PsychSpace">
+
+  <div id="navController" ng-controller="navController as ctrl" layout="row" ng-cloak>
+    <md-content class="md-padding">
+      <md-nav-bar
+              md-selected-nav-item="currentNavItem"
+              nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="goto('home-page')" name="home-page">
+          Home
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('learn-page')" name="learn-page">
+          Learn
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('catalogue-page')" name="catalogue-page">
+          Catalogue
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('news-page')" name="news-page">
+          News
+        </md-nav-item>
+
+
+        <!-- these require actual routing with ui-router or ng-route, so they
+        won't work in the demo
+        <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+        <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+        You can also add options for the <code>ui-sref-opts</code> attribute.
+        <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+          Page Six
+        </md-nav-item>
+        -->
+      </md-nav-bar>
+      <!--<div class="ext-content">-->
+        <!--External content for `<span>{{currentNavItem}}</span>`.-->
+      <!--</div>-->
+
+      <!--<md-checkbox ng-model="disableInkBar">Disable Ink Bar</md-checkbox>-->
+
+    </md-content>
+  </div> <!--div for nav bar-->
+
+  <div layout="column" flex-xs="100" flex-sm="100" flex="33" layout-align="center center">
+    <md-menu md-position-mode="target-right target" >
+      <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+        <i class="material-icons md-36">account_circle</i>
+        <md-icon md-menu-origin md-svg-icon="account_circle"></md-icon>
+      </md-button>
+      <md-menu-content width="4" >
+        <md-menu-item ng-repeat="item in [1, 2, 3]">
+          <md-button ng-click="ctrl.announceClick($index)">
+            <div layout="row" flex>
+              <p flex>Option {{item}}</p>
+              <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+            </div>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+
+
+  <md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">HTML 5</h2>
+    </div>
+  </md-toolbar>
+
+  <md-content flex layout-padding>
+    <p>HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1. HTML5 is a standard for structuring and presenting content on the World Wide Web.</p>
+    <p>HTML5 is a cooperation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG).</p>
+    <p>The new standard incorporates features like video playback and drag-and-drop that have been previously dependent on third-party browser plug-ins such as Adobe Flash, Microsoft Silverlight, and Google Gears.</p>
+  </md-content>
+
+  <h1>Hello App Engine!</h1>
+
+  <table>
+    <tr>
+      <td colspan="2" style="font-weight:bold;">Available Servlets:</td>
+    </tr>
+    <tr>
+      <td><a href='/hello'>The servlet</a></td>
+    </tr>
+  </table>
+
+
   </body>
 </html>

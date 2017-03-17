@@ -1,0 +1,47 @@
+<header ng-controller="DropdownCtrl" class="ng-scope">
+    <nav class="navbar navbar-default" id="nav-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="../resources/img/logo.png" alt="logo" class="img-logo">
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="../resources/img/logo_text.png" alt="PsychSpace" id="img-logo-text">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse in" uib-collapse="vm.isCollapsed" id="bs-example-navbar-collapse-1" aria-expanded="true" aria-hidden="false">
+                <ul class="nav navbar-nav" id="uib-overrides-nav">
+                    <li><a href="#" class="active uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#" class="uib-overrides-nav-a">Learn</a></li>
+                    <li><a href="#" class="uib-overrides-nav-a">Catalogue</a></li>
+                    <li><a href="#" class="uib-overrides-nav-a">News</a></li>
+                </ul>
+                <form class="navbar-form navbar-left ng-pristine ng-valid" id="form-search" role="search">
+                    <div class="form-group" id="form-group-search">
+                        <input type="text" class="form-control" id="search-input" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default" id="button-search">
+                        <i class="material-icons md-36" id="icon-search">search</i>
+                    </button>
+                </form>
+                <ul class="nav navbar-nav">
+                    <li uib-dropdown is-open="status.isopen" class="dropdown" id="nav-profile">
+                        <a uib-dropdown-toggle="" class="uib-overrides-nav-a dropdown-toggle" id="button-profile" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons md-36 icon-account-circle">account_circle</i>
+                            <span class="caret icon-caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="uib-overrides-dropdown-profile" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a href="#">Setting</a></li>
+                            <li role="menuitem"><a href="#">Help</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>

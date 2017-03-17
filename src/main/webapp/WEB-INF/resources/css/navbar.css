@@ -1,0 +1,126 @@
+:root {
+    --space-cadet-color: #1D2051;
+    --baby-powder-color: #FCFCFC;
+    --eucalyptus-color: #3DDC97;
+    --pastel-red-color: #EF6461;
+    --tea-rose-color: #F2CCC3;
+}
+
+
+/**************************** navbar *****************************/
+#nav-top {
+    min-height: 60px;
+    background-color: var(--space-cadet-color);
+    color: var(--baby-powder-color);
+    font-size: 16pt;
+    font-family: "Maven Pro";
+    width: 100%;
+    margin-bottom: 0px;
+    border-bottom: transparent;
+}
+
+.navbar-default {
+    border-color: transparent;
+}
+
+#uib-overrides-nav,
+.icon-account-circle,
+.icon-caret,
+#icon-search {
+    color: var(--baby-powder-color);
+}
+
+#uib-overrides-nav>li>a:hover,
+#nav-profile>li>a:hover,
+.icon-account-circle:hover,
+.icon-account-circle:focus,
+.icon-caret:hover,
+.icon-caret:focus {
+    color: var(--eucalyptus-color);
+}
+
+
+/**************************** Logo *****************************/
+.img-logo {
+    width: 60px;
+    height: 60px;
+    margin-top: -15px;
+    margin-bottom: 0px;
+}
+
+#img-logo-text {
+    width: 200px;
+}
+
+
+/**************************** Menu *****************************/
+#uib-overrides-nav {
+    margin-left: 5%;
+}
+
+#uib-overrides-nav>li>a{
+    color: var(--baby-powder-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+li>.active,
+#uib-overrides-nav>li>.active>a,
+#uib-overrides-nav>li>.active>a:focus,
+#uib-overrides-nav>li>.active>a:hover
+{
+    background-color: var(--eucalyptus-color);
+    color: var(--baby-powder-color);
+}
+
+
+
+
+/**************************** Search *****************************/
+#form-search {
+    position: absolute;
+    margin-left: 60%;
+    bottom: 4px;
+}
+
+#search-input {
+    width: 250px;
+}
+
+#button-search {
+    background-color: var(--space-cadet-color);
+    border-color: transparent;
+}
+
+#icon-search:hover {
+    color: var(--eucalyptus-color);
+}
+
+
+/**************************** Profile *****************************/
+#nav-profile {
+    float: right;
+    position: absolute;
+    margin-left: 35%;
+}
+
+#uib-overrides-dropdown-profile {
+    min-width: 120px;
+    left: -50px;
+    top: 45px;
+    border-radius: 5px;
+}
+
+.nav .open>#button-profile,
+.nav .open>#button-profile:hover,
+.nav .open>#button-profile:focus{
+    background-color: var(--space-cadet-color)
+}
+
+#button-profile:hover>.icon-account-circle,
+#button-profile:hover>.icon-caret,
+.nav .open>#button-profile,
+.nav .open>a>.icon-account-circle,
+.nav .open>a>.icon-caret{
+    color: var(--eucalyptus-color)
+}
