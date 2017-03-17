@@ -17,5 +17,6 @@
 </head>
 <body ng-app="psychSpaceHome" ng-cloak>
     <%@include  file="navbar.html" %>
+    <%@include  file="footer.html" %>
 </body>
 </html>

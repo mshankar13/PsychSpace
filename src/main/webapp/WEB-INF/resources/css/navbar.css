@@ -124,3 +124,42 @@ li>.active,
 .nav .open>a>.icon-caret{
     color: var(--eucalyptus-color)
 }
+
+/**************************** Footer *****************************/
+.container-footer {
+    min-height: 60px;
+    background-color: var(--space-cadet-color);
+    color: var(--tea-rose-color);
+    font-family: "Open Sans";
+    text-align: center;
+    width: 100%;
+}
+
+.footer-div-center {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.footer-ul {
+    list-style-type: none;
+}
+
+.footer-li {
+    float: left;
+}
+
+.footer-li a,
+.footer-li span {
+    display: block;
+    color: var(--tea-rose-color);
+    text-decoration: none;
+    padding: 16px 40px;
+}
+
+.footer-li a:hover {
+    color: var(--pastel-red-color);
+}
+
+#footer-line {
+    width: 90%;
+}
