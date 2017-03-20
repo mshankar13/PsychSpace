@@ -1,0 +1,142 @@
+:root {
+    --space-cadet-color: #1D2951;
+    --baby-powder-color: #FCFCFC;
+    --eucalyptus-color: #3DDC97;
+    --pastel-red-color: #EF6461;
+    --tea-rose-color: #F2CCC3;
+}
+
+/*---------------- CONTENT ----------------*/
+header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    background-image: url('../img/header.jpg');
+    text-align: center;
+    color: white;
+    background-color: var(--space-cadet-color);
+}
+
+hr {
+    border-color: var( --eucalyptus-color);
+    border-width: 3px;
+    max-width: 220px;
+}
+
+header .header-content {
+    position: relative;
+    text-align: center;
+    padding: 50px 15px 50px;
+    width: 100%;
+}
+
+header .header-content .header-content-inner h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+    font-family: "Maven Pro";
+    vertical-align: middle;
+    align-content: center;
+}
+
+header .header-content .header-content-inner hr {
+    margin: 20px auto;
+}
+
+header .header-content .header-content-inner p {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 24px;
+    font-family: "Open Sans";
+}
+
+/*---------------- LOGOS AND TEXT ----------------*/
+.header-content-inner-logos{
+    padding-top: 6em;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    max-width: 50%;
+} 
+
+.header-content-inner-logos p{
+    margin-bottom: 0;
+    margin-right: 0;
+    padding: 1.5em;
+} 
+
+img{
+    padding: 2em;
+    vertical-align: middle;
+}
+
+#logo {
+    max-width: 180px;
+}
+
+.logo-img{
+    display: inline-block;
+}
+
+.logo-text-img{
+    display: inline-block;
+}
+
+/*---------------- BUTTON ----------------*/
+.header-content-inner-buttons{
+    padding: 1em;
+}
+
+.button {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: var(--eucalyptus-color);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    width: 140px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 1.5em;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -15px;
+  transition: 0.5s;
+}
+
+.button:hover{
+    background-color: var(--pastel-red-color);
+}
+
+.button:hover span {
+  padding-right: 15px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
