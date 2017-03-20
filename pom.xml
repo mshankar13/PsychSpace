@@ -44,13 +44,6 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- Jackson Mapper Dependencies -->
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
-
         <!-- Spring MVC Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>

@@ -1,4 +1,4 @@
-package com.spacecadet.controller;
+package com.spacecadet.psychspace.controller;
 
 import org.springframework.stereotype.Controller;
 
