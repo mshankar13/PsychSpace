@@ -9,11 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by aliao on 3/20/2017.
  */
 @Controller
-public class WelcomeController {
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView welcome(){
+public class HomeController {
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView home(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("welcome");
+        model.setViewName("home");
 
         return model;
     }
