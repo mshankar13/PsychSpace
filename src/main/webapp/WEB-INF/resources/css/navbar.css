@@ -79,8 +79,8 @@
     text-align: center;
     transition: 0.5s ease;
     margin: 0 20px;
-    border-top: 4px solid var(--space-cadet-color);
-    border-bottom: 4px solid var(--space-cadet-color);
+    border-top: 3px solid var(--space-cadet-color);
+    border-bottom: 3px solid var(--space-cadet-color);
 }
 
 .uib-overrides-nav-a:before {
@@ -113,8 +113,8 @@
 #uib-overrides-nav>li>.active:hover
 {
     color: var(--baby-powder-color);
-    border-top: 4px solid var(--dogwood-color);
-    border-bottom: 4px solid var(--dogwood-color);
+    border-top: 3px solid var(--dogwood-color);
+    border-bottom: 3px solid var(--dogwood-color);
     padding: 5px 10px;
     margin: 10px 15px;
 }
