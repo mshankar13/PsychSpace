@@ -4,6 +4,8 @@
     --eucalyptus-color: #3DDC97;
     --pastel-red-color: #EF6461;
     --tea-rose-color: #F2CCC3;
+    --yellow-color: #FFD401;
+    --dogwood-color: #D90368;
 }
 
 /*---------------- CONTENT ----------------*/
@@ -31,7 +33,7 @@ hr {
 header .header-content {
     position: relative;
     text-align: center;
-    padding: 50px 15px 50px;
+    padding: 50px 15px 15px auto;
     width: 100%;
 }
 
@@ -98,11 +100,9 @@ img{
     vertical-align: middle;
     display: inline-block;
     border-radius: 4px;
-    background-color: var(--eucalyptus-color);
-    border: none;
+    border: 2px solid var(--baby-powder-color);
     color: #FFFFFF;
     text-align: center;
-    font-size: 28px;
     padding: 10px;
     width: 140px;
     transition: all 0.5s;
@@ -129,7 +129,9 @@ img{
 }
 
 .button:hover{
-    background-color: var(--pastel-red-color);
+    /*border: 1px solid var(--baby-powder-color);*/
+    /*background-color: var(--eucalyptus-color);*/
+    color: var(--baby-powder-color);
 }
 
 .button:hover span {

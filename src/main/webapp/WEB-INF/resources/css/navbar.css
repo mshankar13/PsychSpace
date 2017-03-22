@@ -4,6 +4,8 @@
     --eucalyptus-color: #3DDC97;
     --pastel-red-color: #EF6461;
     --tea-rose-color: #F2CCC3;
+    --yellow-color: #FFD401;
+    --dogwood-color: #D90368;
 }
 
 
@@ -17,6 +19,7 @@
     width: 100%;
     margin-bottom: 0px;
     border-bottom: transparent;
+    border-radius: 0px;
 }
 
 .navbar-default {
@@ -60,17 +63,60 @@
 
 #uib-overrides-nav>li>a{
     color: var(--baby-powder-color);
-    padding-top: 20px;
-    padding-bottom: 20px;
+
 }
 
-li>.active,
-#uib-overrides-nav>li>.active>a,
-#uib-overrides-nav>li>.active>a:focus,
-#uib-overrides-nav>li>.active>a:hover
-{
-    background-color: var(--eucalyptus-color);
+.nav-li {
+    margin: 0px 20px;
+}
+
+.nav>.nav-li>a {
+    margin: 0px 10px;
+}
+
+.uib-overrides-nav-a {
+    padding: 20px 0px;
+    text-align: center;
+    transition: 0.5s ease;
+    margin: 0 20px;
+    border-top: 4px solid var(--space-cadet-color);
+    border-bottom: 4px solid var(--space-cadet-color);
+}
+
+.uib-overrides-nav-a:before {
+    top: 0px;
+    transform: translateY(-10px);
+}
+
+.uib-overrides-nav-a:after {
+    bottom: 0px;
+    transform: translateY(10px);
+}
+
+.uib-overrides-nav-a:before,
+.uib-overrides-nav-a:after {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.nav-li>.uib-overrides-nav-a:hover {
     color: var(--baby-powder-color);
+    border-top: 4px solid var(--baby-powder-color);
+    border-bottom: 4px solid var(--baby-powder-color);
+    padding: 5px 10px;
+    margin: 10px 15px;
+}
+
+.nav>.nav-li>.active,
+#uib-overrides-nav>li>.active,
+#uib-overrides-nav>li>.active:focus,
+#uib-overrides-nav>li>.active:hover
+{
+    color: var(--baby-powder-color);
+    border-top: 4px solid var(--dogwood-color);
+    border-bottom: 4px solid var(--dogwood-color);
+    padding: 5px 10px;
+    margin: 10px 15px;
 }
 
 
@@ -84,7 +130,7 @@ li>.active,
 }
 
 #search-input {
-    width: 250px;
+    width: 200px;
 }
 
 #button-search {
@@ -101,7 +147,11 @@ li>.active,
 #nav-profile {
     float: right;
     position: absolute;
-    margin-left: 35%;
+    margin-left: 13%;
+}
+
+#button-profile {
+    border: transparent;
 }
 
 #uib-overrides-dropdown-profile {
@@ -124,6 +174,7 @@ li>.active,
 .nav .open>a>.icon-caret{
     color: var(--eucalyptus-color)
 }
+
 
 /**************************** Footer *****************************/
 .container-footer {
@@ -157,7 +208,7 @@ li>.active,
 }
 
 .footer-li a:hover {
-    color: var(--pastel-red-color);
+    color: var(--yellow-color);
 }
 
 #footer-line {

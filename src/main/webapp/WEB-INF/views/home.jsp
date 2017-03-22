@@ -14,7 +14,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
-    <!--<script src="../resources/js/ui-bootstrap-tpls-2.5.0.min.js"></script>-->
     <script src="${contextPath}/resources/js/navbar.js"></script>
 </head>
 <body ng-app="psychSpaceHome" ng-cloak>
