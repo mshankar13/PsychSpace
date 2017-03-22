@@ -29,7 +29,15 @@
                         <div class="container-logo">
                             <img src="${contextPath}/resources/img/logo.png" class="logo-img">
                         </div>
-                        <p>PsychSpace provides an online learning tool for adults to develop healthy habits while understanding the science behind self-motivation, turning ambitions into accomplishments, correcting bad habits, and maintaining new routines. Through this tool, users become students by selecting a topic, a habit they would like to create or correct, and join others with the same goal under the direction of an instructor. Throughout the learning period of a topic, the instructor guides students with daily feedback and lectures that will help students overcome obstacles and work smarter towards their goals. Part of an effort to promote cyberlearning, PsychSpace helps students manage their self-enrolled topics, keep track of their progress during the learning period as well as completed topics, communicate with peers, and receive personalized feedback from instructors proficient in psychology and self-help techniques. To keep both students and instructors well-read and up to date with current research, PsychSpace also provides a newsfeed featuring articles. </p>
+                        <p>PsychSpace provides an online self-learning tool for adults to develop healthy habits. This
+                            tool will enable users to understand the science behind self-motivation, turning ambitions
+                            into accomplishments, correcting bad habits, and maintaining new routines. Users can sign up
+                            as students and select courses that would help them create or correct specific habits. As
+                            part of an effort to promote cyberlearning, PsychSpace helps students manage their
+                            self-enrolled topics, keep track of their progress during the learning period, communicate
+                            with peers, and receive personalized feedback from instructors proficient in psychology
+                            and self-help techniques.
+                        </p>
                     </div>
 
                 </div>
@@ -42,7 +50,9 @@
                         <img src="img/speaker-1.png" class="speaker-img">
                         <h2>Celesta Ma</h2>
                         <h3>Lead Programmer</h3>
-                        <p>She is a Computer Science major with HCI specialization. Celeste has worked with startup companies and Research Foundation for SUNY for full stack development. She is trained at developing user friendly interfaces and web development.</p>
+                        <p>She is a Computer Science major with HCI specialization. Celeste has worked with startup
+                            companies and Research Foundation for SUNY for full stack development. She is trained at
+                            developing user friendly interfaces and web development.</p>
                         <ul class="speaker-social">
                             <li><a href="#"><span class="ti-linkedin"></span></a></li>
                             <li><a href="#"><span class="ti-github"></span></a></li>
@@ -52,7 +62,9 @@
                         <img src="img/speaker-1.png" class="speaker-img">
                         <h2>Angela Liao</h2>
                         <h3>Project Manager</h3>
-                        <p>Pursuing a Bachelor’s in Computer Science and Applied Math and Statistics at Stony Brook University. Angela is a former intern and a prospective employee at Amazon.com. She is proficient in team organization and project specification development.</p>
+                        <p>Pursuing a Bachelor’s in Computer Science and Applied Math and Statistics at Stony Brook
+                            University. Angela is a former intern and a prospective employee at Amazon.com. She is
+                            proficient in team organization and project specification development.</p>
                         <ul class="speaker-social">
                             <li><a href="#"><span class="ti-linkedin"></span></a></li>
                             <li><a href="#"><span class="ti-github"></span></a></li>
@@ -62,7 +74,9 @@
                         <img src="img/speaker-1.png" class="speaker-img">
                         <h2>Marlene Shankar</h2>
                         <h3>Data Designer</h3>
-                        <p>Pursuing a Bachelor’s in Computer Science and Biochemistry at Stony Brook University. Marlene is a former game programming and Chemistry storyline intern for the Smithsonian. She is proficient in relational databases and backend development.</p>
+                        <p>Pursuing a Bachelor’s in Computer Science and Biochemistry at Stony Brook University.
+                            Marlene is a former game programming and Chemistry storyline intern for the Smithsonian.
+                            She is proficient in relational databases and backend development.</p>
                         <ul class="speaker-social">
                             <li><a href="#"><span class="ti-linkedin"></span></a></li>
                             <li><a href="#"><span class="ti-github"></span></a></li>
@@ -72,7 +86,10 @@
                         <img src="img/speaker-1.png" class="speaker-img">
                         <h2>Andrea Cerini</h2>
                         <h3>Lead Designer</h3>
-                        <p>A Computer Science student with a focus in Digital Arts at Stony Brook University. Andrea has over 10 years of experience both professionally and personally in digital arts, having worked as a graphics designer and her art has been featured in many exhibitions. She is proficient in many design applications such as Adobe Photoshop and Illustrator.</p>
+                        <p>A Computer Science student with a focus in Digital Arts at Stony Brook University.
+                            Andrea has over 10 years of experience both professionally and personally in digital arts,
+                            having worked as a graphics designer and her art has been featured in many exhibitions.
+                            She is proficient in many design applications such as Adobe Photoshop and Illustrator.</p>
                         <ul class="speaker-social">
                             <li><a href="#"><span class="ti-linkedin"></span></a></li>
                             <li><a href="#"><span class="ti-github"></span></a></li>

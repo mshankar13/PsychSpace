@@ -35,9 +35,16 @@ public class NewsManager {
             news.likesCount = Integer.parseInt(entity.getProperty("Likes").toString());
             news.date = news.convertDate(entity.getProperty("Date").toString());
             news.newsKey = KeyFactory.keyToString(entity.getKey());
-
             loadedNews.add(news);
         }
+
+        // Sort the loaded News by date
+        Collections.sort(loadedNews, new Comparator<News>() {
+            @Override
+            public int compare(News o1, News o2) {
+                return o1.date.compareTo(o2.date);
+            }
+        });
 
         return loadedNews;
     }
