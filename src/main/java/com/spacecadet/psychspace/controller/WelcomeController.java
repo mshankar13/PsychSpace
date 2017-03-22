@@ -17,4 +17,12 @@ public class WelcomeController {
 
         return model;
     }
+
+    @RequestMapping(value = "/_ah/warmup", method = RequestMethod.GET)
+    public ModelAndView notUsed(){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("welcome");
+
+        return model;
+    }
 }
