@@ -27,7 +27,7 @@
 .error-header{
     position: relative;
     width: 100%;
-    height: 98vh;
+    min-height: 100vh;
     text-align: center;
     color: white;
 }
@@ -40,9 +40,86 @@
 }
 
 .error-header .error-header-content h1{
-    font-size: 300px;
+    font-size: 36px;
+    font-family: "Maven Pro";
+    padding: 2em;
 }
 
-.error-header .error-header-content h2{
-    font-size: 40px;
+/*---------------- LOGOS ----------------*/
+
+.error-header .error-header-content-inner-logos{
+    padding-top: 6em;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    max-width: 40%;
+}
+
+.error-header .error-img-logo{
+    padding: 2em;
+    vertical-align: middle;
+    width: 200px;
+}
+
+.error-header .error-img-text{
+    padding: 2em;
+    vertical-align: middle;
+    max-width: 90%;
+}
+
+
+.error-header .error-logo{
+    display: inline-block;
+}
+
+/*---------------- BUTTONS ----------------*/
+.error-header .error-header-content-inner-buttons{
+    padding: 1em;
+}
+
+.error-header .button {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 4px;
+    border: 2px solid var(--baby-powder-color);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+    width: 140px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 1.5em;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.error-header .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.error-header .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+.error-header .button:hover{
+    /*border: 1px solid var(--baby-powder-color);*/
+    /*background-color: var(--eucalyptus-color);*/
+    color: var(--baby-powder-color);
+}
+
+.error-header .button:hover span {
+    padding-right: 15px;
+}
+
+.error-header .button:hover span:after {
+    opacity: 1;
+    right: 0;
 }
