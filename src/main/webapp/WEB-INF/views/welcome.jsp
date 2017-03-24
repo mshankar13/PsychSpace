@@ -17,7 +17,7 @@
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
 </head>
-<body>
+<b
         <div class="welcome-nav">
             <%@include  file="navbar.html" %>
         </div>

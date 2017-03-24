@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * Created by marleneshankar on 3/18/17.
  */
@@ -13,5 +15,12 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    public String userKey;
     public String username;
+    public String password;
+    public String firstName;
+    public String lastName;
+    public String email;
+    public Date dob;
+    public String role; //User, Instructor, Admin
 }
