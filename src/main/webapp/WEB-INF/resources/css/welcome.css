@@ -9,10 +9,9 @@
 }
 
 /*---------------- CONTENT ----------------*/
-header {
+.welcome-header{
     position: relative;
     width: 100%;
-    height: 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -24,20 +23,14 @@ header {
     background-color: var(--space-cadet-color);
 }
 
-hr {
-    border-color: var( --eucalyptus-color);
-    border-width: 3px;
-    max-width: 220px;
-}
-
-header .header-content {
+.welcome-header .header-content {
     position: relative;
     text-align: center;
     padding: 50px 15px 15px auto;
     width: 100%;
 }
 
-header .header-content .header-content-inner h1 {
+.welcome-header .header-content .header-content-inner h1 {
     font-weight: 700;
     text-transform: uppercase;
     margin-top: 0;
@@ -48,11 +41,11 @@ header .header-content .header-content-inner h1 {
     align-content: center;
 }
 
-header .header-content .header-content-inner hr {
+.welcome-header .header-content .header-content-inner hr {
     margin: 20px auto;
 }
 
-header .header-content .header-content-inner p {
+.welcome-header .header-content .header-content-inner p {
     font-weight: 300;
     color: rgba(255, 255, 255, 0.9);
     font-size: 24px;
@@ -60,43 +53,47 @@ header .header-content .header-content-inner p {
 }
 
 /*---------------- LOGOS AND TEXT ----------------*/
-.header-content-inner-logos{
+.welcome-header .header-content-inner-logos{
     padding-top: 6em;
     position: relative;
     text-align: center;
     display: inline-block;
-    max-width: 50%;
-} 
+    max-width: 40%;
+}
 
-.header-content-inner-logos p{
+.welcome-header .header-content-inner-logos p{
     margin-bottom: 0;
     margin-right: 0;
     padding: 1.5em;
-} 
+}
 
-img{
+.welcome-header .welcome-img-logo{
     padding: 2em;
     vertical-align: middle;
+    width: 300px;
 }
 
-#logo {
-    max-width: 180px;
+.welcome-header .welcome-img-text{
+    padding: 2em;
+    vertical-align: middle;
+    max-width: 100%;
 }
 
-.logo-img{
+
+.welcome-header .logo-img{
     display: inline-block;
 }
 
-.logo-text-img{
+.welcome-header .logo-text-img{
     display: inline-block;
 }
 
 /*---------------- BUTTON ----------------*/
-.header-content-inner-buttons{
+.welcome-header .header-content-inner-buttons{
     padding: 1em;
 }
 
-.button {
+.welcome-header .button {
     vertical-align: middle;
     display: inline-block;
     border-radius: 4px;
@@ -112,14 +109,14 @@ img{
     font-size: 18px;
 }
 
-.button span {
+.welcome-header .button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.button span:after {
+.welcome-header .button span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -128,17 +125,23 @@ img{
   transition: 0.5s;
 }
 
-.button:hover{
+.welcome-header .button:hover{
     /*border: 1px solid var(--baby-powder-color);*/
     /*background-color: var(--eucalyptus-color);*/
     color: var(--baby-powder-color);
 }
 
-.button:hover span {
+.welcome-header .button:hover span {
   padding-right: 15px;
 }
 
-.button:hover span:after {
+.welcome-header .button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.welcome-nav{
+    position:fixed;
+    width: 100%;
+    z-index: 1;
 }
