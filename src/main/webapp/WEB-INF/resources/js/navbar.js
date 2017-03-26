@@ -1,4 +1,4 @@
-var app = angular.module('psychSpaceHome', ['ngMaterial', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+var app = angular.module('navbarApp', ['ngMaterial', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 app.controller('NavCtrl', function($scope, $mdDialog) {
     $scope.customFullscreen = false;
