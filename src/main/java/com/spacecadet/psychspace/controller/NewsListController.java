@@ -40,7 +40,7 @@ public class NewsListController {
      */
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     public ResponseEntity<?> afterLogin(@RequestBody AuthenticateUserRequest request){
-        if (userManager.verifyUser(request.getUsername(), request.getPassword())){
+        if (userManager.verifyUser(request.getEmail(), request.getPassword())){
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
         else {

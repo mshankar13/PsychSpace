@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class AuthenticateUserRequest {
     @NotNull
-    private String username;
+    private String email;
 
     @NotNull
     private String password;

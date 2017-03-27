@@ -165,6 +165,10 @@
     font-family: "Open Sans";
 }
 
+.span-error {
+    color: var(--dogwood-color);
+}
+
 #btn-login,
 #btn-register{
     float: right;

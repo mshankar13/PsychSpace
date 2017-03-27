@@ -4,6 +4,7 @@
     <title>Title</title>
 </head>
 <body>
+    <%@include  file="navbar.html" %>
     <div layout="row">
         <div flex>First item in row
             <h3>Title</h3>
