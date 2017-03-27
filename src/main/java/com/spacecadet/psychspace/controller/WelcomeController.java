@@ -19,7 +19,15 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "/_ah/warmup", method = RequestMethod.GET)
-    public ModelAndView notUsed(){
+    public ModelAndView notUsed1(){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("welcome");
+
+        return model;
+    }
+
+    @RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
+    public ModelAndView notUsed2(){
         ModelAndView model = new ModelAndView();
         model.setViewName("welcome");
 
