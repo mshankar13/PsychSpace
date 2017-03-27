@@ -1,7 +1,10 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.NewsManager;
+import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.AuthenticateUserRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,12 +16,24 @@ import org.springframework.web.servlet.ModelAndView;
 public class NewsListController {
 
     private NewsManager newsManager;
+    private UserManager userManager = new UserManager();
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
+
+        return model;
+    }
+
+    @RequestMapping(value = "/news", method = RequestMethod.POST)
+    public ModelAndView afterLogin(@RequestBody AuthenticateUserRequest request){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("news");
+        if (userManager.verifyUser(request.getUsername(), request.getPassword())){
+            model.setViewName("news");
+        }
 
         return model;
     }
