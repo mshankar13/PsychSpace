@@ -4,7 +4,7 @@
 		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		 version="2.5">
-  <display-name>Spring3 MVC Application</display-name>
+  <!--<display-name>Spring3 MVC Application</display-name>-->
 
   <servlet>
 	<servlet-name>spring-web</servlet-name>
@@ -21,7 +21,7 @@
   <servlet-mapping>
 	<servlet-name>spring-web</servlet-name>
 	<url-pattern>/</url-pattern>
-      <url-pattern>*.htm</url-pattern>
+      <url-pattern>*.</url-pattern>
   </servlet-mapping>
 	<error-page>
 		<error-code>404</error-code>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class ExceptionController {
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(SourceNotFoundException.class)
     public String handleSourceNotFoundException(HttpServletRequest request, Exception e) {
         return "404";
@@ -22,5 +22,10 @@ public class ExceptionController {
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handle(){
         throw new SourceNotFoundException();
+    }
+
+    @RequestMapping(value = "/{anything}", method = RequestMethod.GET)
+    public String error(){
+        return "404";
     }
 }
