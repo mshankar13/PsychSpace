@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <head>
@@ -23,13 +23,25 @@
 </head>
 </head>
 <body>
-    <div class="error-background">
-        <header class="error-header">
-            <div class="error-header-content">
-                <h1>404</h1>
-                <h2>This page is not found.</h2>
+<div class="error-background">
+    <header class="error-header">
+        <div class="error-header-content">
+            <div class="error-header-content-inner">
+                <div class="error-header-content-inner-logos">
+                    <div class="error-logo">
+                        <img class="error-img-logo" src="${contextPath}/resources/img/logo.png" alt="PsychSpace">
+                    </div>
+                    <div class="error-logo">
+                        <img class="error-img-text" src="${contextPath}/resources/img/logo_text.png" alt="PsychSpace">
+                    </div>
+                    <h1>404: This page is not found.</h1>
+                </div>
             </div>
-        </header>
-    </div>
+            <div class="error-header-content-inner-buttons">
+                <a class="button" id="button-enter" href="${contextPath}/"><span>Home</span></a>
+            </div>
+        </div>
+    </header>
+</div>
 </body>
 </html>

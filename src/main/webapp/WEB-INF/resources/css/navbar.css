@@ -143,6 +143,64 @@
 }
 
 
+/**************************** Log In Button *****************************/
+.nav-log-in {
+    right: 0%;
+    position: absolute;
+}
+
+#button-log-in {
+    background: var(--space-cadet-color);
+    padding: 5px 0px;
+    margin: 5px -5px;
+    text-transform: inherit;
+    font-family: 'Maven Pro';
+    font-size: 15pt;
+}
+
+
+#button-log-in:hover{
+    color: var(--eucalyptus-color);
+    text-decoration: none;
+}
+
+/**************************** Login/register *****************************/
+
+.md-toolbar-tools>h2 {
+    font-family: 'Maven Pro';
+    font-size: 20pt;
+}
+
+.dialog {
+    min-width: 500px;
+    font-family: "Open Sans";
+}
+
+#btn-login,
+#btn-register{
+    float: right;
+}
+
+#Dob {
+    height: 45px;
+}
+
+#Dob>.md-datepicker-button {
+    margin: -2px 0px 0px 0px;
+}
+
+#Dob>.md-datepicker-input-container {
+    width: 300px;
+}
+
+#Dob>.md-datepicker-input-container>.md-datepicker-triangle-button {
+    left: 110%;
+    margin-top: 2px;
+}
+
+
+
+
 /**************************** Profile *****************************/
 #nav-profile {
     float: right;

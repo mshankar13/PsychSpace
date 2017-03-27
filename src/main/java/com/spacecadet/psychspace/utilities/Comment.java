@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * Created by marleneshankar on 3/18/17.
  */
@@ -18,4 +20,5 @@ public class Comment {
     public String content;
     public String commentKey;
     public String newsKey;
+    Date date;
 }

@@ -1,4 +1,4 @@
-<header ng-controller="DropdownCtrl" class="ng-scope">
+<header ng-app="navbarApp" class="ng-scope">
     <nav class="navbar navbar-default" id="nav-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,10 +14,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse in" uib-collapse="vm.isCollapsed" id="bs-example-navbar-collapse-1" aria-expanded="true" aria-hidden="false">
                 <ul class="nav navbar-nav" id="uib-overrides-nav">
-                    <li class="nav-li"><a href="#" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-li"><a href="#" class="uib-overrides-nav-a">Learn</a></li>
-                    <li class="nav-li"><a href="#" class="uib-overrides-nav-a">Catalogue</a></li>
-                    <li class="nav-li"><a href="#" class="uib-overrides-nav-a">News</a></li>
+                    <li ng-show="false" class="nav-li nav-user-only" ><a href="#" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
+                    <li ng-show="false" class="nav-li nav-user-only" ><a href="#" class="uib-overrides-nav-a">Learn</a></li>
+                    <li class="nav-li"><a href="${contextPath}/resources/views/catalogue.jsp" class="uib-overrides-nav-a">Catalogue</a></li>
+                    <li class="nav-li"><a href="${contextPath}/resources/views/news.jsp" class="uib-overrides-nav-a">News</a></li>
                 </ul>
                 <!--<form class="navbar-form navbar-left ng-pristine ng-valid" id="form-search" role="search">-->
                     <!--<div class="form-group" id="form-group-search">-->
@@ -27,7 +27,101 @@
                         <!--<i class="material-icons md-36" id="icon-search">search</i>-->
                     <!--</button>-->
                 <!--</form>-->
-                <ul class="nav navbar-nav">
+
+                <ul ng-if="true"  ng-controller="NavCtrl" class="nav navbar-nav nav-log-in">
+                    <li class="nav-li">
+                        <md-button class="md-primary md-raised" id="button-log-in" ng-click="showLoginDialog($event)"   >
+                            Log In
+                        </md-button>
+                    </li>
+                    <li class="nav-li">
+                        <md-button class="md-primary md-raised" id="button-log-in" ng-click="showRegisterDialog($event)"   >
+                            Register
+                        </md-button>
+                    </li>
+                </ul>
+
+                <!-- login form-->
+                <div style="visibility: hidden">
+                    <div class="md-dialog-container" id="dialog-login">
+                    <md-dialog layout-padding class="dialog">
+                        <div class="md-toolbar-tools">
+                            <h2>Log In</h2>
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="cancel()">
+                                <i class="material-icons  md-24">clear</i>
+                            </md-button>
+                        </div>
+                        <form role="form" data-ng-submit="submit()" name="loginForm" data-ng-controller="LoginFormSubmitCtrl">
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="email" name="Email" id="email" class="form-control" ng-model="loginData.email" required >
+                                <span ng-show="loginForm.email.$error.required" class="help-block">Email is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password</label>
+                                <input type="password" name="Password" id="password" class="form-control" ng-model="loginData.password" required >
+                                <span ng-show="loginForm.password.$error.required" class="help-block">Password is required</span>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary" id="btn-login">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </md-dialog>
+                    </div>
+                </div>
+
+                <!--Register form-->
+                <div style="visibility: hidden">
+                    <div class="md-dialog-container" id="dialog-register">
+                    <md-dialog layout-padding class="dialog">
+                        <div class="md-toolbar-tools">
+                            <h2>Register</h2>
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="close()">
+                                <i class="material-icons  md-24">clear</i>
+                            </md-button>
+                        </div>
+                        <form role="form" data-ng-submit="submit()" name="registerForm" data-ng-controller="RegisterFormSubmitCtrl">
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="email" name="Email" class="form-control" ng-model="registerData.email" required >
+                                <span ng-show="registerForm.email.$error.required" class="help-block">Email is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" name="first-name" class="form-control" id="firstName" ng-model="registerData.firstName" required >
+                                <span ng-show="registerForm.firstName.$error.required" class="help-block">First Name is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" name="last-name" class="form-control" id="lastName" ng-model="registerData.lastName" required >
+                                <span ng-show="registerForm.lastName.$error.required" class="help-block">Last Name is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <md-datepicker id="DoB" class="form-control" ng-model="registerData.DoB" md-min-date="minDate" md-placeholder="Enter date"></md-datepicker>
+                                <span ng-show="registerForm.DoB.$error.required" class="help-block">Date of birth is required</span>
+                                <span ng-show="registerForm.DoB.$error.min" class="help-block">You need to be at least 18 years old</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password</label>
+                                <input type="password" name="Password" class="form-control" ng-model="registerData.password" required >
+                                <span ng-show="registerForm.password.$error.required" class="help-block">Password is required</span>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-primary" id="btn-register">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </md-dialog>
+                    </div>
+                </div>
+
+                <ul ng-if="false" ng-controller="DropdownCtrl" class="nav navbar-nav nav-user-only">
                     <li uib-dropdown is-open="status.isopen" class="dropdown" id="nav-profile">
                         <a uib-dropdown-toggle="" class="uib-overrides-nav-a dropdown-toggle" id="button-profile" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="material-icons md-36 icon-account-circle">account_circle</i>
