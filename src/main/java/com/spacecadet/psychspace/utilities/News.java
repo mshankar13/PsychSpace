@@ -25,17 +25,4 @@ public class News {
     public int likesCount;
     public Date date;
     public String newsKey;
-
-    public Date convertDate(String dateString) {
-        DateFormat df = new SimpleDateFormat("MM/dd/yy");
-        Date date = new Date();
-        df.format(date);
-
-        try {
-            date = df.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
 }

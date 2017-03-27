@@ -33,7 +33,7 @@ public class NewsManager {
             news.author = entity.getProperty("Author").toString();
             news.content = entity.getProperty("Content").toString();
             news.likesCount = Integer.parseInt(entity.getProperty("Likes").toString());
-            news.date = news.convertDate(entity.getProperty("Date").toString());
+            news.date = Helpers.convertDate(entity.getProperty("Date").toString());
             news.newsKey = KeyFactory.keyToString(entity.getKey());
             loadedNews.add(news);
         }
@@ -64,7 +64,7 @@ public class NewsManager {
             news.author = singleNews.getProperty("Author").toString();
             news.content = singleNews.getProperty("Content").toString();
             news.likesCount = Integer.parseInt(singleNews.getProperty("Likes").toString());
-            news.date = news.convertDate(singleNews.getProperty("Date").toString());
+            news.date = Helpers.convertDate(singleNews.getProperty("Date").toString());
             news.newsKey = newsID;
 
         } catch (EntityNotFoundException ex) {
