@@ -34,11 +34,11 @@ app.controller('NavCtrl', function($scope, $mdDialog) {
 
 });
 
-app.controller('LoginFormSubmitCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
     $scope.list = [];
 
-    $scope.headerText = 'AngularJS Post Form Spring MVC example: Submit below form';
+    //$scope.headerText = 'AngularJS Post Form Spring MVC example: Submit below form';
     $scope.submit = function() {
 
         var loginData = {
@@ -46,7 +46,8 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', function($scope, $http
             "password" : $scope.password
         };
 
-        var response = $http.post('login', loginData);
+        var response = $http.post($location.absUrl(), loginData);
+
         response.success(function(data, status, headers, config) {
             $scope.list.push(data);
         });
@@ -82,7 +83,7 @@ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', function($scope, $h
 
         console.log(this.minDate);
 
-        var response = $http.post('register', registerData);
+        var response = $http.post($location.absUrl(), registerData);
         response.success(function(data, status, headers, config) {
             $scope.list.push(data);
         });
