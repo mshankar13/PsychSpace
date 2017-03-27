@@ -53,9 +53,9 @@
                             </md-button>
                         </div>
                         <form role="form" data-ng-submit="submit()" name="loginForm" data-ng-controller="LoginFormSubmitCtrl">
-                            <div ng-hide="!loginError" class="form-group">
-                                <span>Email and password do not match</span>
-                            </div>
+                            <span ng-show="loginError" class="help-block">
+                                Email and password don't match
+                            </span>
                             <div class="form-group">
                                 <label for="Email">Email</label>
                                 <input type="email" name="Email" id="email" class="form-control" ng-model="loginData.email" required >
@@ -88,6 +88,9 @@
                             </md-button>
                         </div>
                         <form role="form" data-ng-submit="submit()" name="registerForm" data-ng-controller="RegisterFormSubmitCtrl">
+                            <span ng-show="registerError" class="help-block">
+                                {email} has registered
+                            </span>
                             <div class="form-group">
                                 <label for="Email">Email</label>
                                 <input type="email" name="Email" class="form-control" ng-model="registerData.email" required >

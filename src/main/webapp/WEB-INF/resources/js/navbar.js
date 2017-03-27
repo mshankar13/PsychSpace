@@ -41,23 +41,27 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
 
     //$scope.headerText = 'AngularJS Post Form Spring MVC example: Submit below form';
     $scope.submit = function() {
-
-
-
         var loginData = {
             "email" : $scope.email,
             "password" : $scope.password
         };
 
-        var response = $http.post($location.absUrl(), loginData);
 
-        response.success(function(data, status, headers, config) {
-            $scope.list.push(data);
-        });
-        response.error(function(data, status, headers, config) {
+        var currentPage = $location.absUrl();
+        if (currentPage.slice(-1) === "/") {
+            currentPage = currentPage + "home";
+        }
+
+
+        $http({
+            method: 'POST',
+            url: currentPage,
+            data: loginData
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
             $scope.loginError = true;
-
-            alert( "Exception details: " + JSON.stringify({data: data}));
         });
 
         //Empty list data after process
@@ -69,6 +73,8 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
 
 
 app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+
+    $scope.registerError = false;
 
     $scope.submit = function() {
 
@@ -86,18 +92,17 @@ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', functi
             registerData.DoB.getDate()
         );
 
-        console.log(this.minDate);
+        $http({
+            method: 'POST',
+            url: "http://localhost:8080/home",
+            data: registerData
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            $scope.registerError = true;
 
-        var response = $http.post($location.absUrl(), registerData);
-        response.success(function(data, status, headers, config) {
-            $scope.list.push(data);
         });
-        response.error(function(data, status, headers, config) {
-            alert( "Exception details: " + JSON.stringify({data: data}));
-        });
-
-        //Empty list data after process
-        $scope.list = [];
     };
 
 }]);

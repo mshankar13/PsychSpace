@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.AuthenticateUserRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +28,8 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ResponseEntity<?> afterLogin(@RequestBody AuthenticateUserRequest request){
-        if (userManager.verifyUser(request.getUsername(), request.getPassword())){
+    public ResponseEntity<?> afterLogin(AuthenticateUserRequest request){
+        if (userManager.verifyUser(request.getEmail(), request.getPassword())){
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
         else {

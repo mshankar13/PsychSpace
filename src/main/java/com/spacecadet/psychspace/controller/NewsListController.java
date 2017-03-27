@@ -31,7 +31,7 @@ public class NewsListController {
     public ModelAndView afterLogin(@RequestBody AuthenticateUserRequest request){
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
-        if (userManager.verifyUser(request.getUsername(), request.getPassword())){
+        if (userManager.verifyUser(request.getEmail(), request.getPassword())){
             model.setViewName("news");
         }
 
