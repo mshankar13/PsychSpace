@@ -1,16 +1,14 @@
-:root {
-    --space-cadet-color: #1D2951;
-    --baby-powder-color: #FCFCFC;
-    --eucalyptus-color: #3DDC97;
-    --pastel-red-color: #EF6461;
-    --tea-rose-color: #F2CCC3;
-}
 #about-html{
     padding-top: 2em;
 }
 
 #about-html .about-company, .about-site{
-    text-align: center; 
+    text-align: center;
+    min-height: 100vh;
+}
+
+#about-html .about-site{
+    background-color: white;
 }
 
 #about-html h1, h2, h3{
@@ -19,6 +17,7 @@
 
 #about-html h1{
     font-size: 48px;
+    padding-top: 3em;
 }
 
 #about-html h3{
@@ -37,31 +36,42 @@
 }
 
 /*---------------- ABOUT SITE ----------------*/
-
+#about-html .about-site h1, p{
+    color: var(--space-cadet-color);
+}
 
 #about-html .about .feature {
     vertical-align: middle;
     display: inline-block;
-  	transition: all 0.3s;
   	margin: 2em;
-  	border: 3px solid #f6f6f6;
     border-radius: 5px;  
     max-width: 1000px;
     max-height: 700px;
-  
 }
 
 #about-html .container-logo{
     width: 100%;
-
-    background-color: var(--space-cadet-color);
 }
 #about-html .logo-img {
     padding: 2em;
     max-width: 30%;
 }
 
+#about-html .about-site .anchor-link{
+    color: var(--space-cadet-color);
+    border: none;
+    width: auto;
+}
+#about-html .about-site .anchor-link:hover{
+    color: var(--space-cadet-color);
+    text-decoration: none;
+}
+
 /*---------------- ABOUT TEAM ----------------*/
+#about-html .about-company h1{
+    color: white;
+}
+
 #about-html .speaker .feature {
     vertical-align: middle;
     display: inline-block;
@@ -73,7 +83,8 @@
     border-radius: 5px;  
     width: 500px;
     height: 600px;
-    padding: 1em;   
+    padding: 1em;
+    background-color: white;
 }
 
 #about-html .speaker .feature:hover {

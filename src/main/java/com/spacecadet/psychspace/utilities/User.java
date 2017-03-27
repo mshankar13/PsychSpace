@@ -16,11 +16,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class User {
     public String userKey;
-    public String username;
+    public String email;
     public String password;
     public String firstName;
     public String lastName;
-    public String email;
     public Date dob;
     public String role; //User, Instructor, Admin
 }
