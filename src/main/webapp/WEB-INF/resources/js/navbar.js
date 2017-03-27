@@ -52,6 +52,7 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
             currentPage = currentPage + "home";
         }
 
+        currentPage += "/1";
 
         $http({
             method: 'POST',
@@ -82,15 +83,12 @@ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', functi
             "email" : $scope.email,
             "firstName" : $scope.firstName,
             "lastName" : $scope.lastName,
-            "DoB": $scope.DoB,
+            "DoB": $scope.DoB = new Date(),
             "password" : $scope.password
         };
 
-        this.minDate = new Date(
-            registerData.DoB.getFullYear() - 18,
-            registerData.DoB.getMonth(),
-            registerData.DoB.getDate()
-        );
+        this.minDate = new Date();
+        this.minDate.setFullYear(registerData.DoB.getFullYear()-18);
 
         $http({
             method: 'POST',

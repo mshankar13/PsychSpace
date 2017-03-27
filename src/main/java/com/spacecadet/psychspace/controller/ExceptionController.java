@@ -30,8 +30,8 @@ public class ExceptionController {
         throw new SourceNotFoundException();
     }
 
-    @RequestMapping(value = "/{anything}", method = RequestMethod.GET)
-    public String error(){
-        return "404";
-    }
+//    @RequestMapping(value = "/{anything}", method = RequestMethod.GET)
+//    public String error(){
+//        return "404";
+    //}
 }

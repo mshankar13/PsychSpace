@@ -40,7 +40,7 @@ public class HomeController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    @RequestMapping(value = "/home/1", method = RequestMethod.POST)
     public ResponseEntity<?> afterLogin(AuthenticateUserRequest request){
         if (userManager.verifyUser(request.getEmail(), request.getPassword())){
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -56,7 +56,7 @@ public class HomeController {
      * @return
      */
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ResponseEntity<?> afterRegister(@RequestBody RegisterUserRequest request){
+    public ResponseEntity<?> afterRegister(RegisterUserRequest request){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         try {
             if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
