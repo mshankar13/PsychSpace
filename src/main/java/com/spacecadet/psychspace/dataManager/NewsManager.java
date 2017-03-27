@@ -156,7 +156,7 @@ public class NewsManager {
             List<Entity> listComments =
                     datastore.prepare(newsCommentsQuery).asList(FetchOptions.Builder.withDefaults());
 
-            for (Entity entry: listComments) {
+            for (Entity entry : listComments) {
                 datastore.delete(entry.getKey());
             }
 
