@@ -37,9 +37,12 @@ app.controller('NavCtrl', function($scope, $mdDialog) {
 app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
     $scope.list = [];
+    $scope.loginError = false;
 
     //$scope.headerText = 'AngularJS Post Form Spring MVC example: Submit below form';
     $scope.submit = function() {
+
+
 
         var loginData = {
             "email" : $scope.email,
@@ -52,6 +55,8 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
             $scope.list.push(data);
         });
         response.error(function(data, status, headers, config) {
+            $scope.loginError = true;
+
             alert( "Exception details: " + JSON.stringify({data: data}));
         });
 
@@ -63,7 +68,7 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
 }]);
 
 
-app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
     $scope.submit = function() {
 
