@@ -1,0 +1,70 @@
+:root {
+    --space-cadet-color: #1D2951;
+    --baby-powder-color: #FCFCFC;
+    --eucalyptus-color: #3DDC97;
+    --pastel-red-color: #EF6461;
+    --tea-rose-color: #F2CCC3;
+    --yellow-color: #FFD401;
+    --dogwood-color: #D90368;
+    --fadein-time: 2s;
+}
+
+/*---------------- HTML WRAPPERS ----------------*/
+.navbar-wrapper{
+    position:fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.footer-wrapper{
+    position:fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+/*---------------- BUTTONS ----------------*/
+.button {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 4px;
+    border: 2px solid var(--baby-powder-color);
+    color: var(--baby-powder-color);
+    text-align: center;
+    padding: 10px;
+    width: 140px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 1.5em;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+.button:hover{
+    color: var(--baby-powder-color);
+}
+
+.button:hover span {
+    padding-right: 15px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
