@@ -2,6 +2,8 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.AuthenticateUserRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +27,13 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ModelAndView afterLogin(@RequestBody AuthenticateUserRequest request){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("welcome");
+    public ResponseEntity<?> afterLogin(@RequestBody AuthenticateUserRequest request){
         if (userManager.verifyUser(request.getUsername(), request.getPassword())){
-            model.setViewName("home");
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
-
-        return model;
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
