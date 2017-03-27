@@ -36,4 +36,14 @@ public class HomeController {
         }
     }
 
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    public ResponseEntity<?> afterRegister(@RequestBody AuthenticateUserRequest request){
+        if (userManager.verifyUser(request.getUsername(), request.getPassword())){
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
