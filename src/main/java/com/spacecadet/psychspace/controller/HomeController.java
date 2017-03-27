@@ -57,17 +57,11 @@ public class HomeController {
      */
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ResponseEntity<?> afterRegister(RegisterUserRequest request){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        try {
-            if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
-                    formatter.parse(request.getDoB()), "User")) {
-                return new ResponseEntity<>(null, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }catch (ParseException e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
+                request.getDoB(), "User")) {
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
 }
