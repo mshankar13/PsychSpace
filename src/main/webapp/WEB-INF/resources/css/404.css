@@ -1,14 +1,3 @@
-:root {
-    --space-cadet-color: #1D2951;
-    --baby-powder-color: #FCFCFC;
-    --eucalyptus-color: #3DDC97;
-    --pastel-red-color: #EF6461;
-    --tea-rose-color: #F2CCC3;
-    --yellow-color: #FFD401;
-    --dogwood-color: #D90368;
-    --fadein-time: 2s;
-}
-
 /*---------------- BACKGROUND ----------------*/
 .error-background{
     width: 100%;

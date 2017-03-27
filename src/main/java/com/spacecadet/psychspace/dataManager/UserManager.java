@@ -14,19 +14,18 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public void addUser (String username, String password, String firstName, String lastName, String email, Date dob,
+    public void addUser (String email, String password, String firstName, String lastName, Date dob,
                          String role) {
 
         Transaction txn = datastore.beginTransaction();
         datastore = DatastoreServiceFactory.getDatastoreService();
         try {
 
-            Entity user = new Entity("User", username);
-            user.setProperty("Username", username);
+            Entity user = new Entity("User");
+            user.setProperty("Email", email);
             user.setProperty("Password", password);
             user.setProperty("FirstName", firstName);
             user.setProperty("LastName", lastName);
-            user.setProperty("Email", email);
             user.setProperty("DateOfBirth", dob);
             user.setProperty("Role", role);
             datastore.put(txn, user);
@@ -44,23 +43,23 @@ public class UserManager {
             if (txn.isActive()) {
                 txn.rollback();
             }
-            verifyUser(username, password);
+            verifyUser(email, password);
         }
 
     }
 
     /**
      * verify user login username and password
-     * @param username
+     * @param email
      * @param password
      * @return
      */
-    public boolean verifyUser (String username, String password) {
+    public boolean verifyUser (String email, String password) {
 
         /* Query for public lists using public query filter */
         datastore = DatastoreServiceFactory.getDatastoreService();
         Query.Filter userFilter =
-                new Query.FilterPredicate("Username", Query.FilterOperator.EQUAL, username);
+                new Query.FilterPredicate("Email", Query.FilterOperator.EQUAL, email);
         Query userQuery = new Query("User").setFilter(userFilter);
         Entity foundUser = datastore.prepare(userQuery).asSingleEntity();
 
