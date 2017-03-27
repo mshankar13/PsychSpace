@@ -15,7 +15,7 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public void addUser(String email, String password, String firstName, String lastName, Date dob,
+    public boolean addUser(String email, String password, String firstName, String lastName, Date dob,
                         String role) {
 
         Transaction txn = datastore.beginTransaction();
@@ -44,7 +44,7 @@ public class UserManager {
             if (txn.isActive()) {
                 txn.rollback();
             }
-            verifyUser(email, password);
+            return verifyUser(email, password);
         }
 
     }

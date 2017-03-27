@@ -2,7 +2,9 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.AuthenticateUserRequest;
+import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,10 @@ public class NewsListController {
     private NewsManager newsManager;
     private UserManager userManager = new UserManager();
 
+    /**
+     * all visit to news page
+     * @return
+     */
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
         newsManager = new NewsManager();
@@ -27,15 +33,19 @@ public class NewsListController {
         return model;
     }
 
+    /**
+     * after login in news page
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/news", method = RequestMethod.POST)
-    public ModelAndView afterLogin(@RequestBody AuthenticateUserRequest request){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("news");
+    public ResponseEntity<?> afterLogin(@RequestBody AuthenticateUserRequest request){
         if (userManager.verifyUser(request.getUsername(), request.getPassword())){
-            model.setViewName("news");
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
-
-        return model;
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**

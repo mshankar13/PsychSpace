@@ -13,6 +13,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class ExceptionController {
+    /**
+     * handle error 404
+     * @param request
+     * @param e
+     * @return
+     */
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(SourceNotFoundException.class)
     public String handleSourceNotFoundException(HttpServletRequest request, Exception e) {

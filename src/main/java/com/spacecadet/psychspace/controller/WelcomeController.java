@@ -11,6 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class WelcomeController {
+
+    /**
+     * all visit to url "/" to welcome page
+     * @return
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView welcome(){
         ModelAndView model = new ModelAndView();
@@ -19,6 +24,10 @@ public class WelcomeController {
         return model;
     }
 
+    /**
+     * fix url visit to /_ah/warmup
+     * @return
+     */
     @RequestMapping(value = "/_ah/warmup", method = RequestMethod.GET)
     public ModelAndView notUsed1(){
         ModelAndView model = new ModelAndView();
@@ -27,6 +36,10 @@ public class WelcomeController {
         return model;
     }
 
+    /**
+     * fix url visit to favicon.ico
+     * @return
+     */
     @RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
     public ModelAndView notUsed2(){
         ModelAndView model = new ModelAndView();

@@ -1,4 +1,4 @@
-package com.spacecadet.psychspace.utilities;
+package com.spacecadet.psychspace.requests;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,10 +13,14 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticateUserRequest {
+public class RegisterUserRequest {
     @NotNull
-    private String username;
+    private String email;
 
     @NotNull
     private String password;
+
+    private String firstName;
+    private String lastName;
+    private String DoB;
 }
