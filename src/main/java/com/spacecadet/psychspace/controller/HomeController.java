@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
 import com.spacecadet.psychspace.requests.RegisterUserRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.ws.rs.Consumes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 
 /**
  * Created by aliao on 3/20/2017.
@@ -55,19 +59,18 @@ public class HomeController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> afterRegister(@RequestBody RegisterUserRequest request){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        try {
-            if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
-                    formatter.parse(request.getDoB()), "User")) {
-                return new ResponseEntity<>(null, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }catch (ParseException e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    @Consumes("text/html")
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    public ResponseEntity<Void> afterRegister(@RequestBody RegisterUserRequest request){
+        System.out.print("Register user: " + request.getFirstName());
+        if(userManager.emailRegistered(request.getEmail())){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        else if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
+                request.getDoB(), "User")) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
 }

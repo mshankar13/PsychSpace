@@ -73,7 +73,7 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
 }]);
 
 
-app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http) {
 
     $scope.registerError = false;
 
@@ -96,9 +96,11 @@ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', functi
 
         $http({
             method: 'POST',
-            type: application/json,
             url: "http://localhost:8080/home",
-            data: registerData
+            data: registerData,
+            headers: {
+                'Content-type': 'application/json, charset=UTF-8'
+            }
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available

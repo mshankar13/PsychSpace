@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * Created by aliao on 3/27/2017.
  */
@@ -16,11 +18,9 @@ import lombok.experimental.Accessors;
 public class RegisterUserRequest {
     @NotNull
     private String email;
-
-    @NotNull
-    private String password;
-
     private String firstName;
     private String lastName;
-    private String DoB;
+    private Date DoB;
+    @NotNull
+    private String password;
 }

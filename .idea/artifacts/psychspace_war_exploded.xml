@@ -13,6 +13,8 @@
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:unknown" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.6" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.6.RELEASE" />
@@ -22,6 +24,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: com.google.appengine:appengine-endpoints:1.9.49" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

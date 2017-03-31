@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <head>
@@ -24,8 +24,8 @@
 </head>
 <body>
 <div class="welcome-background">
-    <div class="welcome-nav">
-        <%@include  file="navbar.html" %>
+    <div class="navbar-wrapper">
+        <%@include file="navbar.html" %>
     </div>
     <header class="welcome-header">
         <div class="header-content">
@@ -42,17 +42,22 @@
                         <p>Develop healthy habits and achieve personal goals through self-discipline</p>
                     </div>
                 </div>
+
                 <div class="header-content-inner-buttons">
-                    <a class="button fadein" id="button-register" href="${contextPath}/register"><span>Register</span></a>
-                    <a class="button fadein" id="button-login" href="${contextPath}/login"><span>Login</span></a>
+                    <!--
+                    <a class="button fadein" id="button-register"
+                       href=""><span>Register</span></a>
+                    <a class="button fadein" id="button-login" href=""}/login"><span>Login</span></a>
                     <br>
+                    -->
                     <a class="button anchor-link fadein" id="button-about" href="#about-psychspace"><span>More About PsychSpace</span></a>
                 </div>
+
             </div>
         </div>
     </header>
-    <%@include  file="about.html" %>
-    <%@include  file="footer.html" %>
+    <%@include file="about.html" %>
+    <%@include file="footer.html" %>
 </div>
 <script src="${contextPath}/resources/js/animations.js"></script>
 </body>
