@@ -244,6 +244,7 @@
 
 .footer-ul {
     list-style-type: none;
+    display: inline-flex;
 }
 
 .footer-li {

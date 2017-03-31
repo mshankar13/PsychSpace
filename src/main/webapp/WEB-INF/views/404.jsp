@@ -18,8 +18,10 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>+
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/404.css' rel='stylesheet'>
