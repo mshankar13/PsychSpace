@@ -1,0 +1,75 @@
+body {
+    background-color: white;
+    min-height: 100vh;
+}
+
+.news-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: var(--space-cadet-color);
+    font-family: "Open Sans";
+}
+
+.news-header h1,
+h2,
+h3,
+h4 {
+    font-family: "Maven Pro";
+    margin-top: 0;
+}
+
+.news-header h1 {
+    font-size: 32px;
+}
+
+.news-content {
+    padding: 2em 1em;
+    position: relative;
+    text-align: left;
+    display: inline-block;
+    width: 80%;
+    background-color: var(--baby-powder-color);
+}
+
+.news-header .articles {
+    display: inline-flex;
+}
+
+.news-header .article-info {
+    background-color: white;
+    margin: 1em;
+    padding: 1em 2em;
+    max-width: 30vw;
+}
+
+.news-header .article-info2 {
+    background-color: white;
+    margin: 1em;
+    padding: 1em 2em;
+}
+
+.news-header p {
+    font-size: 14px;
+}
+
+.news-header .lead {
+    color: darkgray
+}
+
+.news-header .button {
+    color: var(--space-cadet-color);
+    border: 0em;
+    margin: 0;
+}
+
+.news-header .button:hover{
+    color: var(--eucalyptus-color);
+    border: 0em;
+    margin: 0;
+}
+
+.news-header hr{
+    border-color:  var( --eucalyptus-color);
+    margin-top: 0em;
+}

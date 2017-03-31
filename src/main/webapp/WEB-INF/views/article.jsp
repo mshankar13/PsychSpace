@@ -35,7 +35,7 @@
                 </div>
                 <header class="nd-header">
                     <div ng-controller="ArticleCtrl" class="nd-content">
-                        <div class="row artcle">
+                        <div class="row article">
                             <div class="article-info">
                                 <!-- Title -->
                                 <h1>Article Title</h1>
