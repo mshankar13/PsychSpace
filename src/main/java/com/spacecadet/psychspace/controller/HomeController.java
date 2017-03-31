@@ -55,8 +55,8 @@ public class HomeController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ResponseEntity<?> afterRegister(RegisterUserRequest request){
+    @RequestMapping(value = "/home", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> afterRegister(@RequestBody RegisterUserRequest request){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         try {
             if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),

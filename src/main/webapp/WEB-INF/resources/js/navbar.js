@@ -25,7 +25,7 @@ app.controller('NavCtrl', function($scope, $mdDialog) {
 
     function DialogController($scope, $mdDialog) {
 
-        $scope.close = function() {
+        $scope.cancel = function() {
             $mdDialog.cancel();
         };
 
@@ -89,9 +89,14 @@ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', functi
 
         this.minDate = new Date();
         this.minDate.setFullYear(registerData.DoB.getFullYear()-18);
+        this.minDate.setMonth(registerData.DoB.getMonth());
+        this.minDate.setMonth(registerData.DoB.getDate());
+
+        console.log(registerData);
 
         $http({
             method: 'POST',
+            type: application/json,
             url: "http://localhost:8080/home",
             data: registerData
         }).then(function successCallback(response) {
