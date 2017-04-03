@@ -35,21 +35,26 @@
                 </div>
                 <header class="nd-header">
                     <div ng-controller="ArticleCtrl" class="nd-content">
-                        <div class="row article">
+                        <div class="row artcle">
                             <div class="article-info">
                                 <!-- Title -->
                                 <h1>Article Title</h1>
                                 <!-- Author -->
-                                <p class="lead"> by <a href="#">Article Author</a> </p>
+                                <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
                                 <hr>
                                 <!-- Date/Time -->
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM
+                                    <button id="btn-article-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                                </p>
                                 <hr>
                                 <!-- Preview Image -->
-                                <!-- <img class="img-responsive" src="http://placehold.it/900x300" alt="">--></div>
+                            </div>
+
                             <!-- end article info -->
-                            <div class="article-content">
-                                <div class="col-lg-9 article-text">
+                            <div class="row article-content">
+                                <div class="col-lg-8 article-text">
+                                    <img class="article-img img-responsive" src="http://placehold.it/900x300" alt="">
+
                                     <!-- Post Content -->
                                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
@@ -58,25 +63,32 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
                                 </div>
                                 <!--end article-text -->
+                                <div class="col-sm-1"></div>
                                 <!-- Suggestions Column -->
-                                <div class="col-md-3 suggestions">
-                                    <!-- Blog Categories Well -->
-                                    <div class="well">
-                                        <h3>Suggested Articles</h3>
-                                        <ul class="suggested-articles">
-                                            <li><a href="#">Article 1</a> </li>
-                                            <li><a href="#">Article 2</a> </li>
-                                            <li><a href="#">Article 3</a> </li>
-                                            <li><a href="#">Article 4</a> </li>
-                                        </ul>
-                                        <!-- /.row -->
+                                <div class="col-lg-3 suggestions">
+                                    <h3>Suggested Articles</h3>
+                                    <div class="well suggestions-list">
+                                        <div class="suggestion">
+                                            <h3>Article Title</h3>
+                                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
+                                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                                        </div>
+                                        <div class="suggestion">
+                                            <h3>Article Title</h3>
+                                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
+                                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                                        </div>
+                                        <div class="suggestion">
+                                            <h3>Article Title</h3>
+                                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
+                                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                                        </div>
                                     </div>
-                                    <!-- end well -->
                                 </div>
                                 <!-- end suggestions -->
                             </div>
-                            <!-- end article-content -->
                         </div>
+                        <!-- end article-content -->
                         <!-- end row artcile -->
                         <hr>
                         <div class="row social">
@@ -89,21 +101,24 @@
                                     <div class="form-group">
                                         <textarea class="form-control" rows="3"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="btn-right-align">
+                                        <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                             <hr>
                             <!-- Posted Comments -->
                             <!-- Comment -->
-                            <div class="media">
+                            <div class="media comment">
                                 <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">Comment #1
+                                    <h4 class="media-heading">Comment
                     <small>March 31, 2017 at 9:30 AM</small>
                 </h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <br>
-                                    <button type="submit" class="btn-comment btn btn-primary">Reply</button>
-                                    <button type="submit" class="btn-comment btn btn-primary">Like</button>
+                                    <div class="btn-right-align">
+                                        <button id="btn-comment-reply" type="submit" class="btn-comment btn btn-primary">Reply</button>
+                                        <button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
