@@ -28,62 +28,85 @@
 <div classs="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
- <header class="news-header">
-        <div ng-controller="ArticleCtrl" class="news-content">
-            <div>
-                <h1>Newsfeed</h1>
-                <hr>
-            </div>
-            <div class="row articles">
-                <div class="article-info">
-                    <div class="row article-title">
-                        <h1>Article Title</h1>
-                        <p class="lead"> by <a href="#">Article Author</a> </p>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
-                    </div>
-                    <div class="row">
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                    </div> <a class="button fadein" id="button-register" href=""><span>Read More</span></a> </div>
-                <!-- end article-info-->
-                <div class="article-info">
-                    <div class="row article-title">
-                        <h1>Article Title</h1>
-                        <p class="lead"> by <a href="#">Article Author</a> </p>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
-                    </div>
-                    <div class="row">
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                    </div> <a class="button fadein" id="button-register" href=""><span>Read More</span></a> </div>
-                <!-- end article-info-->
-                <div class="article-info">
-                    <div class="row article-title">
-                        <h1>Article Title</h1>
-                        <p class="lead"> by <a href="#">Article Author</a> </p>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
-                    </div>
-                    <div class="row">
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                    </div> <a class="button fadein" id="button-register" href=""><span>Read More</span></a> </div>
-                <!-- end article-info-->
-                </div>
+<header class="news-header">
+    <div ng-controller="ArticleCtrl" class="news-content">
+        <!--<div class="page-title fadein"><h1>NEWS</h1><hr></div> -->
+        <div class="section-title fadein">
+            <h2>Featured Article</h2>
+            <hr>
         </div>
-        <div ng-controller="ArticleCtrl" class="news-content">
-            <div class="row articles">
-                <div class="row article-info2">
-                    <div class="row article-title">
-                        <h1>Article Title</h1></div>
-                    <div class="col-lg-4">
-                        <p> by <a href="#">Article Author</a> </p>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
+        <div class="row articles">
+            <div class="row article-info2 fadein">
+                <div class="row article-title">
+                    <h1>Article Title: Lorem ipsum dolor sit amet, consectetur adipisicing elit </h1></div>
+                <div class="col-lg-4">
+                    <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
+
+                </div>
+                <div class="col-lg-8">
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <p class="article-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore...</p>
+                    <div class="center">
+                        <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
                     </div>
-                    <div class="col-lg-8">
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                        <a class="button fadein" id="button-register" href=""><span>Read More</span></a>
-                    </div>  
+
                 </div>
             </div>
         </div>
-    </header>
+        <div class="section-title fadein">
+            <h2>All Articles</h2>
+            <hr>
+        </div>
+        <div class="row articles">
+            <div class="article-info fadein">
+                <div class="row article-title">
+                    <h1>Article Title: Lorem ipsum dolor sit amet, consectetur adipisicing elit </h1>
+                    <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
+                    <p><span class="glyphicon glyphicon-time"></span> March 31, 2017 at 12:00 AM</p>
+                </div>
+                <div class="row">
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <p class="article-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore...</p>
+                </div>
+                <div class="center">
+                    <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                </div>
+            </div>
+            <!-- end article-info-->
+            <div class="article-info fadein">
+                <div class="row article-title">
+                    <h1>Article Title</h1>
+                    <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
+                    <p><span class="glyphicon glyphicon-time"></span> March 31, 2017 at 12:00 AM</p>
+                </div>
+                <div class="row">
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <p class="article-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore...</p>
+                </div>
+                <div class="center">
+                    <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                </div>
+            </div>
+            <!-- end article-info-->
+            <div class="article-info fadein">
+                <div class="row article-title">
+                    <h1>Article Title</h1>
+                    <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
+                    <p><span class="glyphicon glyphicon-time"></span> March 31, 2017 at 12:00 AM</p>
+                </div>
+                <div class="row">
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <p class="article-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore..</p>
+                </div>
+                <div class="center">
+                    <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                </div>
+            </div>
+            <!-- end article-info-->
+        </div>
+    </div>
+</header>
 <%@include file="footer.html" %>
 <script src="${contextPath}/resources/js/animations.js"></script>
 </body>

@@ -31,8 +31,8 @@
     border: 2px solid var(--baby-powder-color);
     color: var(--baby-powder-color);
     text-align: center;
-    padding: 10px;
-    width: 140px;
+    padding: .3em 0;
+    min-width: 140px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 1.5em;

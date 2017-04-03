@@ -11,6 +11,10 @@ body {
     font-family: "Open Sans";
 }
 
+.nd-header p {
+    font-size: 18px;
+}
+
 .nd-header h1,
 h2,
 h3,
@@ -41,11 +45,50 @@ h4 {
     padding: 2em;
 }
 
-.nd-content .suggestions {
-    padding-top: 2em;
+.nd-content .suggestions-list {
+    text-align: center;
+}
+
+.nd-content .suggestion {
+    display: inline-block;
+    padding: 1em 1em;
+}
+
+.nd-content .article-img {
+    padding-bottom: 2em;
 }
 
 .nd-content .btn-comment {
     margin: 1em;
     background-color: var(--space-cadet-color);
+}
+
+.nd-content .button {
+    color: var(--eucalyptus-color);
+    border: 0em;
+    margin: 0;
+    width: auto;
+}
+
+.nd-content .button:hover {
+    color: var(--dogwood-color);
+    border: 0em;
+    margin: 0;
+}
+
+.nd-content p,
+h1,
+h2,
+h3 {
+    text-align: left;
+}
+
+@media only screen and (max-width: 1080px) {
+    .nd-content .suggestions {
+        padding-top: 2em;
+    }
+    .nd-content .suggestion {
+        width: 32%;
+        padding: 0em .2em;
+    }
 }
