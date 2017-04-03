@@ -20,7 +20,7 @@ public class RegisterUserRequest {
     private String email;
     private String firstName;
     private String lastName;
-    private Date DoB;
+//    private Date DoB;
     @NotNull
     private String password;
 }

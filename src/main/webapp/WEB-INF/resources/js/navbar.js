@@ -73,33 +73,50 @@ app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function(
 }]);
 
 
-app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http) {
-
-    $scope.registerError = false;
-
-    $scope.submit = function() {
+ app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http) {
+//
+//     $scope.registerError = false;
+//
+     $scope.submit = function() {
 
         var registerData = {
-            "email" : $scope.email,
-            "firstName" : $scope.firstName,
-            "lastName" : $scope.lastName,
-            "DoB": $scope.DoB = new Date(),
-            "password" : $scope.password
+            email: "ejrkwh@kweh",
+            firstName: "im here yay",
+            lastName: "hi",
+            password: "wlit"
         };
 
-        this.minDate = new Date();
-        this.minDate.setFullYear(registerData.DoB.getFullYear()-18);
-        this.minDate.setMonth(registerData.DoB.getMonth());
-        this.minDate.setMonth(registerData.DoB.getDate());
+        // var registerData = {
+        //     "email" : $scope.email,
+        //     "firstName" : $scope.firstName,
+        //     "lastName" : $scope.lastName,
+        //     //"DoB": $scope.DoB = new Date(),
+        //     "password" : $scope.password
+        // };
+
+        // this.minDate = new Date();
+        // this.minDate.setFullYear(registerData.DoB.getFullYear()-18);
+        // this.minDate.setMonth(registerData.DoB.getMonth());
+        // this.minDate.setMonth(registerData.DoB.getDate());
 
         console.log(registerData);
 
+        var successCallBk = function(response){
+
+        };
+
+        var errorCallBk = function(response){
+
+        };
+
+        // $http.post('http://localhost:8080/home', registerData).then(successCallBk, errorCallBk);
+
         $http({
-            method: 'POST',
+            method: "POST",
             url: "http://localhost:8080/home",
             data: registerData,
             headers: {
-                'Content-type': 'application/json, charset=UTF-8'
+                "Content-type": "application/json, charset=UTF-8"
             }
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
