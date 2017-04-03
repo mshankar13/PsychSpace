@@ -61,6 +61,28 @@ h4 {
 .nd-content .btn-comment {
     margin: 1em;
     background-color: var(--space-cadet-color);
+    border-color: var(--space-cadet-color);
+}
+
+.nd-content .btn-comment:hover {
+    transition-duration: 300ms;
+    background-color: var(--eucalyptus-color);
+    border-color: var(--eucalyptus-color);
+}
+
+.nd-content .btn-like {
+    background-color: var(--baby-poweder-color);
+    font-size: 2em;
+}
+
+.nd-content .btn-like:hover {
+    transition-duration: 300ms;
+    color: var(--dogwood-color);
+}
+
+.nd-content .btn-like:active {
+    margin: 1em;
+    color: var(--dogwood-color);
 }
 
 .nd-content .button {
@@ -81,6 +103,16 @@ h1,
 h2,
 h3 {
     text-align: left;
+}
+
+.nd-content .comment {
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.nd-content .btn-right-align {
+    text-align: right;
 }
 
 @media only screen and (max-width: 1080px) {

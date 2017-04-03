@@ -43,7 +43,9 @@
                                 <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
                                 <hr>
                                 <!-- Date/Time -->
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM
+                                    <button id="btn-article-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                                </p>
                                 <hr>
                                 <!-- Preview Image -->
                             </div>
@@ -99,18 +101,25 @@
                                     <div class="form-group">
                                         <textarea class="form-control" rows="3"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="btn-right-align">
+                                        <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                             <hr>
                             <!-- Posted Comments -->
                             <!-- Comment -->
-                            <div class="media">
+                            <div class="media comment">
                                 <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">Comment #1
-                                        <small>March 31, 2017 at 9:30 AM</small>
-                                    </h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+                                    <h4 class="media-heading">Comment
+                    <small>March 31, 2017 at 9:30 AM</small>
+                </h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    <div class="btn-right-align">
+                                        <button id="btn-comment-reply" type="submit" class="btn-comment btn btn-primary">Reply</button>
+                                        <button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Social -->
