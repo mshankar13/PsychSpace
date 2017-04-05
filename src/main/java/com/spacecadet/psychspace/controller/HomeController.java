@@ -60,7 +60,7 @@ public class HomeController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.POST, consumes = {"application/json, charset=UTF-8"})
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ResponseEntity<?> afterRegister(@RequestBody RegisterUserRequest request){
         System.out.print("Register user: " + request.getFirstName());
         if(userManager.emailRegistered(request.getEmail())){
