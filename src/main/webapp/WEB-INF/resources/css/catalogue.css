@@ -3,7 +3,7 @@ body {
     min-height: 100vh;
 }
 
-.news-header {
+.catalogue-header {
     position: relative;
     width: 100%;
     text-align: center;
@@ -11,11 +11,11 @@ body {
     font-family: "Open Sans";
 }
 
-.news-header .articles {
+.catalogue-header .courses {
     text-align: center;
 }
 
-.news-header h1,
+.catalogue-header h1,
 h2,
 h3,
 h4 {
@@ -23,90 +23,93 @@ h4 {
     margin-top: 0;
 }
 
-.news-header h1 {
+.catalogue-header h1 {
     font-size: 32px;
     text-align: left;
 }
 
-.news-header p {
+.catalogue-header p {
     font-size: 14px;
     color: darkgray;
     text-align: left;
+    padding: .2em .2em 0 0;
 }
 
-.news-header .page-title h1 {
+.catalogue-header .page-title h1 {
     font-size: 64px;
     text-align: center;
 }
 
-.news-header .section-title h2 {
+.catalogue-header .section-title h2 {
     padding-top: 1em;
     text-align: left;
 }
 
-.news-content {
+.catalogue-content {
     padding: 2em 1em;
     position: relative;
     text-align: left;
     display: inline-block;
     width: 80%;
     background-color: var(--baby-powder-color);
-    border-radius: 10px
 }
 
-.news-header .article-info {
+.catalogue-header .course-info {
     background-color: white;
     margin: 1em;
     padding: 1em 2em;
     width: 400px;
-    height: 600px;
     display: inline-block;
     border-radius: var(--border-radius-1);
 }
 
-.news-header .article-info2 {
+.catalogue-header .course-info2 {
     background-color: white;
     margin: 1em;
     padding: 1em 2em;
-    border-radius: var(--border-radius-1);
 }
 
-.news-header .article-preview {
-    padding-top: 1em;
+.catalogue-header p {
+    color: dimgrey;
+    /* color: var(--space-cadet-color);*/
 }
 
-.news-header .lead {
+.catalogue-header .lead {
     font-size: 18px;
 }
 
-.news-header .button {
+.catalogue-header .button {
     color: var(--eucalyptus-color);
     border: 0em;
     margin: 0;
     width: auto;
 }
 
-.news-header .button:hover {
+.catalogue-header .button:hover {
     color: var(--dogwood-color);
     border: 0em;
     margin: 0;
 }
 
-.news-header hr {
+.catalogue-header hr {
     border-color: var( --eucalyptus-color);
     margin: 0em;
 }
 
-.news-header .btn-read-more {
+.catalogue-header .btn-read-more {
     font-size: 22px;
 }
 
-.news-header .center {
-    text-align: center;
+.catalogue-header .course-info-header {
+    padding-top: .2em;
+}
+
+.catalogue-header .course-img {
+    padding-bottom: 1em;
 }
 
 @media only screen and (max-width: 1100px) {
-    .news-header .article-info {
+    .catalogue-header .course-info {
         width: auto;
     }
 }

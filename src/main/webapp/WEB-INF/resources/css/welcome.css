@@ -101,12 +101,6 @@
     color: var(--baby-powder-color);
     text-decoration: none;
 }
-/*---------------- NAVIGATION BAR ----------------*/
-.welcome-nav{
-    position:fixed;
-    width: 100%;
-    z-index: 1;
-}
 
 
 

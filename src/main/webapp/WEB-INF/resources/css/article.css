@@ -1,9 +1,8 @@
 body {
-    /*background-color: var(--space-cadet-color);*/
     min-height: 100vh;
 }
 
-.nd-header {
+.article-header {
     position: relative;
     width: 100%;
     text-align: center;
@@ -11,11 +10,11 @@ body {
     font-family: "Open Sans";
 }
 
-.nd-header p {
+.article-header p {
     font-size: 18px;
 }
 
-.nd-header h1,
+.article-header h1,
 h2,
 h3,
 h4 {
@@ -23,7 +22,10 @@ h4 {
     margin-top: 0;
 }
 
-.nd-content {
+
+/*----------- CONTENT ---------------*/
+
+.article-content {
     padding: 2em 4em;
     position: relative;
     text-align: left;
@@ -32,94 +34,100 @@ h4 {
     background-color: var(--baby-powder-color);
 }
 
-.nd-content .article-info {
+.article-content .article-info {
     padding: 2em;
 }
 
-.nd-content .article {
+.article-content .article {
     float: left;
     /*  border: solid thin #EEEEEE; */
 }
 
-.nd-content .social {
+.article-content .social {
     padding: 2em;
 }
 
-.nd-content .suggestions-list {
+.article-content .suggestions-list {
     text-align: center;
 }
 
-.nd-content .suggestion {
+.article-content .suggestion {
     display: inline-block;
     padding: 1em 1em;
 }
 
-.nd-content .article-img {
+.article-content .article-img {
     padding-bottom: 2em;
 }
 
-.nd-content .btn-comment {
+.article-content .btn-comment {
     margin: 1em;
     background-color: var(--space-cadet-color);
     border-color: var(--space-cadet-color);
 }
 
-.nd-content .btn-comment:hover {
+.article-content .btn-comment:hover {
     transition-duration: 300ms;
     background-color: var(--eucalyptus-color);
     border-color: var(--eucalyptus-color);
 }
 
-.nd-content .btn-like {
+.article-content .btn-like {
     background-color: var(--baby-poweder-color);
     font-size: 2em;
 }
 
-.nd-content .btn-like:hover {
+.article-content .btn-like:hover {
     transition-duration: 300ms;
     color: var(--dogwood-color);
 }
 
-.nd-content .btn-like:active {
+.article-content .btn-like:active {
     margin: 1em;
     color: var(--dogwood-color);
 }
 
-.nd-content .button {
+.article-content .button {
     color: var(--eucalyptus-color);
     border: 0em;
     margin: 0;
     width: auto;
 }
 
-.nd-content .button:hover {
+.article-content .button:hover {
     color: var(--dogwood-color);
     border: 0em;
     margin: 0;
 }
 
-.nd-content p,
+.article-content p,
 h1,
 h2,
 h3 {
     text-align: left;
 }
 
-.nd-content .comment {
+.article-content .comment {
     background-color: white;
     padding: 1em;
     border-radius: 1em;
 }
 
-.nd-content .btn-right-align {
+.article-content .btn-right-align {
     text-align: right;
 }
 
+.article-content .article-text {
+    background-color: white;
+    border-radius: 20px;
+    padding-top: 2em
+}
+
 @media only screen and (max-width: 1080px) {
-    .nd-content .suggestions {
+    .article-content .suggestions {
         padding-top: 2em;
     }
-    .nd-content .suggestion {
+    .article-content .suggestion {
         width: 32%;
         padding: 0em .2em;
     }

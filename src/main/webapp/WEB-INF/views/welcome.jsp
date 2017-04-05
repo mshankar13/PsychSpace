@@ -16,11 +16,11 @@
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/about.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/welcome.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
 </head>
 <body>
 <div class="welcome-background">

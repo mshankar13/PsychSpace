@@ -1,0 +1,141 @@
+body {
+    min-height: 100vh;
+}
+
+.course-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: var(--space-cadet-color);
+    font-family: "Open Sans";
+}
+
+.course-header p {
+    font-size: 14px;
+    color: dimgrey;
+}
+
+.course-header h1,
+h2,
+h3,
+h4 {
+    font-family: "Maven Pro";
+    margin-top: 0;
+}
+
+
+/*----------- BUTTON ---------------*/
+
+.course-content .button {
+    color: var(--eucalyptus-color);
+    border: 0em;
+    margin: 0;
+    width: auto;
+}
+
+.course-content .button:hover {
+    color: var(--dogwood-color);
+    border: 0em;
+    margin: 0;
+}
+
+.course-content .button-enroll {
+    background-color: var(--eucalyptus-color);
+    color: white;
+    font-size: 2em;
+    width: 100%;
+    margin-top: .5em;
+    font-family: "Maven Pro";
+    text-align: center;
+}
+
+.course-content .button-enroll:hover {
+    background-color: var(--dogwood-color);
+    color: white;
+    margin-top: .5em;
+}
+
+.course-content .button-instructor {
+    width: 100%;
+    font-family: "Maven Pro";
+    text-align: left;
+    margin-left: .1em;
+    padding: 0;
+}
+
+
+/*----------- CONTENT ---------------*/
+
+.course-content {
+    padding: 2em 4em;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    background-color: var(--baby-powder-color);
+}
+
+.course-content .text-content {
+    text-align: left;
+    display: inline-block;
+    padding: 2em;
+    width: 100%;
+}
+
+.course-content .course-info {
+    padding: 0 2em;
+}
+
+.course-content .course-details {
+    float: left;
+    background-color: white;
+    border-radius: var(--border-radius-1);
+    padding: 1em 2em;
+    /*  border: solid thin #EEEEEE; */
+}
+
+.course-content .course-text {
+    background-color: white;
+    border-radius: var(--border-radius-1);
+    padding-top: 1em;
+    display: inline-block;
+}
+
+.course-content .course-img {
+    padding-bottom: 2em;
+    display: inline;
+}
+
+
+/*----------- SOCIAL ---------------*/
+
+.course-content .social {
+    padding: 2em;
+}
+
+.course-content p,
+h1,
+h2,
+h3 {
+    text-align: left;
+}
+
+.course-content .comment {
+    background-color: white;
+    padding: 1em;
+    border-radius: var(--border-radius-1);
+    text-align: left;
+}
+
+.course-content .instructor-feature {
+    background-color: white;
+    padding: 0;
+    text-align: left;
+}
+
+@media only screen and (max-width: 1000px) {
+    .course-content .course-details {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+}

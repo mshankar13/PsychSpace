@@ -24,7 +24,7 @@
                 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
                 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
                 <script src="${contextPath}/resources/js/navbar.js"></script>
-                <link href='${contextPath}/resources/css/article.css' rel='stylesheet'>
+                <link href='${contextPath}/resources/css/course.css' rel='stylesheet'>
                 <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
                 <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
                 <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
@@ -34,7 +34,7 @@
                 <div classs="navbar-wrapper">
                     <%@include file="navbar.html"%>
                 </div>
-                <%@include file="article.html"%>
+                <%@include file="course.html"%>
                     <%@include file="footer.html" %>
                         <script src="${contextPath}/resources/js/animations.js"></script>
             </body>
