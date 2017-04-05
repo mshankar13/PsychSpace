@@ -6,19 +6,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by aliao on 3/27/2017.
+ * Created by aliao on 4/5/2017.
  */
 @Controller
-public class CatalogController {
-
+public class CourseController {
     /**
-     * all visit to catalog page
+     * all visit to course page
      * @return
      */
-    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
-    public ModelAndView catalog() {
+    @RequestMapping(value = "/course", method = RequestMethod.GET)
+    public ModelAndView course() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("catalogue");
+        model.setViewName("course");
 
         return model;
     }

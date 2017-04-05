@@ -35,7 +35,7 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("home");
+        model.setViewName("welcome");
 
         return model;
     }
