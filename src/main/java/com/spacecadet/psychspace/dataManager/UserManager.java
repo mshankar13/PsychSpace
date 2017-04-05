@@ -15,7 +15,7 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public boolean addUser(String email, String password, String firstName, String lastName, Date dob,
+    public boolean addUser(String email, String password, String firstName, String lastName,
                         String role) {
 
         Transaction txn = datastore.beginTransaction();
@@ -27,7 +27,7 @@ public class UserManager {
             user.setProperty("Password", password);
             user.setProperty("FirstName", firstName);
             user.setProperty("LastName", lastName);
-            user.setProperty("DateOfBirth", dob);
+//            user.setProperty("DateOfBirth", dob);
             user.setProperty("Role", role);
             datastore.put(txn, user);
 
