@@ -1,5 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
 import com.spacecadet.psychspace.requests.RegisterUserRequest;
@@ -55,11 +56,12 @@ public class HomeController {
         }
     }
 
-
+    //@JsonView(Views.Public.class)
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody RegisterUserRequest request){
+    public  String afterRegister(@RequestBody RegisterUserRequest request){
         System.out.print("name: " + request.getFirstName());
         return "welcome";
     }
+
 
 }

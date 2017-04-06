@@ -21,6 +21,6 @@ public class RegisterUserRequest {
     private String firstName;
     private String lastName;
 //    private Date DoB;
-    @NotNull
-    private String password;
+//    @NotNull
+//    private String password;
 }

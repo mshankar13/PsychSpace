@@ -20,30 +20,37 @@ function google_signin_callback(authResult){
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
 
-    console.log('Name: ' + profile.getName());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    // console.log('Name: ' + profile.getName());
+    // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
     var user = {};
     user["email"] = profile.getEmail();
-    user['firstName'] = profile.getName();
+    user["firstName"] = profile.getGivenName();
+    user["lastName"] = profile.getFamilyName();
+
+    console.log(user);
 
     $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        mimeType: "application/json",
-        url: "/home",
-        data: JSON.stringify(user),
-        dataType: 'json',
-        timeout: 600000,
-        success: function (response) {
-            console.log(response);
+        type : "POST",
+        contentType : "application/json",
+        url : "/home",
+        data : JSON.stringify(user),
+        dataType : 'json',
+        timeout : 100000,
+        success : function(data) {
+            console.log("SUCCESS: ", data);
+            display(data);
         },
-        error: function (e) {
-           console.log(e);
+        error : function(e) {
+            console.log("ERROR: ", e);
+            display(e);
+        },
+        done : function(e) {
+            console.log("DONE");
         }
     });
 
-
+    
 }
 
 function signOut() {
