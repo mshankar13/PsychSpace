@@ -1,153 +1,58 @@
-var app = angular.module('navbarApp', ['ngMaterial', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+$(document).ready(function(){
 
-app.controller('NavCtrl', function($scope, $mdDialog) {
-    $scope.customFullscreen = false;
-
-    $scope.showLoginDialog = function(ev) {
-        $mdDialog.show( {
-            controller: DialogController,
-            contentElement: '#dialog-login',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true
-    });
+    window.onbeforeunload = function(e){
+        gapi.auth2.getAuthInstance().signOut();
     };
 
-    $scope.showRegisterDialog = function(ev) {
-        $mdDialog.show( {
-            controller: DialogController,
-            contentElement: '#dialog-register',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true
-        });
-    };
+    $("#btn-signin").on("click", onSignIn);
+});
 
-    function DialogController($scope, $mdDialog) {
+function google_signin_callback(authResult){
+    gapi.client.load('plus', 'v1', apiClientLoaded);
 
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-
+    if(authResult.status.method == 'AUTO'){
+        console.log("auto" + authResult);
+    } else if(authResult.status.method == 'PROMPT') {
+        console.log("prompt" + authResult);
     }
+}
 
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
 
-});
+    console.log('Name: ' + profile.getName());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-app.controller('LoginFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    var user = {};
+    user["email"] = profile.getEmail();
+    user['firstName'] = profile.getName();
 
-    $scope.list = [];
-    $scope.loginError = false;
-
-    //$scope.headerText = 'AngularJS Post Form Spring MVC example: Submit below form';
-    $scope.submit = function() {
-        var loginData = {
-            "email" : $scope.email,
-            "password" : $scope.password
-        };
-
-
-        var currentPage = $location.absUrl();
-        if (currentPage.slice(-1) === "/") {
-            currentPage = currentPage + "home";
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        mimeType: "application/json",
+        url: "/home",
+        data: JSON.stringify(user),
+        dataType: 'json',
+        timeout: 600000,
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (e) {
+           console.log(e);
         }
-
-        currentPage += "/1";
-
-        $http({
-            method: 'POST',
-            url: currentPage,
-            data: loginData
-        }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            $scope.loginError = true;
-        });
-
-        //Empty list data after process
-        $scope.list = [];
-    };
+    });
 
 
-}]);
+}
 
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
 
- app.controller('RegisterFormSubmitCtrl', ['$scope', '$http', '$location', function($scope, $http) {
-//
-//     $scope.registerError = false;
-//
-     $scope.submit = function() {
-
-        var registerData = {
-            email: "ejrkwh@kweh",
-            firstName: "im here yay",
-            lastName: "hi",
-            password: "wlit"
-        };
-
-        // var registerData = {
-        //     "email" : $scope.email,
-        //     "firstName" : $scope.firstName,
-        //     "lastName" : $scope.lastName,
-        //     //"DoB": $scope.DoB = new Date(),
-        //     "password" : $scope.password
-        // };
-
-        // this.minDate = new Date();
-        // this.minDate.setFullYear(registerData.DoB.getFullYear()-18);
-        // this.minDate.setMonth(registerData.DoB.getMonth());
-        // this.minDate.setMonth(registerData.DoB.getDate());
-
-        console.log(registerData);
-
-        var successCallBk = function(response){
-
-        };
-
-        var errorCallBk = function(response){
-
-        };
-
-        // $http.post('http://localhost:8080/home', registerData).then(successCallBk, errorCallBk);
-
-        $http({
-            method: "POST",
-            url: "http://localhost:8080/home",
-            data: registerData,
-            headers: {
-                "Content-type": "application/json, charset=UTF-8"
-            }
-        }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            $scope.registerError = true;
-
-        });
-    };
-
-}]);
-
-app.controller('DropdownCtrl', function ($scope, $log) {
-
-    $scope.status = {
-        isopen: false
-    };
-
-    $scope.toggled = function(open) {
-        $log.log('Dropdown is now: ', open);
-    };
-
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.status.isopen = !$scope.status.isopen;
-    };
-
-    $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-});
-
-
-
-
+function onSigninCallbackVanilla(authResponse){
+    console.log(authResponse);
+}

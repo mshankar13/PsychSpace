@@ -55,22 +55,12 @@ public class HomeController {
         }
     }
 
-    /**
-     * after register goto home page
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/home", method = RequestMethod.POST, consumes = {"application/json, charset=UTF-8"})
-    public ResponseEntity<?> afterRegister(@RequestBody RegisterUserRequest request){
-        System.out.print("Register user: " + request.getFirstName());
-        if(userManager.emailRegistered(request.getEmail())){
-            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
-        }
-        else if(userManager.addUser(request.getEmail(), request.getPassword(), request.getFirstName(), request.getLastName(),
-                 "User")) {
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    public String afterRegister(@RequestBody RegisterUserRequest request){
+        System.out.print("name: " + request.getFirstName());
+        return "welcome";
+
     }
 
 }
