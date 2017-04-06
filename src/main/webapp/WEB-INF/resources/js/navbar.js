@@ -30,16 +30,19 @@ function onSignIn(googleUser) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        mimeType: "application/json",
         url: "/home",
         data: JSON.stringify(user),
         dataType: 'json',
         timeout: 600000,
         success: function (response) {
-            console.log(response);
+            console.log("SUCCESS: ", response);
         },
         error: function (e) {
-           console.log(e);
+           console.log("ERROR: ", e);
+        },
+        done : function(e) {
+            console.log("DONE");
+        //    enable buttons after log in
         }
     });
 
