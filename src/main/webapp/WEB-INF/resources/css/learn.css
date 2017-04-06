@@ -1,0 +1,115 @@
+body {
+    background-color: white;
+    min-height: 100vh;
+}
+
+.learn-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: var(--space-cadet-color);
+    font-family: "Open Sans";
+}
+
+.learn-header .courses {
+    text-align: center;
+}
+
+.learn-header h1,
+h2,
+h3,
+h4 {
+    font-family: "Maven Pro";
+    margin-top: 0;
+}
+
+.learn-header h1 {
+    font-size: 32px;
+    text-align: left;
+}
+
+.learn-header p {
+    font-size: 14px;
+    color: darkgray;
+    text-align: left;
+    padding: .2em .2em 0 0;
+}
+
+.learn-header .page-title h1 {
+    font-size: 64px;
+    text-align: center;
+}
+
+.learn-header .section-title h2 {
+    padding-top: 1em;
+    text-align: left;
+}
+
+.learn-content {
+    padding: 2em 1em;
+    position: relative;
+    text-align: left;
+    display: inline-block;
+    width: 80%;
+    background-color: var(--baby-powder-color);
+}
+
+.learn-header .course-info {
+    background-color: white;
+    margin: 1em;
+    padding: 1em 2em;
+    width: 400px;
+    display: inline-block;
+    border-radius: var(--border-radius-1);
+}
+
+.learn-header .course-info2 {
+    background-color: white;
+    margin: 1em;
+    padding: 1em 2em;
+}
+
+.learn-header p {
+    color: dimgrey;
+    /* color: var(--space-cadet-color);*/
+}
+
+.learn-header .lead {
+    font-size: 18px;
+}
+
+.learn-header .button {
+    color: var(--eucalyptus-color);
+    border: 0em;
+    margin: 0;
+    width: auto;
+}
+
+.learn-header .button:hover {
+    color: var(--dogwood-color);
+    border: 0em;
+    margin: 0;
+}
+
+.learn-header hr {
+    border-color: var( --eucalyptus-color);
+    margin: 0em;
+}
+
+.learn-header .btn-read-more {
+    font-size: 22px;
+}
+
+.learn-header .course-info-header {
+    padding-top: .2em;
+}
+
+.learn-header .course-img {
+    padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 1100px) {
+    .learn-header .course-info {
+        width: auto;
+    }
+}
