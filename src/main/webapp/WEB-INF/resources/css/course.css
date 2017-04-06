@@ -133,6 +133,10 @@ h3 {
     text-align: left;
 }
 
+.course-content media-body h4 {
+    width: 200px;
+}
+
 @media only screen and (max-width: 1000px) {
     .course-content .course-details {
         width: 100%;

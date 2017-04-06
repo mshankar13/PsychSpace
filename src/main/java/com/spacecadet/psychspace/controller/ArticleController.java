@@ -19,7 +19,7 @@ public class ArticleController {
     @RequestMapping(value = "/article", method = RequestMethod.GET)
     public ModelAndView newsDetail() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("newsdetail");
+        model.setViewName("article");
 
         return model;
     }

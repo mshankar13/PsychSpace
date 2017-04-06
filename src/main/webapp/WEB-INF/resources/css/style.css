@@ -100,13 +100,14 @@
 }
 
 .page-banner .absolute-text {
-    position: absolute;
-    width: 100vw;
-    bottom: 0;
     /* background: rgba(251, 251, 251, 0.5);*/
+    width: 100vw;
     text-align: center;
     color: white;
-    font-size: 5em
+    font-size: 64px;
+    position: absolute;
+    top: 35%;
+    height: 65%;
 }
 
 hr {
