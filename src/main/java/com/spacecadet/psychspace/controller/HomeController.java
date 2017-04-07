@@ -1,15 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
-import com.spacecadet.psychspace.responses.AjaxResponseBody;
-import com.spacecadet.psychspace.responses.JsonViews;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -31,12 +25,4 @@ public class HomeController {
 
         return model;
     }
-
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user, HttpServletRequest request){
-        System.out.print("get: " + user);
-        return "welcome";
-    }
-
-
 }
