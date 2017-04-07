@@ -34,21 +34,6 @@ public class NewsListController {
     }
 
     /**
-     * after login in news page
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/news/1", method = RequestMethod.POST)
-    public ResponseEntity<?> afterLogin(AuthenticateUserRequest request){
-        if (userManager.verifyUser(request.getEmail(), request.getPassword())){
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    /**
      * TODO -- Test this method as well as other news functions
      * Provides dummy data for newsfeed.
      */

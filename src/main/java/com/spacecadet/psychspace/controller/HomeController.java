@@ -3,22 +3,11 @@ package com.spacecadet.psychspace.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
-import com.spacecadet.psychspace.requests.RegisterUserRequest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.spacecadet.psychspace.responses.AjaxResponseBody;
+import com.spacecadet.psychspace.responses.JsonViews;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.ws.rs.Consumes;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 
 /**
@@ -36,31 +25,23 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("welcome");
+        model.setViewName("home");
 
         return model;
     }
 
-    /**
-     * after login goto home page
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/home/1", method = RequestMethod.POST)
-    public ResponseEntity<?> afterLogin(AuthenticateUserRequest request){
-        if (userManager.verifyUser(request.getEmail(), request.getPassword())){
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    //@JsonView(Views.Public.class)
+    @JsonView(JsonViews.Public.class)
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public  String afterRegister(@RequestBody RegisterUserRequest request){
-        System.out.print("name: " + request.getFirstName());
-        return "welcome";
+    public AjaxResponseBody afterRegister(@RequestBody AuthenticateUserRequest user){
+        System.out.print("email: " + user.getEmail());
+        AjaxResponseBody result = new AjaxResponseBody();
+
+        if(user != null){
+            result.setCode("200");
+            result.setMsg("User email: " + user.getEmail());
+        }
+
+        return result;
     }
 
 
