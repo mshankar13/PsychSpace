@@ -4,7 +4,8 @@ $(document).ready(function(){
         gapi.auth2.getAuthInstance().signOut();
     };
 
-    $("#btn-signin").on("click", onSignIn);
+    $("#btn-sign-in").on("click", onSignIn);
+    $("#btn-sign-out").on("click", signOut);
 
     if (checkIfLoggedIn()) {
         $("#btn-sign-in").hide();
@@ -12,7 +13,6 @@ $(document).ready(function(){
         $("#nav-home").show();
         $("#nav-learn").show();
     }
-
 
     else {
         $("#btn-sign-in").show();
