@@ -5,6 +5,7 @@
 <head>
     <meta name="google-signin-client_id" content="268071146674-5jjt494svk74rt4jb5mu4pik8503qbph.apps.googleusercontent.com">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <script src="https://apis.google.com/js/platform.js" async defer></script>

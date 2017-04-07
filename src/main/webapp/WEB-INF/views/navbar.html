@@ -14,8 +14,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse in">
                 <ul class="nav navbar-nav" id="uib-overrides-nav">
-                    <li ng-show="false" class="nav-li nav-user-only" ><a href="${contextPath}/home" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
-                    <li ng-show="false" class="nav-li nav-user-only" ><a href="${contextPath}/learn" class="uib-overrides-nav-a">Learn</a></li>
+                    <li id="nav-home" class="nav-li nav-user-only" ><a href="${contextPath}/home" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
+                    <li id="nav-learn" class="nav-li nav-user-only" ><a href="${contextPath}/learn" class="uib-overrides-nav-a">Learn</a></li>
                     <li class="nav-li"><a href="${contextPath}/catalogue" class="uib-overrides-nav-a">Catalogue</a></li>
                     <li class="nav-li"><a href="${contextPath}/news" class="uib-overrides-nav-a">News</a></li>
                 </ul>
@@ -28,114 +28,42 @@
                     <!--</button>-->
                 <!--</form>-->
 
-                <ul class="nav navbar-nav nav-log-in">
+                <ul class="nav navbar-nav nav-log-in" id="btn-sign-in">
                     <li class="nav-li">
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </li>
                 </ul>
 
-                <!-- login form-->
-                <!--<div style="visibility: hidden">-->
-                    <!--<div class="md-dialog-container" id="dialog-login">-->
-                    <!--<md-dialog layout-padding class="dialog">-->
-                        <!--<div class="md-toolbar-tools">-->
-                            <!--<h2>Log In</h2>-->
-                            <!--<span flex></span>-->
-                            <!--<md-button class="md-icon-button" ng-click="cancel()">-->
-                                <!--<i class="material-icons  md-24">clear</i>-->
-                            <!--</md-button>-->
-                        <!--</div>-->
-                        <!--<form role="form" data-ng-submit="submit()" name="loginForm" data-ng-controller="LoginFormSubmitCtrl">-->
-                            <!--<span class="span-error" ng-show="loginError" class="help-block">-->
-                                <!--Email and password don't match.-->
-                            <!--</span>-->
-                            <!--</br>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="Email">Email</label>-->
-                                <!--<input type="email" name="Email" id="email" class="form-control" ng-model="email" required >-->
-                                <!--<span ng-show="loginForm.email.$error.required" class="help-block">Email is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="Password">Password</label>-->
-                                <!--<input type="password" name="Password" id="password" class="form-control" ng-model="password" required >-->
-                                <!--<span ng-show="loginForm.password.$error.required" class="help-block">Password is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-actions">-->
-                                <!--<button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary" id="btn-login">-->
-                                    <!--Login-->
-                                <!--</button>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                    <!--</md-dialog>-->
-                    <!--</div>-->
-                <!--</div>-->
 
-                <!--Register form-->
-                <!--<div style="visibility: hidden">-->
-                    <!--<div class="md-dialog-container" id="dialog-register">-->
-                    <!--<md-dialog layout-padding class="dialog">-->
-                        <!--<div class="md-toolbar-tools">-->
-                            <!--<h2>Register</h2>-->
-                            <!--<span flex></span>-->
-                            <!--<md-button class="md-icon-button" ng-click="close()">-->
-                                <!--<i class="material-icons  md-24">clear</i>-->
-                            <!--</md-button>-->
-                        <!--</div>-->
-                        <!--<form role="form" data-ng-submit="submit()" name="registerForm" data-ng-controller="RegisterFormSubmitCtrl">-->
-                            <!--&lt;!&ndash;<form role="form" data-ng-submit="submit()" name="registerForm">&ndash;&gt;-->
-                            <!--<span class="span-error" ng-show="registerError" class="help-block">-->
-                                <!--{{email}} has been registered!-->
-                            <!--</span>-->
-                            <!--</br>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="Email">Email</label>-->
-                                <!--<input type="email" name="Email" class="form-control" ng-model="email" required >-->
-                                <!--<span ng-show="registerForm.email.$error.required" class="help-block">Email is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="firstName">First Name</label>-->
-                                <!--<input type="text" name="first-name" class="form-control" id="firstName" ng-model="firstName" required >-->
-                                <!--<span ng-show="registerForm.firstName.$error.required" class="help-block">First Name is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="lastName">Last Name</label>-->
-                                <!--<input type="text" name="last-name" class="form-control" id="lastName" ng-model="lastName" required >-->
-                                <!--<span ng-show="registerForm.lastName.$error.required" class="help-block">Last Name is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label>Date of Birth</label>-->
-                                <!--<md-datepicker id="DoB" class="form-control" ng-model="registerData.DoB" md-min-date="minDate" md-placeholder="Enter date"></md-datepicker>-->
-                                <!--<span ng-show="registerForm.DoB.$error.required" class="help-block">Date of birth is required</span>-->
-                                <!--<span ng-show="registerForm.DoB.$error.min" class="help-block">You need to be at least 18 years old</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="Password">Password</label>-->
-                                <!--<input type="password" name="Password" class="form-control" ng-model="password" required >-->
-                                <!--<span ng-show="registerForm.password.$error.required" class="help-block">Password is required</span>-->
-                            <!--</div>-->
-                            <!--<div class="form-actions">-->
-                                <!--<button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-primary" id="btn-register">-->
-                                    <!--Register-->
-                                <!--</button>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                    <!--</md-dialog>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <ul class="nav navbar-nav nav-user-only">
-                    <li class="dropdown" id="nav-profile">
-                        <a class="uib-overrides-nav-a dropdown-toggle" id="button-profile" role="button">
-                            <i class="material-icons md-36 icon-account-circle">account_circle</i>
-                            <span class="caret icon-caret"></span>
+                <ul id="icon-user">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            </button>
+                            <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu" id="uib-overrides-dropdown-profile" >
-                            <li role="menuitem"><a href="#">Logout</a></li>
-                            <li role="menuitem"><a href="#">Setting</a></li>
-                            <li role="menuitem"><a href="#">Help</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-arrow-up"></i> Logout</a></li>
+                            <li><a href="#"><i class="icon-arrow-down"></i> Setting</a></li>
+                            <li><a href="#"><i class="icon-arrow-left"></i> Help</a></li>
                         </ul>
                     </li>
                 </ul>
+
+
+                            <!--<ul class="nav navbar-nav nav-user-only">-->
+                    <!--<li class="dropdown" id="nav-profile">-->
+                        <!--<button type="button" class="btn btn-default" id="icon-user" aria-label="Left Align">-->
+                            <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                        <!--</button>-->
+                        <!--<ul class="dropdown-menu" id="uib-overrides-dropdown-profile" >-->
+                            <!--<li role="menuitem"><a href="#">Logout</a></li>-->
+                            <!--<li role="menuitem"><a href="#">Setting</a></li>-->
+                            <!--<li role="menuitem"><a href="#">Help</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
             </div>
             <!-- /.navbar-collapse -->
         </div>

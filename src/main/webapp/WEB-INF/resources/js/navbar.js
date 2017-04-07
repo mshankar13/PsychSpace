@@ -5,17 +5,22 @@ $(document).ready(function(){
     };
 
     $("#btn-signin").on("click", onSignIn);
-});
 
-function google_signin_callback(authResult){
-    gapi.client.load('plus', 'v1', apiClientLoaded);
-
-    if(authResult.status.method == 'AUTO'){
-        console.log("auto" + authResult);
-    } else if(authResult.status.method == 'PROMPT') {
-        console.log("prompt" + authResult);
+    if (checkIfLoggedIn()) {
+        $("#btn-sign-in").hide();
+        $("#icon-user").show();
+        $("#nav-home").show();
+        $("#nav-learn").show();
     }
-}
+
+
+    else {
+        $("#btn-sign-in").show();
+        $("#icon-user").hide();
+        $("#nav-home").hide();
+        $("#nav-learn").hide();
+    }
+});
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -27,28 +32,31 @@ function onSignIn(googleUser) {
 
     console.log(user);
 
-    $.ajax({
+    $.ajax("/home", {
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "http://localhost:8080/home",
-        data: JSON.stringify(user),
+        contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        timeout: 100000,
-        processData : false,
-        success: function (response) {
-            console.log("SUCCESS: ", response);
-        },
-        error: function (e) {
-           console.log("ERROR: ", e);
-        },
-        done : function(e) {
-            console.log("DONE");
-        //    enable buttons after log in
-        }
+        data: JSON.stringify(user),
     });
 
-    
+    //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
+    sessionStorage.setItem('user',JSON.stringify(user));
 }
+
+function checkIfLoggedIn()
+{
+    if(sessionStorage.getItem('user') == null){
+
+        return false;
+
+    } else {
+        //User already logged in
+        var userEntity = {};
+        userEntity = JSON.parse(sessionStorage.getItem('myUserEntity'));
+        return true;
+    }
+}
+
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();

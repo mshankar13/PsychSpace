@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Created by aliao on 3/20/2017.
@@ -30,18 +32,10 @@ public class HomeController {
         return model;
     }
 
-    @JsonView(JsonViews.Public.class)
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public AjaxResponseBody afterRegister(@RequestBody AuthenticateUserRequest user){
-        System.out.print("email: " + user.getEmail());
-        AjaxResponseBody result = new AjaxResponseBody();
-
-        if(user != null){
-            result.setCode("200");
-            result.setMsg("User email: " + user.getEmail());
-        }
-
-        return result;
+    public String afterRegister(@RequestBody String user, HttpServletRequest request){
+        System.out.print("get: " + user);
+        return "welcome";
     }
 
 
