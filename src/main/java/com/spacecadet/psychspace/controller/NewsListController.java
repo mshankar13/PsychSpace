@@ -2,14 +2,13 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.requests.AuthenticateUserRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by aliao on 3/20/2017.
@@ -31,6 +30,12 @@ public class NewsListController {
         model.setViewName("news");
 
         return model;
+    }
+
+    @RequestMapping(value = "/news", method = RequestMethod.POST)
+    public String afterRegister(@RequestBody String user, HttpServletRequest request){
+        System.out.print("get: " + user);
+        return "news";
     }
 
     /**

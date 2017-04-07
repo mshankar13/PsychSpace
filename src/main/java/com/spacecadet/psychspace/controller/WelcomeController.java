@@ -1,10 +1,12 @@
 package com.spacecadet.psychspace.controller;
 
-import com.sun.tracing.dtrace.Attributes;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by aliao on 3/20/2017.
@@ -22,6 +24,12 @@ public class WelcomeController {
         model.setViewName("welcome");
 
         return model;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String afterRegister(@RequestBody String user, HttpServletRequest request){
+        System.out.print("get: " + user);
+        return "home";
     }
 
     /**
