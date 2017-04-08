@@ -1,28 +1,23 @@
 $(document).ready(function(){
 
-    window.onbeforeunload = function(e){
-        gapi.auth2.getAuthInstance().signOut();
-    };
+    setActiveNav();
+
+    if (checkIfSignedIn()) {
+        userSignedInUI();
+    }
+    else {
+        userSignedOutUI();
+    }
 
     $("#btn-sign-in").on("click", onSignIn);
     $("#btn-sign-out").on("click", signOut);
 
-    if (checkIfLoggedIn()) {
-        $("#btn-sign-in").hide();
-        $("#icon-user").show();
-        $("#nav-home").show();
-        $("#nav-learn").show();
-    }
-
-    else {
-        $("#btn-sign-in").show();
-        $("#icon-user").hide();
-        $("#nav-home").hide();
-        $("#nav-learn").hide();
-    }
 });
 
 function onSignIn(googleUser) {
+    var url = window.location.href;
+    url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
+
     var profile = googleUser.getBasicProfile();
 
     var user = {};
@@ -30,20 +25,23 @@ function onSignIn(googleUser) {
     user["firstName"] = profile.getGivenName();
     user["lastName"] = profile.getFamilyName();
 
-    console.log(user);
+    console.log(url);
 
-    $.ajax("/home", {
+    $.ajax(url, {
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        data: JSON.stringify(user),
+        data: JSON.stringify(user)
     });
 
     //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
     sessionStorage.setItem('user',JSON.stringify(user));
+
+    // hide signin button, show the user icon
+    userSignedInUI();
 }
 
-function checkIfLoggedIn()
+function checkIfSignedIn()
 {
     if(sessionStorage.getItem('user') == null){
 
@@ -60,11 +58,56 @@ function checkIfLoggedIn()
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
+
     auth2.signOut().then(function () {
+        sessionStorage.removeItem("user");
         console.log('User signed out.');
     });
+
+    userSignedOutUI();
 }
 
-function onSigninCallbackVanilla(authResponse){
-    console.log(authResponse);
+function userSignedInUI() {
+    $("#nav-sign-in").hide();
+    $("#nav-profile").show();
+    $("#nav-home").show();
+    $("#nav-learn").show();
+}
+
+function userSignedOutUI() {
+    $("#nav-sign-in").show();
+    $("#nav-profile").hide();
+    $("#nav-home").hide();
+    $("#nav-learn").hide();
+}
+
+function setActiveNav() {
+    var url = window.location.href;
+    url = url.substring(url.lastIndexOf("/") + 1, url.length);
+
+    if (url == "home") {
+        $("#nav-home-a").addClass("active");
+        $("#nav-learn-a").removeClass("active");
+        $("#nav-catalogue-a").removeClass("active");
+        $("#nav-news-a").removeClass("active");
+    }
+    else if (url == "learn") {
+        $("#nav-learn-a").addClass("active");
+        $("#nav-home-a").removeClass("active");
+        $("#nav-catalogue-a").removeClass("active");
+        $("#nav-news-a").removeClass("active");
+    }
+    else if (url == "catalogue") {
+        $("#nav-catalogue-a").addClass("active");
+        $("#nav-learn-a").removeClass("active");
+        $("#nav-home-a").removeClass("active");
+        $("#nav-news-a").removeClass("active");
+    }
+    else if (url == "news") {
+        console.log("news!");
+        $("#nav-news-a").addClass("active");
+        $("#nav-learn-a").removeClass("active");
+        $("#nav-catalogue-a").removeClass("active");
+        $("#nav-home-a").removeClass("active");
+    }
 }

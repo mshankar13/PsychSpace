@@ -147,11 +147,12 @@
     font-size: 15pt;
 }
 
-
 #button-log-in:hover{
     color: var(--eucalyptus-color);
     text-decoration: none;
 }
+
+
 
 /**************************** Login/register *****************************/
 
@@ -195,36 +196,94 @@
 
 
 /**************************** Profile *****************************/
-#nav-profile {
-    float: right;
+#nav-sign-in {
+    float: left;
     position: absolute;
-    margin-left: 13%;
+    margin-left: 85%;
+    margin-top: 10px;
+}
+
+#div-sign-in>.abcRioButtonLightBlue {
+    background-color: transparent;
+    color: var(--eucalyptus-color);
+    border: 2px dashed var(--eucalyptus-color);
+}
+
+span.abcRioButtonContents {
+    font-size: 12pt;
+    margin-left: -5px;
+}
+
+.abcRioButtonContentWrapper>.abcRioButtonContents {
+    font-family: "Maven Pro";
+    font-size: 12pt;
+}
+
+.btn-profile {
+    background: transparent;
+    border-color: transparent;
+    color: var(--baby-powder-color);
+}
+
+.btn-profile:hover {
+    background: transparent;
+    border-color: transparent;
+    color: var(--baby-powder-color);
+}
+
+#uib-overrides-caret {
+    border-top-color: var(--baby-powder-color);
+    margin-top: 25px;
+    left: 80px;
+}
+
+#uib-overrides-caret:hover {
+    border-top-color: var(--baby-powder-color);
+}
+
+#uib-overrides-profile-a,
+#uib-overrides-profile-a:hover{
+    background: transparent;
+}
+
+.user-dropdown {
+    background: var(--space-cadet-color);
+}
+
+.dropdown-menu {
+    left: -20px;
+}
+
+.menu-item {
+    margin: 3px 25px;
+    font-size: 12pt;
+    line-height: 20px;
+    left: 50px;
+    color: var(--baby-powder-color);
+}
+
+.menu-item>.menu-item-a {
+    color: var(--baby-powder-color);
+    padding: inherit;
+}
+
+.menu-item>.menu-item-a:hover {
+    background-color: transparent;
+    color: var(--eucalyptus-color);
+    background-image: none;
+}
+
+#nav-profile {
+    float: left;
+    position: absolute;
+    margin-left: 90%;
 }
 
 #button-profile {
     border: transparent;
 }
 
-#uib-overrides-dropdown-profile {
-    min-width: 120px;
-    left: -50px;
-    top: 45px;
-    border-radius: 5px;
-}
 
-.nav .open>#button-profile,
-.nav .open>#button-profile:hover,
-.nav .open>#button-profile:focus{
-    background-color: var(--space-cadet-color)
-}
-
-#button-profile:hover>.icon-account-circle,
-#button-profile:hover>.icon-caret,
-.nav .open>#button-profile,
-.nav .open>a>.icon-account-circle,
-.nav .open>a>.icon-caret{
-    color: var(--eucalyptus-color)
-}
 
 
 /**************************** Footer *****************************/
