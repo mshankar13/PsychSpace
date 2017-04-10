@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 /**
  * Created by aliao on 3/20/2017.
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class NewsListController {
 
-    private NewsManager newsManager;
+    private NewsManager newsManager = new NewsManager();
     private UserManager userManager = new UserManager();
     private HelperManager helper = new HelperManager();
 
@@ -31,6 +33,11 @@ public class NewsListController {
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
+        ArrayList<News> newsList = newsManager.loadNews();
+        for(News news : newsList){
+            news.setContent(news.content.substring(0, 100));
+        }
+        model.addObject("newsList", newsList);
 
         return model;
     }
