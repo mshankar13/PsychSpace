@@ -12,6 +12,53 @@
 }
 
 
+/*---------------- HTML FONTS ----------------*/
+
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+    font-weight: 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+a {
+    margin-top: 0;
+    font-family: "Maven Pro";
+    color: var(--space-cadet-color);
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2,
+a {
+    font-size: 24px;
+}
+
+h3,
+a {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+    color: var(--eucalyptus-color);
+}
+
+p {
+    font-size: 13px;
+    color: dimgrey;
+    font-family: "Open Sans";
+}
+
+
 /*---------------- HTML WRAPPERS ----------------*/
 
 .navbar-wrapper {
@@ -105,6 +152,7 @@
 /* PAGE BANNER */
 
 .page-banner {
+    padding-top: 1em;
     position: relative;
 }
 

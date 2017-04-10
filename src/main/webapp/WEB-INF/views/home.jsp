@@ -17,12 +17,20 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <%--Customized--%>
-    <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+    <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
+    <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
 </head>
 <body>
-    <%@include  file="navbar.html" %>
-    <%@include  file="footer.html" %>
+<div class="navbar-wrapper">
+    <%@include file="navbar.html"%>
+</div>
+<%@include file="home.html"%>
+<%@include file="footer.html" %>
+<script src="${contextPath}/resources/js/animations.js"></script>
 </body>
 </html>
 

@@ -20,9 +20,9 @@
         <%--Customized--%>
         <script src="${contextPath}/resources/js/scrollreveal.js"></script>
         <script src="${contextPath}/resources/js/navbar.js"></script>
-        <link href='${contextPath}/resources/css/article.css' rel='stylesheet'>
         <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
         <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+        <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
         <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     </head>
 

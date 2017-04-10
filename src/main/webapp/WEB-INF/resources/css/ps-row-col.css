@@ -6,22 +6,12 @@ body {
     position: relative;
     width: 100%;
     text-align: center;
-    color: var(--space-cadet-color);
-    font-family: "Open Sans";
-}
-
-.ps-feature-header p {
-    font-size: 14px;
-    color: dimgrey;
 }
 
 .ps-feature-header h1,
 h2,
 h3,
-h4 {
-    font-family: "Maven Pro";
-    margin-top: 0;
-}
+h4 {}
 
 
 /*----------- BUTTON ---------------*/
