@@ -1,6 +1,5 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.UserManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
-
-    private UserManager userManager = new UserManager();
 
     /**
      * all visit to home page

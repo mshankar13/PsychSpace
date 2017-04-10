@@ -1,7 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ public class NewsListController {
 
     private NewsManager newsManager;
     private UserManager userManager = new UserManager();
+    private HelperManager helper = new HelperManager();
 
     /**
      * all visit to news page
@@ -34,7 +37,11 @@ public class NewsListController {
 
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
-        System.out.print("get: " + user);
+        User user1 = (User)(helper.stringToJson(user, "User"));
+        String key = userManager.emailRegistered(user1.email);
+        if (key == null) {
+            key = userManager.addUser(user1, "User");
+        }
         return "news";
     }
 
