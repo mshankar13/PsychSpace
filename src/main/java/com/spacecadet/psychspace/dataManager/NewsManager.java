@@ -4,8 +4,14 @@ import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.repackaged.org.joda.time.DateTime;
+import com.google.appengine.repackaged.org.joda.time.format.DateTimeFormat;
+import com.google.appengine.repackaged.org.joda.time.format.DateTimeFormatter;
 import com.spacecadet.psychspace.utilities.*;
 
+import java.sql.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -33,7 +39,7 @@ public class NewsManager {
             news.author = entity.getProperty("Author").toString();
             news.content = entity.getProperty("Content").toString();
             news.likesCount = Integer.parseInt(entity.getProperty("Likes").toString());
-            news.date = Helpers.convertDate(entity.getProperty("Date").toString());
+            news.date = HelperManager.convertDate(entity.getProperty("Date").toString());
             news.newsKey = KeyFactory.keyToString(entity.getKey());
             loadedNews.add(news);
         }
@@ -64,7 +70,7 @@ public class NewsManager {
             news.author = singleNews.getProperty("Author").toString();
             news.content = singleNews.getProperty("Content").toString();
             news.likesCount = Integer.parseInt(singleNews.getProperty("Likes").toString());
-            news.date = Helpers.convertDate(singleNews.getProperty("Date").toString());
+            news.date = HelperManager.convertDate(singleNews.getProperty("Date").toString());
             news.newsKey = newsID;
 
         } catch (EntityNotFoundException ex) {
@@ -165,5 +171,38 @@ public class NewsManager {
                 txn.rollback();
             }
         }
+    }
+
+    /**
+     * Gets the featured article from the list of loaded news
+     * Returns latest article if there is no article within the week
+     * @param allNews
+     * @return
+     */
+    public News getFeatured(ArrayList<News> allNews) {
+
+        ArrayList<News> potentialFeatured = new ArrayList<>();
+
+        Date lastWeek = new DateTime().minusDays(7).toDate();
+        Date today = new Date();
+        System.out.println(today.after(lastWeek));
+        for (News news : allNews) {
+            if (news.date.after(lastWeek) == true) {
+                potentialFeatured.add(news);
+            }
+        }
+
+        if (potentialFeatured.size() != 0) {
+            Collections.sort(potentialFeatured, new Comparator<News>() {
+                @Override
+                public int compare(News o1, News o2) {
+                    if (o1.likesCount >= o2.likesCount) return 1;
+                    return 0;
+                }
+            });
+            return potentialFeatured.get(potentialFeatured.size() - 1);
+        }
+
+        return allNews.get(allNews.size() - 1);
     }
 }

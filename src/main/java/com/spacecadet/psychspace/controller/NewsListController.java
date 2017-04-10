@@ -102,7 +102,7 @@ public class NewsListController {
                 "Bruce Duncan Perry",
                 "While the benefits of self-directed learning are widely acknowledged, the reasons why a sense of control leads to better acquisition of material are poorly understood.",
                 8,
-                "03/22/2017");
+                "04/10/2017");
     }
 
     public void comments_test() {
