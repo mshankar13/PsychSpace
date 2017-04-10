@@ -32,8 +32,8 @@ public class NewsManager {
             news.title = entity.getProperty("Title").toString();
             news.author = entity.getProperty("Author").toString();
             news.content = entity.getProperty("Content").toString();
-            news.likesCount = Integer.parseInt(entity.getProperty("Likes").toString());
-            news.date = Helpers.convertDate(entity.getProperty("Date").toString());
+            news.likesCount = entity.getProperty("Likes").toString();
+            news.date = entity.getProperty("Date").toString();
             news.newsKey = KeyFactory.keyToString(entity.getKey());
             loadedNews.add(news);
         }
@@ -63,8 +63,8 @@ public class NewsManager {
             news.title = singleNews.getProperty("Title").toString();
             news.author = singleNews.getProperty("Author").toString();
             news.content = singleNews.getProperty("Content").toString();
-            news.likesCount = Integer.parseInt(singleNews.getProperty("Likes").toString());
-            news.date = Helpers.convertDate(singleNews.getProperty("Date").toString());
+            news.likesCount = singleNews.getProperty("Likes").toString();
+            news.date = singleNews.getProperty("Date").toString();
             news.newsKey = newsID;
 
         } catch (EntityNotFoundException ex) {
@@ -82,7 +82,7 @@ public class NewsManager {
      * @param content
      * @param likesCount
      */
-    public void addNews(String title, String author, String content, int likesCount, String date) {
+    public void addNews(String title, String author, String content, String likesCount, String date) {
 
         Transaction txn = datastore.beginTransaction();
         try {
@@ -90,11 +90,11 @@ public class NewsManager {
             news.setProperty("Title", title);
             news.setProperty("Author", author);
             news.setProperty("Content", content);
-            news.setProperty("Likes", Integer.toString(likesCount));
+            news.setProperty("Likes", likesCount);
             news.setProperty("Date", date);
             datastore.put(txn, news);
             txn.commit();
-
+            System.out.println(KeyFactory.keyToString(news.getKey()));
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -111,7 +111,7 @@ public class NewsManager {
      * @param content
      * @param likesCount
      */
-    public void editNews(String newsID, String title, String author, String content, int likesCount, String date) {
+    public void editNews(String newsID, String title, String author, String content, String likesCount, String date) {
 
         Transaction txn = datastore.beginTransaction();
 
@@ -121,7 +121,7 @@ public class NewsManager {
                 updatedNews.setProperty("Title", title);
                 updatedNews.setProperty("Author", author);
                 updatedNews.setProperty("Content", content);
-                updatedNews.setProperty("Likes", Integer.toString(likesCount));
+                updatedNews.setProperty("Likes", likesCount);
                 updatedNews.setProperty("Date", date);
 
                 datastore.delete(KeyFactory.stringToKey(newsID));

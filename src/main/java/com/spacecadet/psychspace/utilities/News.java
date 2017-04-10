@@ -22,7 +22,7 @@ public class News {
     public String title;
     public String author;
     public String content;
-    public int likesCount;
-    public Date date;
+    public String likesCount;
+    public String date;
     public String newsKey;
 }

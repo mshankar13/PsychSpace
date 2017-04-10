@@ -21,7 +21,7 @@ public class HelloAppEngine extends HttpServlet {
   Date date = new Date();
   entryManager.addNews("What Makes Self-Directed Learning Effective?", "Association for Psychological Science"
     , "While the benefits of self-directed learning are widely acknowledged, the reasons why a sense of control leads to better acquisition of material are poorly understood.",
-            5, "06/04/1995");
+            "5", "06/04/1995");
 
     response.setContentType("text/plain");
     response.getWriter().print(entryManager.loadNews());
