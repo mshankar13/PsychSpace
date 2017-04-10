@@ -187,7 +187,6 @@ public class NewsManager {
     public News getFeatured(ArrayList<News> allNews) {
 
         ArrayList<News> potentialFeatured = new ArrayList<>();
-
         Date lastWeek = new DateTime().minusDays(7).toDate();
         Date today = new Date();
         System.out.println(today.after(lastWeek));
@@ -202,9 +201,7 @@ public class NewsManager {
             Collections.sort(potentialFeatured, new Comparator<News>() {
                 @Override
                 public int compare(News o1, News o2) {
-                    if (Integer.parseInt(o1.getLikesCount()) >=
-                            Integer.parseInt(o2.getLikesCount())) return 1;
-                    return 0;
+                    return Integer.parseInt(o1.getLikesCount()) - Integer.parseInt(o2.getLikesCount());
                 }
             });
             return potentialFeatured.get(potentialFeatured.size() - 1);
