@@ -8,7 +8,7 @@
     --dogwood-color: #D90368;
     --fadein-time: 2s;
     --border-radius-1: 5px;
-    --page-width: 80%;
+    --page-width: 90%;
 }
 
 
@@ -78,11 +78,7 @@
 
 /* PADDING */
 
-.catalogue-header,
-.news-header,
-.welcome-header,
-.article-header,
-.course-header header {
+.ps-feature-header header {
     padding: 2em 0;
 }
 
@@ -90,6 +86,10 @@
 /* ALIGNMENT CLASSES */
 
 .center {
+    text-align: center;
+}
+
+.center img {
     text-align: center;
 }
 
@@ -115,7 +115,7 @@
 
 .page-banner .absolute-text {
     /* background: rgba(251, 251, 251, 0.5);*/
-    width: 100vw;
+    width: 100%;
     text-align: center;
     color: white;
     font-size: 64px;

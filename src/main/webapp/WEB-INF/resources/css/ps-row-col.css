@@ -1,0 +1,156 @@
+body {
+    min-height: 100vh;
+}
+
+.ps-feature-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: var(--space-cadet-color);
+    font-family: "Open Sans";
+}
+
+.ps-feature-header p {
+    font-size: 14px;
+    color: dimgrey;
+}
+
+.ps-feature-header h1,
+h2,
+h3,
+h4 {
+    font-family: "Maven Pro";
+    margin-top: 0;
+}
+
+
+/*----------- BUTTON ---------------*/
+
+.ps-feature-content .button {
+    color: var(--eucalyptus-color);
+    border: 0em;
+    margin: 0;
+    width: auto;
+}
+
+.ps-feature-content .button:hover {
+    color: var(--dogwood-color);
+    border: 0em;
+    margin: 0;
+}
+
+.ps-feature-content .button-enroll {
+    background-color: var(--eucalyptus-color);
+    color: white;
+    font-size: 2em;
+    width: 100%;
+    margin-top: .5em;
+    font-family: "Maven Pro";
+    text-align: center;
+}
+
+.ps-feature-content .button-enroll:hover {
+    background-color: var(--dogwood-color);
+    color: white;
+    margin-top: .5em;
+}
+
+.ps-feature-content .button-instructor {
+    width: 100%;
+    font-family: "Maven Pro";
+    text-align: left;
+    margin-left: .1em;
+    padding: 0;
+}
+
+
+/*----------- CONTENT ---------------*/
+
+.ps-feature-content {
+    padding: 2em 4em;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: var(--page-width);
+    background-color: var(--baby-powder-color);
+}
+
+.ps-feature-content .ps-text-content {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+}
+
+.ps-feature-content .ps-feature-info {
+    padding: 0 1em;
+}
+
+.ps-feature-content .ps-well {
+    background-color: white;
+    border-radius: var(--border-radius-1);
+    padding: 1em;
+}
+
+.ps-feature-content .ps-feature-details {
+    /*  padding: 1em 2em;
+     border: solid thin #EEEEEE; */
+}
+
+.ps-feature-content .ps-feature-text {
+    /*  padding-top: 1em;*/
+    display: inline-block;
+}
+
+.ps-feature-content .ps-feature-img {
+    padding-bottom: 1em;
+    display: inline;
+}
+
+.ps-feature-content .ps-col-right {
+    padding: 0 0 0 1em;
+}
+
+.ps-feature-content .ps-col-left {
+    padding: 0 1em 0 0;
+}
+
+
+/*----------- SOCIAL ---------------*/
+
+.ps-feature-content p,
+h1,
+h2,
+h3 {
+    text-align: left;
+}
+
+.ps-feature-content .ps-comment {
+    background-color: white;
+    padding: 1em;
+    border-radius: var(--border-radius-1);
+    text-align: left;
+}
+
+.ps-feature-content .instructor-feature {
+    background-color: white;
+    padding: 1em;
+    padding: 0;
+    text-align: left;
+}
+
+.ps-feature-content media-body h4 {
+    width: 200px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .ps-feature-content .ps-feature-details {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+    .ps-feature-content .ps-col-right {
+        padding: 0 0 1em 0;
+    }
+    .ps-feature-content .ps-col-left {
+        padding: 0 0 1em 0;
+    }
+}

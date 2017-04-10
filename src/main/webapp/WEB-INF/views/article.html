@@ -1,24 +1,34 @@
-<header class="article-header">
-    <div class="article-content">
-        <div class="row artcle">
-            <div class="article-info">
-                <!-- Title -->
-                <h1>Article Title</h1>
-                <!-- Author -->
-                <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
-                <hr>
+<header class="ps-feature-header">
+    <div class="ps-feature-content">
+        <div class="row ps-feature">
+            <div class="ps-feature-info">
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM
-                    <button id="btn-article-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                    <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
                 </p>
+                <!-- Title -->
+                <h1>Article Title<hr></h1>
+                <!-- Author -->
+                <div class="media ps-comment">
+                    <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
+                    <div class="media-body">
+                        <a class="button-instructor button fadein" href="" id="button-instructor"><span>Joe Doe</span></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                    </div>
+                </div>
+                <br>
                 <hr>
-                <!-- Preview Image -->
+                <br>
             </div>
+        </div>
 
-            <!-- end article info -->
-            <div class="row text-content">
-                <div class="col-lg-8 article-text">
-                    <img class="article-img img-responsive" src="http://placehold.it/900x300" alt="">
+        <!-- end article info -->
+        <div class="row ps-text-content">
+            <div class="col-lg-8 ps-col-left">
+                <div class="ps-well">
+                    <div class="center">
+                        <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
+                    </div>
 
                     <!-- Post Content -->
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
@@ -27,61 +37,62 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
                 </div>
-                <!--end article-text -->
-                <div class="col-sm-1"></div>
-                <!-- Suggestions Column -->
-                <div class="col-lg-3 suggestions">
-                    <h3>Suggested Articles</h3>
-                    <div class="well suggestions-list">
-                        <div class="suggestion">
-                            <h3>Article Title</h3>
-                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
-                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
-                        </div>
-                        <div class="suggestion">
-                            <h3>Article Title</h3>
-                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
-                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
-                        </div>
-                        <div class="suggestion">
-                            <h3>Article Title</h3>
-                            <img class="img-responsive" src="http://placehold.it/300x100" alt="">
-                            <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+            </div>
+            <!--end article-text -->
+            <div class="col-lg-4 ps-col-right">
+                <div class="ps-well">
+                    <div class="left">
+                        <h2>Suggestions<hr></h2>
+                    </div>
+                    <br>
+                    <div class="left">
+                        <h3 class="ps-feature-info-header"> Article Title <hr></h3>
+                        <div class="center">
+                            <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
+                            <a class="button fadein btn-read-more" id="button-read" href=""><span>Read More</span></a>
                         </div>
                     </div>
+                    <br>
+                    <div class="left">
+                        <h3 class="ps-feature-info-header"> Article Title <hr></h3>
+                        <div class="center">
+                            <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
+                            <a class="button fadein btn-read-more" id="button-read" href=""><span>Read More</span></a>
+                        </div>
+                    </div>
+                    <br>
                 </div>
-                <!-- end suggestions -->
             </div>
         </div>
+        <div class="row ps-text-content"></div>
         <!-- end article-content -->
         <!-- end row artcile -->
-        <hr>
-        <div class="row social">
-            <h2>Discussion</h2>
-            <!-- Blog Comments -->
-            <!-- Comments Form -->
-            <div class="well">
-                <h4>Leave a Comment:</h4>
-                <form role="form">
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="btn-right-align">
-                        <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
-                    </div>
-                </form>
+        <div class="row ps-text-content">
+            <h2>Comments<hr></h2>
+            <br>
+            <div class="col-lg ps-well">
+                <div class="left">
+
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="right">
+                            <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <hr>
-            <!-- Posted Comments -->
+
             <!-- Comment -->
-            <div class="media comment">
+            <div class="media ps-comment">
                 <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
                 <div class="media-body">
-                    <h4 class="media-heading">Comment
-                    <small>March 31, 2017 at 9:30 AM</small>
-                </h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <div class="btn-right-align">
-                        <button id="btn-comment-reply" type="submit" class="btn-comment btn btn-primary">Reply</button>
+                    <h4>Jane Doe <small>March 31, 2017</small><hr></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <div class="right">
+                        <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Edit</button>
                         <button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>
                     </div>
                 </div>
