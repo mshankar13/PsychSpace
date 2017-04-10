@@ -15,9 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    public String userKey;
-    public String email;
-    public String firstName;
-    public String lastName;
-    public String role; //User, Instructor, Admin
+    private  String userKey;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String role; //User, Instructor, Admin
 }

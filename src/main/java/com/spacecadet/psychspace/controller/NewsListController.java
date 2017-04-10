@@ -1,10 +1,8 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.CommentManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
@@ -37,8 +35,8 @@ public class NewsListController {
         model.setViewName("news");
         ArrayList<News> newsList = newsManager.loadNews();
         for(News news : newsList){
-            if(news.content.length() >= 100)
-                news.setContent(news.content.substring(0, 100));
+            if(news.getContent().length() >= 100)
+                news.setContent(news.getContent().substring(0, 100));
         }
         model.addObject("newsList", newsList);
 
@@ -48,7 +46,7 @@ public class NewsListController {
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
         User user1 = (User)(helper.stringToJson(user, "User"));
-        String key = userManager.emailRegistered(user1.email);
+        String key = userManager.emailRegistered(user1.getEmail());
         if (key == null) {
             key = userManager.addUser(user1, "User");
         }

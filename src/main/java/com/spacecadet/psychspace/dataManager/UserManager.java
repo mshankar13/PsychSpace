@@ -20,13 +20,13 @@ public class UserManager {
 
         Transaction txn = datastore.beginTransaction();
         datastore = DatastoreServiceFactory.getDatastoreService();
-        Entity userEntity = new Entity("User", user.email);
+        Entity userEntity = new Entity("User", user.getEmail());
 
         try {
 
-            userEntity.setProperty("Email", user.email);
-            userEntity.setProperty("FirstName", user.firstName);
-            userEntity.setProperty("LastName", user.lastName);
+            userEntity.setProperty("Email", user.getEmail());
+            userEntity.setProperty("FirstName", user.getFirstName());
+            userEntity.setProperty("LastName", user.getLastName());
             userEntity.setProperty("Role", role);
             datastore.put(txn, userEntity);
 
