@@ -94,7 +94,7 @@ public class NewsManager {
             news.setProperty("Date", date);
             datastore.put(txn, news);
             txn.commit();
-
+            System.out.println(KeyFactory.keyToString(news.getKey()));
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
