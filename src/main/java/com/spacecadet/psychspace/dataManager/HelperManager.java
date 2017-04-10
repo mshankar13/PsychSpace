@@ -6,6 +6,11 @@ import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by marleneshankar on 4/8/17.
  */
@@ -21,5 +26,18 @@ public class HelperManager {
             return g.fromJson(str, Comment.class);
         }
         return null;
+    }
+
+    public static Date convertDate(String dateString) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+        Date date = new Date();
+        df.format(date);
+
+        try {
+            date = df.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }
