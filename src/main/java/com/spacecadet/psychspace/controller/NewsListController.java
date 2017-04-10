@@ -45,6 +45,7 @@ public class NewsListController {
 
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
+        newsManager.getFeatured(newsManager.loadNews());
         User user1 = (User)(helper.stringToJson(user, "User"));
         String key = userManager.emailRegistered(user1.getEmail());
         if (key == null) {
