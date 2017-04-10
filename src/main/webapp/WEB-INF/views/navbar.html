@@ -14,10 +14,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse in">
                 <ul class="nav navbar-nav" id="uib-overrides-nav">
-                    <li id="nav-home" class="nav-li nav-user-only" ><a href="${contextPath}/home" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
-                    <li id="nav-learn" class="nav-li nav-user-only" ><a href="${contextPath}/learn" class="uib-overrides-nav-a">Learn</a></li>
-                    <li class="nav-li"><a href="${contextPath}/catalogue" class="uib-overrides-nav-a">Catalogue</a></li>
-                    <li class="nav-li"><a href="${contextPath}/news" class="uib-overrides-nav-a">News</a></li>
+                    <li id="nav-home" class="nav-li nav-user-only" ><a href="${contextPath}/home" id="nav-home-a" class="uib-overrides-nav-a">Home <span class="sr-only">(current)</span></a></li>
+                    <li id="nav-learn" class="nav-li nav-user-only" ><a href="${contextPath}/learn" id="nav-learn-a" class="uib-overrides-nav-a">Learn</a></li>
+                    <li class="nav-li"><a href="${contextPath}/catalogue" id="nav-catalogue-a" class="uib-overrides-nav-a">Catalogue</a></li>
+                    <li class="nav-li"><a href="${contextPath}/news" id="nav-news-a" class="uib-overrides-nav-a">News</a></li>
                 </ul>
                 <!--<form class="navbar-form navbar-left ng-pristine ng-valid" id="form-search" role="search">-->
                     <!--<div class="form-group" id="form-group-search">-->
@@ -28,25 +28,25 @@
                     <!--</button>-->
                 <!--</form>-->
 
-                <ul class="nav navbar-nav nav-log-in" id="btn-sign-in">
+                <ul class="nav navbar-nav" id="nav-sign-in">
                     <li class="nav-li">
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <div class="g-signin2" id="div-sign-in" data-onsuccess="onSignIn"></div>
                     </li>
                 </ul>
 
 
-                <ul id="icon-user">
+                <ul class="nav navbar-nav" id="nav-profile">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default btn-profile" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </button>
-                            <b class="caret"></b>
+                            <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-arrow-up"></i> Logout</a></li>
-                            <li><a href="#"><i class="icon-arrow-down"></i> Setting</a></li>
-                            <li><a href="#"><i class="icon-arrow-left"></i> Help</a></li>
+                        <ul class="dropdown-menu user-dropdown" role="menu">
+                            <li id="btn-sign-out"  class="menu-item"> <a href="#" class="menu-item-a">Sign out </a></li>
+                            <li class="menu-item"> <a href="#" class="menu-item-a"> Setting </a></li>
+                            <li class="menu-item"> <a href="#" class="menu-item-a">Help </a></li>
                         </ul>
                     </li>
                 </ul>

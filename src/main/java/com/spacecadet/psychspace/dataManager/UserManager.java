@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.utilities.User;
 
 import java.util.Date;
 
@@ -15,36 +16,34 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public boolean addUser(String email, String password, String firstName, String lastName,
-                        String role) {
+    public String addUser(User user, String role) {
 
         Transaction txn = datastore.beginTransaction();
         datastore = DatastoreServiceFactory.getDatastoreService();
+        Entity userEntity = new Entity("User", user.email);
+
         try {
 
-            Entity user = new Entity("User", email);
-            user.setProperty("Email", email);
-            user.setProperty("Password", password);
-            user.setProperty("FirstName", firstName);
-            user.setProperty("LastName", lastName);
-//            user.setProperty("DateOfBirth", dob);
-            user.setProperty("Role", role);
-            datastore.put(txn, user);
+            userEntity.setProperty("Email", user.email);
+            userEntity.setProperty("FirstName", user.firstName);
+            userEntity.setProperty("LastName", user.lastName);
+            userEntity.setProperty("Role", role);
+            datastore.put(txn, userEntity);
+
+            txn.commit();
 
             try {
                 datastore = DatastoreServiceFactory.getDatastoreService();
-                datastore.get(user.getKey());
+                datastore.get(userEntity.getKey());
             } catch (EntityNotFoundException ex) {
-                ex.printStackTrace();
+                System.out.println("User was not added successfully");
             }
-
-            txn.commit();
 
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
             }
-            return verifyUser(email, password);
+            return KeyFactory.keyToString(userEntity.getKey());
         }
 
     }
@@ -55,7 +54,7 @@ public class UserManager {
      * @param email
      * @return foundUser or null
      */
-    public Entity accExists(String email) {
+    public String accExists(String email) {
         datastore = DatastoreServiceFactory.getDatastoreService();
         Query.Filter userFilter =
                 new Query.FilterPredicate("Email", Query.FilterOperator.EQUAL, email);
@@ -65,7 +64,8 @@ public class UserManager {
         if (foundUser == null) {
             return null;
         }
-        return foundUser;
+
+        return KeyFactory.keyToString(foundUser.getKey());
     }
 
     /**
@@ -74,31 +74,8 @@ public class UserManager {
      * @param email
      * @return true - the email is already linked to an account
      */
-    public boolean emailRegistered(String email) {
-        if (accExists(email) == null) {
-            return false;
-        }
-        return true;
+    public String emailRegistered(String email) {
+        return accExists(email);
     }
 
-    /**
-     * verify user login username and password
-     *
-     * @param email
-     * @param password
-     * @return
-     */
-    public boolean verifyUser(String email, String password) {
-        Entity foundUser = accExists(email);
-        if (foundUser == null) {
-            return false;
-        } else {
-            /* Verify password */
-            if (password.equals(foundUser.getProperty("Password").toString())) {
-                currentUserID = foundUser.getKey();
-                return true;
-            }
-        }
-        return false;
-    }
 }
