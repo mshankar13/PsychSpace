@@ -20,29 +20,36 @@
     <%--Customized--%>
 </head>
 <body>
-    <h2>Add News</h2>
-    <%--TODO: check form--%>
-    <form:form class="form-horizontal" method="post"
-               modelAttribute="news" action="${addNews}">
-        <div class="form-group">
-            <label for="news-title">News Title</label>
-            <form:input type="text" class="form-control" id="news-title" value="${news.title}" placeholder="News Title" />
-        </div>
-        <div class="form-group">
-            <label for="author">Author</label>
-            <form:input type="text" class="form-control" id="author" value="${news.title}" placeholder="Author" />
-        </div>
-        <div class="form-group row">
-            <label for="date" class="col-2 col-form-label">Date</label>
-            <div class="col-10">
-                <form:input class="form-control" type="date" value="${news.date}" id="date" />
+<div id="wrapper">
+
+    <%@include file="admin-sidebar.html" %>
+
+    <div id="page-content-wrapper">
+        <h2>Add News</h2>
+        <%--TODO: check form--%>
+        <form:form class="form-horizontal" method="post"
+                   modelAttribute="news" action="${addNews}">
+            <div class="form-group">
+                <label for="news-title">News Title</label>
+                <form:input type="text" class="form-control" id="news-title" value="${news.title}" placeholder="News Title" />
             </div>
-        </div>
-        <div class="form-group">
-            <label for="news-content">News Content</label>
-            <form:textarea class="form-control" id="news-content" rows="10" value="${news.content}" />
-        </div>
-        <button type="submit" class="btn btn-primary">Add</button>
-    </form:form>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <form:input type="text" class="form-control" id="author" value="${news.title}" placeholder="Author" />
+            </div>
+            <div class="form-group row">
+                <label for="date" class="col-2 col-form-label">Date</label>
+                <div class="col-10">
+                    <form:input class="form-control" type="date" value="${news.date}" id="date" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="news-content">News Content</label>
+                <form:textarea class="form-control" id="news-content" rows="10" value="${news.content}" />
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form:form>
+    </div>
+</div>
 </body>
 </html>
