@@ -16,9 +16,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
-    public String username;
-    public String content;
-    public String commentKey;
-    public String newsKey;
-    Date date;
+    private String username;
+    private String content;
+    private String commentKey;
+    private String newsKey;
+    private String date;
 }

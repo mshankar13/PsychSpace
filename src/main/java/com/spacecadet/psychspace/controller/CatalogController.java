@@ -35,7 +35,7 @@ public class CatalogController {
     @RequestMapping(value = "/catalogue", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
         User user1 = (User)(helper.stringToJson(user, "User"));
-        String key = userManager.emailRegistered(user1.email);
+        String key = userManager.emailRegistered(user1.getEmail());
         if (key == null) {
             key = userManager.addUser(user1, "User");
         }

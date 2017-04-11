@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 /**
  * Created by aliao on 3/20/2017.
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class NewsListController {
 
-    private NewsManager newsManager;
+    private NewsManager newsManager = new NewsManager();
     private UserManager userManager = new UserManager();
     private HelperManager helper = new HelperManager();
 
@@ -31,14 +33,21 @@ public class NewsListController {
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
+        ArrayList<News> newsList = newsManager.loadNews();
+        for(News news : newsList){
+            if(news.getContent().length() >= 100)
+                news.setContent(news.getContent().substring(0, 100));
+        }
+        model.addObject("newsList", newsList);
 
         return model;
     }
 
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
+        newsManager.getFeatured(newsManager.loadNews());
         User user1 = (User)(helper.stringToJson(user, "User"));
-        String key = userManager.emailRegistered(user1.email);
+        String key = userManager.emailRegistered(user1.getEmail());
         if (key == null) {
             key = userManager.addUser(user1, "User");
         }
@@ -54,7 +63,7 @@ public class NewsListController {
                 "Association for Psychological Science",
                 "While the benefits of self-directed learning are widely acknowledged, the reasons why a " +
                         "sense of control leads to better acquisition of material are poorly understood.",
-                5,
+                "5",
                 "06/04/1995");
 
         newsManager.addNews("10 Essential Emotion Regulation Skills for Adults",
@@ -62,7 +71,7 @@ public class NewsListController {
                 "If you can tolerate feeling anxious you’ll be less likely to avoid trying new things, more " +
                         "likely to try things a second time if it didn’t go well the first time, and less likely to " +
                         "abandon projects before they’ve become successful.",
-                2,
+                "2",
                 "04/08/2013");
 
         newsManager.addNews("Self-Regulation",
@@ -72,7 +81,7 @@ public class NewsListController {
                         "interest, consistent with your deepest values. (Violation of one's deepest values causes " +
                         "guilt, shame, and anxiety, which undermine well being.) Emotionally, self-regulation is the " +
                         "ability to calm yourself down when you're upset and cheer yourself up when you're down.",
-                12,
+                "12",
                 "10/28/2011");
         newsManager.addNews("How Self-Regulation Works",
                 "Yalda T. Uhls",
@@ -91,12 +100,12 @@ public class NewsListController {
                         "a variety of contexts, not only in the classroom, but also in healthcare and other arenas, " +
                         "found similar positive outcomes for better self-regulated learners (Duckworth, Akerman, " +
                         "MacGregor, Salter, & Vorhaus, 2009).",
-                23,
+                "23",
                 "12/28/2001");
         newsManager.addNews("Self-Regulation: The Second Core Strength",
                 "Bruce Duncan Perry",
                 "While the benefits of self-directed learning are widely acknowledged, the reasons why a sense of control leads to better acquisition of material are poorly understood.",
-                8,
+                "8",
                 "03/22/2017");
     }
 }
