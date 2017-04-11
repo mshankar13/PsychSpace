@@ -32,7 +32,7 @@ h4 {}
 .ps-feature-content .button-enroll {
     background-color: var(--eucalyptus-color);
     color: white;
-    font-size: 2em;
+    font-size: 20px;
     width: 100%;
     margin-top: .5em;
     font-family: "Maven Pro";
@@ -131,6 +131,36 @@ h3 {
 .ps-feature-content media-body h4 {
     width: 200px;
 }
+
+
+/* Search Bar */
+
+.ps-search input[type=text] {
+    width: 20%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: var(--border-radius-1);
+    font-size: 18px;
+    background-color: white;
+    padding: 12px 20px 12px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    font-family: "Open Sans";
+}
+
+.ps-search input[type=text]:focus {
+    width: 40%;
+}
+
+.ps-search:before {
+    content: "\e003";
+    font-family: "Glyphicons Halflings";
+    display: inline-block;
+    color: white;
+}
+
+
+/* Modal / Edit Comment */
 
 @media only screen and (max-width: 1000px) {
     .ps-feature-content .ps-feature-details {
