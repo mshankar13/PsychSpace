@@ -24,10 +24,10 @@ public class CommentManager {
         ArrayList<Comment> loadedComments = new ArrayList<Comment>();
         for (Entity entity : newsComments) {
             Comment comment = new Comment();
-            comment.username = entity.getProperty("Username").toString();
-            comment.content = entity.getProperty("Content").toString();
-            comment.commentKey = KeyFactory.keyToString(entity.getKey());
-            comment.newsKey = newsID;
+            comment.setUsername(entity.getProperty("Username").toString());
+            comment.setContent(entity.getProperty("Content").toString());
+            comment.setCommentKey(KeyFactory.keyToString(entity.getKey()));
+            comment.setNewsKey(newsID);
 
             loadedComments.add(comment);
         }

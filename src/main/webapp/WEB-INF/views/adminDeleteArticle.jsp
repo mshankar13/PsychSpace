@@ -1,4 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>PsychSpace</title>
@@ -15,6 +18,8 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <%--Customized--%>
+    <link href="${contextPath}/resources/css/admin.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,7 +28,8 @@
         <%@include file="admin-sidebar.html" %>
 
         <div id="page-content-wrapper">
-            <form:form method="get" action="deleteArtcile" modelAttribute="news">
+            <h1>Delete Article</h1>
+            <form:form method="get" action="admin_deleteArticle" modelAttribute="news">
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -33,10 +39,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${news.article}" var="article">
+                    <c:forEach items="${newsList}" var="news">
                         <tr>
-                            <td>>${article.title}</td>
-                            <td>${article.date}</td>
+                            <form:hidden value="${news.newsKey}" path="newsKey"/>
+                            <form:hidden value="${news.title}" path="title"/>
+                            <form:hidden value="${news.date}" path="date"/>
+                            <form:hidden value="${news.content}" path="content"/>
+                            <form:hidden value="${news.author}" path="author"/>
+                            <form:hidden value="${news.likesCount}" path="likesCount"/>
+                            <td>${news.title}</td>
+                            <td>${news.date}</td>
                             <td><button type="submit">Delete</button></td>
                         </tr>
                     </c:forEach>
@@ -44,7 +56,7 @@
                 </table>
             </form:form>
 
-        </div>
+        </div>@#!
     </div>
 </body>
 </html>

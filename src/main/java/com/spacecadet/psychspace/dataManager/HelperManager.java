@@ -28,14 +28,20 @@ public class HelperManager {
         return null;
     }
 
-    public static Date convertDate(String dateString) {
-        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+    public Date convertDate(String dateString) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat df2 = new SimpleDateFormat("yyyy-mm-dd");
         Date date = new Date();
         df.format(date);
 
         try {
             date = df.parse(dateString);
         } catch (ParseException e) {
+            try{
+                date = df2.parse(dateString);
+            } catch (ParseException ex){
+                ex.printStackTrace();
+            }
             e.printStackTrace();
         }
         return date;

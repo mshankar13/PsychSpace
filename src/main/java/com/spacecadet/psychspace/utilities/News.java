@@ -19,10 +19,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class News {
-    public String title;
-    public String author;
-    public String content;
-    public int likesCount;
-    public Date date;
-    public String newsKey;
+    private String title;
+    private String author;
+    private String content;
+    private String likesCount;
+    private String date;
+    private String newsKey;
 }

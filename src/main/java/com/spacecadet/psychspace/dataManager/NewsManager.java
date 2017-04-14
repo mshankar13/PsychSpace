@@ -8,9 +8,11 @@ import com.google.appengine.repackaged.org.joda.time.DateTime;
 import com.google.appengine.repackaged.org.joda.time.format.DateTimeFormat;
 import com.google.appengine.repackaged.org.joda.time.format.DateTimeFormatter;
 import com.spacecadet.psychspace.utilities.*;
+import lombok.experimental.Helper;
 
 import java.sql.Array;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,6 +21,7 @@ import java.util.*;
  */
 public class NewsManager {
     private DatastoreService datastore;
+    private HelperManager helper = new HelperManager();
 
     public NewsManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
@@ -35,12 +38,12 @@ public class NewsManager {
         ArrayList<News> loadedNews = new ArrayList<News>();
         for (Entity entity : newsList) {
             News news = new News();
-            news.title = entity.getProperty("Title").toString();
-            news.author = entity.getProperty("Author").toString();
-            news.content = entity.getProperty("Content").toString();
-            news.likesCount = Integer.parseInt(entity.getProperty("Likes").toString());
-            news.date = HelperManager.convertDate(entity.getProperty("Date").toString());
-            news.newsKey = KeyFactory.keyToString(entity.getKey());
+            news.setTitle(entity.getProperty("Title").toString());
+            news.setAuthor(entity.getProperty("Author").toString());
+            news.setContent(entity.getProperty("Content").toString());
+            news.setLikesCount(entity.getProperty("Likes").toString());
+            news.setDate(entity.getProperty("Date").toString());
+            news.setNewsKey(KeyFactory.keyToString(entity.getKey()));
             loadedNews.add(news);
         }
 
@@ -48,7 +51,9 @@ public class NewsManager {
         Collections.sort(loadedNews, new Comparator<News>() {
             @Override
             public int compare(News o1, News o2) {
-                return o1.date.compareTo(o2.date);
+                Date date1 = helper.convertDate(o1.getDate());
+                Date date2 = helper.convertDate(o2.getDate());
+                return date1.compareTo(date2);
             }
         });
 
@@ -66,12 +71,12 @@ public class NewsManager {
         News news = new News();
         try {
             Entity singleNews = datastore.get(KeyFactory.stringToKey(newsID));
-            news.title = singleNews.getProperty("Title").toString();
-            news.author = singleNews.getProperty("Author").toString();
-            news.content = singleNews.getProperty("Content").toString();
-            news.likesCount = Integer.parseInt(singleNews.getProperty("Likes").toString());
-            news.date = HelperManager.convertDate(singleNews.getProperty("Date").toString());
-            news.newsKey = newsID;
+            news.setTitle(singleNews.getProperty("Title").toString());
+            news.setAuthor(singleNews.getProperty("Author").toString());
+            news.setContent(singleNews.getProperty("Content").toString());
+            news.setLikesCount(singleNews.getProperty("Likes").toString());
+            news.setDate(singleNews.getProperty("Date").toString());
+            news.setNewsKey(newsID);
 
         } catch (EntityNotFoundException ex) {
 
@@ -88,7 +93,7 @@ public class NewsManager {
      * @param content
      * @param likesCount
      */
-    public void addNews(String title, String author, String content, int likesCount, String date) {
+    public void addNews(String title, String author, String content, String likesCount, String date) {
 
         Transaction txn = datastore.beginTransaction();
         try {
@@ -96,7 +101,7 @@ public class NewsManager {
             news.setProperty("Title", title);
             news.setProperty("Author", author);
             news.setProperty("Content", content);
-            news.setProperty("Likes", Integer.toString(likesCount));
+            news.setProperty("Likes", likesCount);
             news.setProperty("Date", date);
             datastore.put(txn, news);
             txn.commit();
@@ -117,7 +122,7 @@ public class NewsManager {
      * @param content
      * @param likesCount
      */
-    public void editNews(String newsID, String title, String author, String content, int likesCount, String date) {
+    public void editNews(String newsID, String title, String author, String content, String likesCount, String date) {
 
         Transaction txn = datastore.beginTransaction();
 
@@ -127,7 +132,7 @@ public class NewsManager {
                 updatedNews.setProperty("Title", title);
                 updatedNews.setProperty("Author", author);
                 updatedNews.setProperty("Content", content);
-                updatedNews.setProperty("Likes", Integer.toString(likesCount));
+                updatedNews.setProperty("Likes", likesCount);
                 updatedNews.setProperty("Date", date);
 
                 datastore.delete(KeyFactory.stringToKey(newsID));
@@ -187,7 +192,8 @@ public class NewsManager {
         Date today = new Date();
         System.out.println(today.after(lastWeek));
         for (News news : allNews) {
-            if (news.date.after(lastWeek) == true) {
+            Date date = helper.convertDate(news.getDate());
+            if (date.after(lastWeek) == true) {
                 potentialFeatured.add(news);
             }
         }
@@ -196,7 +202,8 @@ public class NewsManager {
             Collections.sort(potentialFeatured, new Comparator<News>() {
                 @Override
                 public int compare(News o1, News o2) {
-                    if (o1.likesCount >= o2.likesCount) return 1;
+                    if (Integer.parseInt(o1.getLikesCount()) >=
+                            Integer.parseInt(o2.getLikesCount())) return 1;
                     return 0;
                 }
             });

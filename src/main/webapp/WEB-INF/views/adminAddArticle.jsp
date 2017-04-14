@@ -15,9 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <%--Customized--%>
+    <link href="${contextPath}/resources/css/admin.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div id="wrapper">
@@ -25,30 +25,33 @@
     <%@include file="admin-sidebar.html" %>
 
     <div id="page-content-wrapper">
-        <h2>Add News</h2>
-        <%--TODO: check form--%>
+        <div class="container-fluid">
+        <h1>Add Article</h1>
         <form:form class="form-horizontal" method="post"
-                   modelAttribute="news" action="${addNews}">
+                   modelAttribute="news" action="admin_addArticle">
             <div class="form-group">
                 <label for="news-title">News Title</label>
-                <form:input type="text" class="form-control" id="news-title" value="${news.title}" placeholder="News Title" />
+                <form:input type="text" class="form-control" id="news-title" path="title" placeholder="News Title" />
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
-                <form:input type="text" class="form-control" id="author" value="${news.title}" placeholder="Author" />
+                <form:input type="text" class="form-control" id="author" path="author" placeholder="Author" />
             </div>
             <div class="form-group row">
                 <label for="date" class="col-2 col-form-label">Date</label>
                 <div class="col-10">
-                    <form:input class="form-control" type="date" value="${news.date}" id="date" />
+                    <form:input class="form-control" type="date" path="date" id="date" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="news-content">News Content</label>
-                <form:textarea class="form-control" id="news-content" rows="10" value="${news.content}" />
+                <form:textarea class="form-control" id="news-content" rows="10" path="content" />
             </div>
+            <form:hidden path="likesCount" value="0"/>
+            <form:hidden path="newsKey" value="null"/>
             <button type="submit" class="btn btn-primary">Add</button>
         </form:form>
+        </div>
     </div>
 </div>
 </body>
