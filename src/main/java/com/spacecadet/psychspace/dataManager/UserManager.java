@@ -16,7 +16,7 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public String addUser(User user, String role) {
+    public User addUser(User user, String role) {
 
         Transaction txn = datastore.beginTransaction();
         datastore = DatastoreServiceFactory.getDatastoreService();
@@ -43,7 +43,9 @@ public class UserManager {
             if (txn.isActive()) {
                 txn.rollback();
             }
-            return KeyFactory.keyToString(userEntity.getKey());
+            user.setRole(role);
+            user.setUserKey(KeyFactory.keyToString(userEntity.getKey()));
+            return user;
         }
 
     }
