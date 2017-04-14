@@ -51,8 +51,8 @@ public class NewsManager {
         Collections.sort(loadedNews, new Comparator<News>() {
             @Override
             public int compare(News o1, News o2) {
-                Date date1 = helper.convertDate(o1.getDate());
-                Date date2 = helper.convertDate(o2.getDate());
+                Date date1 = helper.stringToDate(o1.getDate());
+                Date date2 = helper.stringToDate(o2.getDate());
                 return date1.compareTo(date2);
             }
         });
@@ -105,7 +105,6 @@ public class NewsManager {
             news.setProperty("Date", date);
             datastore.put(txn, news);
             txn.commit();
-            System.out.println(KeyFactory.keyToString(news.getKey()));
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -191,7 +190,7 @@ public class NewsManager {
         Date today = new Date();
         System.out.println(today.after(lastWeek));
         for (News news : allNews) {
-            Date date = helper.convertDate(news.getDate());
+            Date date = helper.stringToDate(news.getDate());
             if (date.after(lastWeek) == true) {
                 potentialFeatured.add(news);
             }
