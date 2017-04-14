@@ -36,7 +36,9 @@ public class WelcomeController {
         User user1 = (User)(helper.stringToJson(user, "User"));
         String key = userManager.emailRegistered(user1.getEmail());
         if (key == null) {
-            key = userManager.addUser(user1, "User");
+             user1= userManager.addUser(user1, "User");
+        } else {
+
         }
 
         return "home";

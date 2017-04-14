@@ -44,24 +44,23 @@
                             <br>
                         </div>
                         <div class="ps-well">
-                            <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM</p>
+                            <p><span class="glyphicon glyphicon-time"></span>${featuredNews.date}</p>
 
-                            <h1>Article Title: Lorem ipsum dolor sit amet, consectetur adipisicing elit<hr></h1>
+                            <h1>${featuredNews.title}<hr></h1>
                             <br>
 
                             <div class="col-lg-8 ps-col-left">
                                 <img class="img-responsive" src="http://placehold.it/900x300" alt="">
                                 <br>
-                                <p> by <a class="button fadein" href="#"><span>Article Author</span></a> </p>
+                                <p> by <a class="button fadein" href="#"><span>${featuredNews.author}</span></a> </p>
 
                             </div>
                             <div class="col-lg-4 ps-col-right">
                                 <div class="media ps-comment">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore...</p>
-
+                                    <p>${featuredNews.content}</p>
 
                                     <div class="center">
-                                        <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                                        <a class="button fadein btn-read-more" href="/article/${featuredNews.newsKey}"><span>Read More</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -80,20 +79,20 @@
 
                         <div class="row ps-text-content">
                             <!-- start course -->
-                            <c:forEach items="${newsList}" var="news">
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <p><span class="glyphicon glyphicon-time"></span> Posted ${news.date}</p>
-                                    <h2 class="ps-feature-info-header"> ${news.title}<hr> </h2>
-                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
-                                    <br>
-                                    <p> by <a class="button fadein" href="#"><span> ${news.author}</span></a> </p>
-                                    <p> ${news.content} </p>
-                                    <div class="center">
-                                        <a class="button fadein btn-read-more" id="button-register" href=""><span>Read More</span></a>
+                            <c:forEach items="${newsList}" var="newsItem">
+                                <div class="col-lg-4">
+                                    <div class="ps-well">
+                                        <p><span class="glyphicon glyphicon-time"></span> Posted ${newsItem.date}</p>
+                                        <h2 class="ps-feature-info-header"> ${newsItem.title}<hr> </h2>
+                                        <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                        <br>
+                                        <p> by <a class="button fadein" href=""><span> ${newsItem.author}</span></a> </p>
+                                        <p> ${newsItem.content} </p>
+                                        <div class="center">
+                                            <a class="button fadein btn-read-more" href="/article/${newsItem.newsKey}"><span>Read More</span></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </c:forEach>
                             <!-- End course -->
                         </div>

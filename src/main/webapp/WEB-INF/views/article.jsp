@@ -38,17 +38,16 @@
                 <div class="row ps-feature">
                     <div class="ps-feature-info">
                         <!-- Date/Time -->
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on March 31, 2017 at 12:00 AM
+                        <p><span class="glyphicon glyphicon-time"></span> ${article.title}
                             <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
                         </p>
                         <!-- Title -->
-                        <h1>Article Title<hr></h1>
+                        <h1>${article.title}<hr></h1>
                         <!-- Author -->
                         <div class="media ps-comment">
                             <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
                             <div class="media-body">
-                                <a class="button-instructor button fadein" href="" id="button-instructor"><span>Joe Doe</span></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                                <a class="button-instructor button fadein" href="" id="button-instructor"><span>${article.author}</span></a>
                             </div>
                         </div>
                         <br>
@@ -66,25 +65,21 @@
                             </div>
 
                             <!-- Post Content -->
-                            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+                            <p class="lead">${article.content}</p>
                         </div>
                     </div>
                     <!--end article-text -->
                     <div class="col-lg-4 ps-col-right">
                         <div class="ps-well">
                             <div class="left">
-                                <h2>Suggestions<hr></h2>
+                                <h2>Featured News<hr></h2>
                             </div>
                             <br>
                             <div class="left">
-                                <h3 class="ps-feature-info-header"> Article Title <hr></h3>
+                                <h3 class="ps-feature-info-header">${featured.title}<hr></h3>
                                 <div class="center">
                                     <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
-                                    <a class="button fadein btn-read-more" id="button-read" href=""><span>Read More</span></a>
+                                    <a class="button fadein btn-read-more" id="button-read" href="/article/${featured.newsKey}"><span>Read More</span></a>
                                 </div>
                             </div>
                             <br>
@@ -92,7 +87,7 @@
                                 <h3 class="ps-feature-info-header"> Article Title <hr></h3>
                                 <div class="center">
                                     <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
-                                    <a class="button fadein btn-read-more" id="button-read" href=""><span>Read More</span></a>
+                                    <a class="button fadein btn-read-more" href=""><span>Read More</span></a>
                                 </div>
                             </div>
                             <br>

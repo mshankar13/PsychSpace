@@ -40,6 +40,9 @@ public class NewsListController {
                 news.setContent(news.getContent().substring(0, 100));
         }
         model.addObject("newsList", newsList);
+        News featured = newsManager.getFeatured(newsList);
+        featured.setContent(featured.getContent().substring(0, 100));
+        model.addObject("featuredNews", featured);
 
         return model;
     }
