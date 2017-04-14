@@ -133,7 +133,7 @@ h3 {
 }
 
 
-/* Search Bar */
+/*----------- SEARCH BAR ---------------*/
 
 .ps-search input[type=text] {
     width: 20%;
@@ -157,6 +157,32 @@ h3 {
     font-family: "Glyphicons Halflings";
     display: inline-block;
     color: white;
+}
+
+
+/*----------- MODAL ---------------*/
+
+.ps-modal-type-comment {
+    max-height: 35vh;
+}
+
+.ps-modal-close h1 {
+    color: var(--dogwood-color);
+}
+
+.ps-modal-dialog {}
+
+.ps-modal-header {
+    padding: 2em 2em 0 2em;
+}
+
+.ps-modal-body {
+    padding 2em;
+    margin: 2em;
+}
+
+.ps-modal-footer {
+    margin: 2em;
 }
 
 
