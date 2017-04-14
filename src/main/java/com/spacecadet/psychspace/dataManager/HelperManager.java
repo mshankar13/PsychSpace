@@ -28,22 +28,15 @@ public class HelperManager {
         return null;
     }
 
-    public Date convertDate(String dateString) {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        DateFormat df2 = new SimpleDateFormat("yyyy-mm-dd");
+    public Date stringToDate(String dateString) {
+        DateFormat df2 = new SimpleDateFormat("mm-dd-yyyy");
         Date date = new Date();
-        df.format(date);
-
         try {
-            date = df.parse(dateString);
-        } catch (ParseException e) {
-            try{
-                date = df2.parse(dateString);
-            } catch (ParseException ex){
-                ex.printStackTrace();
-            }
-            e.printStackTrace();
+            date = df2.parse(dateString);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         }
+
         return date;
     }
 }
