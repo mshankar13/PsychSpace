@@ -65,7 +65,7 @@
                             </div>
 
                             <!-- Post Content -->
-                            <p class="lead">${article.content}</p>
+                            <p>${article.content}</p>
                         </div>
                     </div>
                     <!--end article-text -->
@@ -75,6 +75,7 @@
                                 <h2>Featured News<hr></h2>
                             </div>
                             <br>
+                            <!-- Start Recommended Article -->
                             <div class="left">
                                 <h3 class="ps-feature-info-header">${featured.title}<hr></h3>
                                 <div class="center">
@@ -83,6 +84,7 @@
                                 </div>
                             </div>
                             <br>
+                            <!--End Recommended Article -->
                             <div class="left">
                                 <h3 class="ps-feature-info-header"> Article Title <hr></h3>
                                 <div class="center">
@@ -96,7 +98,7 @@
                 </div>
                 <div class="row ps-text-content"></div>
                 <!-- end article-content -->
-                <!-- end row artcile -->
+                <!-- end row article -->
                 <div class="row ps-text-content">
                     <h2>Comments<hr></h2>
                     <br>
