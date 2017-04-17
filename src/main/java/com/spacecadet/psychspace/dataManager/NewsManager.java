@@ -45,6 +45,7 @@ public class NewsManager {
             news.setDate(entity.getProperty("Date").toString());
             news.setNewsKey(KeyFactory.keyToString(entity.getKey()));
             loadedNews.add(news);
+
         }
 
         // Sort the loaded News by date
@@ -81,7 +82,6 @@ public class NewsManager {
         } catch (EntityNotFoundException ex) {
 
         }
-
         return news;
     }
 

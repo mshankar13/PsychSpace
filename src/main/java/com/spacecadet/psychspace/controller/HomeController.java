@@ -1,5 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
