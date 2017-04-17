@@ -40,7 +40,7 @@
                     </form>
                 </div>
                 <div class="ps-feature-content">
-                    <div class="row ps-feature">
+                    <div class="row ps-feature fadein">
                         <div class="ps-feature-info">
                             <!-- Title -->
                             <h1>Featured Article<hr></h1>
@@ -88,11 +88,11 @@
                                         <p><span class="glyphicon glyphicon-time"></span> Posted ${newsItem.date}</p>
                                         <h2 class="ps-feature-info-header"> ${newsItem.title}<hr> </h2>
                                         <br>
-                                        <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                        <img class="img-responsive course-img fadein" src="http://placehold.it/900x300" alt="">
                                         <br>
                                         <p> by <a class="button fadein" href=""><span> ${newsItem.author}</span></a> </p>
                                         <br>
-                                        <p> ${newsItem.content} </p>
+                                        <p class="fadein"> ${newsItem.content} </p>
                                         <div class="center">
                                             <a class="button fadein btn-read-more" href="/article/${newsItem.newsKey}"><span>Read More</span></a>
                                         </div>
@@ -106,8 +106,9 @@
             </header>
 
             <%@include file="footer.html" %>
-                <script src="${contextPath}/resources/js/animations.js"></script>
                 <script src="${contextPath}/resources/js/style.js"></script>
+            <script src="${contextPath}/resources/js/animations.js"></script>
+
 
         </body>
 
