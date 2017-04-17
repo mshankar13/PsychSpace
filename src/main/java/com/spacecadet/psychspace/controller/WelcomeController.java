@@ -34,8 +34,7 @@ public class WelcomeController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
         User user1 = (User)(helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if (user1 == null) {
+        if (userManager.emailRegistered(user1.getEmail()) == null) {
              user1= userManager.addUser(user1, "User");
         } else {
 

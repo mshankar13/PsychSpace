@@ -36,7 +36,7 @@ public class HelperManager {
     }
 
     public Date stringToDate(String dateString) {
-        DateFormat df2 = new SimpleDateFormat("mm-dd-yyyy");
+        DateFormat df2 = new SimpleDateFormat("mm/dd/yyyy");
         Date date = new Date();
         try {
             date = df2.parse(dateString);
