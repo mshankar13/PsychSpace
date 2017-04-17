@@ -13,11 +13,14 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%--Customized--%>
     <link href="${contextPath}/resources/css/admin.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
+
 </head>
 <body>
 <div id="wrapper">
@@ -40,7 +43,7 @@
             <div class="form-group row">
                 <label for="date" class="col-2 col-form-label">Date</label>
                 <div class="col-10">
-                    <form:input class="form-control" type="date" path="date" id="date" />
+                    <form:input class="form-control" type="text" path="date" id="add-article-date"/>
                 </div>
             </div>
             <div class="form-group">
@@ -49,10 +52,14 @@
             </div>
             <form:hidden path="likesCount" value="0"/>
             <form:hidden path="newsKey" value="null"/>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary btn-add-article">Add</button>
         </form:form>
         </div>
     </div>
 </div>
+<script>
+    $("#add-article-date").datepicker();
+    //        $("#add-article-date").datepicker("setDate", new Date());
+</script>
 </body>
 </html>

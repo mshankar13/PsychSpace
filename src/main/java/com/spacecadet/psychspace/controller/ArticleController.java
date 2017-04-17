@@ -42,9 +42,23 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
-    public String afterRegister(@PathVariable("key") String key, @ModelAttribute Comment comment){
-        //commentManager.addComment(key, comment.getContent());
-        return "article/"+key;
+    public ModelAndView addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
+        if (comment.getState().equals("add")){
+            commentManager.addComment(key,"currUser",comment.getContent());
+        } else if(comment.getState().equals("edit")){
+            commentManager.editComment(comment.getCommentKey(), "currUser", comment.getContent());
+        }
+
+        ModelAndView model = new ModelAndView();
+        model.setViewName("article");
+        model.addObject("article", newsManager.loadSingleNews(key));
+        News featured = newsManager.getFeatured(newsManager.loadNews());
+        featured.setContent(featured.getContent().substring(0, 100));
+        model.addObject("featured", featured);
+        model.addObject("comment", new Comment());
+        model.addObject("commentList", commentManager.loadComments(key));
+
+        return model;
     }
 
     public void comments_test() {

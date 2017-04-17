@@ -19,6 +19,7 @@ function editArticleModalShow() {
     $("#edit-author").val(author);
     $("#edit-date").datepicker();
     $("#edit-date").datepicker("setDate", date);
+    //$("#edit-date").text(date);
     $("#edit-content").val(content);
     $("#linkedCount").val(likesCount);
     $("#key").val(key);

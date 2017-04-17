@@ -21,4 +21,5 @@ public class Comment {
     private String commentKey;
     private String newsKey;
     private String date;
+    private String state; //null, add, edit, delete
 }

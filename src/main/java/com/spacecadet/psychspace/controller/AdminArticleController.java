@@ -91,7 +91,6 @@ public class AdminArticleController {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminEditArticle");
         ArrayList<News> newsList = newsManager.loadNews();
-        System.out.print("total: " + newsList);
         model.addObject("newsList", newsList);
         model.addObject("news", new News());
 
@@ -103,12 +102,17 @@ public class AdminArticleController {
      * @return
      */
     @RequestMapping(value = "/admin_editArticle", method = RequestMethod.POST)
-    public String editNews(@ModelAttribute("news") News news) {
+    public ModelAndView editNews(@ModelAttribute("news") News news) {
         if (news != null)
             newsManager.editNews(news.getNewsKey(), news.getTitle(), news.getAuthor(),
                     news.getContent(), news.getLikesCount(), news.getDate());
+        ModelAndView model = new ModelAndView();
+        model.setViewName("adminEditArticle");
+        ArrayList<News> newsList = newsManager.loadNews();
+        model.addObject("newsList", newsList);
+        model.addObject("news", new News());
 
-        return "admin_editArticle";
+        return model;
     }
 
 

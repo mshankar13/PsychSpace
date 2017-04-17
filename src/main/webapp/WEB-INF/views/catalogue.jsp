@@ -20,7 +20,6 @@
                             <%--Customized--%>
                                 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
                                 <script src="${contextPath}/resources/js/navbar.js"></script>
-                                <script src="${contextPath}/resources/js/style.js"></script>
                                 <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
                                 <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
                                 <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -31,11 +30,113 @@
             <div class="navbar-wrapper">
                 <%@include file="navbar.html"%>
             </div>
-            <%@include file="catalogue.html"%>
-                <%@include file="footer.html" %>
-                    <script src="${contextPath}/resources/js/animations.js"></script>
+
+            <header class="ps-feature-header">
+                <div class="center page-banner">
+                    <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
+                    <h1 class="absolute-text">Course Catalogue</h1>
+                    <form class="ps-search">
+                        <input type="text" name="search" placeholder="Search...">
+                    </form>
+                </div>
+                <div class="ps-feature-content">
+                    <div class="row ps-feature">
+                        <div class="ps-feature-info">
+                            <h1>Open Courses<hr></h1>
+                            <br>
+                        </div>
+
+                        <div class="row ps-text-content">
+                            <!-- start course -->
+                            <div class="col-lg-4 fadein">
+                                <div class="ps-well">
+                                    <!-- Course Title -->
+                                    <h2 class="ps-feature-info-header"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.<hr> </h2>
+                                    <br>
+                                    <!-- Course Image -->
+                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                    <br>
+                                    <h3 class="ps-feature-info-header"> Dates<hr> </h3>
+                                    <!-- Start Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> Start Date: March 31, 2017 at 12:00 AM</p>
+                                    <!-- End Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> End Date: May 31, 2017 at 11:59 PM
+                                    </p>
+                                    <br>
+                                    <!-- Topics -->
+                                    <h3 class="ps-feature-info-header"> Topics <hr></h3>
+                                    <!-- Course Preview -->
+                                    <p class="ps-feature-preview">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                    <br>
+                                    <div>
+                                        <div class="center">
+                                            <!-- Button Read More -->
+                                            <a class="button fadein btn-read-more" href=""><span>Read More</span></a>
+                                            <!-- Button Enroll -->
+                                            <a class="button fadein btn-read-more" href=""><span>Enroll</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End course -->
+                        </div>
+                    </div>
+                </div>
+                <div class="ps-feature-content">
+                    <div class="row ps-feature">
+                        <div class="ps-feature-info">
+                            <!-- Title -->
+                            <h1> All Courses<hr></h1>
+                            <br>
+                        </div>
+                        <div class="row ps-text-content">
+                            <!-- start course -->
+                            <div class="col-lg-4">
+                                <div class="ps-well">
+                                    <!-- Course Title -->
+                                    <h2 class="ps-feature-info-header"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.<hr> </h2>
+                                    <br>
+                                    <!-- Course Image -->
+                                    <img class="img-responsive course-img fadein" src="http://placehold.it/900x300" alt="">
+                                    <br>
+                                    <h3 class="ps-feature-info-header fadein"> Dates<hr> </h3>
+                                    <!-- Start Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> Start Date: March 31, 2017 at 12:00 AM</p>
+                                    <!-- End Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> End Date: May 31, 2017 at 11:59 PM
+                                    </p>
+                                    <br>
+                                    <!-- Topics -->
+                                    <h3 class="ps-feature-info-header"> Topics <hr></h3>
+                                    <!-- Course Preview -->
+                                    <p class="ps-feature-preview">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                    <br>
+                                    <div>
+                                        <div class="center">
+                                            <!-- Button Read More -->
+                                            <a class="button fadein btn-read-more" href=""><span>Read More</span></a>
+                                            <!-- Button Enroll -->
+                                            <a class="button fadein btn-read-more" href=""><span>Enroll</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End course -->
+                        </div>
+                    </div>
+
+                </div>
 
 
+            <%@include file="footer.html" %>
+                <script src="${contextPath}/resources/js/style.js"></script>
+                <script src="${contextPath}/resources/js/animations.js"></script>
         </body>
 
         </html>

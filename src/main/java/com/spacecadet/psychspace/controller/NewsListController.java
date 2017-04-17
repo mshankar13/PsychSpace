@@ -30,6 +30,7 @@ public class NewsListController {
      */
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
+        news_test();
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
@@ -86,7 +87,7 @@ public class NewsListController {
                 "While the benefits of self-directed learning are widely acknowledged, the reasons why a " +
                         "sense of control leads to better acquisition of material are poorly understood.",
                 "5",
-                "06-04-1995");
+                "06/04/1995");
 
         newsManager.addNews("10 Essential Emotion Regulation Skills for Adults",
                 "Alice Boyes",
@@ -94,7 +95,7 @@ public class NewsListController {
                         "likely to try things a second time if it didn’t go well the first time, and less likely to " +
                         "abandon projects before they’ve become successful.",
                 "2",
-                "04-08-2013");
+                "04/08/2013");
 
         newsManager.addNews("Self-Regulation",
                 "Steven Stosny",
@@ -104,7 +105,7 @@ public class NewsListController {
                         "guilt, shame, and anxiety, which undermine well being.) Emotionally, self-regulation is the " +
                         "ability to calm yourself down when you're upset and cheer yourself up when you're down.",
                 "12",
-                "10-28-2011");
+                "10/28/2011");
         newsManager.addNews("How Self-Regulation Works",
                 "Yalda T. Uhls",
                 "Self-regulation is an extremely important skill to develop.  In fact, as I am writing this " +
@@ -123,11 +124,11 @@ public class NewsListController {
                         "found similar positive outcomes for better self-regulated learners (Duckworth, Akerman, " +
                         "MacGregor, Salter, & Vorhaus, 2009).",
                 "23",
-                "12-28-2001");
+                "12/28/2001");
         newsManager.addNews("Self-Regulation: The Second Core Strength",
                 "Bruce Duncan Perry",
                 "While the benefits of self-directed learning are widely acknowledged, the reasons why a sense of control leads to better acquisition of material are poorly understood.",
                 "8",
-                "03-22-2017");
+                "03/22/2017");
     }
 }

@@ -65,7 +65,7 @@
                             </div>
 
                             <!-- Post Content -->
-                            <p class="lead">${article.content}</p>
+                            <p>${article.content}</p>
                         </div>
                     </div>
                     <!--end article-text -->
@@ -75,6 +75,7 @@
                                 <h2>Featured News<hr></h2>
                             </div>
                             <br>
+                            <!-- Start Recommended Article -->
                             <div class="left">
                                 <h3 class="ps-feature-info-header">${featured.title}<hr></h3>
                                 <div class="center">
@@ -83,6 +84,7 @@
                                 </div>
                             </div>
                             <br>
+                            <!--End Recommended Article -->
                             <div class="left">
                                 <h3 class="ps-feature-info-header"> Article Title <hr></h3>
                                 <div class="center">
@@ -96,7 +98,7 @@
                 </div>
                 <div class="row ps-text-content"></div>
                 <!-- end article-content -->
-                <!-- end row artcile -->
+                <!-- end row article -->
                 <div class="row ps-text-content">
                     <h2>Comments<hr></h2>
                     <br>
@@ -104,13 +106,14 @@
                         <div class="left">
                             <h4>Leave a Comment:</h4>
                             <form:form class="form-horizontal" method="post"
-                                       modelAttribute="comment" action="article">
+                                       modelAttribute="comment" action="${article.newsKey}">
                                     <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
 \
                                 <form:hidden path="username" value="0"/>
                                 <form:hidden path="commentKey" value="0"/>
                                 <form:hidden path="newsKey" value="0"/>
                                 <form:hidden path="date" value="0"/>
+                                <form:hidden path="state" value="add"/>
 
                                 <div class="right">
                                     <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
@@ -153,7 +156,7 @@
                             <div class="ps-modal-body">
                                 <form role="form">
                                     <div class="form-group">
-                                        <textarea id="form-comment-edit" class="form-control" rows="3" autofocus="true"></textarea>
+                                        <textarea id="form-comment-edit" class="form-control" rows="3" autofocus="true"/>
                                     </div>
 
                                 </form>
@@ -163,11 +166,8 @@
                                 <div class="right">
                                     <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Save</button>
                                 </div>
-
-
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- End Edit Modal -->
