@@ -205,7 +205,6 @@ public class NewsManager {
             });
             return potentialFeatured.get(potentialFeatured.size() - 1);
         }
-
         return allNews.get(allNews.size() - 1);
     }
 }

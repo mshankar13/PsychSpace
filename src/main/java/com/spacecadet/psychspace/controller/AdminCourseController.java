@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Celeste on 4/15/17.
  */
 @Controller
-public class AdminAddCourseController {
+public class AdminCourseController {
 
     //    TODO: Complete this
     /**

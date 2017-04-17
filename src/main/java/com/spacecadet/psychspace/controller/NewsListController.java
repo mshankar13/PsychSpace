@@ -34,6 +34,10 @@ public class NewsListController {
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
         ArrayList<News> newsList = newsManager.loadNews();
+        if(newsList.isEmpty()){
+            news_test();
+            newsList = newsManager.loadNews();
+        }
         for(News news : newsList){
             if(news.getContent().length() >= 100)
                 news.setContent(news.getContent().substring(0, 100));
@@ -47,15 +51,29 @@ public class NewsListController {
     }
 
     @RequestMapping(value = "/news", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user, HttpServletRequest request){
-        // news_test();
-        newsManager.getFeatured(newsManager.loadNews());
+    public ModelAndView afterRegister(@RequestBody String user, HttpServletRequest request){
+        newsManager = new NewsManager();
+        ModelAndView model = new ModelAndView();
+        model.setViewName("news");
+        ArrayList<News> newsList = newsManager.loadNews();
+        if(newsList.isEmpty()){
+            news_test();
+            newsList = newsManager.loadNews();
+        }
+        for(News news : newsList){
+            if(news.getContent().length() >= 100)
+                news.setContent(news.getContent().substring(0, 100));
+        }
+        model.addObject("newsList", newsList);
+        News featured = newsManager.getFeatured(newsList);
+        featured.setContent(featured.getContent().substring(0, 100));
+        model.addObject("featuredNews", featured);
         User user1 = (User)(helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());
         if (user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
-        return "news";
+        return model;
     }
 
     /**
