@@ -39,6 +39,9 @@ public class NewsListController {
                 news.setContent(news.getContent().substring(0, 100));
         }
         model.addObject("newsList", newsList);
+        News featured = newsManager.getFeatured(newsList);
+        featured.setContent(featured.getContent().substring(0, 100));
+        model.addObject("featuredNews", featured);
 
         return model;
     }
@@ -48,9 +51,9 @@ public class NewsListController {
         // news_test();
         newsManager.getFeatured(newsManager.loadNews());
         User user1 = (User)(helper.stringToJson(user, "User"));
-        String key = userManager.emailRegistered(user1.getEmail());
-        if (key == null) {
-            key = userManager.addUser(user1, "User");
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if (user1 == null) {
+            user1 = userManager.addUser(user1, "User");
         }
         return "news";
     }

@@ -16,7 +16,7 @@ public class UserManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public String addUser(User user, String role) {
+    public User addUser(User user, String role) {
 
         Transaction txn = datastore.beginTransaction();
         datastore = DatastoreServiceFactory.getDatastoreService();
@@ -43,7 +43,9 @@ public class UserManager {
             if (txn.isActive()) {
                 txn.rollback();
             }
-            return KeyFactory.keyToString(userEntity.getKey());
+            user.setRole(role);
+            user.setUserKey(KeyFactory.keyToString(userEntity.getKey()));
+            return user;
         }
 
     }
@@ -54,7 +56,7 @@ public class UserManager {
      * @param email
      * @return foundUser or null
      */
-    public String accExists(String email) {
+    public User accExists(String email) {
         datastore = DatastoreServiceFactory.getDatastoreService();
         Query.Filter userFilter =
                 new Query.FilterPredicate("Email", Query.FilterOperator.EQUAL, email);
@@ -63,9 +65,16 @@ public class UserManager {
 
         if (foundUser == null) {
             return null;
+        } else {
+            User user = new User();
+            user.setUserKey(KeyFactory.keyToString(foundUser.getKey()));
+            user.setEmail(email);
+            user.setFirstName(foundUser.getProperty("FirstName").toString());
+            user.setLastName(foundUser.getProperty("LastName").toString());
+            user.setRole(foundUser.getProperty("Role").toString());
+            return user;
         }
 
-        return KeyFactory.keyToString(foundUser.getKey());
     }
 
     /**
@@ -74,7 +83,7 @@ public class UserManager {
      * @param email
      * @return true - the email is already linked to an account
      */
-    public String emailRegistered(String email) {
+    public User emailRegistered(String email) {
         return accExists(email);
     }
 

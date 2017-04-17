@@ -105,6 +105,15 @@ h4 {}
 }
 
 
+/*----------- VIDEO ---------------*/
+
+.ps-video iframe {
+    padding: 0;
+    margin: 0;
+    width: 1000px;
+}
+
+
 /*----------- SOCIAL ---------------*/
 
 .ps-feature-content p,
@@ -188,7 +197,7 @@ h3 {
 
 /* Modal / Edit Comment */
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 720px) {
     .ps-feature-content .ps-feature-details {
         width: 100%;
         margin-bottom: 2em;

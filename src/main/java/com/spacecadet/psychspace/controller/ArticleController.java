@@ -1,17 +1,15 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.CommentManager;
-import com.spacecadet.psychspace.dataManager.HelperManager;
-import com.spacecadet.psychspace.dataManager.NewsManager;
-import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.dataManager.*;
+import com.spacecadet.psychspace.utilities.Comment;
+import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Path;
 
 /**
  * Created by aliao on 3/27/2017.
@@ -21,28 +19,32 @@ public class ArticleController {
 
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
+    private ArticleManager articleManager = new ArticleManager();
     private CommentManager commentManager = new CommentManager();
+    private NewsManager newsManager = new NewsManager();
 
     /**
      * all visit to article page
      * @return
      */
-    @RequestMapping(value = "/article", method = RequestMethod.GET)
-    public ModelAndView newsDetail() {
+    @RequestMapping(value = "/article/{key}", method = RequestMethod.GET)
+    public ModelAndView newsDetail(@PathVariable("key") String key) {
         ModelAndView model = new ModelAndView();
         model.setViewName("article");
+        model.addObject("article", newsManager.loadSingleNews(key));
+        News featured = newsManager.getFeatured(newsManager.loadNews());
+        featured.setContent(featured.getContent().substring(0, 100));
+        model.addObject("featured", featured);
+        model.addObject("comment", new Comment());
+        model.addObject("commentList", commentManager.loadComments(key));
 
         return model;
     }
 
-    @RequestMapping(value = "/article", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user, HttpServletRequest request){
-        User user1 = (User)(helper.stringToJson(user, "User"));
-        String key = userManager.emailRegistered(user1.getEmail());
-        if (key == null) {
-            key = userManager.addUser(user1, "User");
-        }
-        return "article";
+    @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
+    public String afterRegister(@PathVariable("key") String key, @ModelAttribute Comment comment){
+        //commentManager.addComment(key, comment.getContent());
+        return "article/"+key;
     }
 
     public void comments_test() {
