@@ -48,11 +48,15 @@
 /**************************** Menu *****************************/
 #uib-overrides-nav {
     margin-left: 5%;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
 }
 
 #uib-overrides-nav>li>a{
     color: var(--baby-powder-color);
-
+    text-shadow: none;
+    padding: 5px 10px;
+    margin: 10px 15px;
 }
 
 .nav-li {
@@ -88,15 +92,8 @@
     transform: translateY(0px);
 }
 
-.nav-li>.uib-overrides-nav-a:hover {
-    color: var(--baby-powder-color);
-    border-top: 4px solid var(--baby-powder-color);
-    border-bottom: 4px solid var(--baby-powder-color);
-    padding: 5px 10px;
-    margin: 10px 15px;
-}
-
 .nav>.nav-li>.active,
+.nav-li>.uib-overrides-nav-a:hover,
 #uib-overrides-nav>li>.active,
 #uib-overrides-nav>li>.active:focus,
 #uib-overrides-nav>li>.active:hover

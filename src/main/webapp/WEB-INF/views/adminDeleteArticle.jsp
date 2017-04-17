@@ -20,6 +20,7 @@
     <%--Customized--%>
     <link href="${contextPath}/resources/css/admin.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
+    <script src="${contextPath}/resources/js/adminDeleteArticle.js"></script>
 </head>
 <body>
 
@@ -30,12 +31,18 @@
         <div id="page-content-wrapper">
             <h1>Delete Article</h1>
             <form:form method="get" action="admin_deleteArticle" modelAttribute="news">
-                <table class="table table-striped table-hover">
+                <table id="delete-article-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
+                        <th>
+                            <input type="checkbox" id="selectAll" />
+                        </th>
                         <th>Title</th>
                         <th>Date</th>
-                        <th></th>
+                        <td><button type="button" class="btn btn-primary" id="btn-delete-article"data-toggle="modal" data-target="deleteArticleModal">
+                            Delete
+                            </button>
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,16 +54,69 @@
                             <form:hidden value="${news.content}" path="content"/>
                             <form:hidden value="${news.author}" path="author"/>
                             <form:hidden value="${news.likesCount}" path="likesCount"/>
+                            <th>
+                                <input type="checkbox" id="${news.newsKey}"/>
+                            </th>
                             <td>${news.title}</td>
                             <td>${news.date}</td>
-                            <td><button type="submit">Delete</button></td>
+                            <td><div class="button">Delete</div></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </form:form>
 
-        </div>@#!
+        </div>
     </div>
+
+    <%--Delete confirmation modal--%>
+    <div class="modal fade" id="deleteArticleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header row">
+                    <div class="col-sm-8">
+                        <h3 class="modal-title">Delete Confirmation</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <span id="modal-delete-article-span"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="btn-delete-article-confirm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Delete error modal--%>
+    <div class="modal fade" id="deleteArticleErrorModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header row">
+                    <div class="col-sm-8">
+                        <h3 class="modal-title">Oops</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    Something went wrong :/
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

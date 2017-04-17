@@ -2,7 +2,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Toggle Styles */
+/**************************** Style *****************************/
 
 #wrapper {
     padding-left: 0;
@@ -46,7 +46,39 @@ body {
     margin-right: -250px;
 }
 
-/* Sidebar Styles */
+.admin-btn {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid var(--space-cadet-color);
+    color: var(--baby-powder-color);
+    background-color: var(--space-cadet-color);
+    text-align: center;
+    padding: 5px 15px;
+    margin: 0px 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+    font-size: 13pt;
+    min-width: 30px;
+}
+
+.admin-btn:hover {
+    background-color: var(--eucalyptus-color);
+}
+
+.admin-btn-secondary {
+    border: 1px solid var(--space-cadet-color);
+    color: var(--space-cadet-color);
+    background-color: transparent;
+    padding: 5px 15px;
+    font-family: "Open Sans";
+    font-size: 13pt;
+    border-radius: 5px;
+    min-width: 30px;
+}
+
+
+/**************************** Sidebar *****************************/
 
 .sidebar-nav {
     position: absolute;
@@ -121,4 +153,29 @@ body {
         position: relative;
         margin-right: 0;
     }
+}
+
+
+
+/**************************** delete article *****************************/
+.modal {
+    width: 600px;
+    height: 250px;
+}
+
+.modal-content {
+    box-shadow: none;
+    border: transparent;
+}
+
+.modal-body {
+    font-family: "Open Sans";
+    font-size: 13pt;
+}
+
+/**************************** edit article *****************************/
+
+#editArticleModal {
+    width: 700px;
+    height: 700px;
 }

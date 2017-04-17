@@ -28,6 +28,13 @@ public class HelperManager {
         return null;
     }
 
+    public String[] stringToJsonNewsKeyList(String str) {
+        Gson g = new Gson();
+
+        return g.fromJson(str, String[].class);
+
+    }
+
     public Date stringToDate(String dateString) {
         DateFormat df2 = new SimpleDateFormat("mm-dd-yyyy");
         Date date = new Date();
