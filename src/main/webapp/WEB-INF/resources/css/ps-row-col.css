@@ -105,6 +105,15 @@ h4 {}
 }
 
 
+/*----------- VIDEO ---------------*/
+
+.ps-video iframe {
+    padding: 0;
+    margin: 0;
+    width: 1000px;
+}
+
+
 /*----------- SOCIAL ---------------*/
 
 .ps-feature-content p,
