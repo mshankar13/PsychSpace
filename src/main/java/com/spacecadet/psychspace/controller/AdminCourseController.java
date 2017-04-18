@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by Celeste on 4/15/17.
+ * Created by acliao on 4/15/17.
  */
 @Controller
 public class AdminCourseController {
 
-    //    TODO: Complete this
     /**
      * admin page - add new course to catalog
      * @return
@@ -21,11 +20,10 @@ public class AdminCourseController {
     public ModelAndView courseList() {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminAddCourse");
-        //model.addObject("course", new Course());
+
         return model;
     }
 
-    // TODO: Complete this
     /**
      * admin page - add new course to catalog
      * @return
@@ -34,7 +32,7 @@ public class AdminCourseController {
     public String addNews() {
 
 
-        return "redirect:/news";
+        return "adminAddCourse";
     }
 
 
