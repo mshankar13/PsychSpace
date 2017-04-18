@@ -1,39 +1,25 @@
-/**
- * Created by acerini on 3/27/2017.
- */
 $(document).ready(function () {
-    $("#btn-comment-edit").click(function () {
-        modal.style.display = "block";
-    });
+    $(".btn-comment-edit").on("click", editCommentModalShow);
+    $(".btn-comment-delete").on("click", deleteCommentModalShow);
 });
 
-window.onload = function () {
-    // your code 
 
-    // Get the modal
-    var modal = document.getElementById('myModal');
+function editCommentModalShow() {
+    var commentKey = $(this).siblings()[1].value;
+    var content = $(this).parent().closest(".ps-comment").find("p").text();
 
-    // Get the button that opens the modal
-    var btn = document.getElementById('btn-comment-edit');
+    $("#edit-comment-modal-key").val(commentKey);
+    $("#edit-comment-content").val(content);
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    $("#edit-comment-modal").modal("show");
+}
 
+function deleteCommentModalShow() {
+    var commentKey = $(this).siblings()[1].value;
+    var content = $(this).parent().closest(".ps-comment").find("p").text();
 
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    };
+    $("#delete-comment-modal-key").val(commentKey);
+    $("#delete-comment-modal-span").text(content);
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
+    $("#delete-comment-modal").modal("show");
 }

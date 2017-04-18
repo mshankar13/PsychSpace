@@ -30,7 +30,7 @@ public class NewsListController {
      */
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
-        news_test();
+        //news_test();
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");

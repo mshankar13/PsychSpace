@@ -25,8 +25,6 @@ function onSignIn(googleUser) {
     user["firstName"] = profile.getGivenName();
     user["lastName"] = profile.getFamilyName();
 
-    console.log(url);
-
     $.ajax(url, {
         type: "POST",
         contentType: 'application/json; charset=utf-8',

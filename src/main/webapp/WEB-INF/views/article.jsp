@@ -22,6 +22,7 @@
         <%--Customized--%>
         <script src="${contextPath}/resources/js/scrollreveal.js"></script>
         <script src="${contextPath}/resources/js/navbar.js"></script>
+        <script src="${contextPath}/resources/js/article.js"></script>
         <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
         <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
         <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -63,7 +64,6 @@
                             <div class="center">
                                 <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
                             </div>
-
                             <!-- Post Content -->
                             <p>${article.content}</p>
                         </div>
@@ -107,14 +107,12 @@
                             <h4>Leave a Comment:</h4>
                             <form:form class="form-horizontal" method="post"
                                        modelAttribute="comment" action="${article.newsKey}">
-                                    <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
-\
+                                <form:hidden path="commentKey" value="0" />
                                 <form:hidden path="username" value="0"/>
-                                <form:hidden path="commentKey" value="0"/>
                                 <form:hidden path="newsKey" value="0"/>
                                 <form:hidden path="date" value="0"/>
                                 <form:hidden path="state" value="add"/>
-
+                                <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
                                 <div class="right">
                                     <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit</button>
                                 </div>
@@ -124,26 +122,28 @@
                     <!-- Comment -->
                     <c:forEach items="${commentList}" var="articleComment">
                     <div class="media ps-comment">
-                        <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
+                        <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""></a>
                         <div class="media-body">
                             <!-- Comment Author and Date Posted -->
-                            <h4>${articleComment.username} <small>${articleComment.date} </small><hr></h4>
+                            <h4>${articleComment.username} <small>${articleComment.date}</small></h4><hr>
                             <!-- Comment Content -->
-                            <p id="comment-text">${articleComment.content}</p>
+                            <p class="comment-text">${articleComment.content}</p>
                             <!-- Comment Buttons (Edit/Delete OR Like) -->
                             <div class="right">
-                                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn-comment btn btn-primary">Delete</button>
-                                <button type="button" data-toggle="modal" data-target="#myModal" class="btn-comment btn btn-primary">Edit</button>
-                                <button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>
+                                <button type="button" class="btn-comment btn btn-primary btn-comment-delete">Delete</button>
+                                <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Edit</button>
+                                <input type="hidden" value="${articleComment.commentKey}">
                             </div>
                         </div>
                     </div>
                     </c:forEach>
                     <!-- End Comment -->
                 </div>
+
+
                 <!-- Social -->
                 <!-- Edit Modal-->
-                <div class="modal ps-modal-type-comment fade" id="myModal" role="dialog">
+                <div class="modal ps-modal-type-comment fade" id="edit-comment-modal" role="dialog">
                     <div class="ps-modal-dialog">
                         <!-- Modal content-->
                         <div class="ps-modal-content">
@@ -153,26 +153,30 @@
                                 <div class="left">
                                     <h2 class="ps-feature-info-header"> Edit Comment <hr></h2> </div>
                             </div>
+                            <form:form method="post" action="${article.newsKey}" modelAttribute="comment">
                             <div class="ps-modal-body">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <textarea id="form-comment-edit" class="form-control" rows="3" autofocus="true"/>
-                                    </div>
-
-                                </form>
-                            </div>
-                            <div class="ps-modal-footer">
-                                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                                <div class="right">
-                                    <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Save</button>
+                                <div class="form-group">
+                                    <form:hidden path="state" value="edit"/>
+                                    <form:hidden path="commentKey" value="0" id="edit-comment-modal-key"/>
+                                    <form:textarea id="edit-comment-content" path="content" class="form-control" rows="3" autofocus="true"/>
+                                    <form:hidden path="username" value="0"/>
+                                    <form:hidden path="newsKey" value="0"/>
+                                    <form:hidden path="date" value="0"/>
                                 </div>
                             </div>
+                            <div class="ps-modal-footer right">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Save</button>
+                            </div>
+                            </form:form>
                         </div>
                     </div>
                 </div>
                 <!-- End Edit Modal -->
+
+
                 <!-- Delete Modal -->
-                <div class="modal ps-modal-type-comment fade" id="myModal2" role="dialog">
+                <div class="modal ps-modal-type-comment fade" id="delete-comment-modal" role="dialog">
                     <div class="ps-modal-dialog">
                         <!-- Modal content-->
                         <div class="ps-modal-content">
@@ -182,18 +186,22 @@
                                 <div class="left">
                                     <h2 class="ps-feature-info-header"> Delete Comment <hr></h2> </div>
                             </div>
+                            <form:form method="delete" action="${article.newsKey}" modelAttribute="comment">
                             <div class="ps-modal-body">
-                                <h3>Are you sure you want to delete this comment?</h3>
+                                <form:hidden path="state" value="delete"/>
+                                <form:hidden path="commentKey" value="0" id="delete-comment-modal-key"/>
+                                <form:hidden path="username" value="0"/>
+                                <form:hidden path="newsKey" value="0"/>
+                                <form:hidden path="date" value="0"/>
+                                <form:hidden path="state" value="add"/>
+                                <form:hidden path="content"/>
+                                <h3>Are you sure you want to delete comment: <span id="delete-comment-modal-span"></span></h3>
                             </div>
-                            <div class="ps-modal-footer">
-                                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                                <div class="right">
-                                    <button type="button" class="btn-comment btn btn-primary" data-dismiss="modal">No</button>
-                                    <button id="btn-comment-update" type="submit" class="btn-comment btn btn-primary">Yes</button>
-                                </div>
-
-
+                            <div class="ps-modal-footer right">
+                                <button type="button" class="btn-comment btn btn-primary" data-dismiss="modal">No</button>
+                                <button id="btn-comment-update" type="submit" class="btn-comment btn btn-primary">Delete</button>
                             </div>
+                            </form:form>
                         </div>
 
                     </div>
