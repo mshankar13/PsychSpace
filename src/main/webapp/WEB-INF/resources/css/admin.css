@@ -54,7 +54,7 @@ body {
     color: var(--baby-powder-color);
     background-color: var(--space-cadet-color);
     text-align: center;
-    padding: 5px 15px;
+    padding: 3px 15px;
     margin: 0px 10px;
     transition: all 0.5s;
     cursor: pointer;
@@ -64,19 +64,32 @@ body {
 
 .admin-btn:hover {
     background-color: var(--eucalyptus-color);
+    border-color: var(--eucalyptus-color);
 }
 
 .admin-btn-secondary {
     border: 1px solid var(--space-cadet-color);
     color: var(--space-cadet-color);
     background-color: transparent;
-    padding: 5px 15px;
+    padding: 3px 15px;
     font-family: "Open Sans";
     font-size: 13pt;
     border-radius: 5px;
     min-width: 30px;
 }
 
+.admin-btn-secondary:hover {
+    background-color: var(--tea-rose-color);
+}
+
+.fixed {
+    position: fixed;
+    background: white;
+    z-index: 1;
+    width: 100%;
+    top: 0px;
+    padding: 20px;
+}
 
 /**************************** Sidebar *****************************/
 
@@ -171,6 +184,15 @@ body {
 .modal-body {
     font-family: "Open Sans";
     font-size: 13pt;
+}
+
+.modal-header {
+    margin: auto auto auto 10px;
+}
+
+#delete-article-table {
+    top: 80px;
+    position: absolute;
 }
 
 /**************************** edit article *****************************/

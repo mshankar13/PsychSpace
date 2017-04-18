@@ -29,7 +29,17 @@
         <%@include file="admin-sidebar.html" %>
 
         <div id="page-content-wrapper">
-            <h1>Delete Article</h1>
+            <div class="row fixed" >
+                <div class="col-sm-3">
+                    <h1>Delete Article</h1>
+                </div>
+                <div class="col-sm-9">
+                    <button type="button" class="admin-btn" id="btn-delete-article"data-toggle="modal" data-target="deleteArticleModal">
+                        Delete
+                    </button>
+                </div>
+            </div>
+
             <form:form method="get" action="admin_deleteArticle" modelAttribute="news">
                 <table id="delete-article-table" class="table table-striped table-hover">
                     <thead>
@@ -39,10 +49,6 @@
                         </th>
                         <th>Title</th>
                         <th>Date</th>
-                        <td><button type="button" class="btn btn-primary" id="btn-delete-article"data-toggle="modal" data-target="deleteArticleModal">
-                            Delete
-                            </button>
-                        </td>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,7 +65,6 @@
                             </th>
                             <td>${news.title}</td>
                             <td>${news.date}</td>
-                            <td><div class="button">Delete</div></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -75,7 +80,7 @@
             <div class="modal-content">
                 <div class="modal-header row">
                     <div class="col-sm-8">
-                        <h3 class="modal-title">Delete Confirmation</h3>
+                        <h2 class="modal-title">Delete Confirmation</h2>
                     </div>
                     <div class="col-sm-4">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -87,8 +92,8 @@
                     Are you sure you want to delete <span id="modal-delete-article-span"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="btn-delete-article-confirm">Delete</button>
+                    <button type="button" class="admin-btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="admin-btn" id="btn-delete-article-confirm">Delete</button>
                 </div>
             </div>
         </div>

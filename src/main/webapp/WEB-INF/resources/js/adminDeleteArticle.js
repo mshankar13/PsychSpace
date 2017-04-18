@@ -2,11 +2,18 @@ var articles = [];
 
 $(document).ready(function(){
 
+    $('#delete-article-table tr').on("click", rowClickCheckboxTrigger);
     $("#deleteArticleErrorModal").hide();
     $("#selectAll").on("click", deleteArticleSelectAllOnClick);
     $("#btn-delete-article").on("click", showDeleteArticleModal);
     $("#btn-delete-article-confirm").on("click", deleteArticles);
 });
+
+function rowClickCheckboxTrigger(event) {
+    if (event.target.type !== 'checkbox') {
+        $(':checkbox', this).trigger('click');
+    }
+}
 
 function deleteArticleSelectAllOnClick() {
     $("#delete-article-table").find('input:checkbox').prop('checked', this.checked);
@@ -33,8 +40,10 @@ function showDeleteArticleModal() {
         })
     }
 
-    $("#modal-delete-article-span").text(i + " articles?");
-    console.log(i);
+    var article = " article?";
+    if (i > 1)
+        article = " articles?";
+    $("#modal-delete-article-span").text(i + article);
 }
 
 function deleteArticles() {
@@ -47,9 +56,11 @@ function deleteArticles() {
         dataType: 'json',
         data: JSON.stringify(articles),
         success: function () {
+            var i = 0;
             $.each($("input:checkbox"), function (index) {
-                if ($(this).attr("id") == articles[index]) {
+                if ($(this).attr("id") == articles[i]) {
                     $(this).closest('tr').remove();
+                    i++;
                 }
             })
         },

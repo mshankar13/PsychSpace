@@ -37,4 +37,6 @@ public class AdminCourseController {
         return "redirect:/news";
     }
 
+
+
 }
