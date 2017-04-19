@@ -30,11 +30,13 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <h1>Add Evaluation</h1>
-            <form:form class="form-horizontal" method="post"
-                       modelAttribute="evaluation" action="admin_addEvaluation">
+            <%--<form:form class="form-horizontal" method="post"--%>
+                       <%--modelAttribute="evaluation" action="admin_addEvaluation">--%>
+            <form>
                 <div class="form-group">
                     <label for="news-title">News Title</label>
-                    <form:input type="text" class="form-control" id="news-title" path="title" placeholder="News Title" />
+                    <input type="text" class="form-control" id="news-title" placeholder="News Title" />
+                    <%--<form:input type="text" class="form-control" id="news-title" path="title" placeholder="News Title" />--%>
                 </div>
                 <div class="form-group">
                     <label for="author">Author</label>
@@ -53,7 +55,8 @@
                 <form:hidden path="likesCount" value="0"/>
                 <form:hidden path="newsKey" value="null"/>
                 <button type="submit" class="btn btn-primary btn-add-article">Add</button>
-            </form:form>
+            </form>
+            <%--</form:form>--%>
         </div>
     </div>
 </div>

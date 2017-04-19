@@ -1,3 +1,5 @@
+var profile;
+
 $(document).ready(function(){
 
     setActiveNav();
@@ -17,8 +19,10 @@ $(document).ready(function(){
 function onSignIn(googleUser) {
     var url = window.location.href;
     url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
+    url = url + "/login";
+    console.log(url);
 
-    var profile = googleUser.getBasicProfile();
+    profile = googleUser.getBasicProfile();
 
     var user = {};
     user["email"] = profile.getEmail();
@@ -55,7 +59,24 @@ function checkIfSignedIn()
 
 
 function signOut() {
+    var url = window.location.href;
+    url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
+    url = url + "/logout";
+    console.log(url);
+
     var auth2 = gapi.auth2.getAuthInstance();
+
+    var user = {};
+    user["email"] = profile.getEmail();
+    user["firstName"] = profile.getGivenName();
+    user["lastName"] = profile.getFamilyName();
+
+    $.ajax(url, {
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(user)
+    });
 
     auth2.signOut().then(function () {
         sessionStorage.removeItem("user");

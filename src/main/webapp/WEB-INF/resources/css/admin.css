@@ -2,6 +2,11 @@ body {
     overflow-x: hidden;
 }
 
+label {
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+
 /**************************** Style *****************************/
 
 #wrapper {
@@ -200,4 +205,9 @@ body {
 #editArticleModal {
     width: 700px;
     height: 700px;
+}
+
+/**************************** add survey *****************************/
+.input-answer {
+    width: 280px;
 }

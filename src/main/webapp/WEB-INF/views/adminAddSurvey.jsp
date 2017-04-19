@@ -20,7 +20,7 @@
     <%--Customized--%>
     <link href="${contextPath}/resources/css/admin.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
-
+    <script src="${contextPath}/resources/js/adminAddSurvey.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -29,9 +29,10 @@
 
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <h1>Add Survey</h1>
-            <form:form class="form-horizontal" method="post"
-                       modelAttribute="survey" action="admin_addSurvey">
+            <h1>Create Survey</h1>
+        <form>
+            <%--<form:form class="form-horizontal" method="post"--%>
+                       <%--modelAttribute="survey" action="admin_addSurvey">--%>
                 <div class="form-group">
                     <label for="select-course">Course</label>
                     <select class="form-control" id="select-course">
@@ -44,36 +45,84 @@
                 </div>
                 <div class="form-group">
                     <label for="survey-title">Title</label>
-                    <form:input type="text" class="form-control" id="survey-title" path="title" placeholder="Title" />
+                    <input type="text" class="form-control" id="survey-title" placeholder="Title" />
+                    <%--<form:input type="text" class="form-control" id="survey-title" path="title" placeholder="Title" />--%>
                 </div>
-                <div class="form-group">
-                    <label>Question</label>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <form:input class="form-control" path="question"/>
+                <div id="add-survey-q-group">
+                    <label style="font-size: 15pt">Questions</label>
+                    <div class="form-group question-group">
+                        <label>Question 1</label>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input class="form-control" path="question"/>
+                                <%--<form:input class="form-control" path="question"/>--%>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label>Answer</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="input-answer"/>
+                                <%--<form:input class="form-control" path="question"/>--%>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Score</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group question-group">
+                        <label>Question <span class="question-number">2</span></label>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input class="form-control" path="question1"/>
+                                <%--<form:input class="form-control" path="question1"/>--%>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label>Answer</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="input-answer"/>
+                                <%--<form:input class="form-control" path="question"/>--%>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Score</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Question</label>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <form:input class="form-control" path="question1"/>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-add-article">Add</button>
-            </form:form>
+                <button type="submit" class="admin-btn">Create</button>
+            <%--</form:form>--%>
+            </form>
         </div>
     </div>
 </div>

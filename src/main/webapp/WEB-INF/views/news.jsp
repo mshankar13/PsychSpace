@@ -97,6 +97,7 @@
                                             <a class="button fadein btn-read-more" href="/article/${newsItem.newsKey}"><span>Read More</span></a>
                                         </div>
                                     </div>
+                                    <br>
                                 </div>
                             </c:forEach>
                             <!-- End course -->
@@ -106,7 +107,7 @@
             </header>
 
             <%@include file="footer.html" %>
-                <script src="${contextPath}/resources/js/style.js"></script>
+                <%--<script src="${contextPath}/resources/js/style.js"></script>--%>
             <script src="${contextPath}/resources/js/animations.js"></script>
 
 
