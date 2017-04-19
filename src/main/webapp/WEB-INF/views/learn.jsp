@@ -20,6 +20,7 @@
             <%--Customized--%>
             <script src="${contextPath}/resources/js/scrollreveal.js"></script>
             <script src="${contextPath}/resources/js/navbar.js"></script>
+            <script src="${contextPath}/resources/js/survey.js"></script>
             <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
             <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
             <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -31,8 +32,8 @@
                 <%@include file="navbar.html"%>
             </div>
             <%@include file="learn.html"%>
-                <%@include file="footer.html" %>
-                    <script src="${contextPath}/resources/js/animations.js"></script>
+            <%@include file="footer.html" %>
+            <script src="${contextPath}/resources/js/animations.js"></script>
         </body>
 
         </html>
