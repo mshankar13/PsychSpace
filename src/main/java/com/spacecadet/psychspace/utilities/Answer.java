@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * Created by marleneshankar on 4/17/17.
+ * Created by marleneshankar on 4/19/17.
  */
 
 @Accessors(chain = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Survey {
-    private String surveyKey;
-    private String name;
-    private String content;
+public class Answer {
+    private String userKey;
+    private String questionKey;
+    private String answer;
 }

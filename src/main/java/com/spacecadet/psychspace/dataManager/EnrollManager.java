@@ -32,7 +32,7 @@ public class EnrollManager {
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-        Query enrollQuery = new Query("News").setFilter(propertyFilter1).setFilter(propertyFilter2);
+        Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
         Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
 
         Transaction txn = datastore.beginTransaction();

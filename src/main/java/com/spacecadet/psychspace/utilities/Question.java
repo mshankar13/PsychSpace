@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class Question {
     private String questionKey;
+    private String surveyKey;
     private String question;
     private HashMap<String, String> answers;
     private String type;
