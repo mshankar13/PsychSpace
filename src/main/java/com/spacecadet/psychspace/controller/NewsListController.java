@@ -29,7 +29,6 @@ public class NewsListController {
      */
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
-        //news_test();
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
@@ -84,6 +83,11 @@ public class NewsListController {
         if (user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
+        WelcomeController.currUser.setFirstName(user1.getFirstName());
+        WelcomeController.currUser.setRole(user1.getRole());
+        WelcomeController.currUser.setUserKey(user1.getUserKey());
+        WelcomeController.currUser.setEmail(user1.getEmail());
+        WelcomeController.currUser.setLastName(user1.getLastName());
         return model;
     }
 

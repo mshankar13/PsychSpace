@@ -78,19 +78,19 @@ public class ArticleController {
     public String likeArticle(@PathVariable("key") String key, @ModelAttribute Like like){
         News news = newsManager.loadSingleNews(key);
         ArrayList<Like> likeList = likeManager.loadLikes();
-        // TODO: set like currUserID
+        like.setUserID(WelcomeController.currUser.getUserKey());
         for(Like l : likeList){
             // if data already exists, its either liked or unliked
-            if (like.getArticleID().equals(l.getArticleID()) && like.getUserID().equals(l.getUserID())){
+            if (l.getArticleID().equals(key) && l.getUserID().equals(like.getUserID())){
                 like.setLikeKey(l.getLikeKey());
                 if(l.getStatus().equals("like")){  //if already like, unlike
                     like.setStatus("unlike");
-                    likeManager.unlike(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
+                    likeManager.editlike(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
                             news.getContent(), news.getLikesCount(), news.getDate(), like);
                     return "redirect:/article/"+key;
                 } else if (l.getStatus().equals("unlike")){ // if already unlike, like
                     like.setStatus("like");
-                    likeManager.like(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
+                    likeManager.editlike(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
                             news.getContent(), news.getLikesCount(), news.getDate(), like);
                     return "redirect:/article/"+key;
                 }

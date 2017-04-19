@@ -83,4 +83,33 @@ public class CourseManager {
     public void deleteCourse () {
 
     }
+
+    public ArrayList<Course> searchCourse(ArrayList<Course> courses, String keyword) {
+        ArrayList<Course> titleSearch = new ArrayList<>();
+        for (Course course: courses) {
+            if (course.getName().contains(keyword) == true) {   titleSearch.add(course);    }
+        }
+        Collections.sort(titleSearch, new Comparator<Course>() {
+            @Override
+            public int compare(Course o1, Course o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        ArrayList<Course> descriptionSearch = new ArrayList<>();
+        for (Course course: courses) {
+            if (course.getDescription().contains(keyword) == true) {
+                if (!titleSearch.contains(course)) {    descriptionSearch.add(course);  }
+                }
+        }
+        Collections.sort(descriptionSearch, new Comparator<Course>() {
+            @Override
+            public int compare(Course o1, Course o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        ArrayList<Course> results = new ArrayList<>();
+        results.addAll(titleSearch);
+        results.addAll(descriptionSearch);
+        return results;
+    }
 }

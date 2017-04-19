@@ -19,6 +19,8 @@ public class WelcomeController {
 
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
+    public static User currUser = new User();
+
     /**
      * all visit to url "/" to welcome page
      * @return
@@ -34,12 +36,15 @@ public class WelcomeController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String afterRegister(@RequestBody String user, HttpServletRequest request){
         User user1 = (User)(helper.stringToJson(user, "User"));
-        if (userManager.emailRegistered(user1.getEmail()) == null) {
-             user1= userManager.addUser(user1, "User");
-        } else {
-
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if ( user1 == null) {
+            user1 = userManager.addUser(user1, "User");
         }
-
+        currUser.setFirstName(user1.getFirstName());
+        currUser.setRole(user1.getRole());
+        currUser.setUserKey(user1.getUserKey());
+        currUser.setEmail(user1.getEmail());
+        currUser.setLastName(user1.getLastName());
         return "home";
     }
 

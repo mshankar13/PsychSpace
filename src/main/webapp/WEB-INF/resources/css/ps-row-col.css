@@ -75,8 +75,8 @@ h4 {}
     padding: 0 1em;
 }
 
-.ps-well {
-    min-height: 410px;
+.ps-feature-content .col-lg-4 {
+    margin-bottom: 2em;
 }
 
 .ps-feature-content .ps-well {
@@ -108,10 +108,6 @@ h4 {}
     padding: 0 1em 0 0;
 }
 
-
-.ps-text-content>.col-lg-4 {
-    min-height: 480px;
-}
 
 /*----------- VIDEO ---------------*/
 
@@ -194,7 +190,7 @@ h3 {
 }
 
 .ps-modal-body {
-    padding: 2em;
+    padding 2em;
     margin: 2em;
 }
 
@@ -205,7 +201,7 @@ h3 {
 
 /* Modal / Edit Comment */
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 480px) {
     .ps-feature-content .ps-feature-details {
         width: 100%;
         margin-bottom: 2em;
