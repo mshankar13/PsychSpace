@@ -20,5 +20,4 @@ public class User {
     private String firstName;
     private String lastName;
     private String role; //User, Instructor, Admin
-
 }
