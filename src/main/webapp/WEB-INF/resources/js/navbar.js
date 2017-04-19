@@ -16,31 +16,42 @@ $(document).ready(function(){
 
 });
 
-function onSignIn(googleUser) {
+function onSignIn(googleUser, authResult) {
     var url = window.location.href;
     url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
-    url = url + "/login";
+    if (url == "/")
+        url = url + "login";
+    else
+        url = url + "/login";
     console.log(url);
 
     profile = googleUser.getBasicProfile();
 
-    var user = {};
-    user["email"] = profile.getEmail();
-    user["firstName"] = profile.getGivenName();
-    user["lastName"] = profile.getFamilyName();
+    if(!url.includes("learn") && !url.includes("home")) {
+        var user = {};
+        user["email"] = profile.getEmail();
+        user["firstName"] = profile.getGivenName();
+        user["lastName"] = profile.getFamilyName();
 
-    $.ajax(url, {
-        type: "POST",
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(user)
-    });
+        $.ajax(url, {
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(user)
+        });
 
-    //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
-    sessionStorage.setItem('user',JSON.stringify(user));
+        //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
+        sessionStorage.setItem('user',JSON.stringify(user));
+    }
 
     // hide signin button, show the user icon
     userSignedInUI();
+}
+
+function google_signin_callback(authResult){
+    if(authResult.status.method == 'AUTO'){
+        // handle auto sign-in scenario
+    }
 }
 
 function checkIfSignedIn()
@@ -61,7 +72,10 @@ function checkIfSignedIn()
 function signOut() {
     var url = window.location.href;
     url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
-    url = url + "/logout";
+    if (url == "/")
+        url = url + "logout";
+    else
+        url = url + "/logout";
     console.log(url);
 
     var auth2 = gapi.auth2.getAuthInstance();

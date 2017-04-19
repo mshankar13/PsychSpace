@@ -52,7 +52,7 @@ public class CourseController {
      * logout on course page
      * @return
      */
-    @RequestMapping(value = "/course/{key}/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/course/{key}/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/course/{key}";

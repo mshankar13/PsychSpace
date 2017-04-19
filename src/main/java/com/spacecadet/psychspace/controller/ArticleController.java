@@ -110,7 +110,7 @@ public class ArticleController {
      * logout on article page
      * @return
      */
-    @RequestMapping(value = "/article/{key}/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/article/{key}/logout", method = RequestMethod.POST)
     public String logout(@PathVariable("key") String key, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/article/"+key;
@@ -121,7 +121,7 @@ public class ArticleController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/article{key}/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/article/{key}/login", method = RequestMethod.POST)
     public String login(@PathVariable("key") String key, @RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());

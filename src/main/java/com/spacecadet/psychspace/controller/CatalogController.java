@@ -65,7 +65,7 @@ public class CatalogController {
      * logout on catalog page
      * @return
      */
-    @RequestMapping(value = "/catalogue/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/catalogue/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/catalogue";

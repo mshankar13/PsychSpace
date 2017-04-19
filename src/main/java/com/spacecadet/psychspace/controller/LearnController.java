@@ -32,7 +32,7 @@ public class LearnController {
      * logout on learn page
      * @return
      */
-    @RequestMapping(value = "/learn/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/learn/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";

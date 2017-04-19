@@ -31,7 +31,7 @@ public class HomeController {
      * logout on home page
      * @return
      */
-    @RequestMapping(value = "/home/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/home/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
