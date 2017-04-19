@@ -4,6 +4,7 @@ import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.Like;
 import com.spacecadet.psychspace.utilities.News;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +20,8 @@ public class ArticleController {
     private CommentManager commentManager = new CommentManager();
     private NewsManager newsManager = new NewsManager();
     private LikeManager likeManager = new LikeManager();
+    private UserManager userManager = new UserManager();
+    private HelperManager helper = new HelperManager();
 
     /**
      * all visits to article page
@@ -100,6 +103,32 @@ public class ArticleController {
         like.setStatus("like");
         likeManager.like(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
                 news.getContent(), news.getLikesCount(), news.getDate(), like);
+        return "redirect:/article/"+key;
+    }
+
+    /**
+     * logout on article page
+     * @return
+     */
+    @RequestMapping(value = "/article/{key}/logout", method = RequestMethod.GET)
+    public String logout(@PathVariable("key") String key, @RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/article/"+key;
+    }
+
+    /**
+     * login on article page
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/article{key}/login", method = RequestMethod.POST)
+    public String login(@PathVariable("key") String key, @RequestBody String user){
+        User user1 = (User)(helper.stringToJson(user, "User"));
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if (user1 == null) {
+            user1 = userManager.addUser(user1, "User");
+        }
+        userManager.resetCurrentUser(user1);
         return "redirect:/article/"+key;
     }
 

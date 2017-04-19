@@ -62,6 +62,32 @@ public class CatalogController {
     }
 
     /**
+     * logout on catalog page
+     * @return
+     */
+    @RequestMapping(value = "/catalogue/logout", method = RequestMethod.GET)
+    public String logout(@RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/catalogue";
+    }
+
+    /**
+     * login on catalog page
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/catalogue/login", method = RequestMethod.POST)
+    public String login(@RequestBody String user){
+        User user1 = (User)(helper.stringToJson(user, "User"));
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if (user1 == null) {
+            user1 = userManager.addUser(user1, "User");
+        }
+        userManager.resetCurrentUser(user1);
+        return "redirect:/catalogue";
+    }
+
+    /**
      * create dummy data for courses
      */
     private void course_test(){

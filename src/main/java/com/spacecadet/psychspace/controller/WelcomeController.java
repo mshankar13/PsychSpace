@@ -33,18 +33,20 @@ public class WelcomeController {
         return model;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user, HttpServletRequest request){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());
         if ( user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
-        currUser.setFirstName(user1.getFirstName());
-        currUser.setRole(user1.getRole());
-        currUser.setUserKey(user1.getUserKey());
-        currUser.setEmail(user1.getEmail());
-        currUser.setLastName(user1.getLastName());
+        userManager.resetCurrentUser(user1);
+        return "home";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public String logout(@RequestBody String user){
+        userManager.resetCurrentUser(new User());
         return "home";
     }
 
