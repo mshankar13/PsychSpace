@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**
@@ -40,8 +39,12 @@ public class NewsListController {
             newsList = newsManager.loadNews();
         }
         for(News news : newsList){
-            if(news.getContent().length() >= 100)
+            if(news.getTitle().length() >= 50){
+                news.setTitle(news.getTitle().substring(0, 50));
+            }
+            if(news.getContent().length() >= 100) {
                 news.setContent(news.getContent().substring(0, 100));
+            }
         }
         model.addObject("newsList", newsList);
         News featured = newsManager.getFeatured(newsList);
@@ -51,8 +54,13 @@ public class NewsListController {
         return model;
     }
 
+    /**
+     * after register on news page
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/news", method = RequestMethod.POST)
-    public ModelAndView afterRegister(@RequestBody String user, HttpServletRequest request){
+    public ModelAndView afterRegister(@RequestBody String user){
         newsManager = new NewsManager();
         ModelAndView model = new ModelAndView();
         model.setViewName("news");
@@ -62,6 +70,8 @@ public class NewsListController {
             newsList = newsManager.loadNews();
         }
         for(News news : newsList){
+            if(news.getTitle().length() >= 50)
+                news.setTitle(news.getTitle().substring(0, 50));
             if(news.getContent().length() >= 100)
                 news.setContent(news.getContent().substring(0, 100));
         }

@@ -40,7 +40,15 @@
                     <div class="ps-feature-info">
                         <!-- Date/Time -->
                         <p><span class="glyphicon glyphicon-time"></span> ${article.title}
-                            <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                            <form:form method="post"
+                                       modelAttribute="like" action="${article.newsKey}/+1">
+                                <form:hidden path="userID" value="0"/>
+                                <form:hidden path="articleID" value="${article.newsKey}"/>
+                                <form:hidden path="status" value="like"/>
+                                <form:hidden path="likeKey" value="0"/>
+                                <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                            </form:form>
+                            ${article.likesCount}
                         </p>
                         <!-- Title -->
                         <h1>${article.title}<hr></h1>

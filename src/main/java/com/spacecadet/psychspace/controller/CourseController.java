@@ -4,6 +4,7 @@ import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,21 +25,27 @@ public class CourseController {
      * all visit to course page
      * @return
      */
-    @RequestMapping(value = "/course", method = RequestMethod.GET)
-    public ModelAndView course() {
+    @RequestMapping(value = "/course/{key}", method = RequestMethod.GET)
+    public ModelAndView course(@PathVariable("key") String key) {
         ModelAndView model = new ModelAndView();
         model.setViewName("course");
 
         return model;
     }
 
-    @RequestMapping(value = "/course", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user, HttpServletRequest request){
+    /**
+     * after register
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/course/{key}", method = RequestMethod.POST)
+    public String afterRegister(@PathVariable("key") String key, @RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());
         if (user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
-        return "course";
+        return "redirect:/course/"+key;
     }
+
 }
