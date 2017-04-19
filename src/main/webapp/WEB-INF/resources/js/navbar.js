@@ -23,7 +23,7 @@ function onSignIn(googleUser, authResult) {
         url = url + "login";
     else
         url = url + "/login";
-    console.log(url);
+    //console.log(url);
 
     profile = googleUser.getBasicProfile();
 
@@ -76,7 +76,7 @@ function signOut() {
         url = url + "logout";
     else
         url = url + "/logout";
-    console.log(url);
+    //console.log(url);
 
     var auth2 = gapi.auth2.getAuthInstance();
 
