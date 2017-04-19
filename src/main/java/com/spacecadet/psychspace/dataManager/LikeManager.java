@@ -39,6 +39,21 @@ public class LikeManager {
         return loadedLikes;
     }
 
+
+    public boolean isLiked(String newsID, String userID){
+        datastore = DatastoreServiceFactory.getDatastoreService();
+        Query.Filter userFilter =
+                new Query.FilterPredicate("userID", Query.FilterOperator.EQUAL, userID);
+        Query.Filter newsFilter =
+                new Query.FilterPredicate("articleID", Query.FilterOperator.EQUAL, newsID);
+        Query likeQuery = new Query("Like").setFilter(userFilter).setFilter(newsFilter);
+        Entity like = datastore.prepare(likeQuery).asSingleEntity();
+        if (like == null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * adds new Like entity to datastore when user likes an article
      * @param newsManager
@@ -81,10 +96,14 @@ public class LikeManager {
      * @param likesCount
      * @param date
      */
-    public void unlike (NewsManager newsManager, String newsID, String title, String author, String content,
+    public void editlike (NewsManager newsManager, String newsID, String title, String author, String content,
                       String likesCount, String date, Like like) {
         int count = Integer.parseInt(likesCount);
-        count--;
+        if(like.getStatus().equals("like")){
+            count++;
+        } else {
+            count--;
+        }
         newsManager.editNews(newsID, title, author, content, Integer.toString(count), date);
 
         Transaction txn = datastore.beginTransaction();

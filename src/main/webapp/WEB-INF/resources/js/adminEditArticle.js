@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    //$('#edit-date').datepicker({ dateFormat: 'yyyy-mm-dd' });
     $(".btn-edit-article").on("click", editArticleModalShow);
 });
 
@@ -19,12 +18,10 @@ function editArticleModalShow() {
     $("#edit-author").val(author);
     $("#edit-date").datepicker();
     $("#edit-date").datepicker("setDate", date);
-    //$("#edit-date").text(date);
     $("#edit-content").val(content);
     $("#linkedCount").val(likesCount);
     $("#key").val(key);
 
     $("#editArticleModal").modal("show");
-
 }
 
