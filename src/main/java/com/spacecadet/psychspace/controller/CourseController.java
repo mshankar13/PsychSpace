@@ -1,5 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.User;
@@ -20,9 +21,11 @@ public class CourseController {
 
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * all visit to course page
+     *
      * @return
      */
     @RequestMapping(value = "/course/{key}", method = RequestMethod.GET)
@@ -35,17 +38,18 @@ public class CourseController {
 
     /**
      * after register
+     *
      * @param user
      * @return
      */
     @RequestMapping(value = "/course/{key}", method = RequestMethod.POST)
-    public String afterRegister(@PathVariable("key") String key, @RequestBody String user){
-        User user1 = (User)(helper.stringToJson(user, "User"));
+    public String afterRegister(@PathVariable("key") String key, @RequestBody String user) {
+        User user1 = (User) (helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());
         if (user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
-        return "redirect:/course/"+key;
+        return "redirect:/course/" + key;
     }
 
     /**

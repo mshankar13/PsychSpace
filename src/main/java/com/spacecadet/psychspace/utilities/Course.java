@@ -14,11 +14,16 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course {
+    private String userKey;
     private String courseKey;
     private String name;
+    private String instructor;
     private String description;
     private String startDate;
     private String endDate;
+    private String enrollDate;
+    private String dropDate;
     private String status;
-    private String size;
+    private String currSize;
+    private String capacity;
 }

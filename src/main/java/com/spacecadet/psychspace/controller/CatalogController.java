@@ -75,6 +75,7 @@ public class CatalogController {
      * login on catalog page
      * @param user
      * @return
+
      */
     @RequestMapping(value = "/catalogue/login", method = RequestMethod.POST)
     public String login(@RequestBody String user){
@@ -87,10 +88,13 @@ public class CatalogController {
         return "redirect:/catalogue";
     }
 
-    /**
-     * create dummy data for courses
-     */
-    private void course_test(){
-        courseManager.addCourse();
+    public void course_test() {
+        // Before use add user keys to first field of each call!
+        courseManager.addCourse("", "Exam Time Management", "Bob", "this is a course",
+                "3/3/17", "4/3/17", "3/2/17", "false", "20", "25");
+        courseManager.addCourse("", "Homework Time Management", "Angela", "this is a course",
+                "4/3/17", "5/3/17", "4/3/17", "true", "25", "30");
+        courseManager.addCourse("", "Application Time Management", "Celeste", "this is a course",
+                "4/16/17", "5/30/17", "4/16/17", "false", "25", "25");
     }
 }
