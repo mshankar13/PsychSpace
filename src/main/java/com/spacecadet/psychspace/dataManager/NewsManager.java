@@ -54,7 +54,7 @@ public class NewsManager {
             public int compare(News o1, News o2) {
                 Date date1 = helper.stringToDate(o1.getDate());
                 Date date2 = helper.stringToDate(o2.getDate());
-                return date1.compareTo(date2);
+                return date2.compareTo(date1);
             }
         });
 

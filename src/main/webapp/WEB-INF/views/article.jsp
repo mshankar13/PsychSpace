@@ -46,9 +46,8 @@
                                 <form:hidden path="articleID" value="${article.newsKey}"/>
                                 <form:hidden path="status" value="like"/>
                                 <form:hidden path="likeKey" value="0"/>
-                                <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                                <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button> ${article.likesCount}
                             </form:form>
-                            ${article.likesCount}
                         </p>
                         <!-- Title -->
                         <h1>${article.title}<hr></h1>
