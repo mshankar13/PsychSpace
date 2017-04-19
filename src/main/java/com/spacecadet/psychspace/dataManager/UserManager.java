@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.controller.WelcomeController;
 import com.spacecadet.psychspace.utilities.User;
 
 import java.util.Date;
@@ -87,4 +88,16 @@ public class UserManager {
         return accExists(email);
     }
 
+
+    /**
+     * helper method for reseting current user
+     * @param user
+     */
+    public void resetCurrentUser(User user){
+        WelcomeController.currUser.setFirstName(user.getFirstName());
+        WelcomeController.currUser.setRole(user.getRole());
+        WelcomeController.currUser.setUserKey(user.getUserKey());
+        WelcomeController.currUser.setEmail(user.getEmail());
+        WelcomeController.currUser.setLastName(user.getLastName());
+    }
 }

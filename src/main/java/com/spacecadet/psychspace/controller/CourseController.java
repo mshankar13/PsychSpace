@@ -48,4 +48,29 @@ public class CourseController {
         return "redirect:/course/"+key;
     }
 
+    /**
+     * logout on course page
+     * @return
+     */
+    @RequestMapping(value = "/course/{key}/logout", method = RequestMethod.GET)
+    public String logout(@RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/course/{key}";
+    }
+
+    /**
+     * login on course page
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/course/{key}/login", method = RequestMethod.POST)
+    public String login(@RequestBody String user){
+        User user1 = (User)(helper.stringToJson(user, "User"));
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if (user1 == null) {
+            user1 = userManager.addUser(user1, "User");
+        }
+        userManager.resetCurrentUser(user1);
+        return "redirect:/course/{key}";
+    }
 }

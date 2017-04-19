@@ -54,15 +54,37 @@ public class NewsListController {
     }
 
     /**
-     * after register on news page
+     * login on news page
      * @param user
      * @return
      */
-    @RequestMapping(value = "/news", method = RequestMethod.POST)
-    public ModelAndView afterRegister(@RequestBody String user){
-        newsManager = new NewsManager();
-        ModelAndView model = new ModelAndView();
-        model.setViewName("news");
+    @RequestMapping(value = "/news/login", method = RequestMethod.POST)
+    public String login(@RequestBody String user){
+        User user1 = (User)(helper.stringToJson(user, "User"));
+        user1 = userManager.emailRegistered(user1.getEmail());
+        if (user1 == null) {
+            user1 = userManager.addUser(user1, "User");
+        }
+        userManager.resetCurrentUser(user1);
+        return "redirect:/news";
+    }
+
+    /**
+     * logout on news page
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/news/logout", method = RequestMethod.POST)
+    public String logout(@RequestBody String user){
+        userManager.resetCurrentUser(new User());
+        return "redirect:/news";
+    }
+
+    /**
+     * helper method for shortening the content to show in frontend
+     * @return
+     */
+    private ArrayList<News> shortenNews(){
         ArrayList<News> newsList = newsManager.loadNews();
         if(newsList.isEmpty()){
             news_test();
@@ -74,21 +96,7 @@ public class NewsListController {
             if(news.getContent().length() >= 100)
                 news.setContent(news.getContent().substring(0, 100));
         }
-        model.addObject("newsList", newsList);
-        News featured = newsManager.getFeatured(newsList);
-        featured.setContent(featured.getContent().substring(0, 100));
-        model.addObject("featuredNews", featured);
-        User user1 = (User)(helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if (user1 == null) {
-            user1 = userManager.addUser(user1, "User");
-        }
-        WelcomeController.currUser.setFirstName(user1.getFirstName());
-        WelcomeController.currUser.setRole(user1.getRole());
-        WelcomeController.currUser.setUserKey(user1.getUserKey());
-        WelcomeController.currUser.setEmail(user1.getEmail());
-        WelcomeController.currUser.setLastName(user1.getLastName());
-        return model;
+        return newsList;
     }
 
     /**
