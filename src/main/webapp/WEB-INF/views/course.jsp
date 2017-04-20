@@ -112,8 +112,8 @@
                         <div class="center">
                             <input id="button-user-enroll-status" value=${isEnrolled} hidden>
                             <input id="button-enroll-status" value=${course.status} hidden>
-                            <a class="button-enroll button" id="button-enroll" href=""><span> Enroll Now</span></a>
-                            <a class="button-enroll button" id="button-unenroll" href=""><span> Unenroll</span></a>
+                            <a class="button-enroll button" id="button-enroll" href="/course/${course.courseKey}/enroll"><span> Enroll Now</span></a>
+                            <a class="button-enroll button" id="button-unenroll" href="/course/${course.courseKey}/unenroll"><span> Unenroll</span></a>
                         </div>
                     </div>
                 </div>
