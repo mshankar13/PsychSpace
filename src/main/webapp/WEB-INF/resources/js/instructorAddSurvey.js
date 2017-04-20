@@ -1,8 +1,6 @@
 //TODO: 1. no course, no survey
 //      2. Question type
-//      3. Answers
-//      4. Each answer score
-//      5. Add survey
+//      3. Add survey
 
 
 var questionCounter = 2;
@@ -11,6 +9,7 @@ $(document).ready(function(){
     $("#add-survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#add-survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#add-survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
+    $("#add-survey-due-date").datepicker();
 
     $("#add-survey-submit").on("click", addSurvey);
 });
@@ -117,6 +116,8 @@ function addSurvey() {
     })
 
     survey["questions"] = questions;
+
+    console.log("Survey", survey);
 
     $.ajax({
         url: "/addSurvey",

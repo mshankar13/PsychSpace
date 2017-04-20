@@ -57,10 +57,17 @@
                     <div class="form-group">
                         <label for="add-survey-title">Title</label>
                         <input type="text" class="form-control" id="add-survey-title" placeholder="Title" />
-                        <%--<form:input type="text" class="form-control" id="survey-title" path="title" placeholder="Title" />--%>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-survey-due-date" class="col-sm-2 control-label">Enroll Date</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" id="add-survey-due-date"/>
+                        </div>
                     </div>
                     <div id="add-survey-q-group">
-                        <label style="font-size: 15pt">Questions</label>
+                        <div class="form-group">
+                            <label style="font-size: 15pt">Questions</label>
+                        </div>
                         <div class="form-group question-group">
                             <label>Question 1</label>
                             <div class="row">
