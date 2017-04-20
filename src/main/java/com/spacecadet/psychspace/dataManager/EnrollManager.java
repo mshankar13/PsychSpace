@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore.*;
 
 /**
  * Created by marleneshankar on 4/14/17.
+ * Modified by aliao on 4/19/17
  */
 public class EnrollManager {
     private DatastoreService datastore;
@@ -46,5 +47,25 @@ public class EnrollManager {
                 txn.rollback();
             }
         }
+    }
+
+    /**
+     * check if user is enrolled to course
+     * @param userKey
+     * @param courseKey
+     * @return
+     */
+    public boolean isEnrolled(String userKey, String courseKey){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
+        Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
+
+        if(foundEnrolled == null){
+            return false;
+        }
+        return true;
     }
 }

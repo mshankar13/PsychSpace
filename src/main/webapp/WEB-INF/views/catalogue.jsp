@@ -57,6 +57,13 @@
                                     <!-- Course Image -->
                                     <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
                                     <br>
+                                    <!-- Status -->
+                                    <h3 class="ps-feature-info-header"> Status<hr> </h3>
+                                    <!-- Start Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> ${course.status}
+                                    </p>
+                                    <br>
                                     <h3 class="ps-feature-info-header"> Dates<hr> </h3>
                                     <!-- Start Date -->
                                     <p>
@@ -65,6 +72,14 @@
                                     <!-- End Date -->
                                     <p>
                                         <span class="glyphicon glyphicon-time"></span> End Date: ${course.endDate}
+                                    </p>
+                                    <!-- Enroll Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> Enrollment Ends: ${course.enrollDate}
+                                    </p>
+                                    <!-- Drop Date -->
+                                    <p>
+                                        <span class="glyphicon glyphicon-time"></span> Last Day to Drop: ${course.dropDate}
                                     </p>
                                     <br>
                                     <!-- Description -->

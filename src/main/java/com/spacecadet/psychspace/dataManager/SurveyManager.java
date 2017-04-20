@@ -17,32 +17,37 @@ public class SurveyManager {
 
         return survey;
     }
-    public void addSurvey(String userKey, String courseKey, String title, String dueDate) {
+    public void addSurvey(Survey survey) {
         Transaction txn = datastore.beginTransaction();
 
         try {
-            Entity survey = new Entity("Survey");
-            survey.setProperty("UserKey", userKey);
-            survey.setProperty("CourseKey", courseKey);
-            survey.setProperty("Title", title);
-            survey.setProperty("DueDate", dueDate);
+            Entity survey1 = new Entity("Survey");
+            survey1.setProperty("UserKey", survey.getUserKey());
+            survey1.setProperty("CourseKey", survey.getCourseKey());
+            survey1.setProperty("Title", survey.getTitle());
+            survey1.setProperty("DueDate", survey.getDueDate());
+            survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
+            datastore.put(txn, survey1);
+            txn.commit();
+
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
             }
+
         }
     }
-    public void editSurvey(String surveyKey, String title, String dueDate) {
+    public void editSurvey(Survey survey) {
         Transaction txn = datastore.beginTransaction();
 
         try {
             try {
-                Entity updatedNews = datastore.get(KeyFactory.stringToKey(surveyKey));
-                updatedNews.setProperty("Title", title);
-                updatedNews.setProperty("DueDate", dueDate);
+                Entity updatedSurvey = datastore.get(KeyFactory.stringToKey(survey.getSurveyKey()));
+                updatedSurvey.setProperty("Title", survey.getTitle());
+                updatedSurvey.setProperty("DueDate", survey.getDueDate());
 
-                datastore.delete(KeyFactory.stringToKey(surveyKey));
-                datastore.put(updatedNews);
+                datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
+                datastore.put(updatedSurvey);
                 txn.commit();
 
             } catch (EntityNotFoundException ex) {

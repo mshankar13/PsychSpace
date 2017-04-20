@@ -17,4 +17,5 @@ public class Answer {
     private String userKey;
     private String questionKey;
     private String answer;
+    private String score;
 }
