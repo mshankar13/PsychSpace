@@ -28,7 +28,7 @@ function checkAllAnswers() {
         }
     });
     if(isAllAnswered == true){
-        $('#btn-submit-survey').disable(false)
+        $('#btn-submit-survey').disable(false);
     }
 }
 
