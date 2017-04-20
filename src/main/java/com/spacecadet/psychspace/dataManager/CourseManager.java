@@ -8,6 +8,7 @@ import java.util.*;
 
 /**
  * Created by marleneshankar on 4/14/17.
+ * Modified by aliao on 04/19/17.
  */
 public class CourseManager {
     private DatastoreService datastore;
@@ -27,6 +28,21 @@ public class CourseManager {
         List<Entity> allCourses =
                 datastore.prepare(newsQuery).asList(FetchOptions.Builder.withDefaults());
         return entityToCourse(allCourses);
+    }
+
+    /**
+     * Loads all the open courses
+     * @return
+     */
+    public ArrayList<Course> loadAllOpenCourses(){
+        ArrayList<Course> result = new ArrayList<Course>();
+        ArrayList<Course> list = loadAllCourses();
+        for(Course item : list){
+            if(item.getStatus().equals("open")){
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     /**
@@ -55,8 +71,8 @@ public class CourseManager {
             Key courseKey = entity.getKey();
 
             course.setCourseKey(KeyFactory.keyToString(courseKey));
-            course.setUserKey(entity.getProperty("UserID").toString());
-            course.setName(entity.getProperty("Name").toString());
+            course.setUserKey(entity.getProperty("UserKey").toString());
+            course.setTitle(entity.getProperty("Title").toString());
             course.setInstructor(entity.getProperty("Instructor").toString());
             course.setDescription(entity.getProperty("Description").toString());
             course.setStartDate(entity.getProperty("StartDate").toString());
@@ -80,13 +96,13 @@ public class CourseManager {
         return loadedCourses;
     }
 
-    public void addCourse(String userKey, String name, String instructor, String description, String startDate,
+    public void addCourse(String userKey, String title, String instructor, String description, String startDate,
                           String endDate, String enrollDate, String status, String currSize, String capacity) {
         Transaction txn = datastore.beginTransaction();
         try {
             Entity course = new Entity("Course");
-            course.setProperty("UserID", userKey);
-            course.setProperty("Name", name);
+            course.setProperty("UserKey", userKey);
+            course.setProperty("Title", title);
             course.setProperty("Instructor", instructor);
             course.setProperty("Description", description);
             course.setProperty("StartDate", startDate);
@@ -104,15 +120,15 @@ public class CourseManager {
         }
     }
 
-    public void editCourse(String courseKey, String name, String instructor, String description, String startDate,
+    public void editCourse(String courseKey, String title, String instructor, String description, String startDate,
                            String endDate, String enrollDate, String status, String currSize, String capacity) {
         Transaction txn = datastore.beginTransaction();
 
         try {
             try {
                 Entity updatedCourse = datastore.get(KeyFactory.stringToKey(courseKey));
-                updatedCourse.setProperty("UserID", updatedCourse.getProperty("UserID").toString());
-                updatedCourse.setProperty("Name", name);
+                updatedCourse.setProperty("UserKey", updatedCourse.getProperty("UserKey").toString());
+                updatedCourse.setProperty("Title", title);
                 updatedCourse.setProperty("Instructor", instructor);
                 updatedCourse.setProperty("Description", description);
                 updatedCourse.setProperty("StartDate", startDate);
@@ -153,14 +169,14 @@ public class CourseManager {
     public ArrayList<Course> searchCourse(ArrayList<Course> courses, String keyword) {
         ArrayList<Course> titleSearch = new ArrayList<>();
         for (Course course : courses) {
-            if (course.getName().contains(keyword) == true) {
+            if (course.getTitle().contains(keyword) == true) {
                 titleSearch.add(course);
             }
         }
         Collections.sort(titleSearch, new Comparator<Course>() {
             @Override
             public int compare(Course o1, Course o2) {
-                return o1.getName().compareTo(o2.getName());
+                return o1.getTitle().compareTo(o2.getTitle());
             }
         });
         ArrayList<Course> descriptionSearch = new ArrayList<>();
@@ -174,7 +190,7 @@ public class CourseManager {
         Collections.sort(descriptionSearch, new Comparator<Course>() {
             @Override
             public int compare(Course o1, Course o2) {
-                return o1.getName().compareTo(o2.getName());
+                return o1.getTitle().compareTo(o2.getTitle());
             }
         });
         ArrayList<Course> results = new ArrayList<>();

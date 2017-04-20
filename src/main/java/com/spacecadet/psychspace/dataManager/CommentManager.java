@@ -15,9 +15,9 @@ public class CommentManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public ArrayList<Comment> loadComments(String newsID) {
+    public ArrayList<Comment> loadComments(String newsKey) {
 
-        Query newsCommentsQuery = new Query("Comment", KeyFactory.stringToKey(newsID));
+        Query newsCommentsQuery = new Query("Comment", KeyFactory.stringToKey(newsKey));
         List<Entity> newsComments =
                 datastore.prepare(newsCommentsQuery).asList(FetchOptions.Builder.withDefaults());
 
@@ -27,7 +27,7 @@ public class CommentManager {
             comment.setUsername(entity.getProperty("Username").toString());
             comment.setContent(entity.getProperty("Content").toString());
             comment.setCommentKey(KeyFactory.keyToString(entity.getKey()));
-            comment.setNewsKey(newsID);
+            comment.setNewsKey(newsKey);
 
             loadedComments.add(comment);
         }
@@ -36,12 +36,12 @@ public class CommentManager {
 
     }
 
-    public void addComment(String newsID, String username, String content) {
+    public void addComment(String newsKey, String username, String content) {
 
         Transaction txn = datastore.beginTransaction();
 
         try {
-            Entity comment = new Entity("Comment", KeyFactory.stringToKey(newsID));
+            Entity comment = new Entity("Comment", KeyFactory.stringToKey(newsKey));
             comment.setProperty("Username", username);
             comment.setProperty("Content", content);
 
@@ -56,13 +56,13 @@ public class CommentManager {
         }
     }
 
-    public void editComment(String commentID, String username, String content) {
+    public void editComment(String commentKey, String username, String content) {
 
         Transaction txn = datastore.beginTransaction();
 
         try {
             try {
-                Entity updatedComment = datastore.get(KeyFactory.stringToKey(commentID));
+                Entity updatedComment = datastore.get(KeyFactory.stringToKey(commentKey));
                 updatedComment.setProperty("Username", username);
                 updatedComment.setProperty("Content", content);
 
@@ -80,13 +80,13 @@ public class CommentManager {
         }
     }
 
-    public void deleteComment(String commentID) {
+    public void deleteComment(String commentKey) {
 
         Transaction txn = datastore.beginTransaction();
 
         try {
 
-            datastore.delete(KeyFactory.stringToKey(commentID));
+            datastore.delete(KeyFactory.stringToKey(commentKey));
             txn.commit();
 
         } finally {

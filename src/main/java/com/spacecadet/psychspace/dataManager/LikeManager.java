@@ -29,8 +29,8 @@ public class LikeManager {
         ArrayList<Like> loadedLikes = new ArrayList<Like>();
         for (Entity entity : likeList) {
             Like like = new Like();
-            like.setUserID(entity.getProperty("userID").toString());
-            like.setArticleID(entity.getProperty("articleID").toString());
+            like.setUserKey(entity.getProperty("userKey").toString());
+            like.setArticleKey(entity.getProperty("articleKey").toString());
             like.setStatus(entity.getProperty("status").toString());
             like.setLikeKey(KeyFactory.keyToString(entity.getKey()));
             loadedLikes.add(like);
@@ -40,12 +40,12 @@ public class LikeManager {
     }
 
 
-    public boolean isLiked(String newsID, String userID){
+    public boolean isLiked(String newsKey, String userKey){
         datastore = DatastoreServiceFactory.getDatastoreService();
         Query.Filter userFilter =
-                new Query.FilterPredicate("userID", Query.FilterOperator.EQUAL, userID);
+                new Query.FilterPredicate("userKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter newsFilter =
-                new Query.FilterPredicate("articleID", Query.FilterOperator.EQUAL, newsID);
+                new Query.FilterPredicate("articleKey", Query.FilterOperator.EQUAL, newsKey);
         Query likeQuery = new Query("Like").setFilter(userFilter).setFilter(newsFilter);
         Entity like = datastore.prepare(likeQuery).asSingleEntity();
         if (like == null) {
@@ -57,7 +57,7 @@ public class LikeManager {
     /**
      * adds new Like entity to datastore when user likes an article
      * @param newsManager
-     * @param newsID
+     * @param newsKey
      * @param title
      * @param author
      * @param content
@@ -65,17 +65,17 @@ public class LikeManager {
      * @param date
      * @param like
      */
-    public void like (NewsManager newsManager, String newsID, String title, String author, String content,
+    public void like (NewsManager newsManager, String newsKey, String title, String author, String content,
                       String likesCount, String date, Like like) {
         int count = Integer.parseInt(likesCount);
         count++;
-        newsManager.editNews(newsID, title, author, content, Integer.toString(count), date);
+        newsManager.editNews(newsKey, title, author, content, Integer.toString(count), date);
 
         Transaction txn = datastore.beginTransaction();
         try {
             Entity newLike = new Entity("Like");
-            newLike.setProperty("userID", like.getUserID());
-            newLike.setProperty("articleID", like.getArticleID());
+            newLike.setProperty("userKey", like.getUserKey());
+            newLike.setProperty("articleKey", like.getArticleKey());
             newLike.setProperty("status", like.getStatus());
             datastore.put(txn, newLike);
             txn.commit();
@@ -89,14 +89,14 @@ public class LikeManager {
     /**
      * modifies the like entity to unlike when user choose to unlike
      * @param newsManager
-     * @param newsID
+     * @param newsKey
      * @param title
      * @param author
      * @param content
      * @param likesCount
      * @param date
      */
-    public void editlike (NewsManager newsManager, String newsID, String title, String author, String content,
+    public void editlike (NewsManager newsManager, String newsKey, String title, String author, String content,
                       String likesCount, String date, Like like) {
         int count = Integer.parseInt(likesCount);
         if(like.getStatus().equals("like")){
@@ -104,14 +104,14 @@ public class LikeManager {
         } else {
             count--;
         }
-        newsManager.editNews(newsID, title, author, content, Integer.toString(count), date);
+        newsManager.editNews(newsKey, title, author, content, Integer.toString(count), date);
 
         Transaction txn = datastore.beginTransaction();
         try {
             try {
                 Entity updatedLike = datastore.get(KeyFactory.stringToKey(like.getLikeKey()));
-                updatedLike.setProperty("userID", like.getUserID());
-                updatedLike.setProperty("articleID", like.getArticleID());
+                updatedLike.setProperty("userKey", like.getUserKey());
+                updatedLike.setProperty("articleKey", like.getArticleKey());
                 updatedLike.setProperty("status", like.getStatus());
 
                 datastore.delete(KeyFactory.stringToKey(like.getLikeKey()));

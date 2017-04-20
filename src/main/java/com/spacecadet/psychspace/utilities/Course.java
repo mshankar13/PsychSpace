@@ -16,14 +16,14 @@ import lombok.experimental.Accessors;
 public class Course {
     private String userKey;
     private String courseKey;
-    private String name;
+    private String title;
     private String instructor;
     private String description;
     private String startDate;
     private String endDate;
     private String enrollDate;
     private String dropDate;
-    private String status;
+    private String status;  //open or close
     private String currSize;
     private String capacity;
 }
