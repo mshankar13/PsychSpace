@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,26 +31,12 @@ public class CourseController {
      */
     @RequestMapping(value = "/course/{key}", method = RequestMethod.GET)
     public ModelAndView course(@PathVariable("key") String key) {
+        Course course = courseManager.loadSingleCourse(key);
         ModelAndView model = new ModelAndView();
         model.setViewName("course");
+        model.addObject("course", course);
 
         return model;
-    }
-
-    /**
-     * after register
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/course/{key}", method = RequestMethod.POST)
-    public String afterRegister(@PathVariable("key") String key, @RequestBody String user) {
-        User user1 = (User) (helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if (user1 == null) {
-            user1 = userManager.addUser(user1, "User");
-        }
-        return "redirect:/course/" + key;
     }
 
     /**

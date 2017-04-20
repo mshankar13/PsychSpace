@@ -58,21 +58,6 @@ public class CatalogController {
     }
 
     /**
-     * after register on catalogue page
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/catalogue", method = RequestMethod.POST)
-    public String afterRegister(@RequestBody String user){
-        User user1 = (User)(helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if (user1 == null) {
-            user1 = userManager.addUser(user1, "User");
-        }
-        return "redirect:/catalogue";
-    }
-
-    /**
      * logout on catalog page
      * @return
      */
@@ -102,10 +87,10 @@ public class CatalogController {
     public void course_test() {
         // Before use add user keys to first field of each call!
         courseManager.addCourse("", "Exam Time Management", "Bob", "this is a course",
-                "3/3/17", "4/3/17", "3/2/17", "false", "20", "25");
+                "3/3/17", "4/3/17", "3/2/17", "close", "20", "25");
         courseManager.addCourse("", "Homework Time Management", "Angela", "this is a course",
-                "4/3/17", "5/3/17", "4/3/17", "true", "25", "30");
+                "4/3/17", "5/3/17", "4/3/17", "open", "25", "30");
         courseManager.addCourse("", "Application Time Management", "Celeste", "this is a course",
-                "4/16/17", "5/30/17", "4/16/17", "false", "25", "25");
+                "4/16/17", "5/30/17", "4/16/17", "close", "25", "25");
     }
 }

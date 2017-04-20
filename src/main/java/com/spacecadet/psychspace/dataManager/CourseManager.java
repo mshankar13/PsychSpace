@@ -46,6 +46,35 @@ public class CourseManager {
     }
 
     /**
+     * Load a single course
+     *
+     * @param courseKey
+     * @return
+     */
+    public Course loadSingleCourse(String courseKey) {
+
+       Course course = new Course();
+        try {
+            Entity singleCourse = datastore.get(KeyFactory.stringToKey(courseKey));
+            course.setUserKey(singleCourse.getProperty("UserKey").toString());
+            course.setCourseKey(courseKey);
+            course.setTitle(singleCourse.getProperty("Title").toString());
+            course.setInstructor(singleCourse.getProperty("Instructor").toString());
+            course.setDescription(singleCourse.getProperty("Description").toString());
+            course.setStartDate(singleCourse.getProperty("StartDate").toString());
+            course.setEndDate(singleCourse.getProperty("EndDate").toString());
+            course.setEnrollDate(singleCourse.getProperty("EnrollDate").toString());
+            course.setDropDate(singleCourse.getProperty("DropDate").toString());
+            course.setStatus(singleCourse.getProperty("Status").toString());
+            course.setCurrSize(singleCourse.getProperty("CurrSize").toString());
+            course.setCapacity(singleCourse.getProperty("Capacity").toString());
+        } catch (EntityNotFoundException ex) {
+
+        }
+        return course;
+    }
+
+    /**
      * Loads all courses the user is enrolled in
      *
      * @param userKey
@@ -78,6 +107,7 @@ public class CourseManager {
             course.setStartDate(entity.getProperty("StartDate").toString());
             course.setEndDate(entity.getProperty("EndDate").toString());
             course.setEnrollDate(entity.getProperty("EnrollDate").toString());
+            course.setDropDate(entity.getProperty("DropDate").toString());
             course.setStatus(entity.getProperty("Status").toString());
             course.setCurrSize(entity.getProperty("CurrSize").toString());
             course.setCapacity(entity.getProperty("Capacity").toString());
@@ -96,21 +126,21 @@ public class CourseManager {
         return loadedCourses;
     }
 
-    public void addCourse(String userKey, String title, String instructor, String description, String startDate,
-                          String endDate, String enrollDate, String status, String currSize, String capacity) {
+    public void addCourse(Course initCourse) {
         Transaction txn = datastore.beginTransaction();
         try {
             Entity course = new Entity("Course");
-            course.setProperty("UserKey", userKey);
-            course.setProperty("Title", title);
-            course.setProperty("Instructor", instructor);
-            course.setProperty("Description", description);
-            course.setProperty("StartDate", startDate);
-            course.setProperty("EndDate", endDate);
-            course.setProperty("EnrollDate", enrollDate);
-            course.setProperty("Status", status);
-            course.setProperty("CurrSize", currSize);
-            course.setProperty("Capacity", capacity);
+            course.setProperty("UserKey", initCourse.getUserKey());
+            course.setProperty("Title", initCourse.getTitle());
+            course.setProperty("Instructor", initCourse.getInstructor());
+            course.setProperty("Description", initCourse.getDescription());
+            course.setProperty("StartDate", initCourse.getStartDate());
+            course.setProperty("EndDate", initCourse.getEndDate());
+            course.setProperty("EnrollDate", initCourse.getEnrollDate());
+            course.setProperty("DropDate", initCourse.getDropDate());
+            course.setProperty("Status", initCourse.getStatus());
+            course.setProperty("CurrSize", initCourse.getCurrSize());
+            course.setProperty("Capacity", initCourse.getCapacity());
             datastore.put(txn, course);
             txn.commit();
         } finally {
@@ -120,24 +150,24 @@ public class CourseManager {
         }
     }
 
-    public void editCourse(String courseKey, String title, String instructor, String description, String startDate,
-                           String endDate, String enrollDate, String status, String currSize, String capacity) {
+    public void editCourse(Course course) {
         Transaction txn = datastore.beginTransaction();
 
         try {
             try {
-                Entity updatedCourse = datastore.get(KeyFactory.stringToKey(courseKey));
+                Entity updatedCourse = datastore.get(KeyFactory.stringToKey(course.getCourseKey()));
                 updatedCourse.setProperty("UserKey", updatedCourse.getProperty("UserKey").toString());
-                updatedCourse.setProperty("Title", title);
-                updatedCourse.setProperty("Instructor", instructor);
-                updatedCourse.setProperty("Description", description);
-                updatedCourse.setProperty("StartDate", startDate);
-                updatedCourse.setProperty("EndDate", endDate);
-                updatedCourse.setProperty("EnrollDate", enrollDate);
-                updatedCourse.setProperty("Status", status);
-                updatedCourse.setProperty("CurrSize", currSize);
-                updatedCourse.setProperty("Capacity", capacity);
-                datastore.delete(KeyFactory.stringToKey(courseKey));
+                updatedCourse.setProperty("Title", course.getTitle());
+                updatedCourse.setProperty("Instructor", course.getInstructor());
+                updatedCourse.setProperty("Description", course.getDescription());
+                updatedCourse.setProperty("StartDate", course.getStartDate());
+                updatedCourse.setProperty("EndDate", course.getEndDate());
+                updatedCourse.setProperty("EnrollDate", course.getEnrollDate());
+                updatedCourse.setProperty("DropDate", course.getDropDate());
+                updatedCourse.setProperty("Status", course.getStatus());
+                updatedCourse.setProperty("CurrSize", course.getCurrSize());
+                updatedCourse.setProperty("Capacity", course.getCapacity());
+                datastore.delete(KeyFactory.stringToKey(course.getCourseKey()));
                 datastore.put(updatedCourse);
                 txn.commit();
 
