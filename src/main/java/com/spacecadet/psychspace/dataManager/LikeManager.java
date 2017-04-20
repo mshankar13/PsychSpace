@@ -40,6 +40,12 @@ public class LikeManager {
     }
 
 
+    /**
+     * check whether is liked
+     * @param newsKey
+     * @param userKey
+     * @return
+     */
     public boolean isLiked(String newsKey, String userKey){
         datastore = DatastoreServiceFactory.getDatastoreService();
         Query.Filter userFilter =
