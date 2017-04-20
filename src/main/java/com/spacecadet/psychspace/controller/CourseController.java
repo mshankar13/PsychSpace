@@ -78,10 +78,10 @@ public class CourseController {
      * @param key
      * @return
      */
-    @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.POST)
+    @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.GET)
     public String enroll(@PathVariable("key") String key){
         enrollManager.enroll(WelcomeController.currUser.getUserKey(), key);
-        return "redirect:/course/{key}";
+        return "redirect:/learn";
     }
 
     /**
@@ -89,7 +89,7 @@ public class CourseController {
      * @param key
      * @return
      */
-    @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.POST)
+    @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.GET)
     public String unenroll(@PathVariable("key") String key){
         enrollManager.unenroll(WelcomeController.currUser.getUserKey(), key);
         return "redirect:/course/{key}";

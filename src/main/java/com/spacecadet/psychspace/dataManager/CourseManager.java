@@ -81,10 +81,15 @@ public class CourseManager {
      * @return Ordered list of courses by start date
      */
     public ArrayList<Course> loadUserCourses(String userKey) {
-        Query userListQuery = new Query("Course", KeyFactory.stringToKey(userKey));
-        List<Entity> userCourses =
-                datastore.prepare(userListQuery).asList(FetchOptions.Builder.withDefaults());
-        return entityToCourse(userCourses);
+        Query enrollQuery = new Query("Enroll", KeyFactory.stringToKey(userKey));
+        List<Entity> enrollList =
+                datastore.prepare(enrollQuery).asList(FetchOptions.Builder.withDefaults());
+        List<Entity> userCourseList = new ArrayList<>();
+        for (Entity enroll: enrollList) {
+            Query courseQuery = new Query("Course", KeyFactory.stringToKey(enroll.getProperty("CourseKey").toString()));
+            userCourseList = datastore.prepare(courseQuery).asList(FetchOptions.Builder.withDefaults());
+        }
+        return entityToCourse(userCourseList);
     }
 
     /**
