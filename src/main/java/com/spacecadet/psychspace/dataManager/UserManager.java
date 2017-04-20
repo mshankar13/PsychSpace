@@ -11,7 +11,6 @@ import java.util.Date;
  */
 public class UserManager {
     private DatastoreService datastore;
-    public static Key currentUserID;
 
     public UserManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();

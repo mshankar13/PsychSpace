@@ -8,6 +8,7 @@ import java.util.*;
 
 /**
  * Created by marleneshankar on 4/14/17.
+ * Modified by aliao on 04/19/17.
  */
 public class CourseManager {
     private DatastoreService datastore;
@@ -27,6 +28,21 @@ public class CourseManager {
         List<Entity> allCourses =
                 datastore.prepare(newsQuery).asList(FetchOptions.Builder.withDefaults());
         return entityToCourse(allCourses);
+    }
+
+    /**
+     * Loads all the open courses
+     * @return
+     */
+    public ArrayList<Course> loadAllOpenCourses(){
+        ArrayList<Course> result = new ArrayList<Course>();
+        ArrayList<Course> list = loadAllCourses();
+        for(Course item : list){
+            if(item.getStatus().equals("open")){
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     /**

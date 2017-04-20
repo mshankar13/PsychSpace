@@ -32,16 +32,27 @@ public class CatalogController {
         ModelAndView model = new ModelAndView();
         model.setViewName("catalogue");
         ArrayList<Course> courses = courseManager.loadAllCourses();
+        ArrayList<Course> openCourses = courseManager.loadAllOpenCourses();
         if(courses.isEmpty()){
             course_test();
             courses = courseManager.loadAllCourses();
+        }
+        if(openCourses.isEmpty()){
+            course_test();
+            openCourses = courseManager.loadAllOpenCourses();
         }
         for(Course course : courses){
             if(course.getDescription().length() >= 100){
                 course.setDescription(course.getDescription().substring(0, 100));
             }
         }
+        for(Course course : openCourses){
+            if(course.getDescription().length() >= 100){
+                course.setDescription(course.getDescription().substring(0, 100));
+            }
+        }
         model.addObject("courseList", courses);
+        model.addObject("openCourses", openCourses);
 
         return model;
     }
