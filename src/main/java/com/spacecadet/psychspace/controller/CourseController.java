@@ -83,4 +83,15 @@ public class CourseController {
         enrollManager.enroll(WelcomeController.currUser.getUserKey(), key);
         return "redirect:/course/{key}";
     }
+
+    /**
+     *
+     * @param key
+     * @return
+     */
+    @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.POST)
+    public String unenroll(@PathVariable("key") String key){
+        enrollManager.unenroll(WelcomeController.currUser.getUserKey(), key);
+        return "redirect:/course/{key}";
+    }
 }
