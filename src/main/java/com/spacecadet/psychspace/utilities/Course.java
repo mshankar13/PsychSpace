@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 public class Course {
     private String userKey;
     private String courseKey;
-    private String name;
+    private String title;
     private String instructor;
     private String description;
     private String startDate;

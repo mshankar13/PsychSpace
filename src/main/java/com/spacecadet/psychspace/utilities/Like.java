@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Like {
-    private String userID;
-    private String articleID;
+    private String userKey;
+    private String articleKey;
     private String status; //like or unlike
     private String likeKey;
 }

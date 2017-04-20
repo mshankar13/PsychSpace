@@ -15,6 +15,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class Survey {
     private String surveyKey;
-    private String name;
-    private String content;
+    private String userKey;
+    private String courseKey;
+    private String title;
+    private String dueDate;
 }
