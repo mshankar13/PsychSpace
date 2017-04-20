@@ -176,21 +176,24 @@ h3 {
 /*----------- MODAL ---------------*/
 
 .ps-modal-type-comment {
-    max-height: 35vh;
+    /*max-height: 35vh;*/
+    display: inline-table;
 }
 
 .ps-modal-close h1 {
     color: var(--dogwood-color);
 }
 
-.ps-modal-dialog {}
+.ps-modal-dialog {
+    height: 40vh;
+}
 
 .ps-modal-header {
     padding: 2em 2em 0 2em;
 }
 
 .ps-modal-body {
-    padding 2em;
+    padding: 2em;
     margin: 2em;
 }
 

@@ -1,12 +1,26 @@
 $(document).ready(function () {
-    if ($("#liked").val() == "true") {
+    if ($("#input-liked").val() == "true") {
         $("#btn-ps-feature-like").addClass("liked");
+    }
+    else{
+        $("#btn-ps-feature-like").addClass("unliked");
     }
 
     $(".btn-comment-edit").on("click", editCommentModalShow);
     $(".btn-comment-delete").on("click", deleteCommentModalShow);
+    $("#btn-ps-feature-like").on("click", editLikeShow);
 });
 
+function editLikeShow(){
+    if ($("#input-liked").hasClass("liked")) {
+        $("#btn-ps-feature-like").removeClass("liked");
+        $("#btn-ps-feature-like").addClass("unliked");
+    }
+    else{
+        $("#btn-ps-feature-like").addClass("liked");
+        $("#btn-ps-feature-like").removeClass("unliked");
+    }
+}
 
 function editCommentModalShow() {
     var commentKey = $(this).siblings()[1].value;

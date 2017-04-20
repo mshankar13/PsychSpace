@@ -122,7 +122,13 @@ p {
 
 /*liked button for articles*/
 .liked {
-    color: var(--dogwood-color);
+    background-color: var(--dogwood-color);
+    color: var(--baby-powder-color);
+}
+
+.unliked {
+    background-color: var(--space-cadet-color);
+    color: var(--baby-powder-color);
 }
 
 /*---------------- PADDING ----------------*/
