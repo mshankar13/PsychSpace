@@ -29,7 +29,6 @@ public class SurveyManager {
             survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
             datastore.put(txn, survey1);
             txn.commit();
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -37,6 +36,7 @@ public class SurveyManager {
 
         }
     }
+    
     public void editSurvey(Survey survey) {
         Transaction txn = datastore.beginTransaction();
 
@@ -60,6 +60,7 @@ public class SurveyManager {
             }
         }
     }
+
     public void deleteSurvey(String surveyKey) {
         Transaction txn = datastore.beginTransaction();
 
