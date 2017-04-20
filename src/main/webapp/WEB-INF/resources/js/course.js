@@ -1,10 +1,47 @@
-$(document).ready(function () {
-    setEnrollButton();
+$(document).ready(function(){
+    if (checkIfUserEnrolled() == true){
+        userEnrolledUI();
+    }
+    else if(checkIfUserEnrolled() == false) {
+        if(checkCourseStatus() == true){
+            userNotEnrolledUI();
+        }
+        else{
+            courseClosedUI();
+        }
+
+    }
 });
 
-function setEnrollButton(){
-    // If course is closed, hide and disable the enroll button
-    if($("#button-enroll-status").val() == "closed"){
-        $("#button-enroll").hide();
+function checkIfUserEnrolled(){
+    if($("#button-user-enroll-status").val() == "true"){
+        return true;
     }
+    else{
+        return false;
+    }
+}
+
+function checkCourseStatus(){
+    if($("#button-enroll-status").val() == "open"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function userEnrolledUI(){
+    $("#button-enroll").hide();
+    $("#button-unenroll").show();
+}
+
+function userNotEnrolledUI(){
+    $("#button-enroll").show();
+    $("#button-unenroll").hide();
+}
+
+function courseClosedUI(){
+    $("#button-enroll").hide();
+    $("#button-unenroll").hide();
 }

@@ -22,6 +22,7 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
+    <script src="${contextPath}/resources/js/course.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -54,15 +55,15 @@
                         </h3>
                         <!-- Course Status -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span>Status: ${course.status}
+                            <span class="glyphicon glyphicon-check"></span> Status: ${course.status}
                         </p>
                         <!-- Course Capacity -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span>Capacity: ${course.capacity}
+                            <span class="glyphicon glyphicon-check"></span> Capacity: ${course.capacity}
                         </p>
                         <!-- Course Current Size -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span>Current Size: ${course.currSize}
+                            <span class="glyphicon glyphicon-check"></span> Current Size: ${course.currSize}
                         </p>
                     </div>
                     <br>
@@ -108,10 +109,11 @@
                     <br>
                     <div>
                         <!-- Enroll Button -->
-
                         <div class="center">
+                            <input id="button-user-enroll-status" value=${isEnrolled} hidden>
                             <input id="button-enroll-status" value=${course.status} hidden>
-                            <a class="button-enroll button fadein" id="button-enroll" href=""><span> Enroll Now</span></a>
+                            <a class="button-enroll button" id="button-enroll" href=""><span> Enroll Now</span></a>
+                            <a class="button-enroll button" id="button-unenroll" href=""><span> Unenroll</span></a>
                         </div>
                     </div>
                 </div>
