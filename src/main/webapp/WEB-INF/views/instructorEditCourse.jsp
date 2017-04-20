@@ -40,9 +40,9 @@
         </div>
         <div class="col-md-9">
             <div >
-                <h1>Create Course</h1>
+                <h1>Edit Course</h1>
                 <form:form class="form-horizontal" method="post"
-                           modelAttribute="course" action="addCourse">
+                           modelAttribute="course" action="editCourse">
                     <div class="form-group">
                         <label for="edit-course-title" class="col-sm-2 control-label">Title</label>
                         <div class="col-sm-6">
@@ -82,9 +82,9 @@
                     <div class="form-group">
                         <label for="edit-course-status" class="col-sm-2 control-label">Status</label>
                         <div class="col-sm-6">
-                            <form:select class="form-control" id="edit-course-status">
-                                <form:option>Open</form:option>
-                                <form:option>Closed</form:option>
+                            <form:select class="form-control" id="edit-course-status" path="status">
+                                <form:option value="open">Open</form:option>
+                                <form:option value="closed">Closed</form:option>
                             </form:select>
                         </div>
                     </div>

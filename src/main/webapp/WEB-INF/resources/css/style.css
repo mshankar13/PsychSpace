@@ -120,6 +120,10 @@ p {
     right: 0;
 }
 
+/*liked button for articles*/
+.liked {
+    color: var(--dogwood-color);
+}
 
 /*---------------- PADDING ----------------*/
 

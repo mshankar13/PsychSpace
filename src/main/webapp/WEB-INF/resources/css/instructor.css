@@ -13,8 +13,11 @@
 .list-group-item.active:focus {
     background-color: var(--eucalyptus-color);
     color: var(--baby-powder-color);
+    border-color: var(--eucalyptus-color)
 }
 
 .list-group-item.active:hover {
+    background-color: var(--eucalyptus-color);
+    border-color: var(--eucalyptus-color);
     color: var(--yellow-color);
 }

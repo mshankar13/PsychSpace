@@ -42,11 +42,12 @@
                         <p><span class="glyphicon glyphicon-time"></span> ${article.title}
                             <form:form method="post"
                                        modelAttribute="like" action="${article.newsKey}/+1">
-                                <form:hidden path="userID" value="0"/>
-                                <form:hidden path="articleID" value="${article.newsKey}"/>
-                                <form:hidden path="status" value="like"/>
+                                <form:hidden path="userKey" value="0"/>
+                                <form:hidden path="articleKey" value="${article.newsKey}"/>
+                                <form:hidden path="status" value="" id="liked"/>
                                 <form:hidden path="likeKey" value="0"/>
-                                <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button> ${article.likesCount}
+                                <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star btn-like btn"></button>
+                                ${article.likesCount}
                             </form:form>
                         </p>
                         <!-- Title -->

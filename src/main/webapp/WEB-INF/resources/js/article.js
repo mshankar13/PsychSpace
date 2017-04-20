@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    if ($("#liked").val() == "true") {
+        $("#btn-ps-feature-like").addClass("liked");
+    }
+
     $(".btn-comment-edit").on("click", editCommentModalShow);
     $(".btn-comment-delete").on("click", deleteCommentModalShow);
 });

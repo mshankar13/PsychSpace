@@ -41,7 +41,7 @@ public class ArticleController {
         if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
             model.addObject("isLiked", "true");
         } else {
-            model.addObject("idLikes", "false");
+            model.addObject("isLiked", "false");
         }
         model.addObject("currentUser", WelcomeController.currUser.getUserKey());
 

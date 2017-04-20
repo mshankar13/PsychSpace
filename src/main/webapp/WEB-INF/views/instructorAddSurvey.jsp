@@ -28,8 +28,8 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="${contextPath}/addCourse" class="list-group-item">Create Course</a>
-                <a href="${contextPath}/editCourse" class="list-group-item active">Edit Course</a>
-                <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
+                <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
+                <a href="${contextPath}/addSurvey" class="list-group-item active">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
@@ -40,20 +40,19 @@
                 <h1>Create Survey</h1>
                 <form>
                 <%--<form:form class="form-horizontal" method="post"--%>
-                           <%--modelAttribute="survey" action="admin_addSurvey">--%>
+                           <%--modelAttribute="survey" action="addSurvey">--%>
                     <div class="form-group">
-                        <label for="select-course">Course</label>
+                        <label for="select-course">Select Course</label>
                         <select class="form-control" id="select-course">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
-                            <option>5</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="survey-title">Title</label>
-                        <input type="text" class="form-control" id="survey-title" placeholder="Title" />
+                        <label for="add-survey-title">Title</label>
+                        <input type="text" class="form-control" id="add-survey-title" placeholder="Title" />
                         <%--<form:input type="text" class="form-control" id="survey-title" path="title" placeholder="Title" />--%>
                     </div>
                     <div id="add-survey-q-group">
@@ -77,7 +76,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input class="input-answer"/>
-                                    <%--<form:input class="form-control" path="question"/>--%>
+                                    <%--<form:input class="form-control input-answer" path="question"/>--%>
                                 </div>
                                 <div class="col-md-1">
                                     <label>Score</label>
@@ -128,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="admin-btn">Create</button>
+                    <button type="submit" class="admin-btn" id="add-survey-submit">Create</button>
                 <%--</form:form>--%>
                 </form>
             </div>
