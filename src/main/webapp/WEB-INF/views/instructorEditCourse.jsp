@@ -41,6 +41,40 @@
         <div class="col-md-9">
             <div >
                 <h1>Edit Course</h1>
+
+                <form:form method="get" action="editCourse" modelAttribute="course">
+                    <table id="edit-article-table" class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Instructor</th>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${courses}" var="course">
+                            <tr>
+                                <form:hidden value="${course.userKey}" path="userKey"/>
+                                <form:hidden value="${course.courseKey}" path="courseKey"/>
+                                <form:hidden value="${course.title}" path="instructor"/>
+                                <form:hidden value="${course.instructor}" path="instructor"/>
+                                <form:hidden value="${news.description}" path="description"/>
+                                <form:hidden value="${news.startDate}" path="startDate"/>
+                                <form:hidden value="${news.endDate}" path="endDate"/>
+                                <form:hidden value="${news.enrollDate}" path="enrollDate"/>
+                                <form:hidden value="${course.dropDate}" path="dropDate"/>
+                                <form:hidden value="${course.status}" path="status"/>
+                                <form:hidden value="${course.currSize}" path="currSize"/>
+                                <form:hidden value="${course.capacity}" path="capacity"/>
+                                <td>${course.title}</td>
+                                <td>${course.instructor}</td>
+                                <td><div class="btn-edit-course">Edit</div></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </form:form>
+
                 <form:form class="form-horizontal" method="post"
                            modelAttribute="course" action="editCourse">
                     <div class="form-group">

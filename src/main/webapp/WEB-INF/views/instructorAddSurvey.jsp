@@ -23,6 +23,9 @@
     <script src="${contextPath}/resources/js/instructorAddSurvey.js"></script>
 </head>
 <body>
+<div class="navbar-wrapper">
+    <%@include file="navbar.html"%>
+</div>
 <div id="wrapper">
     <div class="row" >
         <div class="col-md-3">
