@@ -19,14 +19,16 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%--Customized--%>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/navbar.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
     <script src="${contextPath}/resources/js/instructorAddSurvey.js"></script>
+    <script src="${contextPath}/resources/js/navbar.js"></script>
 </head>
 <body>
 <div class="navbar-wrapper">
     <%@include file="navbar.html"%>
 </div>
-<div id="wrapper">
+<div class="wrapper">
     <div class="row" >
         <div class="col-md-3">
             <div class="list-group">
@@ -47,10 +49,9 @@
                     <div class="form-group">
                         <label for="select-course">Select Course</label>
                         <select class="form-control" id="select-course">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                        <c:forEach items="${courses}" var="course">
+                            <option>${course.title}</option>
+                        </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
@@ -65,7 +66,6 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <input class="form-control" path="question"/>
-                                    <%--<form:input class="form-control" path="question"/>--%>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
@@ -73,7 +73,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row answer-row">
                                 <div class="col-md-1">
                                     <label>Answer</label>
                                 </div>
@@ -85,7 +85,7 @@
                                     <label>Score</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="number" />
+                                    <input type="number" class="score"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
@@ -108,7 +108,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row answer-row">
                                 <div class="col-md-1">
                                     <label>Answer</label>
                                 </div>

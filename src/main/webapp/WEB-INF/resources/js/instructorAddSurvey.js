@@ -11,10 +11,12 @@ $(document).ready(function(){
     $("#add-survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#add-survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#add-survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
+
+    $("#add-survey-submit").on("click", addSurvey);
 });
 
 function addQuestion() {
-    var div = '<div class="form-group question"> \
+    var div = '<div class="form-group question-group"> \
                     <label>Question <span class="question-number"></span></label> \
                     <div class="row"> \
                          <div class="col-md-10"> \
@@ -26,7 +28,7 @@ function addQuestion() {
                             </button> \
                         </div> \
                     </div> \
-                    <div class="row"> \
+                    <div class="row answer-row"> \
                         <div class="col-md-1"> \
                             <label>Answer</label> \
                         </div> \
@@ -93,5 +95,38 @@ function deleteQuestion() {
 }
 
 function removeAnswer() {
-    $(this).parents().closest(".row").remove();
+    $(this).parent().closest(".row").remove();
+}
+
+function addSurvey() {
+    var survey = {};
+    survey["title"] = $("#add-survey-title");
+    var questions = {};
+
+
+    survey["questions"] = {};
+    $.each($(".question-group"), function(index, value) {
+        var answers = {};
+        $.each($(this).find(".answer-row"), function(i, v) {
+            var answer = {};
+            answer["answer"] = v.children[1].children[0].value;
+            answer["score"] = v.children[3].children[0].value;
+            answers[i] = answer;
+        })
+        questions[index] = answers;
+    })
+
+    survey["questions"] = questions;
+
+    $.ajax({
+        url: "/addSurvey",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(survey),
+        success: function() {},
+        error: function(e) {
+            console.log("ERROR", e);
+        }
+    });
 }
