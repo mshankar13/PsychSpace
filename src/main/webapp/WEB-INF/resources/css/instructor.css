@@ -8,3 +8,13 @@
 .list-group {
     position: fixed;
 }
+
+.list-group-item.active,
+.list-group-item.active:focus {
+    background-color: var(--eucalyptus-color);
+    color: var(--baby-powder-color);
+}
+
+.list-group-item.active:hover {
+    color: var(--yellow-color);
+}
