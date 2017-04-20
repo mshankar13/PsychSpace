@@ -16,64 +16,74 @@
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%--Customized--%>
+    <script src="${contextPath}/resources/js/scrollreveal.js"></script>
+    <script src="${contextPath}/resources/js/navbar.js"></script>
+    <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div id="wrapper">
-
-    <%@include file="instructor-sidebar.html" %>
-
-    <%--TODO: Complete this--%>
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <h1>Add Course</h1>
-            <form:form class="form-horizontal" method="post"
-                       modelAttribute="course" action="addCourse">
-                <div class="form-group">
-                    <label for="course-name">Course Title</label>
-                    <div class="col-sm-10">
-                        <form:input type="text" class="form-control" id="course-name" path="name" placeholder="Course Title" />
+<div class="navbar-wrapper">
+    <%@include file="navbar.html"%>
+</div>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <%@include file="instructor-sidebar.html" %>
+        </div>
+        <div class="col-md-9">
+            <div >
+                <h1>Create Course</h1>
+                <form:form class="form-horizontal" method="post"
+                           modelAttribute="course" action="addCourse">
+                    <div class="form-group">
+                        <label for="course-title" class="col-sm-2 control-label">Course Title</label>
+                        <div class="col-sm-6">
+                            <form:input type="text" class="form-control" id="course-title" path="name" placeholder="Course Title" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date" class="col-2 col-form-label">Enroll Date</label>
-                    <div class="col-10">
-                        <form:input class="form-control" type="date" path="date"/>
+                    <div class="form-group">
+                        <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
+                        <div class="col-sm-6">
+                            <form:input class="form-control" type="date" path="enrollDate" id="add-course-enroll-date"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date" class="col-2 col-form-label">Start Date</label>
-                    <div class="col-10">
-                        <form:input class="form-control" type="date" path="startDate" />
+                    <div class="form-group">
+                        <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
+                        <div class="col-sm-6">
+                            <form:input class="form-control" type="date" path="startDate" id="add-course-start-date"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date" class="col-2 col-form-label">End Date</label>
-                    <div class="col-10">
-                        <form:input class="form-control" type="date" path="endDate" />
+                    <div class="form-group">
+                        <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
+                        <div class="col-sm-6">
+                            <form:input class="form-control" type="date" path="endDate" id="add-course-end-date"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date" class="col-2 col-form-label">Drop Deadline</label>
-                    <div class="col-10">
-                        <form:input class="form-control" type="date" path="deadline" />
+                    <div class="form-group">
+                        <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
+                        <div class="col-sm-6">
+                            <form:input class="form-control" type="date" path="dropDate" id="add-course-drop-date"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date" class="col-2 col-form-label">Course Size</label>
-                    <div class="col-10">
-                        <form:input class="form-control" type="date" path="size" />
+                    <div class="form-group row">
+                        <label for="add-course-capacity" class="col-sm-2 control-label">Course Capacity</label>
+                        <div class="col-sm-6">
+                            <form:input class="form-control" type="date" path="capacity" id="add-course-capacity"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="course-description">Course Description</label>
-                    <form:textarea class="form-control" id="course-description" rows="10" path="description" />
-                </div>
-                <form:hidden path="courseKey" value="null"/>
-                <form:hidden path="instructor" value="null"/>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form:form>
+                    <div class="form-group">
+                        <label for="add-course-description" class="col-sm-3">Course Description</label>
+                        <form:textarea class="form-control" id="add-course-description" rows="10" path="description" />
+                    </div>
+                    <form:hidden path="userKey" value="null"/>
+                    <form:hidden path="courseKey" value="null"/>
+                    <form:hidden path="instructor" value="null"/>
+                    <form:hidden path="status" value="open" />
+                    <form:hidden path="currSize" value="0" />
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form:form>
+            </div>
         </div>
     </div>
 </div>

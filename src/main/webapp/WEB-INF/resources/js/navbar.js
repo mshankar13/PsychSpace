@@ -27,7 +27,7 @@ function onSignIn(googleUser, authResult) {
 
     profile = googleUser.getBasicProfile();
 
-    if(!url.includes("learn") && !url.includes("home")) {
+    if(!url.includes("learn") && !url.includes("home") && !url.includes("addCourse")) {
         var user = {};
         user["email"] = profile.getEmail();
         user["firstName"] = profile.getGivenName();

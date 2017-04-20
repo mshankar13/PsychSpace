@@ -25,7 +25,7 @@
 <body>
 <div id="wrapper">
 
-    <%@include file="admin-sidebar.html" %>
+    <%@include file="instructor-sidebar.html" %>
 
     <div id="page-content-wrapper">
         <div class="container-fluid">

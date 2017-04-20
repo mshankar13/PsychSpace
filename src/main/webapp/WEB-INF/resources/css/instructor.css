@@ -1,0 +1,10 @@
+.wrapper {
+    margin: 65px 0px 0px 0px;
+    position: absolute;
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.list-group {
+    position: fixed;
+}
