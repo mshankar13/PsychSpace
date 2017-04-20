@@ -108,7 +108,10 @@
                     <br>
                     <div>
                         <!-- Enroll Button -->
-                        <div class="center"><a class="button-enroll button fadein" id="button-enroll" href=""><span> Enroll Now</span></a>
+
+                        <div class="center">
+                            <input id="button-enroll-status" value=${course.status} hidden>
+                            <a class="button-enroll button fadein" id="button-enroll" href=""><span> Enroll Now</span></a>
                         </div>
                     </div>
                 </div>
