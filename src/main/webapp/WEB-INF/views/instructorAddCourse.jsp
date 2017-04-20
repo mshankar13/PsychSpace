@@ -13,8 +13,11 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
@@ -52,7 +55,7 @@
                     <div class="form-group">
                         <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="date" path="enrollDate" id="add-course-enroll-date"/>
+                            <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,10 +76,19 @@
                             <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="add-course-status" class="col-sm-2 control-label">Status</label>
+                        <div class="col-sm-6">
+                            <form:select class="form-control" id="add-course-status" path="status">
+                                <form:option value="open"/>
+                                <form:option value="closed"/>
+                            </form:select>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="capacity" id="add-course-capacity"/>
+                            <form:input class="form-control" type="number" path="capacity" id="add-course-capacity"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -97,4 +109,10 @@
     </div>
 </div>
 </body>
+<script>
+    $("#add-course-enroll-date").datepicker();
+    $("#add-course-start-date").datepicker();
+    $("#add-course-end-date").datepicker();
+    $("#add-course-drop-date").datepicker();
+</script>
 </html>

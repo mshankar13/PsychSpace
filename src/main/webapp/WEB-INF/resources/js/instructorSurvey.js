@@ -10,7 +10,7 @@ function addSurvey() {
     $.each($(".question-group"), function(index, value) {
         var qArray = survey["questions"][index];
         $.each($(this).find(".row"), function(i, v) {
-
+            qArray["answers"][i] = v;
         })
     })
 }
