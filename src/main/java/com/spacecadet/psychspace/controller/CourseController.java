@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
+import com.spacecadet.psychspace.dataManager.EnrollManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
@@ -23,6 +24,7 @@ public class CourseController {
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
     private CourseManager courseManager = new CourseManager();
+    private EnrollManager enrollManager = new EnrollManager();
 
     /**
      * all visit to course page
@@ -35,6 +37,12 @@ public class CourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("course");
         model.addObject("course", course);
+        if(enrollManager.isEnrolled(WelcomeController.currUser.getUserKey(),key)){
+            model.addObject("isEnrolled", "true");
+        } else {
+            model.addObject("isEnrolled", "false");
+        }
+
 
         return model;
     }
@@ -44,7 +52,7 @@ public class CourseController {
      * @return
      */
     @RequestMapping(value = "/course/{key}/logout", method = RequestMethod.POST)
-    public String logout(@RequestBody String user) {
+    public String logout(@PathVariable("key") String key, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/course/{key}";
     }
@@ -55,13 +63,24 @@ public class CourseController {
      * @return
      */
     @RequestMapping(value = "/course/{key}/login", method = RequestMethod.POST)
-    public String login(@RequestBody String user){
+    public String login(@PathVariable("key") String key, @RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
         user1 = userManager.emailRegistered(user1.getEmail());
         if (user1 == null) {
             user1 = userManager.addUser(user1, "User");
         }
         userManager.resetCurrentUser(user1);
+        return "redirect:/course/{key}";
+    }
+
+    /**
+     *
+     * @param key
+     * @return
+     */
+    @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.POST)
+    public String enroll(@PathVariable("key") String key){
+        enrollManager.enroll(WelcomeController.currUser.getUserKey(), key);
         return "redirect:/course/{key}";
     }
 }
