@@ -84,13 +84,19 @@ public class CatalogController {
         return "redirect:/catalogue";
     }
 
+    /**
+     * Dummy data for courses
+     */
     public void course_test() {
         // Before use add user keys to first field of each call!
-        courseManager.addCourse("", "Exam Time Management", "Bob", "this is a course",
-                "3/3/17", "4/3/17", "3/2/17", "close", "20", "25");
-        courseManager.addCourse("", "Homework Time Management", "Angela", "this is a course",
-                "4/3/17", "5/3/17", "4/3/17", "open", "25", "30");
-        courseManager.addCourse("", "Application Time Management", "Celeste", "this is a course",
-                "4/16/17", "5/30/17", "4/16/17", "close", "25", "25");
+        Course course1 = new Course("", "", "Exam Time Management", "Bob", "this is a course",
+                "3/3/17", "4/3/17", "3/2/17", "4/3/17", "close", "20", "25");
+        Course course2 = new Course("","", "Homework Time Management", "Angela", "this is a course",
+                "4/3/17", "5/3/17", "4/3/17", "4/2/17", "open", "25", "30");
+        Course course3 = new Course("", "","Application Time Management", "Celeste", "this is a course",
+                "4/16/17", "5/30/17", "4/16/17", "5/2/17", "close", "25", "25");
+        courseManager.addCourse(course1);
+        courseManager.addCourse(course2);
+        courseManager.addCourse(course3);
     }
 }

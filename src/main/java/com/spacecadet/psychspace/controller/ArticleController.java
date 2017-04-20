@@ -38,6 +38,12 @@ public class ArticleController {
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
         model.addObject("commentList", commentManager.loadComments(key));
+        if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
+            model.addObject("isLiked", "true");
+        } else {
+            model.addObject("idLikes", "false");
+        }
+        model.addObject("currentUser", WelcomeController.currUser.getUserKey());
 
         return model;
     }
@@ -57,7 +63,6 @@ public class ArticleController {
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-
         ModelAndView model = new ModelAndView();
         model.setViewName("article");
         model.addObject("article", newsManager.loadSingleNews(key));
@@ -67,6 +72,12 @@ public class ArticleController {
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
         model.addObject("commentList", commentManager.loadComments(key));
+        if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
+            model.addObject("isLiked", "true");
+        } else {
+            model.addObject("idLikes", "false");
+        }
+        model.addObject("currentUser", WelcomeController.currUser.getUserKey());
 
         return model;
     }
