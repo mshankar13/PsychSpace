@@ -7,7 +7,6 @@ import com.spacecadet.psychspace.utilities.Answer;
  */
 public class AnswerManager {
     public void addAnswers(Answer answer) {
-        
-    }
 
+    }
 }
