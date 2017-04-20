@@ -58,25 +58,25 @@
                     <div class="form-group">
                         <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="date" path="startDate" id="add-course-start-date"/>
+                            <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="date" path="endDate" id="add-course-end-date"/>
+                            <form:input class="form-control" type="text" path="endDate" id="add-course-end-date"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="date" path="dropDate" id="add-course-drop-date"/>
+                            <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="date" path="capacity" id="add-course-capacity"/>
+                            <form:input class="form-control" type="text" path="capacity" id="add-course-capacity"/>
                         </div>
                     </div>
                     <div class="form-group">
