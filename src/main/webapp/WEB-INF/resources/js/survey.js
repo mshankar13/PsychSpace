@@ -1,20 +1,38 @@
 $(document).ready(function () {
-    console.log("ready");
     $("input").on("click", markQuestionAsDone);
     $(".ps-answer").on("click", markAnswerAsChecked)
-    checkAllAnswers();
 });
 
+// Add isAnswered class to the completed question when one of its answers are checked
 function markQuestionAsDone() {
     console.log("clicked");
     $(this).closest(".ps-question").addClass("isAnswered");
+    checkAllAnswers();
 }
 
+// Add isChecked class to the checked answer and make sure the class is removed for the previous checked answer
 function markAnswerAsChecked() {
     console.log("label clicked");
     $(this).closest(".ps-question").find(".ps-answer").removeClass('isChecked');
     $(this).addClass("isChecked");
 }
+
+
+// Check that all questions have been answered before making the submit button clickable
+function checkAllAnswers() {
+    var isAllAnswered = true;
+    $('.ps-question').each(function () {
+        if (!$(this).is(".isAnswered")) {
+            console.print("All answers are not checked");
+            isAllAnswered = false;
+        }
+    });
+    if(isAllAnswered == true){
+        $('#btn-submit-survey').disable(false)
+    }
+}
+
+
 /*
 function handleQuestions() {
     var answerID, answerName;
@@ -46,17 +64,3 @@ function handleQuestions() {
     
 }
 */
-function checkAllAnswers() {
-    $('.ps-answer').each(function () {
-        //if statement here 
-        // use $(this) to reference the current div in the loop
-        //you can try something like...
-
-
-        if (condition) {
-            console.print("All answers are checked");
-        }
-
-
-    });
-}
