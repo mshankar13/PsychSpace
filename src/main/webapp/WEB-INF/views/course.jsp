@@ -54,15 +54,15 @@
                         </h3>
                         <!-- Course Status -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span> ${course.status}
+                            <span class="glyphicon glyphicon-check"></span>Status: ${course.status}
                         </p>
                         <!-- Course Capacity -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span> ${course.capacity}
+                            <span class="glyphicon glyphicon-check"></span>Capacity: ${course.capacity}
                         </p>
                         <!-- Course Current Size -->
                         <p>
-                            <span class="glyphicon glyphicon-check"></span> ${course.currSize}
+                            <span class="glyphicon glyphicon-check"></span>Current Size: ${course.currSize}
                         </p>
                     </div>
                     <br>
