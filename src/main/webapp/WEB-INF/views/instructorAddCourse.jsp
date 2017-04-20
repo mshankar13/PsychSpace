@@ -76,15 +76,6 @@
                             <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-status" class="col-sm-2 control-label">Status</label>
-                        <div class="col-sm-6">
-                            <form:select class="form-control" id="add-course-status" path="status">
-                                <form:option value="open"/>
-                                <form:option value="closed"/>
-                            </form:select>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
                         <div class="col-sm-6">
