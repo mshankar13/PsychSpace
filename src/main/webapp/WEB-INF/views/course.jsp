@@ -35,7 +35,7 @@
             <div class="row ps-feature">
                 <div class="ps-feature-info">
                     <!-- Title -->
-                    <h1><hr></h1>
+                    <h1>${course.title}<hr></h1>
                     <br>
                 </div>
             </div>
@@ -47,28 +47,29 @@
                         <div class="left">
                             <h3 class="ps-feature-info-header"> Status <hr></h3>
                             <p>
-                                <span class="glyphicon glyphicon-check"></span> Open / In Progress / Finished
+                                <span class="glyphicon glyphicon-check"></span> ${course.status}
                             </p>
                         </div>
                         <br>
                         <h3 class="ps-feature-info-header"> Dates<hr> </h3>
                         <p>
-                            <span class="glyphicon glyphicon-time"></span> Start Date: March 31, 2017 at 12:00 AM</p>
+                            <span class="glyphicon glyphicon-time"></span> Start Date: ${course.startDate}
+                        </p>
                         <p>
-                            <span class="glyphicon glyphicon-time"></span> End Date: May 31, 2017 at 11:59 PM
+                            <span class="glyphicon glyphicon-time"></span> End Date: ${course.endDate}
                         </p>
                         <br>
-                        <h3 class="ps-feature-info-header"> Topic <hr> </h3>
-                        <p class="ps-feature-preview">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                        <br>
+                        <%--<h3 class="ps-feature-info-header"> Topic <hr> </h3>--%>
+                        <%--<p class="ps-feature-preview">--%>
+                            <%--Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>--%>
+                        <%--<br>--%>
                         <!-- Author -->
                         <h3 class="ps-feature-info-header"> Instructor<hr> </h3>
                         <div class="media instructor-feature">
                             <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
                             <div class="media-body">
-                                <a class="button-instructor button fadein" href="" id="button-instructor"><span>Joe Doe</span></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                                <a class="button-instructor button fadein" href="" id="button-instructor"><span>${course.instructor}</span></a>
+                                <%--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>--%>
                             </div>
                         </div>
                         <br>
@@ -87,34 +88,30 @@
                         <h3 class="ps-feature-info-header"> Course Description<hr> </h3>
 
                         <!-- Post Content -->
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+                        <p>${course.description}</p>
                     </div>
                 </div>
                 <!--end article-text -->
             </div>
             <!-- end article-content -->
             <!-- end row artcile -->
-            <div class="row ps-text-content">
-                <div class="left">
-                    <h2>Reviews<hr></h2>
-                </div>
-                <!-- Comment -->
-                <div class="media ps-comment">
-                    <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>
-                    <div class="media-body">
-                        <h4>Jane Doe <small>March 31, 2017</small><hr></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="right">
-                            <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Edit</button>
-                            <button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%--<div class="row ps-text-content">--%>
+                <%--<div class="left">--%>
+                    <%--<h2>Reviews<hr></h2>--%>
+                <%--</div>--%>
+                <%--<!-- Comment -->--%>
+                <%--<div class="media ps-comment">--%>
+                    <%--<a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>--%>
+                    <%--<div class="media-body">--%>
+                        <%--<h4>Jane Doe <small>March 31, 2017</small><hr></h4>--%>
+                        <%--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>--%>
+                        <%--<div class="right">--%>
+                            <%--<button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Edit</button>--%>
+                            <%--<button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <!-- Social -->
         </div>
         <!-- article-content-->

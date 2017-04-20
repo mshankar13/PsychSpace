@@ -2,6 +2,7 @@
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
+                <!-- Course Title -->
                 <h1>Course Title<hr></h1>
                 <br>
             </div>
@@ -9,13 +10,15 @@
         <div class="row ps-text-content">
             <div class="col-lg-2 ps-col-right">
                 <div class="ps-well">
+                    <!-- Learn Sidebar -->
                     <%@include file="learn-sidebar.html"%>
                 </div>
             </div>
-            <div class="col-lg-10 ps-col-leftt">
+            <div class="col-lg-10 ps-col-left">
                 <div class="col-lg">
                     <div class="ps-well">
-                        <h2>Time Management Survey<hr> </h2>
+                        <!-- Survey Name -->
+                        <h2>Survey Name<hr> </h2>
                         <br>
                         <br>
                         <!-- Form Start -->
@@ -23,40 +26,25 @@
                             <!-- Question Start -->
                             <div class="ps-question">
                                 <!-- Question Text -->
-                                <h3>Do you have difficulty thinking about the future (in at least a month) and setting goals?</h3>
+                                <h3>Question Text</h3>
                                 <div class="ps-answers">
                                     <!-- Answer Start -->
                                     <div class="ps-answer">
                                         <!-- Answer Button -->
                                         <!-- Set "id" equal to answer ID -->
                                         <!-- Set "name" equal to qustion ID -->
-                                        <input id='radio-1' type="radio" name='r-group-1' />
+                                        <input id="radio-1" type="radio" name="r-group-1" />
                                         <!-- Answer Text -->
                                         <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">I believe I can fly</label>
-                                    </div>
-                                    <!-- Answer End-->
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <input id='radio-2' type="radio" name='r-group-1' />
-                                        <!-- Answer Text -->
-                                        <label for="radio-2">I believe I can fly</label>
-                                    </div>
-                                    <!-- Answer End-->
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <input id='radio-3' type="radio" name='r-group-1' />
-                                        <!-- Answer Text -->
-                                        <label for="radio-3">I believe I can fly</label>
+                                        <label for="radio-1">Answer</label>
                                     </div>
                                     <!-- Answer End-->
                                 </div>
                             </div>
                             <!-- Question End -->
                             <div class="center">
-                                <button type="button" class="button" disabled><span>Submit Survey</span></button>
+                                <!-- Submit Survey Button -->
+                                <button type="button" class="button" id="btn-submit-survey" disabled><span>Submit Survey</span></button>
                             </div>
                         </form>
                         <!-- Form End -->

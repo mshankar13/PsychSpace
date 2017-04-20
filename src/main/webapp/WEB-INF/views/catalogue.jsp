@@ -47,12 +47,12 @@
                         </div>
 
                         <div class="row ps-text-content">
-                            <c:forEach items="${courseList}" var="course">
+                            <c:forEach items="${openCourses}" var="course">
                             <!-- start course -->
                             <div class="col-lg-4 fadein">
                                 <div class="ps-well">
                                     <!-- Course Title -->
-                                    <h2 class="ps-feature-info-header"> ${course.name}<hr> </h2>
+                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
                                     <br>
                                     <!-- Course Image -->
                                     <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
@@ -67,11 +67,11 @@
                                         <span class="glyphicon glyphicon-time"></span> End Date: ${course.endDate}
                                     </p>
                                     <br>
-                                    <!-- Topics -->
-                                    <h3 class="ps-feature-info-header"> Topics <hr></h3>
-                                    <!-- Course Preview -->
+                                    <!-- Description -->
+                                    <h3 class="ps-feature-info-header"> Description <hr></h3>
                                     <p class="ps-feature-preview">
-                                        ${course.description}</p>
+                                        ${course.description}
+                                    </p>
                                     <br>
                                     <div>
                                         <div class="center">
@@ -101,7 +101,7 @@
                             <div class="col-lg-4">
                                 <div class="ps-well">
                                     <!-- Course Title -->
-                                    <h2 class="ps-feature-info-header"> ${course.name}<hr> </h2>
+                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
                                     <br>
                                     <!-- Course Image -->
                                     <img class="img-responsive course-img fadein" src="http://placehold.it/900x300" alt="">
