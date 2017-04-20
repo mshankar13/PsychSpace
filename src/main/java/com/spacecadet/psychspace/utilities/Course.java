@@ -14,10 +14,10 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course {
-    private String userKey;
+    private String userKey; //instructor key
     private String courseKey;
     private String title;
-    private String instructor;
+    private String instructor; //instructor name
     private String description;
     private String startDate;
     private String endDate;
