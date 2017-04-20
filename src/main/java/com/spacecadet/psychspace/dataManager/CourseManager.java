@@ -75,19 +75,36 @@ public class CourseManager {
     }
 
     /**
-     * Loads all courses the user is enrolled in
+     * Loads all courses the instructor created
      *
      * @param userKey
      * @return Ordered list of courses by start date
      */
+    public ArrayList<Course> loadInstructorCourses(String userKey) {
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query userListQuery = new Query("Course").setFilter(propertyFilter1);
+        List<Entity> userCourses =
+                datastore.prepare(userListQuery).asList(FetchOptions.Builder.withDefaults());
+        return entityToCourse(userCourses);
+    }
+
+
+    /**
+     * loads all courses the user is enrolled in
+     * @param userKey
+     * @return
+     */
     public ArrayList<Course> loadUserCourses(String userKey) {
-        Query enrollQuery = new Query("Enroll", KeyFactory.stringToKey(userKey));
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1);
         List<Entity> enrollList =
                 datastore.prepare(enrollQuery).asList(FetchOptions.Builder.withDefaults());
         List<Entity> userCourseList = new ArrayList<>();
         for (Entity enroll: enrollList) {
             Query courseQuery = new Query("Course", KeyFactory.stringToKey(enroll.getProperty("CourseKey").toString()));
-            userCourseList = datastore.prepare(courseQuery).asList(FetchOptions.Builder.withDefaults());
+            userCourseList.add(datastore.prepare(courseQuery).asSingleEntity());
         }
         return entityToCourse(userCourseList);
     }
@@ -162,15 +179,15 @@ public class CourseManager {
             try {
                 Entity updatedCourse = datastore.get(KeyFactory.stringToKey(course.getCourseKey()));
                 updatedCourse.setProperty("UserKey", updatedCourse.getProperty("UserKey").toString());
-                updatedCourse.setProperty("Title", course.getTitle());
-                updatedCourse.setProperty("Instructor", course.getInstructor());
+                updatedCourse.setProperty("Title", updatedCourse.getProperty("Title").toString());
+                updatedCourse.setProperty("Instructor", updatedCourse.getProperty("Instructor").toString());
                 updatedCourse.setProperty("Description", course.getDescription());
                 updatedCourse.setProperty("StartDate", course.getStartDate());
                 updatedCourse.setProperty("EndDate", course.getEndDate());
                 updatedCourse.setProperty("EnrollDate", course.getEnrollDate());
                 updatedCourse.setProperty("DropDate", course.getDropDate());
                 updatedCourse.setProperty("Status", course.getStatus());
-                updatedCourse.setProperty("CurrSize", course.getCurrSize());
+                updatedCourse.setProperty("CurrSize", updatedCourse.getProperty("CurrSize").toString());
                 updatedCourse.setProperty("Capacity", course.getCapacity());
                 datastore.delete(KeyFactory.stringToKey(course.getCourseKey()));
                 datastore.put(updatedCourse);

@@ -31,7 +31,76 @@
             <div class="navbar-wrapper">
                 <%@include file="navbar.html"%>
             </div>
-            <%@include file="learn.html"%>
+            <header class="ps-feature-header">
+                <div class="center page-banner">
+                    <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
+                    <h1 class="absolute-text">Learn</h1>
+                </div>
+                <!-- Current Courses -->
+                <div class="ps-feature-content">
+                    <div class="row ps-feature">
+                        <div class="ps-feature-info">
+                            <h1>My Current Courses<hr></h1>
+                            <br>
+                        </div>
+
+                        <div class="row ps-text-content">
+                            <c:forEach items="${courses}" var="course">
+                            <!-- Start Course -->
+                            <div class="col-lg-4">
+                                <div class="ps-well">
+                                    <!-- Course Title -->
+                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
+                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                    <h3 class="ps-feature-info-header"> Course Description <hr></h3>
+                                    <!-- Course Description-->
+                                    <p class="ps-feature-preview">${course.description}</p>
+                                    <div>
+                                        <div class="center">
+                                            <!-- Button for Course Learn -->
+                                            <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End course -->
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Current Courses -->
+                <!-- Past Courses -->
+                <div class="ps-feature-content">
+                    <div class="row ps-feature">
+                        <div class="ps-feature-info">
+                            <h1> My Past Courses<hr></h1>
+                            <br>
+                        </div>
+                        <div class="row ps-text-content">
+                            <!-- Start Course -->
+                            <div class="col-lg-4">
+                                <div class="ps-well">
+                                    <!-- Course Title -->
+                                    <h2 class="ps-feature-info-header"> Course Title<hr> </h2>
+                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                    <h3 class="ps-feature-info-header"> Course Description <hr></h3>
+                                    <!-- Course Description -->
+                                    <p class="ps-feature-preview">Course Description</p>
+                                    <div>
+                                        <div class="center">
+                                            <!-- Button for Course Learn -->
+                                            <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End course -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Past Courses -->
+            </header>
+
             <%@include file="footer.html" %>
             <script src="${contextPath}/resources/js/animations.js"></script>
         </body>

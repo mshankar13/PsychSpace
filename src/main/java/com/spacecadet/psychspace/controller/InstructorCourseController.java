@@ -57,7 +57,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
         model.addObject("course", new Course());
-        model.addObject("courses", courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses", courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
@@ -73,7 +73,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
         model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
@@ -87,7 +87,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorDeleteCourse");
         model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
