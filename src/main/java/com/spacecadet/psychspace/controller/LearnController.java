@@ -1,12 +1,16 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 
 /**
  * Created by aliao on 4/6/2017.
@@ -15,15 +19,26 @@ import org.springframework.web.servlet.ModelAndView;
 public class LearnController {
 
     private UserManager  userManager = new UserManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * all visit to learn page
      * @return
      */
     @RequestMapping(value = "/learn", method = RequestMethod.GET)
-    public ModelAndView newsDetail() {
+    public ModelAndView learn() {
+        ArrayList<Course> courses = courseManager.loadUserCourses(WelcomeController.currUser.getUserKey());
+        for(Course c : courses){
+            if(c.getTitle().length() >= 50){
+                c.setTitle(c.getTitle().substring(0, 50));
+            }
+            if(c.getDescription().length() >= 100){
+                c.setDescription(c.getDescription().substring(0, 100));
+            }
+        }
         ModelAndView model = new ModelAndView();
         model.setViewName("learn");
+        model.addObject("courses", courses);
 
         return model;
     }

@@ -36,8 +36,11 @@ public class InstructorCourseController {
      */
     @RequestMapping(value = "/addCourse", method = RequestMethod.POST)
     public ModelAndView addCourse(@ModelAttribute("course") Course course) {
-        if(course != null)
+        if(course != null) {
+            course.setInstructor(WelcomeController.currUser.getUserKey());
+            course.setUserKey(WelcomeController.currUser.getUserKey());
             courseManager.addCourse(course);
+        }
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddCourse");
         model.addObject("course", new Course());
@@ -54,7 +57,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
         model.addObject("course", new Course());
-        model.addObject("courses", courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses", courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
@@ -70,7 +73,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
         model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
@@ -84,7 +87,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorDeleteCourse");
         model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadUserCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
         return model;
     }
