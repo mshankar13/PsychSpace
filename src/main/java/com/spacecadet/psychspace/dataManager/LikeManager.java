@@ -13,6 +13,9 @@ public class LikeManager {
 
     private DatastoreService datastore;
 
+    /**
+     * constructor
+     */
     public LikeManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
@@ -25,7 +28,6 @@ public class LikeManager {
         Query likeQuery = new Query("Like");
         List<Entity> likeList =
                 datastore.prepare(likeQuery).asList(FetchOptions.Builder.withDefaults());
-
         ArrayList<Like> loadedLikes = new ArrayList<Like>();
         for (Entity entity : likeList) {
             Like like = new Like();
@@ -35,16 +37,15 @@ public class LikeManager {
             like.setLikeKey(KeyFactory.keyToString(entity.getKey()));
             loadedLikes.add(like);
         }
-
         return loadedLikes;
     }
 
 
     /**
      * check whether is liked
-     * @param newsKey
-     * @param userKey
-     * @return
+     * @param newsKey single news key
+     * @param userKey user key
+     * @return is/not liked
      */
     public boolean isLiked(String newsKey, String userKey){
         datastore = DatastoreServiceFactory.getDatastoreService();
@@ -62,21 +63,20 @@ public class LikeManager {
 
     /**
      * adds new Like entity to datastore when user likes an article
-     * @param newsManager
-     * @param newsKey
-     * @param title
-     * @param author
-     * @param content
-     * @param likesCount
-     * @param date
-     * @param like
+     * @param newsManager newsManager
+     * @param newsKey news key
+     * @param title news title
+     * @param author news author
+     * @param content news content
+     * @param likesCount news like count
+     * @param date news date
+     * @param like like utility
      */
     public void like (NewsManager newsManager, String newsKey, String title, String author, String content,
                       String likesCount, String date, Like like) {
         int count = Integer.parseInt(likesCount);
         count++;
         newsManager.editNews(newsKey, title, author, content, Integer.toString(count), date);
-
         Transaction txn = datastore.beginTransaction();
         try {
             Entity newLike = new Entity("Like");
@@ -94,13 +94,14 @@ public class LikeManager {
 
     /**
      * modifies the like entity to unlike when user choose to unlike
-     * @param newsManager
-     * @param newsKey
-     * @param title
-     * @param author
-     * @param content
-     * @param likesCount
-     * @param date
+     * @param newsManager news Manager
+     * @param newsKey news key
+     * @param title news title
+     * @param author news author
+     * @param content news content
+     * @param likesCount news like count
+     * @param date news date
+     * @param like like utility
      */
     public void editlike (NewsManager newsManager, String newsKey, String title, String author, String content,
                       String likesCount, String date, Like like) {
@@ -111,7 +112,6 @@ public class LikeManager {
             count--;
         }
         newsManager.editNews(newsKey, title, author, content, Integer.toString(count), date);
-
         Transaction txn = datastore.beginTransaction();
         try {
             try {
@@ -125,9 +125,8 @@ public class LikeManager {
                 txn.commit();
 
             } catch (EntityNotFoundException ex) {
-
+                ex.printStackTrace();
             }
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();

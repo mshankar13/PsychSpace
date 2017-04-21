@@ -18,7 +18,7 @@ public class VideoController {
 
     /**
      * all visit to video page
-     * @return
+     * @return learn video page
      */
     @RequestMapping(value = "/video", method = RequestMethod.GET)
     public ModelAndView survey() {
@@ -30,7 +30,8 @@ public class VideoController {
 
     /**
      * logout on video page
-     * @return
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/video/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {

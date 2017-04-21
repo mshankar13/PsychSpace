@@ -26,8 +26,8 @@ public class CourseController {
 
     /**
      * all visit to course page
-     *
-     * @return
+     * @param key course key
+     * @return singel course page
      */
     @RequestMapping(value = "/course/{key}", method = RequestMethod.GET)
     public ModelAndView course(@PathVariable("key") String key) {
@@ -50,7 +50,9 @@ public class CourseController {
 
     /**
      * logout on course page
-     * @return
+     * @param key course key
+     * @param user user logged out
+     * @return single course page
      */
     @RequestMapping(value = "/course/{key}/logout", method = RequestMethod.POST)
     public String logout(@PathVariable("key") String key, @RequestBody String user) {
@@ -60,8 +62,9 @@ public class CourseController {
 
     /**
      * login on course page
-     * @param user
-     * @return
+     * @param key course key
+     * @param user logged in user
+     * @return single course page
      */
     @RequestMapping(value = "/course/{key}/login", method = RequestMethod.POST)
     public String login(@PathVariable("key") String key, @RequestBody String user){
@@ -75,9 +78,9 @@ public class CourseController {
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * enroll on course page
+     * @param key course key
+     * @return learn page
      */
     @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.GET)
     public String enroll(@PathVariable("key") String key){
@@ -86,9 +89,9 @@ public class CourseController {
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * unenroll on course page
+     * @param key course key
+     * @return single course page
      */
     @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.GET)
     public String unenroll(@PathVariable("key") String key){

@@ -24,8 +24,8 @@ public class InstructorEvaluationController {
 
 
     /**
-     * instructor page - add new evaluation to course
-     * @return
+     * instructor page (get) - add new evaluation to course
+     * @return instructor add evaluation page
      */
     @RequestMapping(value = "/addEvaluation", method = RequestMethod.GET)
     public ModelAndView addEvaluation() {
@@ -39,8 +39,8 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * instructor page - edit evaluation to course
-     * @return
+     * instructor page (get) - edit evaluation to course
+     * @return instructor edit evaluation page
      */
     @RequestMapping(value = "/editEvaluation", method = RequestMethod.GET)
     public ModelAndView editEvaluation() {
@@ -54,8 +54,8 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * instructor page - delete evaluation to course
-     * @return
+     * instructor page (get) - delete evaluation to course
+     * @return instructor delete evaluation page
      */
     @RequestMapping(value = "/deleteEvaluation", method = RequestMethod.GET)
     public ModelAndView deleteEvaluation() {
@@ -69,8 +69,9 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor add evaluation page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/addEvaluation/logout", method = RequestMethod.POST)
     public String logoutAdd(@RequestBody String user) {
@@ -79,8 +80,9 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor edit evaluation page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/editEvaluation/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
@@ -89,8 +91,9 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor delete evaluation page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/deleteEvaluation/logout", method = RequestMethod.POST)
     public String logoutDelete(@RequestBody String user) {

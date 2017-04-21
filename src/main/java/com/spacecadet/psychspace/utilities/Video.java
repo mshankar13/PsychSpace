@@ -16,4 +16,5 @@ public class Video {
     private String title;
     private String url; //youtube embed video link (or reconstruct from share link)
     private String videoKey;
+    private String courseKey;
 }

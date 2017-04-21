@@ -23,7 +23,7 @@ public class LearnController {
 
     /**
      * all visit to learn page
-     * @return
+     * @return learn page
      */
     @RequestMapping(value = "/learn", method = RequestMethod.GET)
     public ModelAndView learn() {
@@ -45,7 +45,8 @@ public class LearnController {
 
     /**
      * logout on learn page
-     * @return
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/learn/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {

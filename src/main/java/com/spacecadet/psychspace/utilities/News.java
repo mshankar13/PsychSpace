@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class News {
     private String title;
-    private String author;
+    private String author;  //user key
     private String content;
     private String likesCount;
     private String date;

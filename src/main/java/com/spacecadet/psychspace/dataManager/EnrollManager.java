@@ -3,15 +3,23 @@ package com.spacecadet.psychspace.dataManager;
 import com.google.appengine.api.datastore.*;
 
 /**
- * Created by marleneshankar on 4/14/17.
- * Modified by aliao on 4/19/17
+ * Created by aliao on 4/19/17.
  */
 public class EnrollManager {
+
     private DatastoreService datastore;
     private HelperManager helper = new HelperManager();
 
+    /**
+     * constructor
+     */
     public EnrollManager() { datastore = DatastoreServiceFactory.getDatastoreService(); }
 
+    /**
+     * add new enroll entity to datastore
+     * @param userKey  user key
+     * @param courseKey course key
+     */
     public void enroll(String userKey, String courseKey) {
         Transaction txn = datastore.beginTransaction();
         try {
@@ -28,6 +36,11 @@ public class EnrollManager {
         }
     }
 
+    /**
+     * update enroll entity in datastore
+     * @param userKey user key
+     * @param courseKey course key
+     */
     public void unenroll(String userKey, String courseKey) {
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
@@ -35,13 +48,10 @@ public class EnrollManager {
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
         Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
         Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
-
         Transaction txn = datastore.beginTransaction();
-
         try {
             datastore.delete(foundEnrolled.getKey());
             txn.commit();
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -51,9 +61,9 @@ public class EnrollManager {
 
     /**
      * check if user is enrolled to course
-     * @param userKey
-     * @param courseKey
-     * @return
+     * @param userKey user key
+     * @param courseKey course key
+     * @return is/not enrolled
      */
     public boolean isEnrolled(String userKey, String courseKey){
         Query.Filter propertyFilter1 =
@@ -62,7 +72,6 @@ public class EnrollManager {
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
         Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
         Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
-
         if(foundEnrolled == null){
             return false;
         }

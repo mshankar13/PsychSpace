@@ -22,8 +22,8 @@ public class AdminArticleController {
     private UserManager userManager = new UserManager();
 
     /**
-     * admin page - add new article to news feed
-     * @return
+     * admin page (get) - add new article to news feed
+     * @return addArticle page
      */
     @RequestMapping(value = "/admin_addArticle", method = RequestMethod.GET)
     public ModelAndView loadNewList() {
@@ -34,8 +34,9 @@ public class AdminArticleController {
     }
 
     /**
-     * admin page - add new article to news feed
-     * @return
+     * admin page (post) - add new article to news feed
+     * @param news new created article
+     * @return news page
      */
     @RequestMapping(value = "/admin_addArticle", method = RequestMethod.POST)
     public String addNews(@ModelAttribute("news") News news) {
@@ -47,8 +48,8 @@ public class AdminArticleController {
     }
 
     /**
-     * admin page - delete article from news feed
-     * @return
+     * admin page (get) - delete article from news feed
+     * @return deleteArticle page
      */
     @RequestMapping(value = "/admin_deleteArticle", method = RequestMethod.GET)
     public ModelAndView deleteNews() {
@@ -62,14 +63,13 @@ public class AdminArticleController {
     }
 
     /**
-     * admin page - delete article from news feed
-     * @return
+     * admin page (post) - delte article from news feed
+     * @param news news deleted (in json)
+     * @return success msg to ajax
      */
-    //TODO: AJAX always receives error even when return success
     @RequestMapping(value = "/admin_deleteArticle", method = RequestMethod.POST)
-    public @ResponseBody String deleteNews(@RequestBody String newsList) {
-        String[] list = helper.stringToJsonNewsKeyList(newsList);
-
+    public @ResponseBody String deleteNews(@RequestBody String news) {
+        String[] list = helper.stringToJsonNewsKeyList(news);
         try {
             for (String newsKey : list) {
                 newsManager.deleteNews(newsKey);
@@ -84,8 +84,8 @@ public class AdminArticleController {
 
 
     /**
-     * admin page - edit news article
-     * @return
+     * admin page (get) - edit news article
+     * @return editNews page
      */
     @RequestMapping(value = "/admin_editArticle", method = RequestMethod.GET)
     public ModelAndView editNews() {
@@ -100,8 +100,9 @@ public class AdminArticleController {
     }
 
     /**
-     * admin page - edit article from the news feed
-     * @return
+     * admin page (post) - edit news article
+     * @param news news edited
+     * @return editNews page
      */
     @RequestMapping(value = "/admin_editArticle", method = RequestMethod.POST)
     public ModelAndView editNews(@ModelAttribute("news") News news) {
@@ -118,8 +119,9 @@ public class AdminArticleController {
     }
 
     /**
-     * logout on admin article page
-     * @return
+     * logout on admin add article page
+     * @param user logged out user
+     * @return welcome page
      */
     @RequestMapping(value = "/admin_addArticle/logout", method = RequestMethod.POST)
     public String logoutAdd(@RequestBody String user) {
@@ -128,8 +130,9 @@ public class AdminArticleController {
     }
 
     /**
-     * logout on admin article page
-     * @return
+     * logout on admin edit article page
+     * @param user logged out user
+     * @return welcome page
      */
     @RequestMapping(value = "/admin_editArticle/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
@@ -138,8 +141,9 @@ public class AdminArticleController {
     }
 
     /**
-     * logout on admin article page
-     * @return
+     * logout on admin delete article page
+     * @param user logged out user
+     * @return welcome page
      */
     @RequestMapping(value = "/admin_deleteArticle/logout", method = RequestMethod.POST)
     public String logoutDelete(@RequestBody String user) {
