@@ -30,9 +30,10 @@ public class ArticleController {
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.GET)
     public ModelAndView newsDetail(@PathVariable("key") String key) {
+        News news = newsManager.loadSingleNews(key);
         ModelAndView model = new ModelAndView();
         model.setViewName("article");
-        model.addObject("article", newsManager.loadSingleNews(key));
+        model.addObject("article", news);
         model.addObject("like", new Like());
         News featured = newsManager.getFeatured(newsManager.loadNews());
         featured.setContent(featured.getContent().substring(0, 100));
@@ -48,8 +49,8 @@ public class ArticleController {
             model.addObject("isLiked", "false");
             model.addObject("isLoggedIn", "false");
         }
-
         model.addObject("currentUser", WelcomeController.currUser.getUserKey());
+        model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
 
         return model;
     }
@@ -62,6 +63,7 @@ public class ArticleController {
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
     public ModelAndView addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
+        News news = newsManager.loadSingleNews(key);
         if (comment.getState().equals("add")){
             commentManager.addComment(key,"currUser",comment.getContent());
         } else if(comment.getState().equals("edit")){
@@ -71,7 +73,7 @@ public class ArticleController {
         }
         ModelAndView model = new ModelAndView();
         model.setViewName("article");
-        model.addObject("article", newsManager.loadSingleNews(key));
+        model.addObject("article", news);
         model.addObject("like", new Like());
         News featured = newsManager.getFeatured(newsManager.loadNews());
         featured.setContent(featured.getContent().substring(0, 100));
@@ -84,6 +86,7 @@ public class ArticleController {
             model.addObject("idLikes", "false");
         }
         model.addObject("currentUser", WelcomeController.currUser.getUserKey());
+        model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
 
         return model;
     }

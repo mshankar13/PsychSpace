@@ -34,21 +34,21 @@ a {
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 2vw;
 }
 
 h2,
 a {
-    font-size: 24px;
+    font-size: 1.4vw;
 }
 
 h3,
 a {
-    font-size: 18px;
+    font-size: 1.2vw;
 }
 
 h4 {
-    font-size: 16px;
+    font-size: 1.0vw;
     color: var(--eucalyptus-color);
 }
 
@@ -61,6 +61,10 @@ input {
 p {
     font-size: 13px;
     color: dimgrey;
+}
+
+.col-lg-4 .ps-feature-info-header {
+    min-height: 85px;
 }
 
 
@@ -120,7 +124,9 @@ p {
     right: 0;
 }
 
+
 /*liked button for articles*/
+
 .liked {
     background-color: var(--dogwood-color);
     color: var(--baby-powder-color);
@@ -130,6 +136,7 @@ p {
     background-color: var(--space-cadet-color);
     color: var(--baby-powder-color);
 }
+
 
 /*---------------- PADDING ----------------*/
 
@@ -325,11 +332,39 @@ hr {
     }
 }
 
+
 /*---------------- Z-INDEX ----------------*/
-.pushToFront{
+
+.pushToFront {
     z-index: 10000;
 }
 
-.pushToBack{
+.pushToBack {
     z-index: -1;
+}
+
+
+/*---------------- SCALABALE ----------------*/
+
+@media only screen and (max-width: 1080px) {
+    h1 {
+        font-size: 32px;
+    }
+    h2,
+    a {
+        font-size: 24px;
+    }
+    h3,
+    a {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 16px;
+    }
+    p {
+        font-size: 13px;
+    }
+    .col-lg-4 .ps-feature-info-header {
+        height: auto;
+    }
 }

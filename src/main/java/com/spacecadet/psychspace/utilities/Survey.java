@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by marleneshankar on 4/17/17.
  */
@@ -19,4 +22,5 @@ public class Survey {
     private String courseKey;
     private String title;
     private String dueDate;
+    private HashMap<Question, ArrayList<Answer>> questions;
 }

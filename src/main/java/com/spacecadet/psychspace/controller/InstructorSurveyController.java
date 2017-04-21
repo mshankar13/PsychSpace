@@ -1,6 +1,11 @@
 package com.spacecadet.psychspace.controller;
 
+import com.google.appengine.repackaged.com.google.gson.JsonElement;
+import com.google.appengine.repackaged.com.google.gson.JsonObject;
+import com.google.appengine.repackaged.com.google.gson.JsonParser;
+import com.google.appengine.repackaged.com.google.gson.JsonPrimitive;
 import com.spacecadet.psychspace.dataManager.CourseManager;
+import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.SurveyManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
@@ -20,6 +25,7 @@ public class InstructorSurveyController {
 
     private SurveyManager surveyManager = new SurveyManager();
     private CourseManager courseManager = new CourseManager();
+    private HelperManager helperManager = new HelperManager();
     private UserManager userManager = new UserManager();
 
     /**
@@ -45,6 +51,8 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/addSurvey", method = RequestMethod.POST)
     public String addSurvey(@RequestBody String survey) {
         // TODO: add function for parsing
+        Survey survey1 = helperManager.surveyStringToJson(survey);
+        surveyManager.addSurvey(survey1);
 
         return "redirect:/addSurvey";
     }
