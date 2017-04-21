@@ -36,7 +36,7 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="${contextPath}/addCourse" class="list-group-item">Create Course</a>
-                <a href="${contextPath}/editCourse" class="list-group-item active">Edit Course</a>
+                <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
                 <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>

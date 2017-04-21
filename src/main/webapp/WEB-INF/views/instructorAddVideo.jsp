@@ -54,7 +54,7 @@
                         <div class="col-sm-6">
                             <form:select class="form-control" path="courseKey" >
                                 <c:forEach items="${courses}" var="course">
-                                    <form:option value="${course.courseKey}"/>${course.title}
+                                    <form:option value="${course.courseKey}" label="${course.title}"/>
                                 </c:forEach>
                             </form:select>
                         </div>
