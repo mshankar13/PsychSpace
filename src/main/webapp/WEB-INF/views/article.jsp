@@ -93,7 +93,7 @@
                         </h2>
                     </div>
                     <br>
-                    <!-- Start Recommended Article -->
+                    <!-- Start Featured Article -->
                     <div class="left">
                         <h3 class="ps-feature-info-header">${featured.title}
                             <hr>
@@ -104,17 +104,7 @@
                         </div>
                     </div>
                     <br>
-                    <!--End Recommended Article -->
-                    <%--<div class="left">--%>
-                        <%--<h3 class="ps-feature-info-header"> Article Title--%>
-                            <%--<hr>--%>
-                        <%--</h3>--%>
-                        <%--<div class="center">--%>
-                            <%--<img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">--%>
-                            <%--<a class="button fadein btn-read-more" href=""><span>Read More</span></a>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<br>--%>
+                    <!--End Featured Article -->
                 </div>
             </div>
         </div>
