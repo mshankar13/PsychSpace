@@ -77,7 +77,7 @@
                         <div class="modal-content">
                             <div class="modal-header row">
                                 <div class="col-sm-10">
-                                    <h3 class="modal-title">Edit <strong><span id="edit-course-title"></span></strong></h3>
+                                    <h3 class="modal-title">Edit <strong><span id="edit-survey-title"></span></strong></h3>
                                 </div>
                                 <div class="col-sm-2">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -86,10 +86,6 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="edit-survey-title">Title</label>
-                                    <input type="text" class="form-control" id="edit-survey-title" placeholder="Title" />
-                                </div>
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="select-course" class="col-sm-2 control-label">Select Course</label>

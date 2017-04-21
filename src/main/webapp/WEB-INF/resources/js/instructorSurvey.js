@@ -106,12 +106,12 @@ function addSurveySubmit() {
         question["question"] = $(value).find(".input-question").val();
         question["type"] = $(value).find(".input-type").val();
             $.each($(this).find(".answer-row"), function(i, v) {
-            var answer = {};
-            answer["answer"] = $(v).find(".input-answer").val();
-            answer["score"] = $(v).find(".input-score").val();
-            answers[i] = answer;
-            question["answer"] = answer;
+                var answer = {};
+                answer["answer"] = $(v).find(".input-answer").val();
+                answer["score"] = $(v).find(".input-score").val();
+                answers[i] = answer;
         });
+        question["answers"] = answers;
         questions[index] = question;
     });
 
