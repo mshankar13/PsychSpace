@@ -21,8 +21,8 @@ public class InstructorCourseController {
     private UserManager userManager = new UserManager();
 
     /**
-     * instructor page - add new course to catalog
-     * @return
+     * instructor page (get) - add new course to catalog
+     * @return instructor add course page
      */
     @RequestMapping(value = "/addCourse", method = RequestMethod.GET)
     public ModelAndView addCourse() {
@@ -34,8 +34,9 @@ public class InstructorCourseController {
     }
 
     /**
-     * instructor page - add new course to catalog post
-     * @return
+     * instructor page (post)- add new course to catalog post
+     * @param course added course
+     * @return instructor add course page
      */
     @RequestMapping(value = "/addCourse", method = RequestMethod.POST)
     public ModelAndView addCourse(@ModelAttribute("course") Course course) {
@@ -52,8 +53,8 @@ public class InstructorCourseController {
     }
 
     /**
-     * instructor page - edit course on catalog
-     * @return
+     * instructor page (get) - edit course on catalog
+     * @return instructor edit course page
      */
     @RequestMapping(value = "/editCourse", method = RequestMethod.GET)
     public ModelAndView editCourse() {
@@ -66,8 +67,9 @@ public class InstructorCourseController {
     }
 
     /**
-     * instructor page - edit course on catalog
-     * @return
+     * instructor page (post) - edit course on catalog
+     * @param course edited course
+     * @return instructor edit course page
      */
     @RequestMapping(value = "/editCourse", method = RequestMethod.POST)
     public ModelAndView editCourse(@ModelAttribute("course") Course course) {
@@ -82,8 +84,8 @@ public class InstructorCourseController {
     }
 
     /**
-     * instructor page - add new course to catalog
-     * @return
+     * instructor page (get) - add new course to catalog
+     * @return instructor delete course page
      */
     @RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
     public ModelAndView deleteCourse() {
@@ -96,8 +98,9 @@ public class InstructorCourseController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor add course page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/addCourse/logout", method = RequestMethod.POST)
     public String logoutAdd(@RequestBody String user) {
@@ -106,8 +109,9 @@ public class InstructorCourseController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor edit course page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/editCourse/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
@@ -116,8 +120,9 @@ public class InstructorCourseController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor delete course page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/deleteCourse/logout", method = RequestMethod.POST)
     public String logoutDelete(@RequestBody String user) {

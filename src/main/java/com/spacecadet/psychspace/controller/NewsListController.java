@@ -25,7 +25,7 @@ public class NewsListController {
 
     /**
      * all visit to news page
-     * @return
+     * @return news page
      */
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView newList() {
@@ -55,8 +55,8 @@ public class NewsListController {
 
     /**
      * login on news page
-     * @param user
-     * @return
+     * @param user user logged on
+     * @return news page
      */
     @RequestMapping(value = "/news/login", method = RequestMethod.POST)
     public String login(@RequestBody String user){
@@ -71,8 +71,8 @@ public class NewsListController {
 
     /**
      * logout on news page
-     * @param user
-     * @return
+     * @param user user logged on
+     * @return news page
      */
     @RequestMapping(value = "/news/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user){
@@ -82,7 +82,7 @@ public class NewsListController {
 
     /**
      * helper method for shortening the content to show in frontend
-     * @return
+     * @return list of news
      */
     private ArrayList<News> shortenNews(){
         ArrayList<News> newsList = newsManager.loadNews();
@@ -100,7 +100,6 @@ public class NewsListController {
     }
 
     /**
-     * TODO -- Test this method as well as other news functions
      * Provides dummy data for newsfeed.
      */
     public void news_test() {

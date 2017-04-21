@@ -23,8 +23,8 @@ public class InstructorVideoController {
     private UserManager userManager = new UserManager();
 
     /**
-     * instructor page - add new video to course
-     * @return
+     * instructor page (get) - add new video to course
+     * @return instructor add video page
      */
     @RequestMapping(value = "/addVideo", method = RequestMethod.GET)
     public ModelAndView addVideo() {
@@ -39,7 +39,7 @@ public class InstructorVideoController {
 
     /**
      * instructor page - edit video to course
-     * @return
+     * @return instructor edit video page
      */
     @RequestMapping(value = "/editVideo", method = RequestMethod.GET)
     public ModelAndView editVideo() {
@@ -54,7 +54,7 @@ public class InstructorVideoController {
 
     /**
      * instructor page - delete video to course
-     * @return
+     * @return instructor delete video page
      */
     @RequestMapping(value = "/deleteVideo", method = RequestMethod.GET)
     public ModelAndView deleteVideo() {
@@ -68,8 +68,9 @@ public class InstructorVideoController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor add video page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/addVideo/logout", method = RequestMethod.POST)
     public String logoutAdd(@RequestBody String user) {
@@ -78,8 +79,9 @@ public class InstructorVideoController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor edit video page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/editVideo/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
@@ -88,8 +90,9 @@ public class InstructorVideoController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor delete video page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/deleteVideo/logout", method = RequestMethod.POST)
     public String logoutDelete(@RequestBody String user) {

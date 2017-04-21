@@ -25,7 +25,8 @@ public class ArticleController {
 
     /**
      * all visits to article page
-     * @return
+     * @param key article key
+     * @return single article page
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.GET)
     public ModelAndView newsDetail(@PathVariable("key") String key) {
@@ -55,9 +56,9 @@ public class ArticleController {
 
     /**
      * add/edit/delete comment on an article
-     * @param key
-     * @param comment
-     * @return
+     * @param key article key
+     * @param comment add/edit/delete comment
+     * @return single article page
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
     public ModelAndView addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
@@ -89,9 +90,9 @@ public class ArticleController {
 
     /**
      * like/unlike an article
-     * @param key
-     * @param like
-     * @return
+     * @param key article key
+     * @param like like/unlike object
+     * @return single article page
      */
     @RequestMapping(value = "/article/{key}/+1", method = RequestMethod.POST)
     public String likeArticle(@PathVariable("key") String key, @ModelAttribute Like like){
@@ -124,7 +125,9 @@ public class ArticleController {
 
     /**
      * logout on article page
-     * @return
+     * @param key article key
+     * @param user user logged out
+     * @return single article page
      */
     @RequestMapping(value = "/article/{key}/logout", method = RequestMethod.POST)
     public String logout(@PathVariable("key") String key, @RequestBody String user) {
@@ -134,8 +137,9 @@ public class ArticleController {
 
     /**
      * login on article page
-     * @param user
-     * @return
+     * @param key article key
+     * @param user logged in user
+     * @return single article page
      */
     @RequestMapping(value = "/article/{key}/login", method = RequestMethod.POST)
     public String login(@PathVariable("key") String key, @RequestBody String user){

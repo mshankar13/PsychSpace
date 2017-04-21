@@ -10,16 +10,19 @@ import java.util.*;
  * Modified by aliao on 04/19/17.
  */
 public class CourseManager {
+
     private DatastoreService datastore;
     private HelperManager helper = new HelperManager();
 
+    /**
+     * constructor
+     */
     public CourseManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
     /**
      * Loads all the courses
-     *
      * @return Ordered list of courses by start date
      */
     public ArrayList<Course> loadAllCourses() {
@@ -46,12 +49,10 @@ public class CourseManager {
 
     /**
      * Load a single course
-     *
-     * @param courseKey
-     * @return
+     * @param courseKey course key
+     * @return course object
      */
     public Course loadSingleCourse(String courseKey) {
-
        Course course = new Course();
         try {
             Entity singleCourse = datastore.get(KeyFactory.stringToKey(courseKey));
@@ -68,16 +69,15 @@ public class CourseManager {
             course.setCurrSize(singleCourse.getProperty("CurrSize").toString());
             course.setCapacity(singleCourse.getProperty("Capacity").toString());
         } catch (EntityNotFoundException ex) {
-
+            ex.printStackTrace();
         }
         return course;
     }
 
     /**
      * Loads all courses the instructor created
-     *
-     * @param userKey
-     * @return Ordered list of courses by start date
+     * @param userKey instructor key
+     * @return Ordered list of courses teaches by instructor
      */
     public ArrayList<Course> loadInstructorCourses(String userKey) {
         Query.Filter propertyFilter1 =
@@ -91,8 +91,8 @@ public class CourseManager {
 
     /**
      * loads all courses the user is enrolled in
-     * @param userKey
-     * @return
+     * @param userKey user key
+     * @return Ordered list of courses of user
      */
     public ArrayList<Course> loadUserCourses(String userKey) {
         Query.Filter propertyFilter1 =
@@ -110,8 +110,7 @@ public class CourseManager {
 
     /**
      * Helper function to convert the Course Entity to Object
-     *
-     * @param courses
+     * @param courses list of course entities from datastore
      * @return Organized list of courses by start date
      */
     public ArrayList<Course> entityToCourse(List<Entity> courses) {
@@ -119,7 +118,6 @@ public class CourseManager {
         for (Entity entity : courses) {
             Course course = new Course();
             Key courseKey = entity.getKey();
-
             course.setCourseKey(KeyFactory.keyToString(courseKey));
             course.setUserKey(entity.getProperty("UserKey").toString());
             course.setTitle(entity.getProperty("Title").toString());
@@ -134,7 +132,6 @@ public class CourseManager {
             course.setCapacity(entity.getProperty("Capacity").toString());
             loadedCourses.add(course);
         }
-
         // Sort the loaded News by date
         Collections.sort(loadedCourses, new Comparator<Course>() {
             @Override
@@ -147,6 +144,10 @@ public class CourseManager {
         return loadedCourses;
     }
 
+    /**
+     * add new course to datastore
+     * @param initCourse new course
+     */
     public void addCourse(Course initCourse) {
         Transaction txn = datastore.beginTransaction();
         try {
@@ -171,9 +172,12 @@ public class CourseManager {
         }
     }
 
+    /**
+     * edit course in datastore
+     * @param course edited course
+     */
     public void editCourse(Course course) {
         Transaction txn = datastore.beginTransaction();
-
         try {
             try {
                 Entity updatedCourse = datastore.get(KeyFactory.stringToKey(course.getCourseKey()));
@@ -191,11 +195,9 @@ public class CourseManager {
                 datastore.delete(KeyFactory.stringToKey(course.getCourseKey()));
                 datastore.put(updatedCourse);
                 txn.commit();
-
             } catch (EntityNotFoundException ex) {
-
+                ex.printStackTrace();
             }
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -203,13 +205,15 @@ public class CourseManager {
         }
     }
 
+    /**
+     * delete course in datastore
+     * @param courseKey deleted course
+     */
     public void deleteCourse(String courseKey) {
         Transaction txn = datastore.beginTransaction();
-
         try {
             datastore.delete(KeyFactory.stringToKey(courseKey));
             txn.commit();
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -217,6 +221,12 @@ public class CourseManager {
         }
     }
 
+    /**
+     * search for course with related keyword
+     * @param courses list of all courses
+     * @param keyword user input keyword
+     * @return list of all related course
+     */
     public ArrayList<Course> searchCourse(ArrayList<Course> courses, String keyword) {
         ArrayList<Course> titleSearch = new ArrayList<>();
         for (Course course : courses) {

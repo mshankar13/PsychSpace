@@ -10,9 +10,13 @@ import java.util.*;
  * @author marleneshankar
  */
 public class NewsManager {
+
     private DatastoreService datastore;
     private HelperManager helper = new HelperManager();
 
+    /**
+     * constructor
+     */
     public NewsManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
@@ -24,7 +28,6 @@ public class NewsManager {
         Query newsQuery = new Query("News");
         List<Entity> newsList =
                 datastore.prepare(newsQuery).asList(FetchOptions.Builder.withDefaults());
-
         ArrayList<News> loadedNews = new ArrayList<News>();
         for (Entity entity : newsList) {
             News news = new News();
@@ -35,9 +38,7 @@ public class NewsManager {
             news.setDate(entity.getProperty("Date").toString());
             news.setNewsKey(KeyFactory.keyToString(entity.getKey()));
             loadedNews.add(news);
-
         }
-
         // Sort the loaded News by date
         Collections.sort(loadedNews, new Comparator<News>() {
             @Override
@@ -47,18 +48,15 @@ public class NewsManager {
                 return date2.compareTo(date1);
             }
         });
-
         return loadedNews;
     }
 
     /**
      * Load a single news article with corresponding comments
-     *
-     * @param newsKey
-     * @return
+     * @param newsKey single news key
+     * @return news utility
      */
     public News loadSingleNews(String newsKey) {
-
         News news = new News();
         try {
             Entity singleNews = datastore.get(KeyFactory.stringToKey(newsKey));
@@ -68,23 +66,20 @@ public class NewsManager {
             news.setLikesCount(singleNews.getProperty("Likes").toString());
             news.setDate(singleNews.getProperty("Date").toString());
             news.setNewsKey(newsKey);
-
         } catch (EntityNotFoundException ex) {
-
+            ex.printStackTrace();
         }
         return news;
     }
 
     /**
-     * Adds a news Entity to datastore
-     *
-     * @param title
-     * @param author
-     * @param content
-     * @param likesCount
+     * Adds a news entity to datastore
+     * @param title news title
+     * @param author news author
+     * @param content news content
+     * @param likesCount news like count
      */
     public void addNews(String title, String author, String content, String likesCount, String date) {
-
         Transaction txn = datastore.beginTransaction();
         try {
             Entity news = new Entity("News");
@@ -104,17 +99,14 @@ public class NewsManager {
 
     /**
      * Edits a news Entity from datastore
-     *
-     * @param newsKey
-     * @param title
-     * @param author
-     * @param content
-     * @param likesCount
+     * @param newsKey news key
+     * @param title news title
+     * @param author news author
+     * @param content news content
+     * @param likesCount news like count
      */
     public void editNews(String newsKey, String title, String author, String content, String likesCount, String date) {
-
         Transaction txn = datastore.beginTransaction();
-
         try {
             try {
                 Entity updatedNews = datastore.get(KeyFactory.stringToKey(newsKey));
@@ -127,11 +119,9 @@ public class NewsManager {
                 datastore.delete(KeyFactory.stringToKey(newsKey));
                 datastore.put(updatedNews);
                 txn.commit();
-
             } catch (EntityNotFoundException ex) {
-
+                ex.printStackTrace();
             }
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -141,25 +131,20 @@ public class NewsManager {
 
     /**
      * Deletes a news Entity from datastore
-     *
-     * @param newsKey
+     * @param newsKey news key
      */
     public void deleteNews(String newsKey) {
         Transaction txn = datastore.beginTransaction();
-
         try {
             datastore.delete(KeyFactory.stringToKey(newsKey));
             txn.commit();
-
             // Delete all comments associated with the news entry
             Query newsCommentsQuery = new Query("Comment", KeyFactory.stringToKey(newsKey));
             List<Entity> listComments =
                     datastore.prepare(newsCommentsQuery).asList(FetchOptions.Builder.withDefaults());
-
             for (Entity entry : listComments) {
                 datastore.delete(entry.getKey());
             }
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -170,11 +155,10 @@ public class NewsManager {
     /**
      * Gets the featured article from the list of loaded news
      * Returns latest article if there is no article within the week
-     * @param allNews
-     * @return
+     * @param allNews arraylist of all news objects
+     * @return singel featured news object
      */
     public News getFeatured(ArrayList<News> allNews) {
-
         ArrayList<News> potentialFeatured = new ArrayList<>();
         Date lastWeek = new DateTime().minusDays(7).toDate();
         Date today = new Date();
@@ -185,7 +169,6 @@ public class NewsManager {
                 potentialFeatured.add(news);
             }
         }
-
         if (potentialFeatured.size() != 0) {
             Collections.sort(potentialFeatured, new Comparator<News>() {
                 @Override

@@ -17,7 +17,7 @@ public class HomeController {
 
     /**
      * all visit to home page
-     * @return
+     * @return home page
      */
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home(){
@@ -29,7 +29,8 @@ public class HomeController {
 
     /**
      * logout on home page
-     * @return
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/home/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {

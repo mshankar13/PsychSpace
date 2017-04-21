@@ -15,6 +15,12 @@ import java.util.Date;
  */
 public class HelperManager {
 
+    /**
+     * helper for converting string to json
+     * @param str original string
+     * @param objectType utility object type
+     * @return java utility object
+     */
     public Object stringToJson(String str, String objectType) {
         Gson g = new Gson();
         if (objectType.compareTo("User") == 0) {
@@ -27,13 +33,21 @@ public class HelperManager {
         return null;
     }
 
+    /**
+     * helper for converting string to json list
+     * @param str string of all keys
+     * @return json list of news keys
+     */
     public String[] stringToJsonNewsKeyList(String str) {
         Gson g = new Gson();
-
         return g.fromJson(str, String[].class);
-
     }
 
+    /**
+     * helper for converting string to date objects
+     * @param dateString string of date
+     * @return java date object
+     */
     public Date stringToDate(String dateString) {
         DateFormat df2 = new SimpleDateFormat("mm/dd/yyyy");
         Date date = new Date();
@@ -42,7 +56,6 @@ public class HelperManager {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-
         return date;
     }
 }

@@ -25,7 +25,7 @@ public class CatalogController {
 
     /**
      * all visit to catalog page
-     * @return
+     * @return catalog page
      */
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
     public ModelAndView catalog() {
@@ -55,7 +55,8 @@ public class CatalogController {
 
     /**
      * logout on catalog page
-     * @return
+     * @param user user logged out
+     * @return catalog page
      */
     @RequestMapping(value = "/catalogue/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
@@ -65,9 +66,8 @@ public class CatalogController {
 
     /**
      * login on catalog page
-     * @param user
-     * @return
-
+     * @param user logged in user
+     * @return catalog page
      */
     @RequestMapping(value = "/catalogue/login", method = RequestMethod.POST)
     public String login(@RequestBody String user){
