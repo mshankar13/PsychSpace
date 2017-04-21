@@ -99,9 +99,8 @@ function removeAnswer() {
 
 function addSurvey() {
     var survey = {};
-    survey["title"] = $("#add-survey-title");
+    survey["title"] = $("#add-survey-title").val();
     var questions = {};
-
 
     survey["questions"] = {};
     $.each($(".question-group"), function(index, value) {
@@ -116,7 +115,7 @@ function addSurvey() {
             question["answer"] = answer;
         });
         questions[index] = question;
-    })
+    });
 
     survey["questions"] = questions;
 

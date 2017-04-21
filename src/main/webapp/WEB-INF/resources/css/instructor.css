@@ -5,6 +5,22 @@
     padding: 20px 40px;
 }
 
+.instructor-btn {
+    background-color: var(--tea-rose-color);
+    border-color: var(--tea-rose-color);
+    color: var(--space-cadet-color);
+    border-radius: 5px;
+}
+
+.instructor-btn:hover {
+    border-color: var(--dogwood-color);
+    background-color: var(--dogwood-color);
+    color: var(--baby-powder-color);
+}
+
+
+/*************************** side-bar ****************************/
+
 .list-group {
     position: fixed;
 }
@@ -22,6 +38,8 @@
     color: var(--yellow-color);
 }
 
+
+/*************************** survey ****************************/
 .label-questions {
     display: block;
     clear: both;

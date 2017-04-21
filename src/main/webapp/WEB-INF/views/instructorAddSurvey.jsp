@@ -57,7 +57,7 @@
                         <input type="text" class="form-control" id="add-survey-title" placeholder="Title" />
                     </div>
                     <div class="form-group">
-                        <label for="add-survey-due-date" class="col-sm-2 control-label">Enroll Date</label>
+                        <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
                         <div class="col-sm-4">
                             <input class="form-control" type="text" id="add-survey-due-date"/>
                         </div>
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="admin-btn" id="add-survey-submit">Create</button>
+                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
                 </form>
             </div>
         </div>
