@@ -38,7 +38,7 @@ function addQuestion() {
                             <label>Score</label> \
                         </div> \
                         <div class="col-md-3"> \
-                            <input type="number" /> \
+                            <input type="number" class="input-score"/> \
                         </div> \
                         <div class="col-md-2"> \
                             <button type="button" class="btn btn-default btn-sm btn-survey-add-answer"> \
@@ -67,7 +67,7 @@ function addAnswer() {
                         <label>Score</label> \
                     </div> \
                     <div class="col-md-3"> \
-                        <input type="number" /> \
+                        <input type="number" class="input-score"/> \
                     </div> \
                     <div class="col-md-2"> \
                         <button type="button" class="btn btn-default btn-sm btn-survey-remove-answer"> \
@@ -105,14 +105,17 @@ function addSurvey() {
 
     survey["questions"] = {};
     $.each($(".question-group"), function(index, value) {
+        var question = {};
         var answers = {};
+        question["question"] = $(value).find(".input-question").val();
         $.each($(this).find(".answer-row"), function(i, v) {
             var answer = {};
-            answer["answer"] = v.children[1].children[0].value;
-            answer["score"] = v.children[3].children[0].value;
+            answer["answer"] = $(v).find(".input-answer").val();
+            answer["score"] = $(v).find(".input-score").val();
             answers[i] = answer;
-        })
-        questions[index] = answers;
+            question["answer"] = answer;
+        });
+        questions[index] = question;
     })
 
     survey["questions"] = questions;

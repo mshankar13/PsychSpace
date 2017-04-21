@@ -81,7 +81,7 @@
 
                 <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <%--<div class="modal-content">--%>
                             <div class="modal-header row">
                                 <div class="col-sm-10">
                                     <h3 class="modal-title">Edit <strong><span id="edit-course-title"></span></strong></h3>
@@ -152,7 +152,7 @@
                                 </div>
                             </form:form>
                         </div>
-                    </div>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>
