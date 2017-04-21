@@ -43,60 +43,58 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div >
-                <h1>Create Course</h1>
-                <form:form class="form-horizontal" method="post"
-                           modelAttribute="course" action="addCourse">
-                    <div class="form-group">
-                        <label for="add-course-title" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-6">
-                            <form:input type="text" class="form-control" id="add-course-title" path="title" placeholder="Course Title" />
-                        </div>
+            <h1>Create Course</h1>
+            <form:form class="form-horizontal" method="post"
+                       modelAttribute="course" action="addCourse">
+                <div class="form-group">
+                    <label for="add-course-title" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-6">
+                        <form:input type="text" class="form-control" id="add-course-title" path="title" placeholder="Course Title" />
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
+                    <div class="col-sm-6">
+                        <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
+                    <div class="col-sm-6">
+                        <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="endDate" id="add-course-end-date"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
+                    <div class="col-sm-6">
+                        <form:input class="form-control" type="text" path="endDate" id="add-course-end-date"/>
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
+                    <div class="col-sm-6">
+                        <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
                     </div>
-                    <div class="form-group row">
-                        <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="number" path="capacity" id="add-course-capacity"/>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
+                    <div class="col-sm-6">
+                        <form:input class="form-control" type="number" path="capacity" id="add-course-capacity"/>
                     </div>
-                    <div class="form-group">
-                        <label for="add-course-description" class="col-sm-2 control-label">Description</label>
-                        <div class="col-sm-8">
-                            <form:textarea class="form-control" id="add-course-description" rows="10" path="description" />
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-course-description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-8">
+                        <form:textarea class="form-control" id="add-course-description" rows="10" path="description" />
                     </div>
-                    <form:hidden path="userKey" value="null"/>
-                    <form:hidden path="courseKey" value="null"/>
-                    <form:hidden path="instructor" value="null"/>
-                    <form:hidden path="status" value="open" />
-                    <form:hidden path="currSize" value="0" />
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </form:form>
-            </div>
+                </div>
+                <form:hidden path="userKey" value="null"/>
+                <form:hidden path="courseKey" value="null"/>
+                <form:hidden path="instructor" value="null"/>
+                <form:hidden path="status" value="open" />
+                <form:hidden path="currSize" value="0" />
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form:form>
         </div>
     </div>
 </div>

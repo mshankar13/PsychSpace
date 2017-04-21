@@ -96,7 +96,8 @@ function removeAnswer() {
 function addSurveySubmit() {
     var survey = {};
     survey["course"] = $('#select-course').find(":selected").val();
-    survey["title"] = $("#add-survey-title").val();
+    var title = $("#add-survey-title").val();
+    survey["title"] = title;
     var questions = {};
 
     survey["questions"] = {};
@@ -125,7 +126,14 @@ function addSurveySubmit() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(survey),
-        success: function() {},
+        success: function() {
+            var successAlert = '<div class="alert alert-success alert-dismissible" role="alert"> \
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">\
+                                        <span aria-hidden="true">&times;</span></button> \
+                                        <strong>All set!</strong> Survey Created!\
+                                </div>';
+            $(".col-md-9").prepend(successAlert);
+        },
         error: function(e) {
             console.log("ERROR", e);
         }
