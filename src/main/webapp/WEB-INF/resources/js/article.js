@@ -6,6 +6,7 @@ $(document).ready(function () {
     } else {
         $("#btn-ps-feature-like").addClass("unliked");
     }
+    showIfLoggedIn();
 
     // On Click functions
     $(".btn-comment-edit").on("click", editCommentModalShow);
@@ -54,4 +55,26 @@ function deleteCommentModalShow() {
     $(".ps-modal-type-comment").addClass("pushToFront");
     $("#delete-comment-modal").modal("show");
 
+}
+
+function showIfLoggedIn() {
+    if ($("#psIsLoggedIn").val() == "false") {
+        $("#psLeaveComment").hide();
+        $("#like").hide();
+        $(".btn-comment-edit").hide();
+        $(".btn-comment-delete").hide();
+    } else {
+        showCommentEditDelete();
+    }
+}
+
+function showCommentEditDelete() {
+    $(".ps-comment").each(function () {
+        console.log($(this).find("#commentCreator").val());
+        if ($("#currentUser").val() != $(this).find("#commentCreator").val()) {
+            console.log("Success!");
+            $(".btn-comment-edit").hide();
+            $(".btn-comment-delete").hide();
+        }
+    });
 }

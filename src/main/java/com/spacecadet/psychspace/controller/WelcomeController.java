@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Created by aliao on 3/20/2017.
  */

@@ -1,7 +1,6 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.repackaged.com.google.gson.Gson;
-import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;

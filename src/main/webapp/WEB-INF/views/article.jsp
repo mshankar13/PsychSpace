@@ -37,20 +37,20 @@
 </div>
 
 <header class="ps-feature-header">
+    <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
+    <input type="hidden" id="psCurrentUser" value="${currentUser.userKey}">
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted ${article.date}</p>
                 <input type="hidden" id="ps-input-liked" value="${isLiked}">
-                <form:form method="post"
-                           modelAttribute="like" action="${article.newsKey}/+1" class="left">
+                <form:form method="post" modelAttribute="like" action="${article.newsKey}/+1" class="left">
                     <form:hidden path="userKey" value="0"/>
                     <form:hidden path="articleKey" value="${article.newsKey}"/>
                     <form:hidden path="status" value="" id="liked"/>
                     <form:hidden path="likeKey" value="0"/>
-                    <button id="btn-ps-feature-like" type="submit"
-                            class="glyphicon glyphicon-star"></button>
+                    <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star"></button>
                     ${article.likesCount}
                 </form:form>
 
@@ -93,7 +93,7 @@
                         </h2>
                     </div>
                     <br>
-                    <!-- Start Recommended Article -->
+                    <!-- Start Featured Article -->
                     <div class="left">
                         <h3 class="ps-feature-info-header">${featured.title}
                             <hr>
@@ -104,17 +104,7 @@
                         </div>
                     </div>
                     <br>
-                    <!--End Recommended Article -->
-                    <div class="left">
-                        <h3 class="ps-feature-info-header"> Article Title
-                            <hr>
-                        </h3>
-                        <div class="center">
-                            <img class="ps-feature-img img-responsive" src="http://placehold.it/900x300" alt="">
-                            <a class="button fadein btn-read-more" href=""><span>Read More</span></a>
-                        </div>
-                    </div>
-                    <br>
+                    <!--End Featured Article -->
                 </div>
             </div>
         </div>
@@ -126,17 +116,18 @@
                 <hr>
             </h2>
             <br>
-            <div class="col-lg ps-well">
+            <div id="psLeaveComment" class="col-lg ps-well">
                 <div class="left">
                     <h4>Leave a Comment:</h4>
-                    <form:form class="form-horizontal" method="post"
-                               modelAttribute="comment" action="${article.newsKey}">
+                    <form:form class="form-horizontal" method="post" modelAttribute="comment"
+                               action="${article.newsKey}">
                         <form:hidden path="commentKey" value="0"/>
                         <form:hidden path="username" value="0"/>
                         <form:hidden path="newsKey" value="0"/>
                         <form:hidden path="date" value="0"/>
                         <form:hidden path="state" value="add"/>
                         <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
+                        <input type="hidden" id="psCommentCreator" value="${comment.username}">
                         <div class="right">
                             <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit
                             </button>
@@ -147,6 +138,7 @@
             <!-- Comment -->
             <c:forEach items="${commentList}" var="articleComment">
                 <div class="media ps-comment">
+                    <input type="hidden" id="commentCreator" value="${articleComment.commentKey}">
                     <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""></a>
                     <div class="media-body">
                         <!-- Comment Author and Date Posted -->
@@ -160,7 +152,6 @@
                         <div class="right">
                             <button type="button" class="btn-comment btn btn-primary btn-comment-delete">Delete</button>
                             <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Edit</button>
-                            <input type="hidden" value="${articleComment.commentKey}">
                         </div>
                     </div>
                 </div>
@@ -197,8 +188,10 @@
                             </div>
                         </div>
                         <div class="ps-modal-footer right">
-                            <button type="button" class="ps-type-close btn btn-default" data-dismiss="modal">Close</button>
-                            <button id="btn-comment-edit" type="submit" class="ps-type-close btn-comment btn btn-primary">Save
+                            <button type="button" class="ps-type-close btn btn-default" data-dismiss="modal">Close
+                            </button>
+                            <button id="btn-comment-edit" type="submit"
+                                    class="ps-type-close btn-comment btn btn-primary">Save
                             </button>
                         </div>
                     </form:form>
@@ -222,6 +215,7 @@
                             </h2>
                         </div>
                     </div>
+
                     <form:form method="delete" action="${article.newsKey}" modelAttribute="comment">
                         <div class="ps-modal-body">
                             <form:hidden path="state" value="delete"/>
@@ -234,8 +228,11 @@
                             </h3>
                         </div>
                         <div class="ps-modal-footer right">
-                            <button type="button" class="ps-type-close btn-comment btn btn-primary" data-dismiss="modal">No</button>
-                            <button id="btn-comment-update" type="submit" class="ps-type-close btn-comment btn btn-primary">Delete
+                            <button type="button" class="ps-type-close btn-comment btn btn-primary"
+                                    data-dismiss="modal">No
+                            </button>
+                            <button id="btn-comment-update" type="submit"
+                                    class="ps-type-close btn-comment btn btn-primary">Delete
                             </button>
                         </div>
                     </form:form>

@@ -4,8 +4,6 @@ import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.controller.WelcomeController;
 import com.spacecadet.psychspace.utilities.User;
 
-import java.util.Date;
-
 /**
  * Created by marleneshankar on 3/24/17.
  */

@@ -3,7 +3,6 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
-import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by acliao on 4/15/17.
+ * Created by aliao on 4/15/17.
  */
 @Controller
 public class InstructorCourseController {
