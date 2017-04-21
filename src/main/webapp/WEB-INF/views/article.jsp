@@ -64,7 +64,7 @@
                     </a>
                     <div class="media-body">
                         <a class="button-instructor button fadein" href=""
-                           id="button-instructor"><span>${article.author}</span></a>
+                           id="button-instructor"><span>${articleAuthor}</span></a>
                     </div>
                 </div>
                 <br>

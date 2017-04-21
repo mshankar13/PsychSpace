@@ -6,6 +6,7 @@ import com.spacecadet.psychspace.utilities.User;
 
 /**
  * Created by marleneshankar on 3/24/17.
+ * Modeified by aliao on 4/21/17.
  */
 public class UserManager {
     private DatastoreService datastore;
@@ -32,7 +33,6 @@ public class UserManager {
             userEntity.setProperty("FirstName", user.getFirstName());
             userEntity.setProperty("LastName", user.getLastName());
             userEntity.setProperty("Role", role);
-
             datastore.put(txn, userEntity);
             txn.commit();
             try {
@@ -95,5 +95,25 @@ public class UserManager {
         WelcomeController.currUser.setUserKey(user.getUserKey());
         WelcomeController.currUser.setEmail(user.getEmail());
         WelcomeController.currUser.setLastName(user.getLastName());
+    }
+
+    /**
+     * load single user object by userkey
+     * @param userKey user key
+     * @return user object
+     */
+    public User loadSingleUser(String userKey){
+        User user = new User();
+        try {
+            Entity singleUser = datastore.get(KeyFactory.stringToKey(userKey));
+            user.setUserKey(userKey);
+            user.setEmail(singleUser.getProperty("Email").toString());
+            user.setFirstName(singleUser.getProperty("FirstName").toString());
+            user.setLastName(singleUser.getProperty("LastName").toString());
+            user.setRole(singleUser.getProperty("Role").toString());
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return user;
     }
 }
