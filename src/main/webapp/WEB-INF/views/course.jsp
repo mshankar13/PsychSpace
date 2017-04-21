@@ -34,6 +34,7 @@
     <%@include file="navbar.html" %>
 </div>
 <header class="ps-feature-header">
+    <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
