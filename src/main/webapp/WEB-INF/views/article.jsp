@@ -42,13 +42,13 @@
             <div class="ps-feature-info">
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted ${article.date}</p>
+                <input type="hidden" id="ps-input-liked" value="${isLiked}">
                 <form:form method="post"
                            modelAttribute="like" action="${article.newsKey}/+1" class="left">
                     <form:hidden path="userKey" value="0"/>
                     <form:hidden path="articleKey" value="${article.newsKey}"/>
                     <form:hidden path="status" value="" id="liked"/>
                     <form:hidden path="likeKey" value="0"/>
-                    <input id="input-liked" value=${isLiked} hidden>
                     <button id="btn-ps-feature-like" type="submit"
                             class="glyphicon glyphicon-star"></button>
                     ${article.likesCount}
@@ -176,7 +176,7 @@
                 <!-- Modal content-->
                 <div class="ps-modal-content">
                     <div class="ps-modal-header">
-                        <button type="button" class="close ps-modal-close" data-dismiss="modal">
+                        <button type="button" class="ps-type-close close ps-modal-close" data-dismiss="modal">
                             <h1>X</h1></button>
                         <div class="left">
                             <h2 class="ps-feature-info-header"> Edit Comment
@@ -197,8 +197,8 @@
                             </div>
                         </div>
                         <div class="ps-modal-footer right">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Save
+                            <button type="button" class="ps-type-close btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="btn-comment-edit" type="submit" class="ps-type-close btn-comment btn btn-primary">Save
                             </button>
                         </div>
                     </form:form>
@@ -214,7 +214,7 @@
                 <!-- Modal content-->
                 <div class="ps-modal-content">
                     <div class="ps-modal-header">
-                        <button type="button" class="close ps-modal-close" data-dismiss="modal">
+                        <button type="button" class="ps-type-close close ps-modal-close" data-dismiss="modal">
                             <h1>X</h1></button>
                         <div class="left">
                             <h2 class="ps-feature-info-header"> Delete Comment
@@ -235,8 +235,8 @@
                             </h3>
                         </div>
                         <div class="ps-modal-footer right">
-                            <button type="button" class="btn-comment btn btn-primary" data-dismiss="modal">No</button>
-                            <button id="btn-comment-update" type="submit" class="btn-comment btn btn-primary">Delete
+                            <button type="button" class="ps-type-close btn-comment btn btn-primary" data-dismiss="modal">No</button>
+                            <button id="btn-comment-update" type="submit" class="ps-type-close btn-comment btn btn-primary">Delete
                             </button>
                         </div>
                     </form:form>
