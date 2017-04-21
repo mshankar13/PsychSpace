@@ -38,11 +38,16 @@ public class ArticleController {
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
         model.addObject("commentList", commentManager.loadComments(key));
-        if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
-            model.addObject("isLiked", "true");
+        if(WelcomeController.currUser.getUserKey() != null){
+            if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
+                model.addObject("isLiked", "true");
+            }
+            model.addObject("isLoggedIn", "true");
         } else {
             model.addObject("isLiked", "false");
+            model.addObject("isLoggedIn", "false");
         }
+
         model.addObject("currentUser", WelcomeController.currUser.getUserKey());
 
         return model;

@@ -37,12 +37,15 @@ public class CourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("course");
         model.addObject("course", course);
-        if(enrollManager.isEnrolled(WelcomeController.currUser.getUserKey(),key)){
-            model.addObject("isEnrolled", "true");
+        if(WelcomeController.currUser.getUserKey() != null){
+            if(enrollManager.isEnrolled(WelcomeController.currUser.getUserKey(),key)){
+                model.addObject("isEnrolled", "true");
+            }
+            model.addObject("isLoggedIn", "true");
         } else {
             model.addObject("isEnrolled", "false");
+            model.addObject("isLoggedIn", "false");
         }
-
 
         return model;
     }
