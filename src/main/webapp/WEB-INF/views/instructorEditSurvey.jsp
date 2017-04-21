@@ -36,27 +36,27 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="${contextPath}/addCourse" class="list-group-item">Create Course</a>
-                <a href="${contextPath}/editCourse" class="list-group-item active">Edit Course</a>
+                <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
-                <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
+                <a href="${contextPath}/editSurvey" class="list-group-item active">Edit Survey</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>
         </div>
         <div class="col-md-9">
             <div >
-                <h1>Edit Course</h1>
+                <h1>Edit Survey</h1>
 
                 <table id="edit-article-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Instructor</th>
+                        <th>Course Title</th>
+                        <th>Survey Title</th>
                         <td></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${courses}" var="course">
+                    <c:forEach items="${surveys}" var="survey">
                         <tr>
                             <input type="hidden" value="${course.userKey}" id="userKey"/>
                             <input type="hidden" value="${course.courseKey}" id="courseKey"/>
@@ -70,18 +70,18 @@
                             <input type="hidden" value="${course.status}" id="status"/>
                             <input type="hidden" value="${course.currSize}" id="currSize"/>
                             <input type="hidden" value="${course.capacity}" id="capacity"/>
-                            <td>${course.title}</td>
-                            <td>${course.instructor}</td>
-                            <td><button id="btn-edit-course" data-toggle="modal" data-target="editCourseModal">Edit</button></td>
+                            <td>${survey.title}</td>
+                            <td>${survey.title}</td>
+                            <td><button id="btn-edit-survey" data-toggle="modal" data-target="editSurveyModal">Edit</button></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
 
 
-                <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="editSurveyModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <%--<div class="modal-content">--%>
+                        <div class="modal-content">
                             <div class="modal-header row">
                                 <div class="col-sm-10">
                                     <h3 class="modal-title">Edit <strong><span id="edit-course-title"></span></strong></h3>
@@ -92,14 +92,11 @@
                                     </button>
                                 </div>
                             </div>
-                            <form:form class="form-horizontal" method="post"
-                                       modelAttribute="course" action="editCourse">
+                            <form>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="edit-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
-                                        <div class="col-sm-6">
-                                            <form:input class="form-control" type="text" path="enrollDate" id="edit-course-enroll-date"/>
-                                        </div>
+                                        <label for="add-survey-title">Title</label>
+                                        <input type="text" class="form-control" id="edit-survey-title" placeholder="Title" />
                                     </div>
                                     <div class="form-group">
                                         <label for="edit-course-start-date" class="col-sm-2 control-label">Start Date</label>
@@ -150,9 +147,9 @@
                                     <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
-                            </form:form>
+                            </form>
                         </div>
-                    <%--</div>--%>
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,3 +157,4 @@
 </div>
 </body>
 </html>
+

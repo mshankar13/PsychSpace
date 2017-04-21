@@ -1,8 +1,6 @@
 //TODO: 1. no course, no survey
 //      2. Question type
-//      3. Answers
-//      4. Each answer score
-//      5. Add survey
+//      3. Add survey
 
 
 var questionCounter = 2;
@@ -11,6 +9,7 @@ $(document).ready(function(){
     $("#add-survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#add-survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#add-survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
+    $("#add-survey-due-date").datepicker();
 
     $("#add-survey-submit").on("click", addSurvey);
 });
@@ -39,7 +38,7 @@ function addQuestion() {
                             <label>Score</label> \
                         </div> \
                         <div class="col-md-3"> \
-                            <input type="number" /> \
+                            <input type="number" class="input-score"/> \
                         </div> \
                         <div class="col-md-2"> \
                             <button type="button" class="btn btn-default btn-sm btn-survey-add-answer"> \
@@ -68,7 +67,7 @@ function addAnswer() {
                         <label>Score</label> \
                     </div> \
                     <div class="col-md-3"> \
-                        <input type="number" /> \
+                        <input type="number" class="input-score"/> \
                     </div> \
                     <div class="col-md-2"> \
                         <button type="button" class="btn btn-default btn-sm btn-survey-remove-answer"> \
@@ -100,23 +99,27 @@ function removeAnswer() {
 
 function addSurvey() {
     var survey = {};
-    survey["title"] = $("#add-survey-title");
+    survey["title"] = $("#add-survey-title").val();
     var questions = {};
-
 
     survey["questions"] = {};
     $.each($(".question-group"), function(index, value) {
+        var question = {};
         var answers = {};
+        question["question"] = $(value).find(".input-question").val();
         $.each($(this).find(".answer-row"), function(i, v) {
             var answer = {};
-            answer["answer"] = v.children[1].children[0].value;
-            answer["score"] = v.children[3].children[0].value;
+            answer["answer"] = $(v).find(".input-answer").val();
+            answer["score"] = $(v).find(".input-score").val();
             answers[i] = answer;
-        })
-        questions[index] = answers;
-    })
+            question["answer"] = answer;
+        });
+        questions[index] = question;
+    });
 
     survey["questions"] = questions;
+
+    console.log("Survey", survey);
 
     $.ajax({
         url: "/addSurvey",

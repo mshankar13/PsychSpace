@@ -44,8 +44,6 @@
             <div>
                 <h1>Create Survey</h1>
                 <form>
-                <%--<form:form class="form-horizontal" method="post"--%>
-                           <%--modelAttribute="survey" action="addSurvey">--%>
                     <div class="form-group">
                         <label for="select-course">Select Course</label>
                         <select class="form-control" id="select-course">
@@ -57,15 +55,23 @@
                     <div class="form-group">
                         <label for="add-survey-title">Title</label>
                         <input type="text" class="form-control" id="add-survey-title" placeholder="Title" />
-                        <%--<form:input type="text" class="form-control" id="survey-title" path="title" placeholder="Title" />--%>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="add-survey-due-date"/>
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-questions">Questions</label>
                     </div>
                     <div id="add-survey-q-group">
-                        <label style="font-size: 15pt">Questions</label>
                         <div class="form-group question-group">
                             <label>Question 1</label>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <input class="form-control" path="question"/>
+                                    <input class="form-control input-question"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
@@ -79,13 +85,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input class="input-answer"/>
-                                    <%--<form:input class="form-control input-answer" path="question"/>--%>
                                 </div>
                                 <div class="col-md-1">
                                     <label>Score</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="number" class="score"/>
+                                    <input type="number" class="input-score"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
@@ -99,8 +104,7 @@
                             <label>Question <span class="question-number">2</span></label>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <input class="form-control" path="question1"/>
-                                    <%--<form:input class="form-control" path="question1"/>--%>
+                                    <input class="form-control input-question"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">
@@ -114,13 +118,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input class="input-answer"/>
-                                    <%--<form:input class="form-control" path="question"/>--%>
                                 </div>
                                 <div class="col-md-1">
                                     <label>Score</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="number" />
+                                    <input type="number" class="input-score"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
@@ -130,8 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="admin-btn" id="add-survey-submit">Create</button>
-                <%--</form:form>--%>
+                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
                 </form>
             </div>
         </div>
