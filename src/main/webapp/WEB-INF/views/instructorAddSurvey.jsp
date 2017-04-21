@@ -37,6 +37,9 @@
                 <a href="${contextPath}/addSurvey" class="list-group-item active">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
                 <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
+                <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
+                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
+                <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>
@@ -69,7 +72,7 @@
                         <div class="col-sm-6"></div>
                     </div>
                     <div class="form-group">
-                        <label class="label-questions">Questions</label>
+                        <label class="col-sm-2 control-label label-questions">Questions</label>
                     </div>
                     <div id="add-survey-q-group">
                         <div class="question-group">
@@ -148,7 +151,6 @@
                     <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
                 </form>
             </div>
-        </div>
         </div>
     </div>
 </div>

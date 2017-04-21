@@ -21,7 +21,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
     <%--Customized--%>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/instructorSurveyjs"></script>
+    <script src="${contextPath}/resources/js/instructorSurvey.js"></script>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
@@ -39,6 +39,9 @@
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item active">Edit Survey</a>
                 <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
+                <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
+                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
+                <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>
