@@ -1,10 +1,12 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.utilities.Answer;
 import com.spacecadet.psychspace.utilities.Question;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,38 +14,32 @@ import java.util.List;
  */
 public class QuestionManager {
     private DatastoreService datastore;
+    private AnswerManager answerManager = new AnswerManager();
 
     public QuestionManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public String[] parseQuestions(String questions) {
-        String[] questionsList = questions.split("");
-        return questionsList;
-    }
 
-    public String addQuestions(String surveyKey, String questions) {
-        String keys = "";
+    public void addQuestions(String surveyKey, HashMap<Question, ArrayList<Answer>> questionMap) {
         Transaction txn = datastore.beginTransaction();
-        String[] questionsList = parseQuestions(questions);
-        try {
-            for (String question : questionsList) {
-                Entity question1 = new Entity("Question");
-                question1.setProperty("SurveyKey", surveyKey);
-                question1.setProperty("Content", question);
-                question1.setProperty("Type", "default");
 
-                datastore.put(question1);
+        try {
+            for (Question question : questionMap.keySet()) {
+                Entity question1 = new Entity("Question");
+                question1.setProperty("Content", question.getContent());
+                question1.setProperty("Type", question.getType());
+                question1.setProperty("surveyKey", surveyKey);
+                datastore.put(txn, question1);
                 txn.commit();
-                keys.concat(" ");
-                keys.concat(KeyFactory.keyToString(question1.getKey()));
+
+                answerManager.addAnswers(KeyFactory.keyToString(question1.getKey()), questionMap.get(question));
             }
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
             }
         }
-        return keys;
     }
 
     public ArrayList<Question> loadQuestions(String surveyKey) {
@@ -56,13 +52,7 @@ public class QuestionManager {
 
         ArrayList<Question> questions = new ArrayList<>();
         for (Entity question : surveyQuestions) {
-            Question question1 = new Question();
-            question1.setSurveyKey(question.getProperty("SurveyKey").toString());
-            question1.setQuestionKey(KeyFactory.keyToString(question.getKey()));
-            question1.setContent(question.getProperty("Content").toString());
-            question1.setType(question.getProperty("Type").toString());
 
-            questions.add(question1);
         }
         return questions;
     }
