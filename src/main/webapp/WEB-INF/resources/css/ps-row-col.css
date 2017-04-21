@@ -203,7 +203,7 @@ h3 {
 
 /* Modal / Edit Comment */
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1080px) {
     .ps-feature-content .ps-feature-details {
         width: 100%;
         margin-bottom: 2em;
