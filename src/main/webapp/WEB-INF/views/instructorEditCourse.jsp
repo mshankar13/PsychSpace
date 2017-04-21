@@ -39,6 +39,7 @@
                 <a href="${contextPath}/editCourse" class="list-group-item active">Edit Course</a>
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
+                <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>
@@ -72,7 +73,7 @@
                             <input type="hidden" value="${course.capacity}" id="capacity"/>
                             <td>${course.title}</td>
                             <td>${course.instructor}</td>
-                            <td><button id="btn-edit-course" data-toggle="modal" data-target="editCourseModal">Edit</button></td>
+                            <td><button id="btn-edit-course" class="instructor-btn" data-toggle="modal" data-target="editCourseModal">Edit</button></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -80,7 +81,7 @@
 
 
                 <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog instructor-modal" role="document">
                         <%--<div class="modal-content">--%>
                             <div class="modal-header row">
                                 <div class="col-sm-10">

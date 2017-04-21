@@ -37,6 +37,7 @@
                 <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
+                <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>
