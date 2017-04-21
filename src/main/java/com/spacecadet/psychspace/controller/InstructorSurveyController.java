@@ -7,10 +7,7 @@ import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Survey;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -45,16 +42,10 @@ public class InstructorSurveyController {
      * @return
      */
     @RequestMapping(value = "/addSurvey", method = RequestMethod.POST)
-    public ModelAndView addSurvey(@ModelAttribute("survey") Survey survey) {
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        surveyManager.addSurvey(survey);
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddSurvey");
-        model.addObject("survey", new Survey());
-        model.addObject("courses", courses);
+    public String addSurvey(@RequestBody String survey) {
+        // TODO: add function for parsing
 
-
-        return model;
+        return "redirect:/addSurvey";
     }
 
 
