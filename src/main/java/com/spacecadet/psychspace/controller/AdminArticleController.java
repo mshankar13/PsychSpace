@@ -2,7 +2,9 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
+import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.News;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +20,7 @@ public class AdminArticleController {
 
     private NewsManager newsManager = new NewsManager();
     private HelperManager helper = new HelperManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * admin page - add new article to news feed
@@ -115,5 +118,33 @@ public class AdminArticleController {
         return model;
     }
 
+    /**
+     * logout on admin article page
+     * @return
+     */
+    @RequestMapping(value = "/admin_addArticle/logout", method = RequestMethod.POST)
+    public String logoutAdd(@RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
+    }
 
+    /**
+     * logout on admin article page
+     * @return
+     */
+    @RequestMapping(value = "/admin_editArticle/logout", method = RequestMethod.POST)
+    public String logoutEdit(@RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
+    }
+
+    /**
+     * logout on admin article page
+     * @return
+     */
+    @RequestMapping(value = "/admin_deleteArticle/logout", method = RequestMethod.POST)
+    public String logoutDelete(@RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
+    }
 }
