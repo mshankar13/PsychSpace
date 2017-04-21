@@ -22,7 +22,7 @@ public class WelcomeController {
 
     /**
      * all visit to url "/" to welcome page
-     * @return
+     * @return welcome page
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView welcome(){
@@ -32,6 +32,11 @@ public class WelcomeController {
         return model;
     }
 
+    /**
+     * login on welcome page
+     * @param user user logged on
+     * @return home page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
@@ -40,18 +45,23 @@ public class WelcomeController {
             user2 = userManager.addUser(user1, "User");
         }
         userManager.resetCurrentUser(user2);
-        return "home";
+        return "redirect:/home";
     }
 
+    /**
+     * logout on welcome page
+     * @param user user logged out
+     * @return welcome page
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user){
         userManager.resetCurrentUser(new User());
-        return "home";
+        return "/";
     }
 
     /**
      * fix url visit to /_ah/warmup
-     * @return
+     * @return welcome page
      */
     @RequestMapping(value = "/_ah/warmup", method = RequestMethod.GET)
     public ModelAndView notUsed1(){
@@ -63,7 +73,7 @@ public class WelcomeController {
 
     /**
      * fix url visit to favicon.ico
-     * @return
+     * @return welcome page
      */
     @RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
     public ModelAndView notUsed2(){

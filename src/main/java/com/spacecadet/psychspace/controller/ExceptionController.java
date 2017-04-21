@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionController {
     /**
      * handle error 404
-     * @param request
-     * @param e
-     * @return
+     * @param request http request
+     * @param e exception caught
+     * @return 404 page
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(SourceNotFoundException.class)

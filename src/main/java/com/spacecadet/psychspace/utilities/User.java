@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private  String userKey;
+    private String userKey;
     private String email;
     private String firstName;
     private String lastName;

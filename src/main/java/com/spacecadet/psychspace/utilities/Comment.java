@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
-    private String username;
+    private String username; //userkey
     private String content;
     private String commentKey;
     private String newsKey;

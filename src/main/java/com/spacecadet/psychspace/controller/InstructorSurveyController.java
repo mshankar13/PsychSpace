@@ -23,8 +23,8 @@ public class InstructorSurveyController {
     private UserManager userManager = new UserManager();
 
     /**
-     * instructor page - add new survey to course
-     * @return
+     * instructor page (get) - add new survey to course
+     * @return instructor add survey page
      */
     @RequestMapping(value = "/addSurvey", method = RequestMethod.GET)
     public ModelAndView addSurvey() {
@@ -38,8 +38,9 @@ public class InstructorSurveyController {
     }
 
     /**
-     * instructor page - add new survey to course
-     * @return
+     * instructor page (post) - add new survey to course
+     * @param survey new survey
+     * @return instructor add survey
      */
     @RequestMapping(value = "/addSurvey", method = RequestMethod.POST)
     public String addSurvey(@RequestBody String survey) {
@@ -50,7 +51,7 @@ public class InstructorSurveyController {
 
 
     /**
-     * instructor page - edit survey to course
+     * instructor page  - edit survey to course
      * @return
      */
     @RequestMapping(value = "/editSurvey", method = RequestMethod.GET)
@@ -80,8 +81,9 @@ public class InstructorSurveyController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor add survey page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/addSurvey/logout", method = RequestMethod.POST)
     public String logoutAdd(@RequestBody String user) {
@@ -90,8 +92,9 @@ public class InstructorSurveyController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor edit survey page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/editSurvey/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
@@ -100,8 +103,9 @@ public class InstructorSurveyController {
     }
 
     /**
-     * logout on instructor course page
-     * @return
+     * logout on instructor delete survey page
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/deleteSurvey/logout", method = RequestMethod.POST)
     public String logoutDelete(@RequestBody String user) {

@@ -18,7 +18,7 @@ public class SurveyController {
 
     /**
      * all visit to survey page
-     * @return
+     * @return learn survey page
      */
     @RequestMapping(value = "/survey", method = RequestMethod.GET)
     public ModelAndView survey() {
@@ -30,7 +30,8 @@ public class SurveyController {
 
     /**
      * logout on survey page
-     * @return
+     * @param user user logged out
+     * @return welcome page
      */
     @RequestMapping(value = "/survey/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
