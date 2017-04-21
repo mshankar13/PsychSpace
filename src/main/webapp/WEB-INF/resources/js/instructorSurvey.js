@@ -101,21 +101,27 @@ function addSurveySubmit() {
     var questions = {};
 
     survey["questions"] = {};
+    var qCount = 0;
     $.each($(".question-group"), function(index, value) {
         var question = {};
         var answers = {};
+        var aCount = 0;
         question["question"] = $(value).find(".input-question").val();
         question["type"] = $(value).find(".input-type").val();
-            $.each($(this).find(".answer-row"), function(i, v) {
-                var answer = {};
-                answer["answer"] = $(v).find(".input-answer").val();
-                answer["score"] = $(v).find(".input-score").val();
-                answers[i] = answer;
+        $.each($(this).find(".answer-row"), function(i, v) {
+            var answer = {};
+            answer["answer"] = $(v).find(".input-answer").val();
+            answer["score"] = $(v).find(".input-score").val();
+            answers[i] = answer;
+            aCount++;
         });
         question["answers"] = answers;
         questions[index] = question;
+        question["answerTotal"] = aCount;
+        qCount++;
     });
 
+    survey["questionTotal"] = qCount;
     survey["questions"] = questions;
 
     console.log("Survey", survey);
