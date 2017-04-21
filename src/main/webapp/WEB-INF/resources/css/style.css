@@ -324,3 +324,12 @@ hr {
         margin-top: 4em;
     }
 }
+
+/*---------------- Z-INDEX ----------------*/
+.pushToFront{
+    z-index: 10000;
+}
+
+.pushToBack{
+    z-index: -1;
+}
