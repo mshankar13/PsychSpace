@@ -10,6 +10,7 @@
     border-color: var(--tea-rose-color);
     color: var(--space-cadet-color);
     border-radius: 5px;
+    box-shadow: none;
 }
 
 .instructor-btn:hover {

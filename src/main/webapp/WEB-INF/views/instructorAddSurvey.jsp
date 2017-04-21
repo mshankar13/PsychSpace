@@ -43,18 +43,22 @@
         <div class="col-md-9">
             <div>
                 <h1>Create Survey</h1>
-                <form>
+                <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="select-course">Select Course</label>
-                        <select class="form-control" id="select-course">
-                        <c:forEach items="${courses}" var="course">
-                            <option>${course.title}</option>
-                        </c:forEach>
-                        </select>
+                        <label for="select-course" class="col-sm-2 control-label">Select Course</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="select-course">
+                            <c:forEach items="${courses}" var="course">
+                                <option class="select-course" value="${course.courseKey}">${course.title}</option>
+                            </c:forEach>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-survey-title">Title</label>
-                        <input type="text" class="form-control" id="add-survey-title" placeholder="Title" />
+                        <label for="add-survey-title" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="add-survey-title" placeholder="Survey Name" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
@@ -67,28 +71,30 @@
                         <label class="label-questions">Questions</label>
                     </div>
                     <div id="add-survey-q-group">
-                        <div class="form-group question-group">
-                            <label>Question 1</label>
-                            <div class="row">
-                                <div class="col-md-10">
+                        <div class="question-group">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Question 1</label>
+                                <div class="col-md-6">
                                     <input class="form-control input-question"/>
                                 </div>
+                                <label class="col-sm-1 control-label">Type</label>
                                 <div class="col-md-2">
+                                    <input class="form-control input-type"/>
+                                </div>
+                                <div class="col-md-1">
                                     <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="row answer-row">
-                                <div class="col-md-1">
-                                    <label>Answer</label>
-                                </div>
+                            <div class="form-group answer-row">
+                                <%--Answer--%>
+                                <label class="col-sm-2 control-label">Answer</label>
                                 <div class="col-md-4">
                                     <input class="input-answer"/>
                                 </div>
-                                <div class="col-md-1">
-                                    <label>Score</label>
-                                </div>
+                                <%--Score--%>
+                                <label class="col-sm-1 control-label">Score</label>
                                 <div class="col-md-3">
                                     <input type="number" class="input-score"/>
                                 </div>
@@ -100,28 +106,33 @@
                             </div>
                         </div>
 
-                        <div class="form-group question-group">
-                            <label>Question <span class="question-number">2</span></label>
-                            <div class="row">
-                                <div class="col-md-10">
+                        <div class="question-group">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Question
+                                    <span class="question-number">2</span>
+                                </label>
+                                <%--input question--%>
+                                <div class="col-md-6">
                                     <input class="form-control input-question"/>
                                 </div>
+                                <%--input type--%>
+                                <label class="col-sm-1 control-label">Type</label>
                                 <div class="col-md-2">
+                                    <input class="form-control input-type"/>
+                                </div>
+                                <%--remove button--%>
+                                <div class="col-md-1">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">
                                         <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="row answer-row">
-                                <div class="col-md-1">
-                                    <label>Answer</label>
-                                </div>
+                            <div class="form-group answer-row">
+                                <label class="col-sm-2 control-label">Answer</label>
                                 <div class="col-md-4">
                                     <input class="input-answer"/>
                                 </div>
-                                <div class="col-md-1">
-                                    <label>Score</label>
-                                </div>
+                                <label class="col-sm-1 control-label">Score</label>
                                 <div class="col-md-3">
                                     <input type="number" class="input-score"/>
                                 </div>

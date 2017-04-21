@@ -37,11 +37,11 @@ public class WelcomeController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody String user){
         User user1 = (User)(helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if ( user1 == null) {
-            user1 = userManager.addUser(user1, "User");
+        User user2 = userManager.emailRegistered(user1.getEmail());
+        if ( user2 == null) {
+            user2 = userManager.addUser(user1, "User");
         }
-        userManager.resetCurrentUser(user1);
+        userManager.resetCurrentUser(user2);
         return "home";
     }
 

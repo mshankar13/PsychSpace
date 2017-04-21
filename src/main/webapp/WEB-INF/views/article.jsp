@@ -229,7 +229,6 @@
                             <form:hidden path="username" value="0"/>
                             <form:hidden path="newsKey" value="0"/>
                             <form:hidden path="date" value="0"/>
-                            <form:hidden path="state" value="add"/>
                             <form:hidden path="content"/>
                             <h3>Are you sure you want to delete comment: <span id="delete-comment-modal-span"></span>
                             </h3>

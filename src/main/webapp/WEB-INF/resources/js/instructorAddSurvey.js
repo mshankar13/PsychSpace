@@ -1,6 +1,6 @@
 //TODO: 1. no course, no survey
 //      2. Question type
-//      3. Add survey
+//      3. Course key
 
 
 var questionCounter = 2;
@@ -15,38 +15,40 @@ $(document).ready(function(){
 });
 
 function addQuestion() {
-    var div = '<div class="form-group question-group"> \
-                    <label>Question <span class="question-number"></span></label> \
-                    <div class="row"> \
-                         <div class="col-md-10"> \
-                            <input class="form-control"/> \
-                        </div> \
-                        <div class="col-md-2"> \
-                            <button type="button" class="btn btn-default btn-sm btn-survey-remove-question"> \
-                                <span class="glyphicon glyphicon-minus"></span> \
-                            </button> \
-                        </div> \
-                    </div> \
-                    <div class="row answer-row"> \
-                        <div class="col-md-1"> \
-                            <label>Answer</label> \
-                        </div> \
-                        <div class="col-md-4"> \
-                            <input class="input-answer"/> \
-                        </div> \
-                        <div class="col-md-1"> \
-                            <label>Score</label> \
-                        </div> \
-                        <div class="col-md-3"> \
-                            <input type="number" class="input-score"/> \
-                        </div> \
-                        <div class="col-md-2"> \
-                            <button type="button" class="btn btn-default btn-sm btn-survey-add-answer"> \
-                                <span class="glyphicon glyphicon-plus"></span> \
-                            </button> \
-                        </div> \
+    var div = '<div class="question-group">\
+                <div class="form-group">\
+                    <label class="col-sm-2 control-label">Question \
+                        <span class="question-number"></span> \
+                    </label> \
+                    <div class="col-md-6"> \
+                        <input class="form-control input-question"/>\
                     </div>\
-                </div>';
+                    <label class="col-sm-1 control-label">Type</label> \
+                    <div class="col-md-2"> \
+                        <input class="form-control input-type"/> \
+                    </div> \
+                    <div class="col-md-1">\
+                        <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">\
+                            <span class="glyphicon glyphicon-minus"></span>\
+                        </button>\
+                    </div>\
+                </div>\
+                <div class="form-group answer-row">\
+                    <label class="col-sm-2 control-label">Answer</label>\
+                    <div class="col-md-4">\
+                        <input class="input-answer"/>\
+                    </div>\
+                    <label class="col-sm-1 control-label">Score</label>\
+                    <div class="col-md-3">\
+                        <input type="number" class="input-score"/>\
+                    </div>\
+                    <div class="col-md-2">\
+                        <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">\
+                            <span class="glyphicon glyphicon-plus"></span>\
+                        </button>\
+                    </div>\
+                </div>\
+            </div>';
 
     $("#add-survey-q-group").append(div);
 
@@ -56,32 +58,27 @@ function addQuestion() {
 }
 
 function addAnswer() {
-    var div = '<div class="row"> \
-                    <div class="col-md-1"> \
-                        <label>Answer</label> \
-                    </div> \
-                    <div class="col-md-4"> \
-                        <input class="input-answer"/> \
-                    </div> \
-                    <div class="col-md-1"> \
-                        <label>Score</label> \
-                    </div> \
-                    <div class="col-md-3"> \
-                        <input type="number" class="input-score"/> \
-                    </div> \
-                    <div class="col-md-2"> \
-                        <button type="button" class="btn btn-default btn-sm btn-survey-remove-answer"> \
-                        <span class="glyphicon glyphicon-minus"></span> \
-                        </button> \
+    var div = '<div class="form-group answer-row">\
+                    <label class="col-sm-2 control-label">Answer</label>\
+                    <div class="col-md-4">\
+                        <input class="input-answer"/>\
                     </div>\
-                </div>\
-                ';
+                    <label class="col-sm-1 control-label">Score</label>\
+                    <div class="col-md-3">\
+                        <input type="number" class="input-score"/>\
+                    </div>\
+                    <div class="col-md-2">\
+                        <button type="button" class="btn btn-default btn-sm btn-survey-remove-answer">\
+                            <span class="glyphicon glyphicon-minus"></span>\
+                        </button>\
+                    </div>\
+                </div>';
 
-    $(this).parents().closest(".form-group").append(div);
+    $(this).parents().closest(".question-group").append(div);
 }
 
 function deleteQuestion() {
-    var questionDiv = $(this).closest(".row").parent();
+    var questionDiv = $(this).closest(".question-group");
     questionDiv.remove();
 
     questionCounter--;
@@ -94,11 +91,12 @@ function deleteQuestion() {
 }
 
 function removeAnswer() {
-    $(this).parent().closest(".row").remove();
+    $(this).parent().closest(".answer-row").remove();
 }
 
 function addSurvey() {
     var survey = {};
+    survey["course"] = $('#select-course').find(":selected").val();
     survey["title"] = $("#add-survey-title").val();
     var questions = {};
 
@@ -107,7 +105,8 @@ function addSurvey() {
         var question = {};
         var answers = {};
         question["question"] = $(value).find(".input-question").val();
-        $.each($(this).find(".answer-row"), function(i, v) {
+        question["type"] = $(value).find(".input-type").val();
+            $.each($(this).find(".answer-row"), function(i, v) {
             var answer = {};
             answer["answer"] = $(v).find(".input-answer").val();
             answer["score"] = $(v).find(".input-score").val();
