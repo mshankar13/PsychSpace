@@ -37,6 +37,7 @@
                     <h1 class="absolute-text">Course Catalogue</h1>
                     <form class="ps-search">
                         <input type="text" name="search" placeholder="Search...">
+                        <input type="submit">
                     </form>
                 </div>
                 <div class="ps-feature-content">

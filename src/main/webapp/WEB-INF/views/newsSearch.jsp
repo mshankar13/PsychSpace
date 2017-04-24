@@ -40,38 +40,6 @@
                         <input type="submit">
                     </form>
                 </div>
-                <div class="ps-feature-content">
-                    <div class="row ps-feature fadein">
-                        <div class="ps-feature-info">
-                            <!-- Title -->
-                            <h1>Featured Article<hr></h1>
-                            <br>
-                        </div>
-                        <div class="ps-well">
-                            <p><span class="glyphicon glyphicon-time"></span> Posted ${featuredNews.date}</p>
-
-                            <h1>${featuredNews.title}<hr></h1>
-                            <br>
-
-                            <div class="col-lg-8 ps-col-left">
-                                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                                <br>
-                                <p> by <a class="button fadein" href="#"><span>${featuredNews.author}</span></a> </p>
-
-                            </div>
-                            <div class="col-lg-4 ps-col-right">
-                                <div class="media ps-comment">
-                                    <p>${featuredNews.content}</p>
-
-                                    <div class="center">
-                                        <a class="button fadein btn-read-more" href="/article/${featuredNews.newsKey}"><span>Read More</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
                 </div>
                 <div class="ps-feature-content">
                     <div class="row ps-feature">

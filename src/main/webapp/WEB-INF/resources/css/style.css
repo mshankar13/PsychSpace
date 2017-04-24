@@ -63,7 +63,7 @@ p {
     color: dimgrey;
 }
 
-.col-lg-4 .ps-feature-info-header {
+.col-lg-4 h2.ps-feature-info-header{
     min-height: 85px;
 }
 
@@ -183,7 +183,7 @@ p {
     color: white;
     font-size: 64px;
     position: absolute;
-    top: 35%;
+    top: 50%;
     height: 65%;
 }
 

@@ -172,6 +172,21 @@ h3 {
     color: white;
 }
 
+.ps-search input[type=submit]{
+    background-color: var(--baby-powder-color);
+    color: var(--space-cadet-color);
+    padding: 3px 20px;
+    border: 2px solid #ccc;
+    border-radius: var(--border-radius-1);
+    font-size: 18px;
+    margin-bottom:10px;
+}
+.ps-search input[type=submit]:hover{
+    color: var(--baby-powder-color);
+    background-color: var(--eucalyptus-color);
+}
+
+
 
 /*----------- MODAL ---------------*/
 
