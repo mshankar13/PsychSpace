@@ -2,6 +2,7 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.User;
+import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class VideoController {
      * @return learn video page
      */
     @RequestMapping(value = "/video", method = RequestMethod.GET)
-    public ModelAndView survey() {
+    public ModelAndView video() {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnVideos");
 
