@@ -20,8 +20,9 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
     <%--Customized--%>
+    <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/instructorSurvey.js"></script>
+    <script src="${contextPath}/resources/js/instructorCourse.js"></script>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
@@ -38,9 +39,9 @@
                 <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
-                <a href="${contextPath}/deleteSurvey" class="list-group-item active">Delete Survey</a>
+                <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
                 <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
-                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
+                <a href="${contextPath}/editVideo" class="list-group-item active">Edit Video</a>
                 <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
@@ -48,58 +49,65 @@
         </div>
         <div class="col-md-9">
             <div >
-                <h1>Delete Survey</h1>
+                <h1>Edit Course</h1>
 
                 <table id="edit-article-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Course </th>
-                        <th>Survey Name</th>
+                        <th>Title</th>
+                        <th>Instructor</th>
                         <td></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${surveys}" var="survey">
+                    <c:forEach items="${videos}" var="video">
                         <tr>
-                            <input type="hidden" value="${course.userKey}" id="userKey"/>
-                            <input type="hidden" value="${course.courseKey}" id="courseKey"/>
-                            <input type="hidden" value="${course.title}" id="title"/>
-                            <input type="hidden" value="${course.surveyKey}" id="surveyKey"/>
-                            <input type="hidden" value="${course.dueDate}" id="dueDate"/>
-                            <td>${survey.title}</td>
-                            <td>${survey.title}</td>
-                            <td>
-                                <button id="btn-delete-survey" class="instructor-btn"
-                                        data-toggle="modal" data-target="deleteSurveyModal">Delete
-                                </button>
-                            </td>
+                            <input type="hidden" value="${video.title}" id="video-title"/>
+                            <input type="hidden" value="${video.url}" id="video-url"/>
+                            <input type="hidden" value="${video.videoKey}" id="video-key"/>
+                            <td>${vieo.title}</td>
+                            <td>${video.course}</td>
+                            <td><button id="btn-edit-video" class="instructor-btn" data-toggle="modal" data-target="editVideoModal">Edit</button></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
 
 
-                <div class="modal fade" id="deleteSurveyModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header row">
-                                <div class="col-sm-10">
-                                    <h3 class="modal-title">Delete Confirmation</h3>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                <div class="modal fade" id="editVideoModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog instructor-modal" role="document">
+                        <div class="modal-header row">
+                            <div class="col-sm-10">
+                                <h3 class="modal-title">Edit <strong><span id="edit-video-title"></span></strong></h3>
                             </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <form:form class="form-horizontal" method="post"
+                                   modelAttribute="video" action="editVideo">
                             <div class="modal-body">
-                                Are you sure you want to delete <span></span>?
+                                <div class="form-group">
+                                    <label for="edit-video-title" class="col-sm-2 control-label">Video Name</label>
+                                    <div class="col-sm-6">
+                                        <form:input class="form-control" type="text" path="title" id="edit-video-title"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-video-url" class="col-sm-2 control-label">Video Link</label>
+                                    <div class="col-sm-6">
+                                        <form:input class="form-control" type="text" path="url" id="edit-video-url"/>
+                                    </div>
+                                </div>
+                                <form:hidden path="videoKey" value="null" id="edit-video-key"/>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary" id="edit-survey-submit">Delete</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
-                        </div>
+                        </form:form>
                     </div>
                 </div>
             </div>
@@ -108,5 +116,4 @@
 </div>
 </body>
 </html>
-
 

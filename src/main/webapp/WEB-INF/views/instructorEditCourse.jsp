@@ -40,6 +40,9 @@
                 <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
                 <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
                 <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
+                <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
+                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
+                <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
                 <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
                 <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
             </div>

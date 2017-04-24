@@ -5,6 +5,10 @@
     padding: 20px 40px;
 }
 
+.form-control input {
+    height:30px;
+}
+
 .instructor-btn {
     background-color: var(--tea-rose-color);
     border-color: var(--tea-rose-color);
