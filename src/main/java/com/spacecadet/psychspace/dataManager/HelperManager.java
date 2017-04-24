@@ -76,6 +76,8 @@ public class HelperManager {
         survey.setCourseKey(courseKey.toString());
         JsonElement title = o.get("title");
         survey.setTitle(title.toString());
+        JsonElement date = o.get("date");
+        survey.setDueDate(date.toString());
 
         JsonObject questions = o.getAsJsonObject("questions");
         JsonElement questionTotal = o.get("questionTotal");

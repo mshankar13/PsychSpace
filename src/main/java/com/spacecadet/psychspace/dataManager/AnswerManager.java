@@ -20,9 +20,13 @@ public class AnswerManager {
 
         try {
             for (Answer answer : answers) {
+                if (txn.isActive()) {
+                    txn.rollback();
+                }
+                txn = datastore.beginTransaction();
                 Entity answer1 = new Entity("Answer");
                 answer1.setProperty("Answer", answer.getAnswer());
-                answer1.setProperty("Type", answer.getScore());
+                answer1.setProperty("Score", answer.getScore());
                 answer1.setProperty("QuestionKey", questionKey);
 
                 datastore.put(txn, answer1);

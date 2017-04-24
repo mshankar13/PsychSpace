@@ -52,6 +52,7 @@ public class InstructorSurveyController {
     public String addSurvey(@RequestBody String survey) {
         // TODO: add function for parsing
         Survey survey1 = helperManager.surveyStringToJson(survey);
+        survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
         return "redirect:/addSurvey";
