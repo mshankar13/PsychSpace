@@ -33,7 +33,42 @@
                     <%@include file="navbar.html"%>
                 </div>
 
-                <%@include file="learn-videos.html"%>
+                <header class="ps-feature-header">
+                    <div class="ps-feature-content">
+                        <div class="row ps-feature">
+                            <div class="ps-feature-info">
+                                <!-- Course Title -->
+                                <h1>Course Title<hr></h1>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row ps-text-content">
+                            <div class="col-lg-2 ps-col-left">
+                                <div class="ps-well">
+                                    <!-- Learn Sidebar -->
+                                    <%@include file="learn-sidebar.html"%>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 ps-col-right">
+                                <!-- Start video -->
+                                <div class="col-lg-4">
+                                    <c:forEach items="${videos}" var="video">
+                                    <div class="ps-well">
+                                        <!-- Video Title -->
+                                        <h2>${video.title}<hr> </h2>
+                                        <div class="center">
+                                            <!-- Video Link - change src url -->
+                                            <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0" allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                    </c:forEach>
+                                </div>
+                                <!-- End video -->
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
 
                     <%@include file="footer.html" %>

@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-9">
             <div >
-                <h1>Edit Course</h1>
+                <h1>Edit Video</h1>
 
                 <table id="edit-article-table" class="table table-striped table-hover">
                     <thead>
@@ -65,8 +65,8 @@
                             <input type="hidden" value="${video.title}" id="video-title"/>
                             <input type="hidden" value="${video.url}" id="video-url"/>
                             <input type="hidden" value="${video.videoKey}" id="video-key"/>
-                            <td>${vieo.title}</td>
-                            <td>${video.course}</td>
+                            <td>${video.title}</td>
+                            <td>${video.courseKey}</td>
                             <td><button id="btn-edit-video" class="instructor-btn" data-toggle="modal" data-target="editVideoModal">Edit</button></td>
                         </tr>
                     </c:forEach>
@@ -101,7 +101,7 @@
                                         <form:input class="form-control" type="text" path="url" id="edit-video-url"/>
                                     </div>
                                 </div>
-                                <form:hidden path="videoKey" value="null" id="edit-video-key"/>
+                                <%--<form:hidden path="videoKey" value="null" id="edit-video-key"/>--%>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>

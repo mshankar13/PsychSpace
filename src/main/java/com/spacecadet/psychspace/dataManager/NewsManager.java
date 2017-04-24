@@ -180,4 +180,45 @@ public class NewsManager {
         }
         return allNews.get(allNews.size() - 1);
     }
+
+    /**
+     * search for news with related keyword
+     * @param newsList list of all news
+     * @param keyword user input keyword
+     * @return list of all related news
+     */
+    public ArrayList<News> searchNews(ArrayList<News> newsList, String keyword) {
+        ArrayList<News> titleSearch = new ArrayList<>();
+        for (News news : newsList) {
+            if (news.getTitle().contains(keyword) == true) {
+                titleSearch.add(news);
+            }
+        }
+        Collections.sort(titleSearch, new Comparator<News>() {
+            @Override
+            public int compare(News o1, News o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
+        ArrayList<News> contentSearch = new ArrayList<>();
+        for (News news : newsList) {
+            if (news.getContent().contains(keyword) == true) {
+                if (!titleSearch.contains(news)) {
+                    contentSearch.add(news);
+                }
+            }
+        }
+        Collections.sort(contentSearch, new Comparator<News>() {
+            @Override
+            public int compare(News o1, News o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
+        ArrayList<News> results = new ArrayList<>();
+        results.addAll(titleSearch);
+        results.addAll(contentSearch);
+        return results;
+    }
+
+
 }
