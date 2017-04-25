@@ -69,12 +69,17 @@ function showIfLoggedIn() {
 }
 
 function showCommentEditDelete() {
+    var toHide;
     $(".ps-comment").each(function () {
         console.log($(this).find("#commentCreator").val());
-        if ($("#currentUser").val() != $(this).find("#commentCreator").val()) {
-            console.log("Success!");
-            $(".btn-comment-edit").hide();
-            $(".btn-comment-delete").hide();
+        toHide = $("#psCurrentUser").val() !== $(this).find("#commentCreator").val();
+        console.log(toHide);
+        if (toHide == true) {
+            console.log("Hide butons");
+            $(this).find(".btn-comment-edit").hide();
+            $(this).find(".btn-comment-delete").hide();
+        } else {
+            console.log("Show buttons");
         }
     });
 }
