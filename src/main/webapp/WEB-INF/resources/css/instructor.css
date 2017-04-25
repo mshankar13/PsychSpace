@@ -1,3 +1,8 @@
+h3 {
+    font-size: 1.4vw;
+}
+
+
 .wrapper {
     margin: 65px 0px 0px 0px;
     position: absolute;
@@ -23,8 +28,20 @@
     color: var(--baby-powder-color);
 }
 
+.instructor-btn-secondary {
+    border-radius: 5px;
+    background-color: transparent;
+    border: solid 1px var(--space-cadet-color);
+    color: var(--space-cadet-color);
+}
+
+.instructor-btn-secondary:hover {
+    border: var(--eucalyptus-color);
+    color: var(--eucalyptus-color);
+}
+
 .instructor-modal {
-    padding: 20px;
+    width: 540px;
 }
 
 
@@ -53,4 +70,15 @@
     display: block;
     clear: both;
     font-size: 15pt
+}
+
+
+
+/*************************** video ****************************/
+#editVideoModal {
+    height: 350px;
+}
+
+#deleteVideoModal {
+    height: 250px;
 }

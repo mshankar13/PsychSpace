@@ -51,7 +51,7 @@
             <div >
                 <h1>Edit Course</h1>
 
-                <table id="edit-article-table" class="table table-striped table-hover">
+                <table id="edit-course-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
                         <th>Title</th>

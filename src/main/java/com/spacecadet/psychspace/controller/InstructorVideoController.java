@@ -101,6 +101,7 @@ public class InstructorVideoController {
         model.setViewName("instructorDeleteVideo");
         model.addObject("video", new Video());
         model.addObject("courses", courses);
+        model.addObject("videos", videoManager.loadVideos());
 
         return model;
     }
