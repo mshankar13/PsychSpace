@@ -222,10 +222,10 @@ public class CourseManager {
     }
 
     /**
-     * search for course with related keyword
+     * search for courses with related keyword
      * @param courses list of all courses
      * @param keyword user input keyword
-     * @return list of all related course
+     * @return list of all related courses
      */
     public ArrayList<Course> searchCourse(ArrayList<Course> courses, String keyword) {
         ArrayList<Course> titleSearch = new ArrayList<>();

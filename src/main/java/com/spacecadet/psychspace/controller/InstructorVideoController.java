@@ -2,10 +2,12 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.dataManager.VideoManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,7 @@ public class InstructorVideoController {
 
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
+    private VideoManager videoManager = new VideoManager();
 
     /**
      * instructor page (get) - add new video to course
@@ -38,6 +41,23 @@ public class InstructorVideoController {
     }
 
     /**
+     * instructor page (post) - add new video to course
+     * @return instructor add video page
+     */
+    @RequestMapping(value = "/addVideo", method = RequestMethod.POST)
+    public ModelAndView addVideo(@ModelAttribute("video") Video video) {
+        videoManager.addVideo(video);
+        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ModelAndView model = new ModelAndView();
+        model.setViewName("instructorAddVideo");
+        model.addObject("video", new Video());
+        model.addObject("courses", courses);
+
+        return model;
+    }
+
+
+    /**
      * instructor page - edit video to course
      * @return instructor edit video page
      */
@@ -48,6 +68,24 @@ public class InstructorVideoController {
         model.setViewName("instructorEditVideo");
         model.addObject("video", new Video());
         model.addObject("courses", courses);
+        model.addObject("videos", videoManager.loadVideos());
+
+        return model;
+    }
+
+    /**
+     * instructor page - edit video to course
+     * @return instructor edit video page
+     */
+    @RequestMapping(value = "/editVideo", method = RequestMethod.POST)
+    public ModelAndView editVideo(@ModelAttribute("video") Video video) {
+        videoManager.editVideo(video);
+        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ModelAndView model = new ModelAndView();
+        model.setViewName("instructorEditVideo");
+        model.addObject("video", new Video());
+        model.addObject("courses", courses);
+        model.addObject("videos", videoManager.loadVideos());
 
         return model;
     }

@@ -28,10 +28,10 @@ public class SurveyManager {
             survey1.setProperty("CourseKey", survey.getCourseKey());
             survey1.setProperty("Title", survey.getTitle());
             survey1.setProperty("DueDate", survey.getDueDate());
-            survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
             datastore.put(txn, survey1);
             txn.commit();
 
+            survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
             questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
         } finally {
             if (txn.isActive()) {

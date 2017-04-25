@@ -98,6 +98,8 @@ function addSurveySubmit() {
     survey["course"] = $('#select-course').find(":selected").val();
     var title = $("#add-survey-title").val();
     survey["title"] = title;
+    var date = $('#add-survey-due-date').val();
+    survey["date"] = date;
     var questions = {};
 
     survey["questions"] = {};

@@ -26,6 +26,10 @@ public class QuestionManager {
 
         try {
             for (Question question : questionMap.keySet()) {
+                if (txn.isActive()) {
+                    txn.rollback();
+                }
+                txn = datastore.beginTransaction();
                 Entity question1 = new Entity("Question");
                 question1.setProperty("Content", question.getContent());
                 question1.setProperty("Type", question.getType());
@@ -33,7 +37,9 @@ public class QuestionManager {
                 datastore.put(txn, question1);
                 txn.commit();
 
-                answerManager.addAnswers(KeyFactory.keyToString(question1.getKey()), questionMap.get(question));
+                String k = KeyFactory.keyToString(question1.getKey());
+                ArrayList<Answer> a = questionMap.get(question);
+                answerManager.addAnswers(k, a);
             }
         } finally {
             if (txn.isActive()) {
