@@ -20,6 +20,8 @@ function editVideoModalShow() {
     //     return $(this).val() == courseKey;
     // }).prop('selected', true);
 
+    $("#edit-video-course-key select").val(courseKey);
+
     $("#editVideoModal").modal("show");
 }
 
