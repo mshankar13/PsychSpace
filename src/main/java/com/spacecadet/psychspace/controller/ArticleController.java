@@ -49,8 +49,8 @@ public class ArticleController {
             model.addObject("isLiked", "false");
             model.addObject("isLoggedIn", "false");
         }
-        model.addObject("currentUser", WelcomeController.currUser.getUserKey());
-        model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
+        model.addObject("currentUserKey", WelcomeController.currUser.getUserKey());
+        //model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
 
         return model;
     }
@@ -62,33 +62,17 @@ public class ArticleController {
      * @return single article page
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
-    public ModelAndView addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
+    public String addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
         News news = newsManager.loadSingleNews(key);
         if (comment.getState().equals("add")){
-            commentManager.addComment(key,"currUser",comment.getContent());
+            commentManager.addComment(key, WelcomeController.currUser.getUserKey(),comment.getContent());
         } else if(comment.getState().equals("edit")){
             commentManager.editComment(comment.getCommentKey(), "currUser", comment.getContent());
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-        ModelAndView model = new ModelAndView();
-        model.setViewName("article");
-        model.addObject("article", news);
-        model.addObject("like", new Like());
-        News featured = newsManager.getFeatured(newsManager.loadNews());
-        featured.setContent(featured.getContent().substring(0, 100));
-        model.addObject("featured", featured);
-        model.addObject("comment", new Comment());
-        model.addObject("commentList", commentManager.loadComments(key));
-        if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
-            model.addObject("isLiked", "true");
-        } else {
-            model.addObject("idLikes", "false");
-        }
-        model.addObject("currentUser", WelcomeController.currUser.getUserKey());
-        model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
 
-        return model;
+        return "redirect:/article/"+key;
     }
 
     /**

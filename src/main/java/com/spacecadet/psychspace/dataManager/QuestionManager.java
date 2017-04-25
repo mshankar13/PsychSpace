@@ -48,17 +48,24 @@ public class QuestionManager {
         }
     }
 
-    public ArrayList<Question> loadQuestions(String surveyKey) {
-        Query.Filter surveyFilter =
+    public HashMap<Question, ArrayList<Answer>> loadQuestions(String surveyKey) {
+
+        Query.Filter questionFilter =
                 new Query.FilterPredicate("SurveyKey", Query.FilterOperator.EQUAL, surveyKey);
-        Query questionQuery = new Query("Question").setFilter(surveyFilter);
+        Query questionQuery = new Query("Question").setFilter(questionFilter);
 
         List<Entity> surveyQuestions =
                 datastore.prepare(questionQuery).asList(FetchOptions.Builder.withDefaults());
 
-        ArrayList<Question> questions = new ArrayList<>();
+        HashMap<Question, ArrayList<Answer>> questions = new HashMap<>();
         for (Entity question : surveyQuestions) {
+            Question question1 = new Question();
+            question1.setSurveyKey(question.getProperty("SurveyKey").toString());
+            question1.setQuestionKey(KeyFactory.keyToString(question.getKey()));
+            question1.setContent(question.getProperty("Content").toString());
+            question1.setType(question.getProperty("Type").toString());
 
+            questions.put(question1, answerManager.loadAnswers(KeyFactory.keyToString(question.getKey())));
         }
         return questions;
     }
