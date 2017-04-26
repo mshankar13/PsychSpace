@@ -95,11 +95,11 @@ function removeAnswer() {
 
 function addSurveySubmit() {
     var survey = {};
-    survey["course"] = $('#select-course').find(":selected").val();
-    var title = $("#add-survey-title").val();
-    survey["title"] = title;
-    var date = $('#add-survey-due-date').val();
-    survey["date"] = date;
+    survey["courseKey"] = $('#select-course').find(":selected").val();
+    survey["courseTitle"] = $("#select-course").find(":selected").text();
+
+    survey["title"] = $("#add-survey-title").val();
+    survey["date"] = $('#add-survey-due-date').val();
     var questions = {};
 
     survey["questions"] = {};

@@ -50,6 +50,28 @@ public class SurveyManager {
         return surveys;
     }
 
+    public Survey loadSingleCourseSurvey(String courseKey) {
+        Survey survey = new Survey();
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+
+        Query surveyQuery = new Query("Survey").setFilter(propertyFilter1);
+        Entity surveyEntity = datastore.prepare(surveyQuery).asSingleEntity();
+
+        survey.setSurveyKey(KeyFactory.keyToString(surveyEntity.getKey()));
+        survey.setCourseKey(surveyEntity.getProperty("CourseKey").toString());
+        survey.setUserKey(surveyEntity.getProperty("UserKey").toString());
+        survey.setTitle(surveyEntity.getProperty("Title").toString());
+        survey.setCourseTitle(surveyEntity.getProperty("CourseTitle").toString());
+        survey.setDueDate(surveyEntity.getProperty("DueDate").toString());
+
+        String key = KeyFactory.keyToString(surveyEntity.getKey());
+        HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(key);
+        survey.setQuestions(questions);
+
+        return survey;
+    }
+
     /**
      * instructor create new survey to datastore
      * @param survey new survey
@@ -60,7 +82,7 @@ public class SurveyManager {
             Entity survey1 = new Entity("Survey");
             survey1.setProperty("UserKey", survey.getUserKey());
             survey1.setProperty("CourseKey", survey.getCourseKey());
-            survey1.setProperty("CourseSurvey", survey.getCourseTitle());
+            survey1.setProperty("CourseTitle", survey.getCourseTitle());
             survey1.setProperty("Title", survey.getTitle());
             survey1.setProperty("DueDate", survey.getDueDate());
             datastore.put(txn, survey1);

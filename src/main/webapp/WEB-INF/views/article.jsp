@@ -37,8 +37,8 @@
 </div>
 
 <header class="ps-feature-header">
-    <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
-    <input type="hidden" id="psCurrentUser" value="${currentUserKey}">
+    <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}"/>
+    <input type="hidden" id="psCurrentUser" value="${currentUserKey}"/>
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
