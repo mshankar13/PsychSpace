@@ -22,5 +22,5 @@ public class Survey {
     private String courseKey;
     private String title;
     private String dueDate;
-    private HashMap<Question, ArrayList<Answer>> questions;
+    private transient HashMap<Question, ArrayList<Answer>> questions;
 }

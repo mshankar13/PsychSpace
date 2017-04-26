@@ -38,14 +38,14 @@
 
 <header class="ps-feature-header">
     <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
-    <input type="hidden" id="psCurrentUser" value="${currentUser.userKey}">
+    <input type="hidden" id="psCurrentUser" value="${currentUserKey}">
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted ${article.date}</p>
                 <input type="hidden" id="ps-input-liked" value="${isLiked}">
-                <form:form method="post" modelAttribute="like" action="${article.newsKey}/+1" class="left">
+                <form:form method="post" modelAttribute="like" action="/article/${article.newsKey}/+1" class="left">
                     <form:hidden path="userKey" value="0"/>
                     <form:hidden path="articleKey" value="${article.newsKey}"/>
                     <form:hidden path="status" value="" id="liked"/>
@@ -59,7 +59,7 @@
                     <hr>
                 </h1>
                 <!-- Author -->
-                <div class="media ps-comment">
+                <div class="media">
                     <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
@@ -120,7 +120,7 @@
                 <div class="left">
                     <h4>Leave a Comment:</h4>
                     <form:form class="form-horizontal" method="post" modelAttribute="comment"
-                               action="${article.newsKey}">
+                               action="/article/${article.newsKey}">
                         <form:hidden path="commentKey" value="0"/>
                         <form:hidden path="username" value="0"/>
                         <form:hidden path="newsKey" value="0"/>
@@ -138,7 +138,7 @@
             <!-- Comment -->
             <c:forEach items="${commentList}" var="articleComment">
                 <div class="media ps-comment">
-                    <input type="hidden" id="commentCreator" value="${articleComment.commentKey}">
+                    <input type="hidden" id="commentCreator" value="${articleComment.username}">
                     <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""></a>
                     <div class="media-body">
                         <!-- Comment Author and Date Posted -->
@@ -175,7 +175,7 @@
                             </h2>
                         </div>
                     </div>
-                    <form:form method="post" action="${article.newsKey}" modelAttribute="comment">
+                    <form:form method="post" action="/article/${article.newsKey}" modelAttribute="comment">
                         <div class="ps-modal-body">
                             <div class="form-group">
                                 <form:hidden path="state" value="edit"/>
@@ -216,7 +216,7 @@
                         </div>
                     </div>
 
-                    <form:form method="delete" action="${article.newsKey}" modelAttribute="comment">
+                    <form:form method="post" action="/article/${article.newsKey}" modelAttribute="comment">
                         <div class="ps-modal-body">
                             <form:hidden path="state" value="delete"/>
                             <form:hidden path="commentKey" value="0" id="delete-comment-modal-key"/>

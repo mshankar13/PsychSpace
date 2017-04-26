@@ -17,8 +17,8 @@ $(document).ready(function(){
 });
 
 function onSignIn(googleUser, authResult) {
-    var url = window.location.href;
-    url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
+    var url = window.location.pathname;
+    console.log(url);
     if (url == "/")
         url = url + "login";
     else
@@ -27,7 +27,9 @@ function onSignIn(googleUser, authResult) {
 
     profile = googleUser.getBasicProfile();
 
-    if(!url.includes("learn") && !url.includes("home") && !url.includes("Course") && !url.includes("Survey")) {
+    if(!url.includes("learn") && !url.includes("home")
+        && !url.includes("Course") && !url.includes("Survey")
+       && !url.includes("Video")) {
         var user = {};
         user["email"] = profile.getEmail();
         user["firstName"] = profile.getGivenName();

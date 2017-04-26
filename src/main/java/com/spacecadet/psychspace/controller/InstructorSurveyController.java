@@ -8,14 +8,14 @@ import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.SurveyManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.Course;
-import com.spacecadet.psychspace.utilities.Survey;
-import com.spacecadet.psychspace.utilities.User;
+import com.spacecadet.psychspace.utilities.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by aliao on 4/17/2017.
@@ -66,9 +66,11 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/editSurvey", method = RequestMethod.GET)
     public ModelAndView editSurvey() {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Survey> rawSurveys = surveyManager.loadSurveys(WelcomeController.currUser.getUserKey());
+        String surveys = helperManager.surveyObjectsToJsonString(rawSurveys);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditSurvey");
-        model.addObject("survey", new Survey());
+        model.addObject("surveys", surveys);
         model.addObject("courses", courses);
 
         return model;
