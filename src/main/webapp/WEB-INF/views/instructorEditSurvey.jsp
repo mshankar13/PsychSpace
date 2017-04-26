@@ -53,22 +53,23 @@
                 <table id="edit-article-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Course </th>
-                        <th>Survey Name</th>
+                        <th>Survey </th>
+                        <th>Course Key</th>
+                        <th>Due Date</th>
                         <td></td>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${surveys}" var="survey">
                         <tr>
-                            <input type="hidden" value="${course.userKey}" id="userKey"/>
-                            <input type="hidden" value="${course.courseKey}" id="courseKey"/>
-                            <input type="hidden" value="${course.title}" id="title"/>
-                            <input type="hidden" value="${course.surveyKey}" id="surveyKey"/>
-                            <input type="hidden" value="${course.dueDate}" id="dueDate"/>
+                            <input type="hidden" value="${survey.surveyKey}" id="userKey"/>
+                            <input type="hidden" value="${survey.courseKey}" id="courseKey"/>
+                            <input type="hidden" value="${survey.title}" id="title"/>
+                            <input type="hidden" value="${survey.dueDtae}" id="surveyKey"/>
                             <td>${survey.title}</td>
-                            <td>${survey.title}</td>
-                            <td><button id="btn-edit-survey" class="instructor-btn" data-toggle="modal" data-target="editSurveyModal">Edit</button></td>
+                            <td>${survey.courseKey}</td>
+                            <td>${survey.dueDate}</td>
+                            <td><button class="instructor-btn btn-edit-survey" data-toggle="modal" data-target="editSurveyModal">Edit</button></td>
                         </tr>
                     </c:forEach>
                     </tbody>

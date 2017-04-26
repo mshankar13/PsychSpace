@@ -2,8 +2,18 @@
 
 
 $(document).ready(function(){
-    $("#btn-edit-course").on("click", editCourseModalShow);
+    var courses = $("#courses").val();
+    if (courses == "") {
+        $("#edit-course-div").hide();
+    }
+
+    $("#edit-course-table").on("click", ".btn-edit-course", editCourseModalShow);
+    $("#btn-add-course").on("click", addCourseModalShow);
 });
+
+function addCourseModalShow() {
+    $("#addCourseModal").modal("show");
+}
 
 function editCourseModalShow() {
     var row = $(this).closest("tr");

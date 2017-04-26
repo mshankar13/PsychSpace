@@ -26,7 +26,6 @@
 <div id="wrapper">
 
     <%@include file="admin-sidebar.html" %>
-
     <div id="page-content-wrapper">
         <h1>Delete Comment</h1>
         <form:form method="get" action="admin_deleteArticle" modelAttribute="newsList">
@@ -40,7 +39,6 @@
                 <tbody>
                 <c:forEach items="${newsList}" var="news">
                     <tr>
-                            <%--<form:hidden path="newsKey" value="${news.newsKey}" />--%>
                         <td>${news.title}</td>
                         <td><button type="submit">See Comments</button></td>
                     </tr>
@@ -48,8 +46,7 @@
                 </tbody>
             </table>
         </form:form>
-
-    </div>@#!
+    </div>
 </div>
 </body>
 </html>

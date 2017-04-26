@@ -76,7 +76,7 @@
                             <input type="hidden" value="${course.capacity}" id="capacity"/>
                             <td>${course.title}</td>
                             <td>${course.instructor}</td>
-                            <td><button id="btn-edit-course" class="instructor-btn" data-toggle="modal" data-target="editCourseModal">Edit</button></td>
+                            <td><button class="instructor-btn btn-edit-course" data-toggle="modal" data-target="editCourseModal">Edit</button></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -151,8 +151,8 @@
                                     <form:hidden path="currSize" value="" id="edit-course-currSize"/>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="instructor-btn">Save</button>
                                 </div>
                             </form:form>
                         </div>
