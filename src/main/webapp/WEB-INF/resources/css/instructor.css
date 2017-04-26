@@ -17,6 +17,10 @@ h3 {
     height:30px;
 }
 
+.div-top {
+    margin-bottom: 20px;
+}
+
 .instructor-btn {
     background-color: var(--tea-rose-color);
     border-color: var(--tea-rose-color);
