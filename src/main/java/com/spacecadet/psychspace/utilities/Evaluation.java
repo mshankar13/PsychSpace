@@ -13,7 +13,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Evaluation {
-    private String author;  //user key
+    private String authorKey;
+    private String author;
     private String title;
     private String content;
     private String date;
