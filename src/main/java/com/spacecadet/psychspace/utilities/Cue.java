@@ -13,6 +13,13 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cue {
+    private String cueKey;
     private String userKey;
+    private String type;
+    private String location;
+    private String time;
+    private String emotionalState;
+    private String environment;
+    private String action;
 }
 

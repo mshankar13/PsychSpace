@@ -81,6 +81,7 @@ public class CommentManager {
                 updatedComment.setProperty("UserKey", userKey);
                 updatedComment.setProperty("Content", content);
 
+                datastore.delete(KeyFactory.stringToKey(commentKey));
                 datastore.put(updatedComment);
                 txn.commit();
             } catch (EntityNotFoundException ex) {
