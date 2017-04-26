@@ -29,7 +29,6 @@ public class AnswerManager {
         ArrayList<Answer> answers = new ArrayList<>();
         for (Entity answer : questionAnswers) {
             Answer answer1 = new Answer();
-            answer1.setUserKey(answer.getProperty("UserKey").toString());
             answer1.setQuestionKey(questionKey);
             answer1.setAnswer(answer.getProperty("Answer").toString());
             answer1.setScore(answer.getProperty("Score").toString());

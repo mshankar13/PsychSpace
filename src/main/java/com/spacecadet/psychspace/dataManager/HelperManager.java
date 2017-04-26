@@ -12,10 +12,7 @@ import com.spacecadet.psychspace.utilities.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Created by marleneshankar on 4/8/17.
@@ -24,7 +21,8 @@ public class HelperManager {
 
     /**
      * helper for converting string to json
-     * @param str original string
+     *
+     * @param str        original string
      * @param objectType utility object type
      * @return java utility object
      */
@@ -42,6 +40,7 @@ public class HelperManager {
 
     /**
      * helper for converting string to json list
+     *
      * @param str string of all keys
      * @return json list of news keys
      */
@@ -52,6 +51,7 @@ public class HelperManager {
 
     /**
      * helper for converting string to date objects
+     *
      * @param dateString string of date
      * @return java date object
      */
@@ -73,11 +73,11 @@ public class HelperManager {
         JsonObject o = parser.parse(str).getAsJsonObject();
 
         JsonElement courseKey = o.get("course");
-        survey.setCourseKey(courseKey.toString());
+        survey.setCourseKey(courseKey.toString().replaceAll("^\"|\"$", ""));
         JsonElement title = o.get("title");
-        survey.setTitle(title.toString());
+        survey.setTitle(title.toString().replaceAll("^\"|\"$", ""));
         JsonElement date = o.get("date");
-        survey.setDueDate(date.toString());
+        survey.setDueDate(date.toString().replaceAll("^\"|\"$", ""));
 
         JsonObject questions = o.getAsJsonObject("questions");
         JsonElement questionTotal = o.get("questionTotal");
@@ -86,23 +86,23 @@ public class HelperManager {
 
         int index = 0;
         while (index < Integer.parseInt(questionTotal.toString())) {
-            JsonObject question = questions.getAsJsonObject(Integer.toString(index));
+            JsonObject question = questions.getAsJsonObject(Integer.toString(index).replaceAll("^\"|\"$", ""));
 
             Question question1 = new Question();
-            question1.setContent(question.get("question").toString());
-            question1.setType(question.get("type").toString());
+            question1.setContent(question.get("question").toString().replaceAll("^\"|\"$", ""));
+            question1.setType(question.get("type").toString().replaceAll("^\"|\"$", ""));
 
             JsonObject answers = question.getAsJsonObject("answers");
             JsonElement answerTotal = question.get("answerTotal");
             int index1 = 0;
 
             ArrayList<Answer> answerList = new ArrayList<>();
-            while (index1 < Integer.parseInt(answerTotal.toString())) {
-                JsonObject answer = answers.getAsJsonObject(Integer.toString(index1));
+            while (index1 < Integer.parseInt(answerTotal.toString().replaceAll("^\"|\"$", ""))) {
+                JsonObject answer = answers.getAsJsonObject(Integer.toString(index1).replaceAll("^\"|\"$", ""));
 
                 Answer answer1 = new Answer();
-                answer1.setAnswer(answer.get("answer").toString());
-                answer1.setScore(answer.get("score").toString());
+                answer1.setAnswer(answer.get("answer").toString().replaceAll("^\"|\"$", ""));
+                answer1.setScore(answer.get("score").toString().replaceAll("^\"|\"$", ""));
 
                 answerList.add(answer1);
                 index1++;
@@ -113,5 +113,40 @@ public class HelperManager {
 
         survey.setQuestions(questionsMap);
         return survey;
+    }
+
+    public String surveyObjectsToJsonString(ArrayList<Survey> surveys) {
+
+        Gson gson = new Gson();
+        JsonObject res = new JsonObject();
+
+        for (Survey survey : surveys) {
+            JsonObject survey1 = new JsonObject();
+            survey1.add("Properties", gson.toJsonTree(survey));
+            JsonObject questions = new JsonObject();
+
+            int i = 0;
+            for (Question question : survey.getQuestions().keySet()) {
+                JsonObject question1 = new JsonObject();
+                JsonObject answers = new JsonObject();
+
+                int index = 0;
+                for (Answer answer : survey.getQuestions().get(question)) {
+                    answers.add(Integer.toString(index), gson.toJsonTree(answer));
+                    index++;
+                }
+
+                question1.add("QuestionProperties", gson.toJsonTree(question));
+                question1.add("Answers", gson.toJsonTree(answers));
+                questions.add(Integer.toString(i), gson.toJsonTree(question1));
+                i++;
+            }
+            survey1.add("Questions", gson.toJsonTree(questions));
+            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
+        }
+
+        System.out.println(res.toString());
+
+        return res.toString();
     }
 }

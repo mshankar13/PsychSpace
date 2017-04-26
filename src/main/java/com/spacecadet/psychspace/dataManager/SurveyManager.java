@@ -20,7 +20,7 @@ public class SurveyManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-    public HashMap<Survey, HashMap<Question, ArrayList<Answer>>> loadSurveys(String userKey) {
+    public ArrayList<Survey> loadSurveys(String userKey) {
 
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
@@ -29,7 +29,7 @@ public class SurveyManager {
         List<Entity> surveyList =
                 datastore.prepare(surveyQuery).asList(FetchOptions.Builder.withDefaults());
 
-        HashMap<Survey ,HashMap<Question, ArrayList<Answer>>> surveys = new HashMap<>();
+        ArrayList <Survey> surveys = new ArrayList<>();
 
         for (Entity survey : surveyList) {
             Survey survey1 = new Survey();
@@ -39,8 +39,10 @@ public class SurveyManager {
             survey1.setTitle(survey.getProperty("Title").toString());
             survey1.setDueDate(survey.getProperty("DueDate").toString());
 
-            HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(KeyFactory.keyToString(survey.getKey()));
-            surveys.put(survey1, questions);
+            String key = KeyFactory.keyToString(survey.getKey());
+            HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(key);
+            survey1.setQuestions(questions);
+            surveys.add(survey1);
         }
 
         return surveys;

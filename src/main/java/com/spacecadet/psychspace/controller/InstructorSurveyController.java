@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -65,10 +66,11 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/editSurvey", method = RequestMethod.GET)
     public ModelAndView editSurvey() {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        HashMap<Survey, HashMap<Question, ArrayList<Answer>>> surveys = surveyManager.loadSurveys(WelcomeController.currUser.getUserKey());
+        ArrayList<Survey> rawSurveys = surveyManager.loadSurveys(WelcomeController.currUser.getUserKey());
+        String surveys = helperManager.surveyObjectsToJsonString(rawSurveys);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditSurvey");
-        model.addObject("survey", new Survey());
+        model.addObject("surveys", surveys);
         model.addObject("courses", courses);
 
         return model;

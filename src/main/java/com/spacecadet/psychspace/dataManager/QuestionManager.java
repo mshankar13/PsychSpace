@@ -33,7 +33,7 @@ public class QuestionManager {
                 Entity question1 = new Entity("Question");
                 question1.setProperty("Content", question.getContent());
                 question1.setProperty("Type", question.getType());
-                question1.setProperty("surveyKey", surveyKey);
+                question1.setProperty("SurveyKey", surveyKey);
                 datastore.put(txn, question1);
                 txn.commit();
 
@@ -65,7 +65,9 @@ public class QuestionManager {
             question1.setContent(question.getProperty("Content").toString());
             question1.setType(question.getProperty("Type").toString());
 
-            questions.put(question1, answerManager.loadAnswers(KeyFactory.keyToString(question.getKey())));
+            String key = KeyFactory.keyToString(question.getKey());
+            ArrayList<Answer> answers = answerManager.loadAnswers(key);
+            questions.put(question1, answers);
         }
         return questions;
     }
