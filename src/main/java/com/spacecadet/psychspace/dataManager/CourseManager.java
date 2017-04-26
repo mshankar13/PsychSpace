@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.*;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by marleneshankar on 4/14/17.
@@ -230,7 +231,8 @@ public class CourseManager {
     public ArrayList<Course> searchCourse(ArrayList<Course> courses, String keyword) {
         ArrayList<Course> titleSearch = new ArrayList<>();
         for (Course course : courses) {
-            if (course.getTitle().contains(keyword) == true) {
+            if (Pattern.compile(Pattern.quote(keyword),
+                    Pattern.CASE_INSENSITIVE).matcher(course.getTitle()).find()) {
                 titleSearch.add(course);
             }
         }
@@ -242,7 +244,8 @@ public class CourseManager {
         });
         ArrayList<Course> descriptionSearch = new ArrayList<>();
         for (Course course : courses) {
-            if (course.getDescription().contains(keyword) == true) {
+            if (Pattern.compile(Pattern.quote(keyword),
+                    Pattern.CASE_INSENSITIVE).matcher(course.getDescription()).find()) {
                 if (!titleSearch.contains(course)) {
                     descriptionSearch.add(course);
                 }

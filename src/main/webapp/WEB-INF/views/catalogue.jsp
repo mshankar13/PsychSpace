@@ -35,9 +35,9 @@
                 <div class="center page-banner">
                     <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
                     <h1 class="absolute-text">Course Catalogue</h1>
-                    <form class="ps-search">
+                    <form class="ps-search" action="catalogue/Search" method="get">
                         <input type="text" name="search" placeholder="Search...">
-                        <input type="submit">
+                        <input type="submit" value="Search Course">
                     </form>
                 </div>
                 <div class="ps-feature-content">

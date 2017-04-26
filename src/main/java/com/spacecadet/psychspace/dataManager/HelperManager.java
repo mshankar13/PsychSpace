@@ -66,6 +66,11 @@ public class HelperManager {
         return date;
     }
 
+    /**
+     *
+     * @param str
+     * @return
+     */
     public Survey surveyStringToJson(String str) {
         Survey survey = new Survey();
 
@@ -118,8 +123,12 @@ public class HelperManager {
         return survey;
     }
 
+    /**
+     *
+     * @param surveys
+     * @return
+     */
     public String surveyObjectsToJsonString(ArrayList<Survey> surveys) {
-
         Gson gson = new Gson();
         JsonObject res = new JsonObject();
 
@@ -152,4 +161,5 @@ public class HelperManager {
 
         return res.toString();
     }
+
 }

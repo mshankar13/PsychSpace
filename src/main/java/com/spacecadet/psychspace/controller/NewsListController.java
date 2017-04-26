@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -49,6 +50,15 @@ public class NewsListController {
         News featured = newsManager.getFeatured(newsList);
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featuredNews", featured);
+
+        return model;
+    }
+
+    @RequestMapping(value = "/news/Search", method = RequestMethod.GET)
+    public ModelAndView newsSearch(@RequestParam(value = "search", required = false) String search){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("newsSearch");
+        model.addObject("newsList", newsManager.searchNews(newsManager.loadNews(), search));
 
         return model;
     }

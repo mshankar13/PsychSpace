@@ -37,7 +37,7 @@
                     <h1 class="absolute-text">Course Catalogue</h1>
                     <form class="ps-search">
                         <input type="text" name="search" placeholder="Search...">
-                        <input type="submit">
+                        <input type="submit" value="Search Course">
                     </form>
                 </div>
                 <div class="ps-feature-content">
@@ -47,7 +47,7 @@
                             <br>
                         </div>
                         <div class="row ps-text-content">
-                            <c:forEach items="${openCourses}" var="course">
+                            <c:forEach items="${courseList}" var="course">
                             <!-- start course -->
                             <div class="col-lg-4 fadein">
                                 <div class="ps-well">
