@@ -72,8 +72,11 @@ public class HelperManager {
         JsonParser parser = new JsonParser();
         JsonObject o = parser.parse(str).getAsJsonObject();
 
-        JsonElement courseKey = o.get("course");
+        System.out.println(str);
+        JsonElement courseKey = o.get("courseKey");
         survey.setCourseKey(courseKey.toString().replaceAll("^\"|\"$", ""));
+        JsonElement courseTitle = o.get("courseTitle");
+        survey.setCourseTitle(courseTitle.toString().replaceAll("^\"|\"$", ""));
         JsonElement title = o.get("title");
         survey.setTitle(title.toString().replaceAll("^\"|\"$", ""));
         JsonElement date = o.get("date");

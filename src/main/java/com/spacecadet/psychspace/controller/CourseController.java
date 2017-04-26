@@ -32,6 +32,10 @@ public class CourseController {
     @RequestMapping(value = "/course/{key}", method = RequestMethod.GET)
     public ModelAndView course(@PathVariable("key") String key) {
         Course course = courseManager.loadSingleCourse(key);
+        User instructor = userManager.loadSingleUser(course.getUserKey());
+        if(instructor != null){
+            course.setInstructor(instructor.getFirstName() + " " + instructor.getLastName());
+        }
         ModelAndView model = new ModelAndView();
         model.setViewName("course");
         model.addObject("course", course);

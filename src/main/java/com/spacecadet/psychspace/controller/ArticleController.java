@@ -39,7 +39,13 @@ public class ArticleController {
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
-        model.addObject("commentList", commentManager.loadComments(key));
+        ArrayList<Comment> comments = commentManager.loadComments(key);
+//        for(Comment c : comments){
+//            String name = userManager.loadSingleUser(c.getUsername()).getFirstName() + " " +
+//                    userManager.loadSingleUser(c.getUsername()).getLastName();
+//            c.setUsername(name);
+//        }
+        model.addObject("commentList", comments);
         if(WelcomeController.currUser.getUserKey() != null){
             if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
                 model.addObject("isLiked", "true");
@@ -64,14 +70,14 @@ public class ArticleController {
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
     public String addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
         News news = newsManager.loadSingleNews(key);
+        String fullname = WelcomeController.currUser.getFirstName().concat(" ").concat(WelcomeController.currUser.getLastName());
         if (comment.getState().equals("add")){
-            commentManager.addComment(key, WelcomeController.currUser.getUserKey(),comment.getContent());
+            commentManager.addComment(key, fullname, WelcomeController.currUser.getUserKey(),comment.getContent());
         } else if(comment.getState().equals("edit")){
-            commentManager.editComment(comment.getCommentKey(), "currUser", comment.getContent());
+            commentManager.editComment(comment.getCommentKey(), fullname, WelcomeController.currUser.getUserKey(), comment.getContent());
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-
         return "redirect:/article/"+key;
     }
 
@@ -139,28 +145,4 @@ public class ArticleController {
         return "redirect:/article/"+key;
     }
 
-
-    /**
-     * populate dummy comment data
-     */
-    public void comments_test() {
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wkM", "Person1", "WOW!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wkM", "Person2", "No way!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wkM", "Person1", "Comment");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wsM", "Person3", "Maybe");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wsM", "Person4", "omg!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDg1wsM", "Person5", "Test!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwgM", "Person2", "Very helpful");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwgM", "Person1", "interesting!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwgM", "Person4", "where did you find this!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwoM", "Person7", "test comment!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwoM", "Person9", "this is another comment!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwoM", "Person3", "omg!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwoM", "Person5", "this is weird!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwkM", "Person3", "time to sleep!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwkM", "Person5", "this makes me hungry!");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwkM", "Person2", "content");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwkM", "Person4", "back to work");
-        commentManager.addComment("ahVkZXZ-cHN5Y2hzcGFjZS0xNjA5MjFyEQsSBE5ld3MYgICAgIDgtwkM", "Person1", "recommended");
-    }
 }

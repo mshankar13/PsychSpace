@@ -111,8 +111,8 @@ public class UserManager {
             user.setFirstName(singleUser.getProperty("FirstName").toString());
             user.setLastName(singleUser.getProperty("LastName").toString());
             user.setRole(singleUser.getProperty("Role").toString());
-        } catch (EntityNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            return null;
         }
         return user;
     }

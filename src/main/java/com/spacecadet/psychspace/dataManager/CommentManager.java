@@ -33,6 +33,7 @@ public class CommentManager {
         for (Entity entity : newsComments) {
             Comment comment = new Comment();
             comment.setUsername(entity.getProperty("Username").toString());
+            comment.setUserKey(entity.getProperty("UserKey").toString());
             comment.setContent(entity.getProperty("Content").toString());
             comment.setCommentKey(KeyFactory.keyToString(entity.getKey()));
             comment.setNewsKey(newsKey);
@@ -48,10 +49,11 @@ public class CommentManager {
      * @param username user key
      * @param content comment content
      */
-    public void addComment(String newsKey, String username, String content) {
+    public void addComment(String newsKey, String username, String userKey, String content) {
         Transaction txn = datastore.beginTransaction();
         try {
             Entity comment = new Entity("Comment", KeyFactory.stringToKey(newsKey));
+            comment.setProperty("UserKey", userKey);
             comment.setProperty("Username", username);
             comment.setProperty("Content", content);
 
@@ -67,15 +69,16 @@ public class CommentManager {
     /**
      * edit comment on article
      * @param commentKey comment key
-     * @param username user key
+     * @param userKey user key
      * @param content comment new content
      */
-    public void editComment(String commentKey, String username, String content) {
+    public void editComment(String commentKey, String username, String userKey, String content) {
         Transaction txn = datastore.beginTransaction();
         try {
             try {
                 Entity updatedComment = datastore.get(KeyFactory.stringToKey(commentKey));
                 updatedComment.setProperty("Username", username);
+                updatedComment.setProperty("UserKey", userKey);
                 updatedComment.setProperty("Content", content);
 
                 datastore.put(updatedComment);

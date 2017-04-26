@@ -63,8 +63,9 @@
                             <input type="hidden" value="${video.url}" class="video-link"/>
                             <input type="hidden" value="${video.videoKey}" class="video-key"/>
                             <input type="hidden" value="${video.courseKey}" class="video-course-key"/>
+                            <input type="hidden" value="${video.courseTitle}" class="video-course-title"/>
                             <td>${video.title}</td>
-                            <td>${video.courseKey}</td>
+                            <td>${video.courseTitle}</td>
                             <td><button class="btn-edit-video instructor-btn" data-toggle="modal" data-target="editVideoModal">Edit</button></td>
                         </tr>
                     </c:forEach>
@@ -98,8 +99,8 @@
                                     <div class="col-sm-6" id="edit-video-course-key">
                                         <form:select class="form-control" path="courseKey" >
                                             <c:forEach items="${courses}" var="course">
-                                                <form:option value="${course.courseKey}"
-                                                             label="${course.title}"/>
+                                                <form:option value="${course.courseKey}" label="${course.title}"/>
+                                                <form:hidden value="${course.title}" path="courseTitle"/>
                                             </c:forEach>
                                         </form:select>
                                     </div>
