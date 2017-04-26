@@ -20,5 +20,6 @@ public class Evaluation {
     private String date;
     private String courseKey;
     private String evaluationKey;
+    private String score;
 }
 
