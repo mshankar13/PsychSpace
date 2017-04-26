@@ -37,20 +37,31 @@ public class CatalogController {
             courses = courseManager.loadAllCourses();
         }
         ArrayList<Course> openCourses = courseManager.loadAllOpenCourses();
-        for(Course course : courses){
-            if(course.getDescription().length() >= 100){
-                course.setDescription(course.getDescription().substring(0, 100));
-            }
-        }
-        for(Course course : openCourses){
-            if(course.getDescription().length() >= 100){
-                course.setDescription(course.getDescription().substring(0, 100));
-            }
-        }
+        courses = setCourseList(courses);
+        openCourses = setCourseList(openCourses);
         model.addObject("courseList", courses);
         model.addObject("openCourses", openCourses);
 
         return model;
+    }
+
+    /**
+     * helper method for setting course list into front end format
+     * changes userid to username
+     * @return ArrayList of course
+     */
+    private ArrayList<Course> setCourseList(ArrayList<Course> courses){
+        for(Course course : courses){
+            if(course.getDescription().length() >= 100){
+                course.setDescription(course.getDescription().substring(0, 100));
+            }
+            User instructor = userManager.loadSingleUser(course.getUserKey());
+            if(instructor != null){
+                course.setInstructor(instructor.getFirstName() + " "
+                        + instructor.getLastName());
+            }
+        }
+        return courses;
     }
 
     /**

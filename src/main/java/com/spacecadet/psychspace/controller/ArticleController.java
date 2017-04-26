@@ -39,7 +39,13 @@ public class ArticleController {
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
-        model.addObject("commentList", commentManager.loadComments(key));
+        ArrayList<Comment> comments = commentManager.loadComments(key);
+        for(Comment c : comments){
+            String name = userManager.loadSingleUser(c.getUsername()).getFirstName() + " " +
+                    userManager.loadSingleUser(c.getUsername()).getLastName();
+            c.setUsername(name);
+        }
+        model.addObject("commentList", comments);
         if(WelcomeController.currUser.getUserKey() != null){
             if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
                 model.addObject("isLiked", "true");
@@ -79,7 +85,13 @@ public class ArticleController {
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
-        model.addObject("commentList", commentManager.loadComments(key));
+        ArrayList<Comment> comments = commentManager.loadComments(key);
+        for(Comment c : comments){
+            String name = userManager.loadSingleUser(c.getUsername()).getFirstName() + " " +
+                    userManager.loadSingleUser(c.getUsername()).getLastName();
+            c.setUsername(name);
+        }
+        model.addObject("commentList", comments);
         if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
             model.addObject("isLiked", "true");
         } else {
