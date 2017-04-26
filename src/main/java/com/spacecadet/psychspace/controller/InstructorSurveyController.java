@@ -77,21 +77,6 @@ public class InstructorSurveyController {
     }
 
     /**
-     * instructor page - delete survey to course
-     * @return
-     */
-    @RequestMapping(value = "/deleteSurvey", method = RequestMethod.GET)
-    public ModelAndView deleteSurvey() {
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorDeleteSurvey");
-        model.addObject("survey", new Survey());
-        model.addObject("courses", courses);
-
-        return model;
-    }
-
-    /**
      * logout on instructor add survey page
      * @param user user logged out
      * @return welcome page
@@ -109,17 +94,6 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/editSurvey/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
-    }
-
-    /**
-     * logout on instructor delete survey page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/deleteSurvey/logout", method = RequestMethod.POST)
-    public String logoutDelete(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }

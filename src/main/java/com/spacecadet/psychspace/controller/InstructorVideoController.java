@@ -94,6 +94,23 @@ public class InstructorVideoController {
      * instructor page - delete video to course
      * @return instructor delete video page
      */
+    @RequestMapping(value = "/deleteVideo", method = RequestMethod.POST)
+    public ModelAndView deleteVideo(@ModelAttribute("video") Video video) {
+        videoManager.deleteVideo(video.getVideoKey());
+        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ModelAndView model = new ModelAndView();
+        model.setViewName("instructorDeleteVideo");
+        model.addObject("video", new Video());
+        model.addObject("courses", courses);
+        model.addObject("videos", videoManager.loadVideos());
+
+        return model;
+    }
+
+    /**
+     * instructor page - delete video to course
+     * @return instructor delete video page
+     */
     @RequestMapping(value = "/deleteVideo", method = RequestMethod.GET)
     public ModelAndView deleteVideo() {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();

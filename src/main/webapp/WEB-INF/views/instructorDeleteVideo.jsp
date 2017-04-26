@@ -62,9 +62,10 @@
                             <input type="hidden" value="${video.title}" class="video-title"/>
                             <input type="hidden" value="${video.url}" class="video-link"/>
                             <input type="hidden" value="${video.videoKey}" class="video-key"/>
-                            <input type="hidden" value="${video.videoKey}" class="course-key"/>
+                            <input type="hidden" value="${video.courseKey}" class="course-key"/>
+                            <input type="hidden" value="${video.courseTitle}" class="course-title"/>
                             <td>${video.title}</td>
-                            <td>${video.courseKey}</td>
+                            <td>${video.courseTitle}</td>
                             <td><button class="btn-delete-video instructor-btn" data-toggle="modal" data-target="deleteVideoModal">Delete</button></td>
                         </tr>
                     </c:forEach>
@@ -90,6 +91,7 @@
                                 <p>Are you sure you want to delete?</p>
                                 <form:hidden path="videoKey" value="null" id="delete-video-key"/>
                                 <form:hidden path="courseKey" value="null" id="delete-video-course-key"/>
+                                <form:hidden path="courseTitle" value="null" id="delete-video-course-title"/>
                                 <form:hidden path="url" value="null" id="delete-video-link"/>
                                 <form:hidden path="title" value="null" id="delete-video-title"/>
                             </div>

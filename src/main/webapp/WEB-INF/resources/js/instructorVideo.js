@@ -9,6 +9,7 @@ function editVideoModalShow() {
     var link = row.find(".video-link").val();
     var videoKey = row.find(".video-key").val();
     var courseKey = row.find(".video-course-key").val();
+    var courseTitle = row.find(".video-course-title").val();
 
     // set form data
     $("#edit-video-span").text(title);
@@ -31,12 +32,14 @@ function deleteVideoModalShow() {
     var link = row.find(".video-link").val();
     var videoKey = row.find(".video-key").val();
     var courseKey = row.find(".course-key").val();
+    var courseTitle = row.find(".course-title").val();
 
     $("#delete-video-span").text(title);
     $("#delete-video-title").val(title);
     $("#delete-video-link").val(link);
     $("#delete-video-key").val(videoKey);
     $("#delete-video-course-key").val(courseKey);
+    $("#delete-video-course-title").val(courseTitle);
 
     $("#deleteVideoModal").modal("show");
 }

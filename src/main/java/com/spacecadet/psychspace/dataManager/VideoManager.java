@@ -28,35 +28,40 @@ public class VideoManager {
         Query videoQuery = new Query("Video");
         List<Entity> videoList =
                 datastore.prepare(videoQuery).asList(FetchOptions.Builder.withDefaults());
+        return entityToVideos(videoList);
+    }
+
+    /**
+     * Load a videos from single course
+     * @param courseKey
+     * @return arraylist of videos
+     */
+    public ArrayList<Video> loadVideoForCourse(String courseKey) {
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query videoQuery = new Query("Video").setFilter(propertyFilter1);
+        List<Entity> videoList =
+                datastore.prepare(videoQuery).asList(FetchOptions.Builder.withDefaults());
+        return entityToVideos(videoList);
+    }
+
+    /**
+     * helper method to convert the Video entity to object
+     * @param videoList list of video entities from datastore
+     * @return list of videos object
+     */
+    public ArrayList<Video> entityToVideos(List<Entity> videoList){
         ArrayList<Video> loadedVideos = new ArrayList<Video>();
         for (Entity entity : videoList) {
             Video video = new Video();
             video.setTitle(entity.getProperty("Title").toString());
             video.setUrl(entity.getProperty("Url").toString());
             video.setCourseKey(entity.getProperty("CourseKey").toString());
+            video.setCourseTitle(entity.getProperty("CourseTitle").toString());
             video.setVideoKey(KeyFactory.keyToString(entity.getKey()));
             loadedVideos.add(video);
         }
         return loadedVideos;
-    }
-
-    /**
-     * Load a single video
-     * @param videoKey video key
-     * @return video utility
-     */
-    public Video loadSingleVideo(String videoKey) {
-        Video video = new Video();
-        try {
-            Entity entity = datastore.get(KeyFactory.stringToKey(videoKey));
-            video.setTitle(entity.getProperty("Title").toString());
-            video.setUrl(entity.getProperty("Url").toString());
-            video.setCourseKey(entity.getProperty("CourseKey").toString());
-            video.setVideoKey(videoKey);
-        } catch (EntityNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return video;
     }
 
     /**
@@ -70,6 +75,7 @@ public class VideoManager {
             entity.setProperty("Title", video.getTitle());
             entity.setProperty("Url", video.getUrl());
             entity.setProperty("CourseKey", video.getCourseKey());
+            entity.setProperty("CourseTitle", video.getCourseTitle());
             datastore.put(txn, entity);
             txn.commit();
         } finally {
@@ -81,7 +87,7 @@ public class VideoManager {
 
     /**
      * edits a video entity from datastore
-     * @param video
+     * @param video edited video
      */
     public void editVideo(Video video) {
         Transaction txn = datastore.beginTransaction();
@@ -91,7 +97,7 @@ public class VideoManager {
                 entity.setProperty("Title", video.getTitle());
                 entity.setProperty("Url", video.getUrl());
                 entity.setProperty("CourseKey", video.getCourseKey());
-
+                entity.setProperty("CourseTitle", video.getCourseTitle());
                 datastore.delete(KeyFactory.stringToKey(video.getVideoKey()));
                 datastore.put(entity);
                 txn.commit();
@@ -107,7 +113,7 @@ public class VideoManager {
 
     /**
      * delete a video entity from datastore
-     * @param videoKey
+     * @param videoKey video key
      */
     public void deleteVideo(String videoKey) {
         Transaction txn = datastore.beginTransaction();
