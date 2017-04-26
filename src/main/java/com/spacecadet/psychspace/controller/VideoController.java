@@ -25,7 +25,7 @@ public class VideoController {
      * all visit to video page
      * @return learn video page
      */
-    @RequestMapping(value = "/video", method = RequestMethod.GET)
+    @RequestMapping(value = "/videos", method = RequestMethod.GET)
     public ModelAndView video() {
         ArrayList<Video> videos = videoManager.loadVideos();
         if(videos.size() > 0){
@@ -47,7 +47,7 @@ public class VideoController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/video/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/videos/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";

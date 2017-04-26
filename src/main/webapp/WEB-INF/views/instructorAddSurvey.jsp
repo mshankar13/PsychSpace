@@ -53,7 +53,7 @@
                         <div class="col-sm-6">
                             <select class="form-control" id="select-course">
                             <c:forEach items="${courses}" var="course">
-                                <option class="select-course" value="${course.courseKey}">${course.title}</option>
+                                <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
                             </c:forEach>
                             </select>
                         </div>

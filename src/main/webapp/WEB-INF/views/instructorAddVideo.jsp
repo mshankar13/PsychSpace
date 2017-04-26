@@ -55,6 +55,7 @@
                             <form:select class="form-control" path="courseKey" >
                                 <c:forEach items="${courses}" var="course">
                                     <form:option value="${course.courseKey}" label="${course.title}"/>
+                                    <form:hidden value="${course.title}" path="courseTitle"/>
                                 </c:forEach>
                             </form:select>
                         </div>

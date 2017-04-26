@@ -18,8 +18,9 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class Survey {
     private String surveyKey;
-    private String userKey;
+    private String userKey; //instructor key
     private String courseKey;
+    private String courseTitle;
     private String title;
     private String dueDate;
     private transient HashMap<Question, ArrayList<Answer>> questions;
