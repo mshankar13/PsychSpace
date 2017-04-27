@@ -51,7 +51,7 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.POST)
     public String addSurvey(@RequestBody String survey) {
         // TODO: add function for parsing
-        Survey survey1 = helperManager.surveyStringToJson(survey);
+        Survey survey1 = helperManager.surveyStringToSurvey(survey);
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
@@ -64,13 +64,13 @@ public class InstructorSurveyController {
      * @return
      */
     @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.GET)
-    public ModelAndView editSurvey() {
+    public ModelAndView editSurvey(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        ArrayList<Survey> rawSurveys = surveyManager.loadSurveys(WelcomeController.currUser.getUserKey());
-        String surveys = helperManager.surveyObjectsToJsonString(rawSurveys);
+        Survey rawSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
+        String survey = helperManager.surveyObjectsToJsonString(rawSurvey);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditSurvey");
-        model.addObject("surveys", surveys);
+        model.addObject("survey", survey);
         model.addObject("courses", courses);
 
         return model;

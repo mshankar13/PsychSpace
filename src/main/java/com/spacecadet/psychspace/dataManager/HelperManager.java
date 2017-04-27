@@ -71,7 +71,7 @@ public class HelperManager {
      * @param str
      * @return
      */
-    public Survey surveyStringToJson(String str) {
+    public Survey surveyStringToSurvey(String str) {
         Survey survey = new Survey();
 
         JsonParser parser = new JsonParser();
@@ -125,41 +125,39 @@ public class HelperManager {
 
     /**
      *
-     * @param surveys
+     * @param survey
      * @return
      */
-    public String surveyObjectsToJsonString(ArrayList<Survey> surveys) {
+    public String surveyObjectsToJsonString(Survey survey) {
         Gson gson = new Gson();
         JsonObject res = new JsonObject();
 
-        for (Survey survey : surveys) {
-            JsonObject survey1 = new JsonObject();
-            survey1.add("Properties", gson.toJsonTree(survey));
-            JsonObject questions = new JsonObject();
+        JsonObject survey1 = new JsonObject();
+        survey1.add("Properties", gson.toJsonTree(survey));
+        JsonObject questions = new JsonObject();
 
-            int i = 0;
-            for (Question question : survey.getQuestions().keySet()) {
-                JsonObject question1 = new JsonObject();
-                JsonObject answers = new JsonObject();
+        int i = 0;
+        for (Question question : survey.getQuestions().keySet()) {
+            JsonObject question1 = new JsonObject();
+            JsonObject answers = new JsonObject();
 
-                int index = 0;
-                for (Answer answer : survey.getQuestions().get(question)) {
-                    answers.add(Integer.toString(index), gson.toJsonTree(answer));
-                    index++;
-                }
-
-                question1.add("QuestionProperties", gson.toJsonTree(question));
-                question1.add("Answers", gson.toJsonTree(answers));
-                questions.add(Integer.toString(i), gson.toJsonTree(question1));
-                i++;
+            int index = 0;
+            for (Answer answer : survey.getQuestions().get(question)) {
+                answers.add(Integer.toString(index), gson.toJsonTree(answer));
+                index++;
             }
-            survey1.add("Questions", gson.toJsonTree(questions));
-            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
+
+            question1.add("QuestionProperties", gson.toJsonTree(question));
+            question1.add("Answers", gson.toJsonTree(answers));
+            questions.add(Integer.toString(i), gson.toJsonTree(question1));
+            i++;
         }
+        survey1.add("Questions", gson.toJsonTree(questions));
+//            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
 
         System.out.println(res.toString());
 
-        return res.toString();
+        return survey1.toString();
     }
 
 }
