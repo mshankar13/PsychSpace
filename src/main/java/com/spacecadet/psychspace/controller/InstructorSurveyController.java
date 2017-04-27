@@ -32,9 +32,9 @@ public class InstructorSurveyController {
      * instructor page (get) - add new survey to course
      * @return instructor add survey page
      */
-    @RequestMapping(value = "/addSurvey", method = RequestMethod.GET)
+    @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.GET)
     public ModelAndView addSurvey() {
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadAllCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddSurvey");
         model.addObject("survey", new Survey());
@@ -48,14 +48,14 @@ public class InstructorSurveyController {
      * @param survey new survey
      * @return instructor add survey
      */
-    @RequestMapping(value = "/addSurvey", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.POST)
     public String addSurvey(@RequestBody String survey) {
         // TODO: add function for parsing
-        Survey survey1 = helperManager.surveyStringToJson(survey);
+        Survey survey1 = helperManager.surveyStringToSurvey(survey);
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
-        return "redirect:/addSurvey";
+        return "redirect:/instructor/{courseKey}/addSurvey";
     }
 
 
@@ -63,14 +63,14 @@ public class InstructorSurveyController {
      * instructor page  - edit survey to course
      * @return
      */
-    @RequestMapping(value = "/editSurvey", method = RequestMethod.GET)
-    public ModelAndView editSurvey() {
+    @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.GET)
+    public ModelAndView editSurvey(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        ArrayList<Survey> rawSurveys = surveyManager.loadSurveys(WelcomeController.currUser.getUserKey());
-        String surveys = helperManager.surveyObjectsToJsonString(rawSurveys);
+        Survey rawSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
+        String survey = helperManager.surveyObjectsToJsonString(rawSurvey);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditSurvey");
-        model.addObject("surveys", surveys);
+        model.addObject("survey", survey);
         model.addObject("courses", courses);
 
         return model;

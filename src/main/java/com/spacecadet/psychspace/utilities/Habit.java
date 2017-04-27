@@ -13,6 +13,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Habit {
+    private String habitKey;
+    private String habit;
     private String userKey;
     private String username;
     private String cueKey;

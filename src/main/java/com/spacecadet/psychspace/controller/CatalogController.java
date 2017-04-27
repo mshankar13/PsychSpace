@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -41,6 +42,15 @@ public class CatalogController {
         openCourses = setCourseList(openCourses);
         model.addObject("courseList", courses);
         model.addObject("openCourses", openCourses);
+
+        return model;
+    }
+
+    @RequestMapping(value = "/catalogue/Search", method = RequestMethod.GET)
+    public ModelAndView catalogSearch(@RequestParam(value = "search", required = false) String search){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("catalogueSearch");
+        model.addObject("courseList", courseManager.searchCourse(courseManager.loadAllCourses(), search));
 
         return model;
     }

@@ -37,7 +37,7 @@
                     <h1 class="absolute-text">News</h1>
                     <form class="ps-search">
                         <input type="text" name="search" placeholder="Search...">
-                        <input type="submit">
+                        <input type="submit" value="Search Article">
                     </form>
                 </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="row ps-feature">
                         <div class="ps-feature-info">
                             <!-- Title -->
-                            <h1>All Articles<hr></h1>
+                            <h1>Search Results<hr></h1>
                             <br>
                         </div>
 

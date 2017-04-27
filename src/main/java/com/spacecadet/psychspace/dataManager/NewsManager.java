@@ -5,6 +5,7 @@ import com.google.appengine.repackaged.org.joda.time.DateTime;
 import com.spacecadet.psychspace.utilities.*;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author marleneshankar
@@ -53,6 +54,7 @@ public class NewsManager {
 
     /**
      * Load a single news article with corresponding comments
+     *
      * @param newsKey single news key
      * @return news utility
      */
@@ -74,9 +76,10 @@ public class NewsManager {
 
     /**
      * Adds a news entity to datastore
-     * @param title news title
-     * @param author news author
-     * @param content news content
+     *
+     * @param title      news title
+     * @param author     news author
+     * @param content    news content
      * @param likesCount news like count
      */
     public void addNews(String title, String author, String content, String likesCount, String date) {
@@ -99,10 +102,11 @@ public class NewsManager {
 
     /**
      * Edits a news Entity from datastore
-     * @param newsKey news key
-     * @param title news title
-     * @param author news author
-     * @param content news content
+     *
+     * @param newsKey    news key
+     * @param title      news title
+     * @param author     news author
+     * @param content    news content
      * @param likesCount news like count
      */
     public void editNews(String newsKey, String title, String author, String content, String likesCount, String date) {
@@ -131,6 +135,7 @@ public class NewsManager {
 
     /**
      * Deletes a news Entity from datastore
+     *
      * @param newsKey news key
      */
     public void deleteNews(String newsKey) {
@@ -155,6 +160,7 @@ public class NewsManager {
     /**
      * Gets the featured article from the list of loaded news
      * Returns latest article if there is no article within the week
+     *
      * @param allNews arraylist of all news objects
      * @return singel featured news object
      */
@@ -184,13 +190,14 @@ public class NewsManager {
     /**
      * search for news with related keyword
      * @param newsList list of all news
-     * @param keyword user input keyword
+     * @param keyword  user input keyword
      * @return list of all related news
      */
     public ArrayList<News> searchNews(ArrayList<News> newsList, String keyword) {
         ArrayList<News> titleSearch = new ArrayList<>();
         for (News news : newsList) {
-            if (news.getTitle().contains(keyword) == true) {
+            if (Pattern.compile(Pattern.quote(keyword),
+                    Pattern.CASE_INSENSITIVE).matcher(news.getTitle()).find()) {
                 titleSearch.add(news);
             }
         }
@@ -202,7 +209,8 @@ public class NewsManager {
         });
         ArrayList<News> contentSearch = new ArrayList<>();
         for (News news : newsList) {
-            if (news.getContent().contains(keyword) == true) {
+            if(Pattern.compile(Pattern.quote(keyword),
+                    Pattern.CASE_INSENSITIVE).matcher(news.getContent()).find()){
                 if (!titleSearch.contains(news)) {
                     contentSearch.add(news);
                 }
@@ -219,6 +227,4 @@ public class NewsManager {
         results.addAll(contentSearch);
         return results;
     }
-
-
 }

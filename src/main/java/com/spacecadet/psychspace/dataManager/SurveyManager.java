@@ -50,6 +50,11 @@ public class SurveyManager {
         return surveys;
     }
 
+    /**
+     * load single survey for a course
+     * @param courseKey course key
+     * @return
+     */
     public Survey loadSingleCourseSurvey(String courseKey) {
         Survey survey = new Survey();
         Query.Filter propertyFilter1 =
