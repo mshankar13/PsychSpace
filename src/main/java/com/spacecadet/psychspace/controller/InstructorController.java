@@ -27,8 +27,8 @@ public class InstructorController {
     public ModelAndView instructor(){
         ArrayList<Course> courses = new ArrayList<Course>();
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructor");
-        model.addObject("courses", courses);
+//        model.setViewName("");
+//        model.addObject("courses", courses);
 
         return model;
     }

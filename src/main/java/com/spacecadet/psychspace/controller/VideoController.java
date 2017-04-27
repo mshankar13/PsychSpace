@@ -49,7 +49,7 @@ public class VideoController {
      * @return welcome page
      */
     @RequestMapping(value = "/learn/{courseKey}/videos/logout", method = RequestMethod.POST)
-    public String logout(@RequestBody String user) {
+    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
