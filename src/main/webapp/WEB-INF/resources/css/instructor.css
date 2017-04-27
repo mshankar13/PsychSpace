@@ -23,10 +23,9 @@ h3 {
 
 .instructor-btn {
     background-color: var(--tea-rose-color);
-    border-color: var(--tea-rose-color);
+    border-color: 1px solid var(--tea-rose-color);
     color: var(--space-cadet-color);
     border-radius: 5px;
-    box-shadow: none;
 }
 
 .instructor-btn:hover {

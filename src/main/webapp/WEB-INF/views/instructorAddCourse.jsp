@@ -49,8 +49,8 @@
         <div class="col-md-9">
             <div class="row div-top">
                 <div class="col-md-9">
-                    <label for="select-course" class="col-md-2 control-label">Select Course</label>
-                    <select class="col-md-7" id="select-course">
+                    <label for="select-course" class="col-md-3 control-label">Select Course</label>
+                    <select class="col-md-6" id="select-course">
                         <input type="hidden" value="${courses}" id="courses">
                         <%--<c:forEach items="${courses}" var="course">--%>
                             <%--<option class="select-course" value="${course.courseKey}">${course.title}</option>--%>

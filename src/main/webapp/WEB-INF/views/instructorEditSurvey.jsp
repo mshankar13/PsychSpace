@@ -47,159 +47,138 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div >
-                <h1>Edit Survey</h1>
 
-                <table id="edit-article-table" class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Survey </th>
-                        <th>Course Key</th>
-                        <th>Due Date</th>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${surveys}" var="survey">
-                        <tr>
-                            <input type="hidden" value="${survey.surveyKey}" id="userKey"/>
-                            <input type="hidden" value="${survey.courseKey}" id="courseKey"/>
-                            <input type="hidden" value="${survey.title}" id="title"/>
-                            <input type="hidden" value="${survey.dueDtae}" id="surveyKey"/>
-                            <td>${survey.title}</td>
-                            <td>${survey.courseKey}</td>
-                            <td>${survey.dueDate}</td>
-                            <td><button class="instructor-btn btn-edit-survey" data-toggle="modal" data-target="editSurveyModal">Edit</button></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+            <div class="row div-top">
+                <div class="col-md-9">
+                    <label for="select-course" class="col-md-3 control-label">Select Course</label>
+                    <select class="col-md-6" id="select-course">
+                        <input type="hidden" value="${courses}" id="courses">
+                        <%--<c:forEach items="${courses}" var="course">--%>
+                        <%--<option class="select-course" value="${course.courseKey}">${course.title}</option>--%>
+                        <%--</c:forEach>--%>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="instructor-btn" id="btn-add-course">Create Course</button>
+                </div>
+            </div>
 
+            <div class="tab">
+                <ul class="nav nav-tabs">
+                    <li><a href="#">Course</a></li>
+                    <li class="active"><a href="#">Survey</a></li>
+                    <li><a href="#">Video</a></li>
+                    <li><a href="#">Evaluation</a></li>
+                </ul>
+            </div>
 
-                <div class="modal fade" id="editSurveyModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header row">
-                                <div class="col-sm-10">
-                                    <h3 class="modal-title">Edit <strong><span id="edit-survey-title"></span></strong></h3>
+            <div>
+                <h1><span id="survey-action-span">Edit</span> Survey</h1>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="select-course" class="col-sm-2 control-label">Select Course</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="select-course">
+                                <c:forEach items="${courses}" var="course">
+                                    <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-survey-title" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="add-survey-title" placeholder="Survey Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="add-survey-due-date"/>
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label label-questions">Questions</label>
+                    </div>
+                    <div id="add-survey-q-group">
+                        <div class="question-group">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Question 1</label>
+                                <div class="col-md-6">
+                                    <input class="form-control input-question"/>
                                 </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                <label class="col-sm-1 control-label">Type</label>
+                                <div class="col-md-2">
+                                    <input class="form-control input-type"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
+                                        <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="select-course" class="col-sm-2 control-label">Select Course</label>
-                                        <div class="col-sm-6">
-                                            <select class="form-control" id="select-course">
-                                                <c:forEach items="${courses}" var="course">
-                                                    <option class="select-course" value="${course.courseKey}">${course.title}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="add-survey-title" class="col-sm-2 control-label">Name</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="add-survey-title" placeholder="Survey Name" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="add-survey-due-date"/>
-                                        </div>
-                                        <div class="col-sm-6"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-questions">Questions</label>
-                                    </div>
-                                    <div id="add-survey-q-group">
-                                        <div class="question-group">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Question 1</label>
-                                                <div class="col-md-6">
-                                                    <input class="form-control input-question"/>
-                                                </div>
-                                                <label class="col-sm-1 control-label">Type</label>
-                                                <div class="col-md-2">
-                                                    <input class="form-control input-type"/>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
-                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group answer-row">
-                                                <%--Answer--%>
-                                                <label class="col-sm-2 control-label">Answer</label>
-                                                <div class="col-md-4">
-                                                    <input class="input-answer"/>
-                                                </div>
-                                                <%--Score--%>
-                                                <label class="col-sm-1 control-label">Score</label>
-                                                <div class="col-md-3">
-                                                    <input type="number" class="input-score"/>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
-                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="question-group">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Question
-                                                    <span class="question-number">2</span>
-                                                </label>
-                                                <%--input question--%>
-                                                <div class="col-md-6">
-                                                    <input class="form-control input-question"/>
-                                                </div>
-                                                <%--input type--%>
-                                                <label class="col-sm-1 control-label">Type</label>
-                                                <div class="col-md-2">
-                                                    <input class="form-control input-type"/>
-                                                </div>
-                                                <%--remove button--%>
-                                                <div class="col-md-1">
-                                                    <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">
-                                                        <span class="glyphicon glyphicon-minus"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group answer-row">
-                                                <label class="col-sm-2 control-label">Answer</label>
-                                                <div class="col-md-4">
-                                                    <input class="input-answer"/>
-                                                </div>
-                                                <label class="col-sm-1 control-label">Score</label>
-                                                <div class="col-md-3">
-                                                    <input type="number" class="input-score"/>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
-                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
-                                </form>
+                            <div class="form-group answer-row">
+                                <%--Answer--%>
+                                <label class="col-sm-2 control-label">Answer</label>
+                                <div class="col-md-4">
+                                    <input class="input-answer"/>
+                                </div>
+                                <%--Score--%>
+                                <label class="col-sm-1 control-label">Score</label>
+                                <div class="col-md-3">
+                                    <input type="number" class="input-score"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary" id="edit-survey-submit">Save</button>
+                        </div>
+
+                        <div class="question-group">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Question
+                                    <span class="question-number">2</span>
+                                </label>
+                                <%--input question--%>
+                                <div class="col-md-6">
+                                    <input class="form-control input-question"/>
+                                </div>
+                                <%--input type--%>
+                                <label class="col-sm-1 control-label">Type</label>
+                                <div class="col-md-2">
+                                    <input class="form-control input-type"/>
+                                </div>
+                                <%--remove button--%>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group answer-row">
+                                <label class="col-sm-2 control-label">Answer</label>
+                                <div class="col-md-4">
+                                    <input class="input-answer"/>
+                                </div>
+                                <label class="col-sm-1 control-label">Score</label>
+                                <div class="col-md-3">
+                                    <input type="number" class="input-score"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
+                </form>
+
                 </div>
             </div>
         </div>
