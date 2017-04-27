@@ -5,6 +5,7 @@ import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,19 @@ public class LearnController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learn");
         model.addObject("courses", courses);
+
+        return model;
+    }
+
+    /**
+     * all visit to course learn page
+     * @return learn page
+     */
+    @RequestMapping(value = "/learn/{courseKey}", method = RequestMethod.GET)
+    public ModelAndView learnCourse(@PathVariable("courseKey") String courseKey) {
+        Course course = courseManager.loadSingleCourse(courseKey);
+        ModelAndView model = new ModelAndView();
+        model.setViewName("learn");
 
         return model;
     }

@@ -1,45 +1,44 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.SurveyManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.Survey;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 /**
- * Created by aliao on 4/19/17.
+ * Created by aliao on 4/26/2017.
  */
 @Controller
-public class SurveyController {
+public class InstructorController {
 
     private UserManager userManager = new UserManager();
-    private SurveyManager surveyManager = new SurveyManager();
 
     /**
-     * all visit to survey page
-     * @return learn survey page
+     * all visit to instructor page
+     * @return instructor page
      */
-    @RequestMapping(value = "/learn/{courseKey}/survey", method = RequestMethod.GET)
-    public ModelAndView survey(@PathVariable("courseKey") String courseKey) {
-        Survey survey = surveyManager.loadSingleCourseSurvey(courseKey);
+    @RequestMapping(value = "/instructor", method = RequestMethod.GET)
+    public ModelAndView instructor(){
+        ArrayList<Course> courses = new ArrayList<Course>();
         ModelAndView model = new ModelAndView();
-        model.setViewName("learnSurvey");
-        model.addObject("survey", survey);
+        model.setViewName("instructor");
+        model.addObject("courses", courses);
 
         return model;
     }
 
     /**
-     * logout on survey page
+     * logout on instructor page
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/learn/{courseKey}/survey/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";

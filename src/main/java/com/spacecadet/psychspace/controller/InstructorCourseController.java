@@ -5,10 +5,7 @@ import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -24,7 +21,7 @@ public class InstructorCourseController {
      * instructor page (get) - add new course to catalog
      * @return instructor add course page
      */
-    @RequestMapping(value = "/addCourse", method = RequestMethod.GET)
+    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.GET)
     public ModelAndView addCourse() {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddCourse");
@@ -38,7 +35,7 @@ public class InstructorCourseController {
      * @param course added course
      * @return instructor add course page
      */
-    @RequestMapping(value = "/addCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.POST)
     public ModelAndView addCourse(@ModelAttribute("course") Course course) {
         if(course != null) {
             course.setInstructor(WelcomeController.currUser.getUserKey());
@@ -56,7 +53,7 @@ public class InstructorCourseController {
      * instructor page (get) - edit course on catalog
      * @return instructor edit course page
      */
-    @RequestMapping(value = "/editCourse", method = RequestMethod.GET)
+    @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.GET)
     public ModelAndView editCourse() {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
@@ -67,30 +64,16 @@ public class InstructorCourseController {
     }
 
     /**
-     * instructor page (post) - edit course on catalog
+     * instructor page (post) - edit course on catalogue
      * @param course edited course
      * @return instructor edit course page
      */
-    @RequestMapping(value = "/editCourse", method = RequestMethod.POST)
-    public ModelAndView editCourse(@ModelAttribute("course") Course course) {
+    @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.POST)
+    public ModelAndView editCourse(@PathVariable("courseKey") String courseKey, @ModelAttribute("course") Course course) {
         if(course != null)
             courseManager.editCourse(course);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
-        model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
-
-        return model;
-    }
-
-    /**
-     * instructor page (get) - add new course to catalog
-     * @return instructor delete course page
-     */
-    @RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
-    public ModelAndView deleteCourse() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorDeleteCourse");
         model.addObject("course", new Course());
         model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
@@ -119,14 +102,4 @@ public class InstructorCourseController {
         return "redirect:/";
     }
 
-    /**
-     * logout on instructor delete course page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/deleteCourse/logout", method = RequestMethod.POST)
-    public String logoutDelete(@RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
-    }
 }
