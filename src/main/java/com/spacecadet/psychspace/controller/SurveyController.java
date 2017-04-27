@@ -40,7 +40,7 @@ public class SurveyController {
      * @return welcome page
      */
     @RequestMapping(value = "/learn/{courseKey}/survey/logout", method = RequestMethod.POST)
-    public String logout(@RequestBody String user) {
+    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }

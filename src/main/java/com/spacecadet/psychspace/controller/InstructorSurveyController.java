@@ -33,7 +33,7 @@ public class InstructorSurveyController {
      * @return instructor add survey page
      */
     @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.GET)
-    public ModelAndView addSurvey() {
+    public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddSurvey");
@@ -49,7 +49,7 @@ public class InstructorSurveyController {
      * @return instructor add survey
      */
     @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.POST)
-    public String addSurvey(@RequestBody String survey) {
+    public String addSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String survey) {
         // TODO: add function for parsing
         Survey survey1 = helperManager.surveyStringToSurvey(survey);
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
@@ -64,7 +64,7 @@ public class InstructorSurveyController {
      * @return
      */
     @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.GET)
-    public ModelAndView editSurvey(@PathVariable("courseKey") String courseKey) {
+    public ModelAndView editSurveyGet(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         Survey rawSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
         String survey = helperManager.surveyObjectsToJsonString(rawSurvey);
@@ -81,8 +81,8 @@ public class InstructorSurveyController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/addSurvey/logout", method = RequestMethod.POST)
-    public String logoutAdd(@RequestBody String user) {
+    @RequestMapping(value = "/instructor/{courseKey}/addSurvey/logout", method = RequestMethod.POST)
+    public String logoutAdd(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
@@ -92,8 +92,8 @@ public class InstructorSurveyController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/editSurvey/logout", method = RequestMethod.POST)
-    public String logoutEdit(@RequestBody String user) {
+    @RequestMapping(value = "/instructor/{courseKey}/editSurvey/logout", method = RequestMethod.POST)
+    public String logoutEdit(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }

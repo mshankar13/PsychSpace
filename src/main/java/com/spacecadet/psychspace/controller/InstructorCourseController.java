@@ -54,7 +54,7 @@ public class InstructorCourseController {
      * @return instructor edit course page
      */
     @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.GET)
-    public ModelAndView editCourse() {
+    public ModelAndView editCourse(@PathVariable("courseKey") String courseKey) {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditCourse");
         model.addObject("course", new Course());

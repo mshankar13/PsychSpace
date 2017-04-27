@@ -6,6 +6,7 @@ import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,10 +26,11 @@ public class InstructorEvaluationController {
 
     /**
      * instructor page (get) - evaluations
+     *
      * @return instructor load evaluation page
      */
     @RequestMapping(value = "/instructor/{courseKey}/evaluations", method = RequestMethod.GET)
-    public ModelAndView loadEvaluation() {
+    public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddEvaluation");
@@ -38,34 +40,13 @@ public class InstructorEvaluationController {
     }
 
     /**
-     * logout on instructor add evaluation page
+     * logout on instructor evaluation page
+     *
      * @param user user logged out
      * @return welcome page
      */
     @RequestMapping(value = "/{courseKey}/evaluations/logout", method = RequestMethod.POST)
-    public String logoutAdd(@RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
-    }
-
-    /**
-     * logout on instructor edit evaluation page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/{courseKey}/evaluations/logout", method = RequestMethod.POST)
-    public String logoutEdit(@RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
-    }
-
-    /**
-     * logout on instructor delete evaluation page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/{courseKey}/evaluations/logout", method = RequestMethod.POST)
-    public String logoutDelete(@RequestBody String user) {
+    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }

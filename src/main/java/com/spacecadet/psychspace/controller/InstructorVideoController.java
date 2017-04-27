@@ -44,7 +44,7 @@ public class InstructorVideoController {
      * @return instructor add video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/add", method = RequestMethod.GET)
-    public ModelAndView addVideo() {
+    public ModelAndView addVideo(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorAddVideo");
@@ -59,7 +59,7 @@ public class InstructorVideoController {
      * @return instructor add video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/add", method = RequestMethod.POST)
-    public ModelAndView addVideo(@ModelAttribute("video") Video video) {
+    public ModelAndView addVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.addVideo(video);
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
@@ -76,7 +76,7 @@ public class InstructorVideoController {
      * @return instructor edit video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/edit", method = RequestMethod.GET)
-    public ModelAndView editVideo() {
+    public ModelAndView editVideo(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEditVideo");
@@ -92,7 +92,7 @@ public class InstructorVideoController {
      * @return instructor edit video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/edit", method = RequestMethod.POST)
-    public ModelAndView editVideo(@ModelAttribute("video") Video video) {
+    public ModelAndView editVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.editVideo(video);
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
@@ -109,7 +109,7 @@ public class InstructorVideoController {
      * @return instructor delete video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/delete", method = RequestMethod.POST)
-    public ModelAndView deleteVideo(@ModelAttribute("video") Video video) {
+    public ModelAndView deleteVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.deleteVideo(video.getVideoKey());
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
@@ -126,7 +126,7 @@ public class InstructorVideoController {
      * @return instructor delete video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/delete", method = RequestMethod.GET)
-    public ModelAndView deleteVideo() {
+    public ModelAndView deleteVideo(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorDeleteVideo");
@@ -143,7 +143,7 @@ public class InstructorVideoController {
      * @return welcome page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/logout", method = RequestMethod.POST)
-    public String logoutLoad(@RequestBody String user) {
+    public String logoutLoad(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
@@ -154,7 +154,7 @@ public class InstructorVideoController {
      * @return welcome page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/add/logout", method = RequestMethod.POST)
-    public String logoutAdd(@RequestBody String user) {
+    public String logoutAdd(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
@@ -165,7 +165,7 @@ public class InstructorVideoController {
      * @return welcome page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/edit/logout", method = RequestMethod.POST)
-    public String logoutEdit(@RequestBody String user) {
+    public String logoutEdit(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
@@ -176,7 +176,7 @@ public class InstructorVideoController {
      * @return welcome page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/delete/logout", method = RequestMethod.POST)
-    public String logoutDelete(@RequestBody String user) {
+    public String logoutDelete(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
