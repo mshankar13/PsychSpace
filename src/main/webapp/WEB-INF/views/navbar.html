@@ -1,18 +1,18 @@
 <header>
     <nav class="navbar navbar-default" id="nav-top">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="${contextPath}/">
-                    <img src="../resources/img/logo.png" alt="logo" class="img-logo">
-                </a>
-                <a class="navbar-brand" href="${contextPath}/">
-                    <img src="../resources/img/logo_text.png" alt="PsychSpace" id="img-logo-text">
-                </a>
-            </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse in">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="${contextPath}/">
+                        <img src="${contextPath}/resources/img/logo.png" alt="logo" class="img-logo">
+                    </a>
+                    <a class="navbar-brand" href="${contextPath}/">
+                        <img src="${contextPath}/resources/img/logo_text.png" alt="PsychSpace" id="img-logo-text">
+                    </a>
+                </div>
+
                 <ul class="nav navbar-nav" id="uib-overrides-nav">
                     <li id="nav-home" class="nav-li nav-user-only" ><a href="${contextPath}/home" id="nav-home-a" class="uib-overrides-nav-a">Home</a></li>
                     <li id="nav-learn" class="nav-li nav-user-only" ><a href="${contextPath}/learn" id="nav-learn-a" class="uib-overrides-nav-a">Learn</a></li>
@@ -25,8 +25,6 @@
                         <div class="g-signin2" id="div-sign-in" data-onsuccess="onSignIn"></div>
                     </li>
                 </ul>
-
-
                 <ul class="nav navbar-nav" id="nav-profile">
                     <li class="dropdown">
                         <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
