@@ -43,6 +43,8 @@ public class CourseController {
             if(enrollManager.isEnrolled(WelcomeController.currUser.getUserKey(),key)){
                 model.addObject("isEnrolled", "true");
             }
+            else
+                model.addObject("isEnrolled", "false");
             model.addObject("isLoggedIn", "true");
         } else {
             model.addObject("isEnrolled", "false");

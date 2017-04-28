@@ -37,23 +37,26 @@
 </div>
 
 <header class="ps-feature-header">
-    <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}"/>
-    <input type="hidden" id="psCurrentUser" value="${currentUserKey}"/>
+    <c:set var="currentUserKey" value="${currentUserKey}" />
+    <c:set var="isLoggedIn" value="${isLoggedIn}" />
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted ${article.date}</p>
                 <input type="hidden" id="ps-input-liked" value="${isLiked}">
-                <form:form method="post" modelAttribute="like" action="/article/${article.newsKey}/+1" class="left">
-                    <form:hidden path="userKey" value="0"/>
-                    <form:hidden path="articleKey" value="${article.newsKey}"/>
-                    <form:hidden path="status" value="" id="liked"/>
-                    <form:hidden path="likeKey" value="0"/>
-                    <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star"></button>
-                    ${article.likesCount}
-                </form:form>
-
+                <c:choose>
+                    <c:when test="${isLoggedIn == 'true'}">
+                        <form:form method="post" modelAttribute="like" action="/article/${article.newsKey}/+1" class="left">
+                            <form:hidden path="userKey" value="0"/>
+                            <form:hidden path="articleKey" value="${article.newsKey}"/>
+                            <form:hidden path="status" value="" id="liked"/>
+                            <form:hidden path="likeKey" value="0"/>
+                            <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star"></button>
+                            ${article.likesCount}
+                        </form:form>
+                    </c:when>
+                </c:choose>
                 <!-- Title -->
                 <h1>${article.title}
                     <hr>
@@ -116,46 +119,61 @@
                 <hr>
             </h2>
             <br>
-            <div id="psLeaveComment" class="col-lg ps-well">
-                <div class="left">
-                    <h4>Leave a Comment:</h4>
-                    <form:form class="form-horizontal" method="post" modelAttribute="comment"
-                               action="/article/${article.newsKey}">
-                        <form:hidden path="commentKey" value="0"/>
-                        <form:hidden path="username" value="0"/>
-                        <form:hidden path="newsKey" value="0"/>
-                        <form:hidden path="date" value="0"/>
-                        <form:hidden path="state" value="add"/>
-                        <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
-                        <input type="hidden" id="psCommentCreator" value="${comment.username}">
-                        <div class="right">
-                            <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit
-                            </button>
-                        </div>
-                    </form:form>
-                </div>
-            </div>
-            <!-- Comment -->
-            <c:forEach items="${commentList}" var="articleComment">
-                <div class="media ps-comment">
-                    <input type="hidden" id="commentCreator" value="${articleComment.username}">
-                    <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""></a>
-                    <div class="media-body">
-                        <!-- Comment Author and Date Posted -->
-                        <h4>${articleComment.username}
-                            <small>${articleComment.date}</small>
-                        </h4>
-                        <hr>
-                        <!-- Comment Content -->
-                        <p class="comment-text">${articleComment.content}</p>
-                        <!-- Comment Buttons (Edit/Delete OR Like) -->
-                        <div class="right">
-                            <button type="button" class="btn-comment btn btn-primary btn-comment-delete">Delete</button>
-                            <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Edit</button>
+            <!-- Leaving Comments -->
+            <c:choose>
+                <c:when test="${isLoggedIn == 'true'}">
+                    <div id="psLeaveComment" class="col-lg ps-well">
+                        <div class="left">
+                            <h4>Leave a Comment:</h4>
+                            <form:form class="form-horizontal" method="post" modelAttribute="comment"
+                                       action="/article/${article.newsKey}">
+                                <form:hidden path="commentKey" value="0"/>
+                                <form:hidden path="username" value="0"/>
+                                <form:hidden path="newsKey" value="0"/>
+                                <form:hidden path="date" value="0"/>
+                                <form:hidden path="state" value="add"/>
+                                <form:textarea class="form-control" id="article-comment-create" rows="3" path="content"/>
+                                <input type="hidden" id="psCommentCreator" value="${comment.username}">
+                                <div class="right">
+                                    <button id="btn-comment-post" type="submit" class="btn-comment btn btn-primary">Submit
+                                    </button>
+                                </div>
+                            </form:form>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:when>
+            </c:choose>
+
+            <!-- Loading Comments -->
+            <!-- Comment -->
+            <div id="ps-comment-section">
+                <c:forEach items="${commentList}" var="articleComment">
+                    <c:set var="commentorUserKey" value="${articleComment.userKey}" />
+                    <div class="media ps-comment">
+                        <!-- Comment creator key -->
+                        <input type="hidden" value="${articleComment.commentKey}">
+                        <a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""></a>
+                        <div class="media-body">
+                            <!-- Comment Author and Date Posted -->
+                            <h4>${articleComment.username}
+                                <small>${articleComment.date}</small>
+                            </h4>
+                            <hr>
+                            <!-- Comment Content -->
+                            <p class="comment-text">${articleComment.content}</p>
+                            <!-- Comment Buttons (Edit/Delete OR Like) -->
+                            <c:choose>
+                                <c:when test="${currentUserKey == commentorUserKey}">
+                                    <div class="right">
+                                        <button type="button" class="btn-comment btn btn-primary btn-comment-delete">Delete</button>
+                                        <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Edit</button>
+                                    </div>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
             <!-- End Comment -->
         </div>
 
@@ -184,7 +202,8 @@
                                                autofocus="true"/>
                                 <form:hidden path="username" value="0"/>
                                 <form:hidden path="newsKey" value="0"/>
-                                <form:hidden path="date" value="0"/>
+                                <form:hidden path="userKey" value="0"/>
+                                <form:hidden path="date" value="0" />
                             </div>
                         </div>
                         <div class="ps-modal-footer right">
@@ -222,8 +241,9 @@
                             <form:hidden path="commentKey" value="0" id="delete-comment-modal-key"/>
                             <form:hidden path="username" value="0"/>
                             <form:hidden path="newsKey" value="0"/>
+                            <form:hidden path="userKey" value="0"/>
                             <form:hidden path="date" value="0"/>
-                            <form:hidden path="content"/>
+                            <form:hidden path="content" value=""/>
                             <h3>Are you sure you want to delete comment: <span id="delete-comment-modal-span"></span>
                             </h3>
                         </div>

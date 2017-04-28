@@ -6,14 +6,15 @@ $(document).ready(function () {
     } else {
         $("#btn-ps-feature-like").addClass("unliked");
     }
-    showIfLoggedIn();
+
+    //showIfLoggedIn();
 
     // On Click functions
-    $(".btn-comment-edit").on("click", editCommentModalShow);
-    $(".btn-comment-delete").on("click", deleteCommentModalShow);
+    $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);
+    $("#ps-comment-section").on("click", ".btn-comment-delete", deleteCommentModalShow);
     $("#btn-ps-feature-like").on("click", editLikeShow);
     // click close button
-    $(".ps-type-close").on("click", closeModal);
+    //$(".ps-type-close").on("click", closeModal);
 });
 
 function closeModal() {
@@ -32,8 +33,8 @@ function editLikeShow() {
 }
 
 function editCommentModalShow() {
-    var commentKey = $(this).siblings()[1].value;
-    var content = $(this).parent().closest(".ps-comment").find("p").text();
+    var commentKey = $(this).parents().closest(".ps-comment").find("input").val();
+    var content = $(this).parent().siblings(".comment-text").text();
 
     $("#edit-comment-modal-key").val(commentKey);
     $("#edit-comment-content").val(content);
@@ -41,12 +42,11 @@ function editCommentModalShow() {
     $(".ps-modal-type-comment").removeClass("pushToBack");
     $(".ps-modal-type-comment").addClass("pushToFront");
     $("#edit-comment-modal").modal("show");
-
 }
 
 function deleteCommentModalShow() {
-    var commentKey = $(this).siblings()[1].value;
-    var content = $(this).parent().closest(".ps-comment").find("p").text();
+    var commentKey = $(this).parents().closest(".ps-comment").find("input").val();
+    var content = $(this).parent().siblings(".comment-text").text();
 
     $("#delete-comment-modal-key").val(commentKey);
     $("#delete-comment-modal-span").text(content);
@@ -55,31 +55,4 @@ function deleteCommentModalShow() {
     $(".ps-modal-type-comment").addClass("pushToFront");
     $("#delete-comment-modal").modal("show");
 
-}
-
-function showIfLoggedIn() {
-    if ($("#psIsLoggedIn").val() == "false") {
-        $("#psLeaveComment").hide();
-        $("#like").hide();
-        $(".btn-comment-edit").hide();
-        $(".btn-comment-delete").hide();
-    } else {
-        showCommentEditDelete();
-    }
-}
-
-function showCommentEditDelete() {
-    var toHide;
-    $(".ps-comment").each(function () {
-        console.log($(this).find("#commentCreator").val());
-        toHide = $("#psCurrentUser").val() !== $(this).find("#commentCreator").val();
-        console.log(toHide);
-        if (toHide == true) {
-            console.log("Hide butons");
-            $(this).find(".btn-comment-edit").hide();
-            $(this).find(".btn-comment-delete").hide();
-        } else {
-            console.log("Show buttons");
-        }
-    });
 }

@@ -1,22 +1,22 @@
 $(document).ready(function () {
-    var loggedIn = $('#psIsLoggedIn').val();
-    if (loggedIn == true) {
-        if (checkIfUserEnrolled() == true) {
-            userEnrolledUI();
-        }
-        else if (checkIfUserEnrolled() == false) {
-            if (checkCourseStatus() == true) {
-                userNotEnrolledUI();
-            }
-            else {
-                courseClosedUI();
-            }
-        }
-    }
-    else{
-        $("#button-enroll").hide();
-        $("#button-unenroll").hide();
-    }
+    // var loggedIn = $('#psIsLoggedIn').val();
+    // if (loggedIn == true) {
+    //     if (checkIfUserEnrolled() == true) {
+    //         userEnrolledUI();
+    //     }
+    //     else if (checkIfUserEnrolled() == false) {
+    //         if (checkCourseStatus() == true) {
+    //             userNotEnrolledUI();
+    //         }
+    //         else {
+    //             courseClosedUI();
+    //         }
+    //     }
+    // }
+    // else{
+    //     $("#button-enroll").hide();
+    //     $("#button-unenroll").hide();
+    // }
 });
 
 function checkIfUserEnrolled() {

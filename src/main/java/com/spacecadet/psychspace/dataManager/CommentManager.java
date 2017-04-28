@@ -101,7 +101,8 @@ public class CommentManager {
     public void deleteComment(String commentKey) {
         Transaction txn = datastore.beginTransaction();
         try {
-            datastore.delete(KeyFactory.stringToKey(commentKey));
+            Key key = KeyFactory.stringToKey(commentKey);
+            datastore.delete(key);
             txn.commit();
         } finally {
             if (txn.isActive()) {

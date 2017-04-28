@@ -35,6 +35,7 @@
 </div>
 <header class="ps-feature-header">
     <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
+    <c:set var="isLoggedIn" value="${isLoggedIn}" />
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">
@@ -111,10 +112,21 @@
                     <div>
                         <!-- Enroll Button -->
                         <div class="center">
-                            <input id="button-user-enroll-status" value=${isEnrolled} hidden>
-                            <input id="button-enroll-status" value=${course.status} hidden>
-                            <a class="button-enroll button" id="button-enroll" href="/course/${course.courseKey}/enroll"><span> Enroll Now</span></a>
-                            <a class="button-enroll button" id="button-unenroll" href="/course/${course.courseKey}/unenroll"><span> Unenroll</span></a>
+                            <input type="hidden" value="${isEnrolled}" id="isEnrolled" />
+                            <c:set var="courseStatus" value="${course.status}" />
+                            <c:set var="isEnrolled" value="${isEnrolled}"/>
+                            <c:choose>
+                                <c:when test="${isLoggedIn == 'true'}">
+                                    <c:choose>
+                                    <c:when test="${courseStatus == 'open' and isEnrolled == 'false'}">
+                                        <a class="button-enroll button" id="button-enroll" href="/course/${course.courseKey}/enroll"><span> Enroll Now</span></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="button-enroll button" id="button-unenroll" href="/course/${course.courseKey}/unenroll"><span> Unenroll</span></a>
+                                    </c:otherwise>
+                                    </c:choose>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -136,26 +148,6 @@
             </div>
             <!-- End Course Description-->
         </div>
-        <!-- end article-content -->
-        <!-- end row artcile -->
-        <%--<div class="row ps-text-content">--%>
-        <%--<div class="left">--%>
-        <%--<h2>Reviews<hr></h2>--%>
-        <%--</div>--%>
-        <%--<!-- Comment -->--%>
-        <%--<div class="media ps-comment">--%>
-        <%--<a class="pull-left" href="#"> <img class="media-object" src="http://placehold.it/64x64" alt=""> </a>--%>
-        <%--<div class="media-body">--%>
-        <%--<h4>Jane Doe <small>March 31, 2017</small><hr></h4>--%>
-        <%--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>--%>
-        <%--<div class="right">--%>
-        <%--<button id="btn-comment-edit" type="submit" class="btn-comment btn btn-primary">Edit</button>--%>
-        <%--<button id="btn-comment-like" type="submit" class="btn-comment btn btn-primary">Like</button>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <!-- Social -->
     </div>
     <!-- article-content-->
 </header>
