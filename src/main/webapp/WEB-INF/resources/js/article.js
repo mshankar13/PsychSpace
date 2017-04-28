@@ -1,26 +1,17 @@
 $(document).ready(function () {
     // Ready conditions
     $(".ps-modal-type-comment").addClass("pushToBack");
-    if ($("#ps-input-liked").val() == "true") {
-        $("#btn-ps-feature-like").addClass("liked");
-    } else {
-        $("#btn-ps-feature-like").addClass("unliked");
-    }
-
-    //showIfLoggedIn();
+    // if ($("#ps-input-liked").val() == "true") {
+    //     $("#btn-ps-feature-like").addClass("liked");
+    // } else {
+    //     $("#btn-ps-feature-like").addClass("unliked");
+    // }
 
     // On Click functions
     $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);
     $("#ps-comment-section").on("click", ".btn-comment-delete", deleteCommentModalShow);
-    $("#btn-ps-feature-like").on("click", editLikeShow);
-    // click close button
-    //$(".ps-type-close").on("click", closeModal);
+    // $("#btn-ps-feature-like").on("click", editLikeShow);
 });
-
-function closeModal() {
-    $(".ps-modal-type-comment").removeClass("pushToFront");
-    $(".ps-modal-type-comment").addClass("pushToBack");
-}
 
 function editLikeShow() {
     if ($("#ps-input-liked").hasClass("liked")) {

@@ -45,6 +45,7 @@
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted ${article.date}</p>
                 <input type="hidden" id="ps-input-liked" value="${isLiked}">
+                <c:set var="isLiked" value="${isLiked}" />
                 <c:choose>
                     <c:when test="${isLoggedIn == 'true'}">
                         <form:form method="post" modelAttribute="like" action="/article/${article.newsKey}/+1" class="left">
@@ -52,8 +53,17 @@
                             <form:hidden path="articleKey" value="${article.newsKey}"/>
                             <form:hidden path="status" value="" id="liked"/>
                             <form:hidden path="likeKey" value="0"/>
-                            <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star"></button>
-                            ${article.likesCount}
+                            <c:choose>
+                                <c:when test="${isLiked == 'true'}">
+                                    <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star liked"></button>
+                                    ${article.likesCount}
+                                </c:when>
+                                <c:otherwise>
+                                    <button id="btn-ps-feature-like" type="submit" class="glyphicon glyphicon-star unliked"></button>
+                                    ${article.likesCount}
+                                </c:otherwise>
+                            </c:choose>
+
                         </form:form>
                     </c:when>
                 </c:choose>
