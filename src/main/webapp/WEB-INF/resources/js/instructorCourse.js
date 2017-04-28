@@ -7,6 +7,21 @@ $(document).ready(function(){
         $("#edit-course-div").hide();
     }
 
+    // set the tab links
+    var url = window.location.pathname;
+    $("#course-a").attr("href", url );
+    $("#survey-a").attr("href", url + "/survey");
+    $("#videos-a").attr("href", url + "/videos");
+    $("#evaluation-a").attr("href", url + "/evaluations");
+
+
+    // enable datepicker function
+    $("#add-course-enroll-date").datepicker();
+    $("#add-course-start-date").datepicker();
+    $("#add-course-end-date").datepicker();
+    $("#add-course-drop-date").datepicker();
+
+    // enable onclick function calls
     $("#edit-course-table").on("click", ".btn-edit-course", editCourseModalShow);
     $("#btn-add-course").on("click", addCourseModalShow);
 });

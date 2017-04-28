@@ -13,8 +13,8 @@ h3 {
     padding: 20px 40px;
 }
 
-.form-control input {
-    height:30px;
+input[type="text"], input[type="number"] {
+    height:25px;
 }
 
 .div-top {
@@ -22,13 +22,27 @@ h3 {
 }
 
 .instructor-btn {
+    border: solid 1px var(--space-cadet-color);
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: var(--space-cadet-color);
+}
+
+.instructor-btn:hover {
+    border: solid 1px var(--eucalyptus-color);
+    color: var(--eucalyptus-color);
+}
+
+.instructor-btn-primary {
     background-color: var(--tea-rose-color);
     border-color: 1px solid var(--tea-rose-color);
     color: var(--space-cadet-color);
     border-radius: 5px;
+    box-shadow: none;
 }
 
-.instructor-btn:hover {
+.instructor-btn-primary:hover {
     border-color: var(--dogwood-color);
     background-color: var(--dogwood-color);
     color: var(--baby-powder-color);
@@ -39,6 +53,7 @@ h3 {
     background-color: transparent;
     border: solid 1px var(--space-cadet-color);
     color: var(--space-cadet-color);
+    box-shadow: none;
 }
 
 .instructor-btn-secondary:hover {
@@ -70,6 +85,10 @@ h3 {
     color: var(--yellow-color);
 }
 
+/*************************** course ****************************/
+#addCourseModal {
+    height: 550px;
+}
 
 /*************************** survey ****************************/
 .label-questions {
@@ -79,9 +98,9 @@ h3 {
 }
 
 
-
 /*************************** video ****************************/
-#editVideoModal {
+#addVideoModal,
+#editVideoModal{
     height: 350px;
 }
 

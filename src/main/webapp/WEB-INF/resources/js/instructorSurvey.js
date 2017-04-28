@@ -2,13 +2,26 @@
 
 var questionCounter = 2;
 $(document).ready(function(){
+
+    // set the tab links
+    var url = window.location.pathname;
+    var courseBaseUrl = url.slice(0, url.length-7);
+
+    $("#course-a").attr("href", courseBaseUrl);
+    $("#survey-a").attr("href", url);
+    $("#videos-a").attr("href", courseBaseUrl + "/videos");
+    $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
+
+    // Set selected course
+    var currentCourseKey = courseBaseUrl.slice("/");
+    $("#current-course-key").val(currentCourseKey);
+
     $("#btn-survey-add-question").on("click", addQuestion);
     $("#add-survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#add-survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#add-survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
     $("#add-survey-due-date").datepicker();
     $("#add-survey-submit").on("click", addSurveySubmit);
-
 
     $("edit-survey-btn").on("click", editSurveyModalShow);
 });

@@ -72,7 +72,7 @@
                             <form:input class="form-control" type="text" id="add-video-link" path="url" placeholder="Video Link"/>
                         </div>
                     </div>
-                    <button type="submit" class="instructor-btn" id="add-video-submit">Add</button>
+                    <button type="submit" class="instructor-btn-primary" id="add-video-submit">Add</button>
                 </form:form>
             </div>
         </div>

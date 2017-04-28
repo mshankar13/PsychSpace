@@ -32,11 +32,11 @@ public class InstructorSurveyController {
      * instructor page (get) - add new survey to course
      * @return instructor add survey page
      */
-    @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.GET)
+    @RequestMapping(value = "/instructor/{courseKey}/survey", method = RequestMethod.GET)
     public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllCourses();
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddSurvey");
+        model.setViewName("instructorSurvey");
         model.addObject("survey", new Survey());
         model.addObject("courses", courses);
 

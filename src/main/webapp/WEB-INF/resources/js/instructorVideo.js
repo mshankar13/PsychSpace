@@ -1,7 +1,20 @@
 $(document).ready(function() {
+    // set the tab links
+    var url = window.location.pathname;
+    var courseBaseUrl = url.slice(0, url.length-7);
+    $("#course-a").attr("href", courseBaseUrl);
+    $("#survey-a").attr("href", courseBaseUrl + "/survey");
+    $("#videos-a").attr("href", url);
+    $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
+
+    $("#btn-add-video").on("click", addVideoModalShow);
     $("#edit-video-table").on("click", ".btn-edit-video", editVideoModalShow);
     $("#delete-video-table").on("click", ".btn-delete-video", deleteVideoModalShow);
 });
+
+function addVideoModalShow() {
+    $("#addVideoModal").modal("show");
+}
 
 function editVideoModalShow() {
     var row = $(this).closest("tr");
@@ -16,10 +29,6 @@ function editVideoModalShow() {
     $("#edit-video-title").val(title);
     $("#edit-video-link").val(link);
     $("#edit-video-key").val(videoKey);
-
-    // $("#edit-video-course-key select option").filter(function() {
-    //     return $(this).val() == courseKey;
-    // }).prop('selected', true);
 
     $("#edit-video-course-key select").val(courseKey);
 

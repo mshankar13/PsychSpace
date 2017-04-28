@@ -23,13 +23,12 @@ function onSignIn(googleUser, authResult) {
         url = url + "login";
     else
         url = url + "/login";
-    //console.log(url);
 
     profile = googleUser.getBasicProfile();
 
     if(!url.includes("learn") && !url.includes("home")
         && !url.includes("Course") && !url.includes("Survey")
-       && !url.includes("Video")) {
+       && !url.includes("Video") && !url.includes("instructor")) {
         var user = {};
         user["email"] = profile.getEmail();
         user["firstName"] = profile.getGivenName();
@@ -78,7 +77,6 @@ function signOut() {
         url = url + "logout";
     else
         url = url + "/logout";
-    //console.log(url);
 
     var auth2 = gapi.auth2.getAuthInstance();
 

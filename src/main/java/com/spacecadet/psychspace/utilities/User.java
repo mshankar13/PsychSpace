@@ -14,8 +14,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private String userKey;
-    private String email;
+    private String userKey; // Created by the datastore
+    private String email; // user gmail
     private String firstName;
     private String lastName;
     private String role; //User, Instructor, Admin

@@ -33,7 +33,7 @@ public class InstructorEvaluationController {
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllCourses();
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddEvaluation");
+        model.setViewName("instructorEvaluation");
         model.addObject("courses", courses);
 
         return model;

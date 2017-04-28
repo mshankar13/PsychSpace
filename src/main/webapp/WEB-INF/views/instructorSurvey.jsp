@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <head>
@@ -18,11 +17,9 @@
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%--Customized--%>
+    <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
+    <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/navbar.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
-    <script src="${contextPath}/resources/js/instructorSurvey.js"></script>
-    <script src="${contextPath}/resources/js/navbar.js"></script>
 </head>
 <body>
 <div class="navbar-wrapper">
@@ -30,34 +27,45 @@
 </div>
 <div class="wrapper">
     <div class="row" >
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="list-group">
-                <a href="${contextPath}/addCourse" class="list-group-item">Create Course</a>
-                <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
-                <a href="${contextPath}/addSurvey" class="list-group-item active">Create Survey</a>
-                <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
-                <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
-                <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
-                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
-                <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
-                <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
-                <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
+                <a href="${contextPath}/instructor" class="list-group-item">Instructor Home</a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
+            <div class="row div-top">
+                <div class="col-md-9">
+                    <label for="select-course" class="col-md-3 control-label">Select Course</label>
+                    <select class="col-md-6" id="select-course">
+                        <c:forEach items="${courses}" var="course">
+                            <c:choose>
+                                <c:when test="${course.courseKey ==  courseKey}">
+                                    <option selected="selected" class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="instructor-btn-primary" id="btn-add-course">Create Course</button>
+                </div>
+            </div>
+
+            <div class="tab">
+                <ul class="nav nav-tabs">
+                    <li><a href="#" id="course-a">Course</a></li>
+                    <li class="active"><a href="#" id="survey-a">Survey</a></li>
+                    <li><a href="#" id="videos-a">Videos</a></li>
+                    <li><a href="#" id="evaluation-a">Evaluations</a></li>
+                </ul>
+            </div>
+
             <div>
                 <h1>Create Survey</h1>
                 <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="select-course" class="col-sm-2 control-label">Select Course</label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="select-course">
-                            <c:forEach items="${courses}" var="course">
-                                <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
-                            </c:forEach>
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="add-survey-title" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-6">
@@ -148,12 +156,15 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
+                    <button type="submit" class="instructor-btn-primary" id="add-survey-submit">Create</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 </body>
+
+<script src="${contextPath}/resources/js/instructorSurvey.js"></script>
+<script src="${contextPath}/resources/js/navbar.js"></script>
 </html>
 

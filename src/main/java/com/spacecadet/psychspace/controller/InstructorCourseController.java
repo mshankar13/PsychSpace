@@ -17,25 +17,25 @@ public class InstructorCourseController {
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
 
-    /**
-     * instructor page (get) - add new course to catalog
-     * @return instructor add course page
-     */
-    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.GET)
-    public ModelAndView addCourse() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddCourse");
-        model.addObject("course", new Course());
-
-        return model;
-    }
+//    /**
+//     * instructor page (get) - add new course to catalog
+//     * @return instructor add course page
+//     */
+//    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.GET)
+//    public ModelAndView addCourse() {
+//        ModelAndView model = new ModelAndView();
+//        model.setViewName("instructorAddCourse");
+//        model.addObject("course", new Course());
+//
+//        return model;
+//    }
 
     /**
      * instructor page (post)- add new course to catalog post
      * @param course added course
      * @return instructor add course page
      */
-    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/{courseKey}/addCourse", method = RequestMethod.POST)
     public ModelAndView addCourse(@ModelAttribute("course") Course course) {
         if(course != null) {
             course.setInstructor(WelcomeController.currUser.getUserKey());
@@ -43,7 +43,7 @@ public class InstructorCourseController {
             courseManager.addCourse(course);
         }
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddCourse");
+        model.setViewName("instructorCourse");
         model.addObject("course", new Course());
 
         return model;
@@ -56,7 +56,7 @@ public class InstructorCourseController {
     @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.GET)
     public ModelAndView editCourse(@PathVariable("courseKey") String courseKey) {
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorEditCourse");
+        model.setViewName("instructorCourse");
         model.addObject("course", new Course());
         model.addObject("courses", courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 
@@ -73,7 +73,7 @@ public class InstructorCourseController {
         if(course != null)
             courseManager.editCourse(course);
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorEditCourse");
+        model.setViewName("instructorCourse");
         model.addObject("course", new Course());
         model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
 

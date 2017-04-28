@@ -59,7 +59,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button class="instructor-btn" id="btn-add-course">Create Course</button>
+                    <button class="instructor-btn-primary" id="btn-add-course">Create Course</button>
                 </div>
             </div>
 
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="instructor-btn" id="add-survey-submit">Create</button>
+                    <button type="submit" class="instructor-btn-primary" id="add-survey-submit">Create</button>
                 </form>
 
                 </div>

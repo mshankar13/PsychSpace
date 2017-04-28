@@ -20,7 +20,6 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
     <%--Customized--%>
-    <script src="${contextPath}/resources/js/navbar.js"></script>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
@@ -31,50 +30,47 @@
 </div>
 <div class="wrapper">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
 
             <div class="list-group">
-                <a href="${contextPath}/addCourse" class="list-group-item active">Courses</a>
-                <a href="${contextPath}/editCourse" class="list-group-item">Edit Course</a>
-                <a href="${contextPath}/addSurvey" class="list-group-item">Create Survey</a>
-                <a href="${contextPath}/editSurvey" class="list-group-item">Edit Survey</a>
-                <a href="${contextPath}/deleteSurvey" class="list-group-item">Delete Survey</a>
-                <a href="${contextPath}/addVideo" class="list-group-item">Add Video</a>
-                <a href="${contextPath}/editVideo" class="list-group-item">Edit Video</a>
-                <a href="${contextPath}/deleteVideo" class="list-group-item">Delete Video</a>
-                <a href="${contextPath}/addEvaluation" class="list-group-item">Create Evaluation</a>
-                <a href="${contextPath}/editEvaluation" class="list-group-item">Edit Evaluation</a>
+                <a href="${contextPath}/instructor" class="list-group-item">Instructor Home</a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="row div-top">
                 <div class="col-md-9">
                     <label for="select-course" class="col-md-3 control-label">Select Course</label>
                     <select class="col-md-6" id="select-course">
-                        <input type="hidden" value="${courses}" id="courses">
-                        <%--<c:forEach items="${courses}" var="course">--%>
-                            <%--<option class="select-course" value="${course.courseKey}">${course.title}</option>--%>
-                        <%--</c:forEach>--%>
+                        <c:forEach items="${courses}" var="course">
+                            <c:choose>
+                                <c:when test="${course.courseKey ==  courseKey}">
+                                    <option selected="selected" class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button class="instructor-btn" id="btn-add-course">Create Course</button>
+                    <button class="instructor-btn-primary" id="btn-add-course">Create Course</button>
                 </div>
             </div>
 
             <div class="tab">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#">Course</a></li>
-                    <li><a href="#">Survey</a></li>
-                    <li><a href="#">Video</a></li>
-                    <li><a href="#">Evaluation</a></li>
+                    <li class="active"><a href="#" id="course-a">Course</a></li>
+                    <li><a href="#" id="survey-a">Survey</a></li>
+                    <li><a href="#" id="videos-a">Videos</a></li>
+                    <li><a href="#" id="evaluation-a">Evaluations</a></li>
                 </ul>
             </div>
 
             <div id="edit-course-div">
                 <h1>Edit Course</h1>
                 <form:form class="form-horizontal" method="post"
-                           modelAttribute="course" action="addCourse">
+                           modelAttribute="course" action="intructor/editCourse">
                     <div class="form-group">
                         <label for="add-course-title" class="col-sm-2 control-label">Title</label>
                         <div class="col-sm-6">
@@ -122,7 +118,7 @@
                     <form:hidden path="instructor" value="null"/>
                     <form:hidden path="status" value="open" />
                     <form:hidden path="currSize" value="0" />
-                    <button type="submit" class="instructor-btn">Create</button>
+                    <button type="submit" class="instructor-btn-primary">Save</button>
                 </form:form>
             </div>
 
@@ -192,7 +188,7 @@
                         </div> <%--End of modal body--%>
                         <div class="modal-footer">
                             <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="instructor-btn">Create</button>
+                            <button type="submit" class="instructor-btn-primary">Create</button>
                         </div>
 
                     </form:form>
@@ -203,11 +199,6 @@
     </div>
 </div>
 </body>
+<script src="${contextPath}/resources/js/navbar.js"></script>
 <script src="${contextPath}/resources/js/instructorCourse.js"></script>
-<script>
-    $("#add-course-enroll-date").datepicker();
-    $("#add-course-start-date").datepicker();
-    $("#add-course-end-date").datepicker();
-    $("#add-course-drop-date").datepicker();
-</script>
 </html>
