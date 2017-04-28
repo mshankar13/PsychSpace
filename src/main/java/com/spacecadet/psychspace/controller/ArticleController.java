@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to article pages
+ * use case: load single article, comment on article and like on article
  * Created by aliao on 3/27/2017.
  */
 @Controller

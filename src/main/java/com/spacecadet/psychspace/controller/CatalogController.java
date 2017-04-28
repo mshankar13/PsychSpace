@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.testData.CatalogTest;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class CatalogController {
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
     private CourseManager courseManager = new CourseManager();
+    private CatalogTest test = new CatalogTest();
 
     /**
      * all visit to catalog page
@@ -34,7 +36,7 @@ public class CatalogController {
         model.setViewName("catalogue");
         ArrayList<Course> courses = courseManager.loadAllCourses();
         if(courses.isEmpty()){
-            course_test();
+            test.course_test();
             courses = courseManager.loadAllCourses();
         }
         ArrayList<Course> openCourses = courseManager.loadAllOpenCourses();
@@ -46,6 +48,11 @@ public class CatalogController {
         return model;
     }
 
+    /**
+     * search for course on catalog page
+     * @param search search key word
+     * @return search page with searc result
+     */
     @RequestMapping(value = "/catalogue/Search", method = RequestMethod.GET)
     public ModelAndView catalogSearch(@RequestParam(value = "search", required = false) String search){
         ModelAndView model = new ModelAndView();
@@ -57,7 +64,7 @@ public class CatalogController {
 
     /**
      * helper method for setting course list into front end format
-     * changes userid to username
+     * changes user id to username
      * @return ArrayList of course
      */
     private ArrayList<Course> setCourseList(ArrayList<Course> courses){
@@ -101,19 +108,4 @@ public class CatalogController {
         return "redirect:/catalogue";
     }
 
-    /**
-     * Dummy data for courses
-     */
-    public void course_test() {
-        // Before use add user keys to first field of each call!
-        Course course1 = new Course("", "", "Exam Time Management", "Bob", "this is a course",
-                "3/3/17", "4/3/17", "3/2/17", "4/3/17", "closed", "20", "25");
-        Course course2 = new Course("","", "Homework Time Management", "Angela", "this is a course",
-                "4/3/17", "5/3/17", "4/3/17", "4/2/17", "open", "25", "30");
-        Course course3 = new Course("", "","Application Time Management", "Celeste", "this is a course",
-                "4/16/17", "5/30/17", "4/16/17", "5/2/17", "closed", "25", "25");
-        courseManager.addCourse(course1);
-        courseManager.addCourse(course2);
-        courseManager.addCourse(course3);
-    }
 }
