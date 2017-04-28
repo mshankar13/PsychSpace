@@ -28,7 +28,7 @@ public class InstructorController {
      */
     @RequestMapping(value = "/instructor", method = RequestMethod.GET)
     public ModelAndView instructor(){
-        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
+        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructor");
         model.addObject("courses", courses);
@@ -36,28 +36,6 @@ public class InstructorController {
 
         return model;
     }
-
-    /**
-     * instructor page (post)- add new course to catalog post
-     * @param course added course
-     * @return instructor add course page
-     */
-    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.POST)
-    public ModelAndView addCourse(@ModelAttribute("course") Course course) {
-        if(course != null) {
-            course.setInstructor(WelcomeController.currUser.getUserKey());
-            course.setUserKey(WelcomeController.currUser.getUserKey());
-            courseManager.addCourse(course);
-        }
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorAddCourse");
-        model.addObject("course", new Course());
-
-        return model;
-    }
-
-
-
 
     /**
      * logout on instructor page

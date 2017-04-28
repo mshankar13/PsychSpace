@@ -17,36 +17,21 @@ public class InstructorCourseController {
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
 
-//    /**
-//     * instructor page (get) - add new course to catalog
-//     * @return instructor add course page
-//     */
-//    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.GET)
-//    public ModelAndView addCourse() {
-//        ModelAndView model = new ModelAndView();
-//        model.setViewName("instructorAddCourse");
-//        model.addObject("course", new Course());
-//
-//        return model;
-//    }
-
     /**
      * instructor page (post)- add new course to catalog post
      * @param course added course
      * @return instructor add course page
      */
-    @RequestMapping(value = "/instructor/{courseKey}/addCourse", method = RequestMethod.POST)
-    public ModelAndView addCourse(@ModelAttribute("course") Course course) {
+    @RequestMapping(value = "/instructor/addCourse", method = RequestMethod.POST)
+    public String addCoursePost(@ModelAttribute("course") Course course) {
         if(course != null) {
-            course.setInstructor(WelcomeController.currUser.getUserKey());
+            course.setInstructor(WelcomeController.currUser.getFirstName() + " "
+                    + WelcomeController.currUser.getLastName());
             course.setUserKey(WelcomeController.currUser.getUserKey());
             courseManager.addCourse(course);
         }
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorCourse");
-        model.addObject("course", new Course());
 
-        return model;
+        return "redirect:/instructor/"+course.getCourseKey();
     }
 
     /**
@@ -58,7 +43,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorCourse");
         model.addObject("course", new Course());
-        model.addObject("courses", courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses", courseManager.loadAllOpenCourses());
 
         return model;
     }
@@ -75,20 +60,9 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorCourse");
         model.addObject("course", new Course());
-        model.addObject("courses",courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey()));
+        model.addObject("courses",courseManager.loadAllOpenCourses());
 
         return model;
-    }
-
-    /**
-     * logout on instructor add course page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/addCourse/logout", method = RequestMethod.POST)
-    public String logoutAdd(@RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
     }
 
     /**
@@ -96,7 +70,7 @@ public class InstructorCourseController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/editCourse/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/{courseKey}/logout", method = RequestMethod.POST)
     public String logoutEdit(@RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";

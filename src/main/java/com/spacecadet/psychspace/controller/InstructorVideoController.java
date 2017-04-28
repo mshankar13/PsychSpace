@@ -29,7 +29,7 @@ public class InstructorVideoController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos", method = RequestMethod.GET)
     public ModelAndView loadVideo(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
+        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ArrayList<Video> videos = videoManager.loadVideoForCourse(courseKey);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
@@ -62,6 +62,8 @@ public class InstructorVideoController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/add", method = RequestMethod.POST)
     public ModelAndView addVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
+        Course course = courseManager.loadSingleCourse(courseKey);
+        video.setCourseTitle(course.getTitle());
         videoManager.addVideo(video);
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
@@ -71,23 +73,6 @@ public class InstructorVideoController {
 
         return model;
     }
-
-
-//    /**
-//     * instructor page - edit video to course
-//     * @return instructor edit video page
-//     */
-//    @RequestMapping(value = "/instructor/{courseKey}/videos/edit", method = RequestMethod.GET)
-//    public ModelAndView editVideo(@PathVariable("courseKey") String courseKey) {
-//        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-//        ModelAndView model = new ModelAndView();
-//        model.setViewName("instructorVideo");
-//        model.addObject("video", new Video());
-//        model.addObject("courses", courses);
-//        model.addObject("videos", videoManager.loadVideos());
-//
-//        return model;
-//    }
 
     /**
      * instructor page - edit video to course
@@ -122,22 +107,6 @@ public class InstructorVideoController {
 
         return model;
     }
-
-//    /**
-//     * instructor page - delete video to course
-//     * @return instructor delete video page
-//     */
-//    @RequestMapping(value = "/instructor/{courseKey}/videos/delete", method = RequestMethod.GET)
-//    public ModelAndView deleteVideo(@PathVariable("courseKey") String courseKey) {
-//        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-//        ModelAndView model = new ModelAndView();
-//        model.setViewName("instructorVideo");
-//        model.addObject("video", new Video());
-//        model.addObject("courses", courses);
-//        model.addObject("videos", videoManager.loadVideos());
-//
-//        return model;
-//    }
 
     /**
      * logout on instructor load video page

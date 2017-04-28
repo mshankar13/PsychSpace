@@ -90,7 +90,7 @@ public class ArticleController {
     @RequestMapping(value = "/article/{key}/+1", method = RequestMethod.POST)
     public String likeArticle(@PathVariable("key") String key, @ModelAttribute Like like){
         News news = newsManager.loadSingleNews(key);
-        ArrayList<Like> likeList = likeManager.loadLikes();
+        ArrayList<Like> likeList = likeManager.loadLikes(key);
         like.setUserKey(WelcomeController.currUser.getUserKey());
         for(Like l : likeList){
             // if data already exists, its either liked or unliked

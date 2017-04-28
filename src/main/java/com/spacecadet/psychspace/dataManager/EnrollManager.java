@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.utilities.Course;
 
 /**
  * Created by aliao on 4/19/17.
@@ -9,6 +10,7 @@ public class EnrollManager {
 
     private DatastoreService datastore;
     private HelperManager helper = new HelperManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * constructor
@@ -29,6 +31,10 @@ public class EnrollManager {
 
             datastore.put(txn, enroll);
             txn.commit();
+
+            Course course = courseManager.loadSingleCourse(courseKey);
+            course.setCurrSize(Integer.toString(Integer.parseInt(course.getCurrSize())+1));
+            courseManager.editCourse(course);
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -52,6 +58,9 @@ public class EnrollManager {
         try {
             datastore.delete(foundEnrolled.getKey());
             txn.commit();
+            Course course = courseManager.loadSingleCourse(courseKey);
+            course.setCurrSize(Integer.toString(Integer.parseInt(course.getCurrSize())-1));
+            courseManager.editCourse(course);
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
