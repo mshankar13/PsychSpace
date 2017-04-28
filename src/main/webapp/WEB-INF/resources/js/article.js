@@ -1,11 +1,6 @@
 $(document).ready(function () {
     // Ready conditions
     $(".ps-modal-type-comment").addClass("pushToBack");
-    // if ($("#ps-input-liked").val() == "true") {
-    //     $("#btn-ps-feature-like").addClass("liked");
-    // } else {
-    //     $("#btn-ps-feature-like").addClass("unliked");
-    // }
 
     // On Click functions
     $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);

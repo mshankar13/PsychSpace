@@ -52,7 +52,8 @@ public class EnrollManager {
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-        Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query enrollQuery = new Query("Enroll").setFilter(userCourseFilter);
         Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
         Transaction txn = datastore.beginTransaction();
         try {
@@ -79,7 +80,8 @@ public class EnrollManager {
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-        Query enrollQuery = new Query("Enroll").setFilter(propertyFilter1).setFilter(propertyFilter2);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query enrollQuery = new Query("Enroll").setFilter(userCourseFilter);
         Entity foundEnrolled = datastore.prepare(enrollQuery).asSingleEntity();
         if(foundEnrolled == null){
             return false;
