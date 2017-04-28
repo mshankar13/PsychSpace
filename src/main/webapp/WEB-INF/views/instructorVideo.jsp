@@ -87,7 +87,7 @@
                                     <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0" allowfullscreen>
                                     </iframe>
                                 </div>
-                                <div class="video-footer">
+                                <div class="instructor-video-footer">
                                     <button class="instructor-btn edit-video-btn">Edit</button>
                                     <button class="instructor-btn delete-video-btn">Delete</button>
                                 </div>
