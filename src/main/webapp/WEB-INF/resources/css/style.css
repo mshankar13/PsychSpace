@@ -63,7 +63,7 @@ p {
     color: dimgrey;
 }
 
-.col-lg-4 h2.ps-feature-info-header{
+.col-lg-4 h2.ps-feature-info-header {
     min-height: 85px;
 }
 
@@ -311,9 +311,94 @@ input[type='radio']:checked + label:hover:after {
     color: #fff;
 }
 
+
+/* Number input */
+/*
+.ps-number-input {
+    width: 40%;
+    margin: 1em;
+    font-size: 2em;
+}
+
+input[type='number'] {
+    font-size: 3em;
+    height: 100%;
+}
+*/
+
 .isAnswered {
     border-color: var(--eucalyptus-color);
 }
+
+.ps-optional-response {
+    border-color: var(--space-cadet-color);
+}
+
+.ps-text-area {
+    width: 100%;
+}
+
+
+/*---------------- RANGE SLIDER ----------------*/
+/*
+.ps-range-slider-body {
+    height: 15vh;
+}
+
+input[type=range] {
+    margin: auto;
+    outline: none;
+    padding: 0;
+    width: 50%;
+    height: 6px;
+    background-color: #ccc;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #473e4f), color-stop(100%, #51475a));
+    background-image: -webkit-linear-gradient(#473e4f, #51475a);
+    background-image: -moz-linear-gradient(#473e4f, #51475a);
+    background-image: -o-linear-gradient(#473e4f, #51475a);
+    background-image: linear-gradient(var(--space-cadet-color), var(--space-cadet-color));
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+input[type=range]::-moz-focus-outer {
+    border: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+    border: 0;
+    background: var(--eucalyptus-color);
+    border-radius: 100%;
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
+    -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: 0;
+    background: var(--eucalyptus-color);
+    border-radius: 100%;
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
+}*/
 
 
 /*---------------- DETAIL----------------*/

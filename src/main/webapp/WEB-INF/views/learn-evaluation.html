@@ -1,0 +1,69 @@
+<header class="ps-feature-header">
+    <div class="ps-feature-content">
+        <div class="row ps-feature">
+            <div class="ps-feature-info">
+                <!-- Course Title -->
+                <h1>Course Title<hr></h1>
+                <br>
+            </div>
+        </div>
+        <div class="row ps-text-content">
+            <div class="col-lg-2 ps-col-left">
+                <div class="ps-well">
+                    <!-- Learn Sidebar -->
+                    <%@include file="learn-sidebar.html"%>
+                </div>
+            </div>
+            <div class="col-lg-10 ps-col-right">
+                <!-- Start -->
+                <div class="ps-well">
+
+                    <h2>[Goal Name] - Daily Evaluation for [Date]<hr></h2>
+                    <br>
+                    <br>
+                    <!-- Form Start -->
+                    <form class="ps-all-questions">
+                        <!-- Question Start -->
+                        <div class="ps-question">
+                            <!-- Question Text -->
+                            <h3>How many [unit] did you complete today?</h3>
+                            <div class="ps-answers">
+                                <!-- Answer Start -->
+                                <div class="ps-answer">
+                                    <!--
+                                    <div class="ps-range-slider-body">
+                                        <input type="range" min="0" max=$(val) value=$(double-val) />
+                                    </div>
+-->
+                                    <span><input class="ps-number-input" type="number" placeholder="Number">
+                                    [unit] out of [value] [unit]</span>
+                                </div>
+                                <!-- Answer End-->
+                            </div>
+                        </div>
+                        <!-- Question End -->
+                        <!-- Question Start -->
+                        <div class="ps-question ps-optional-response">
+                            <!-- Question Text -->
+                            <h3>What are your feelings?</h3>
+                            <div class="ps-answers">
+                                <!-- Answer Start -->
+                                <div class="ps-answer">
+                                    <textarea class="ps-text-area" rows="4" placeholder="Feelings..."></textarea>
+                                </div>
+                                <!-- Answer End-->
+                            </div>
+                        </div>
+                        <!-- Question End -->
+                        <div class="center">
+                            <!-- Submit Survey Button -->
+                            <button type="button" class="button" id="btn-submit-survey"><span>Submit Responses</span></button>
+                        </div>
+                    </form>
+                    <!-- Form End -->
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+</header>
