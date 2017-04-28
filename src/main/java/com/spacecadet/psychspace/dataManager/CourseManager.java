@@ -166,6 +166,9 @@ public class CourseManager {
             course.setProperty("Capacity", initCourse.getCapacity());
             datastore.put(txn, course);
             txn.commit();
+
+            String courseKey = KeyFactory.keyToString(course.getKey());
+            initCourse.setCourseKey(courseKey);
         } finally {
             if (txn.isActive()) {
                 txn.rollback();

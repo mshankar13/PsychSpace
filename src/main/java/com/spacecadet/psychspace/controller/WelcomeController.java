@@ -43,7 +43,6 @@ public class WelcomeController {
         User user2 = userManager.emailRegistered(user1.getEmail());
         if ( user2 == null) {
             user2 = userManager.addUser(user1, "User");
-
         }
         userManager.resetCurrentUser(user2);
         return "redirect:/home";

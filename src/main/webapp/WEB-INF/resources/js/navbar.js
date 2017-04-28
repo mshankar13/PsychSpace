@@ -98,7 +98,7 @@ function signOut() {
     });
 
     userSignedOutUI();
-    window.location.href = "http://localhost:8080/";
+    window.location.href = "http://psychspace-160921.appspot.com/";
 }
 
 function userSignedInUI() {
