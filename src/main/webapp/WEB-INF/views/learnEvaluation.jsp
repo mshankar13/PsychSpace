@@ -24,7 +24,6 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/survey.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -35,6 +34,7 @@
 <div classs="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
+
 <header class="ps-feature-header">
     <div class="ps-feature-content">
         <div class="row ps-feature">
@@ -57,8 +57,7 @@
                 <!-- Start Content -->
                 <div class="col-lg">
                     <div class="ps-well">
-                        <!-- Survey Name -->
-                        <h2>Survey Name
+                        <h2>[Goal Name] - Daily Evaluation for [Date]
                             <hr>
                         </h2>
                         <br>
@@ -68,17 +67,25 @@
                             <!-- Question Start -->
                             <div class="ps-question">
                                 <!-- Question Text -->
-                                <h3>Question Text</h3>
+                                <h3>How many [unit] did you complete today?</h3>
                                 <div class="ps-answers">
                                     <!-- Answer Start -->
                                     <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <!-- Set "id" equal to answer ID -->
-                                        <!-- Set "name" equal to question ID -->
-                                        <input id="radio-1" type="radio" name="r-group-1"/>
-                                        <!-- Answer Text -->
-                                        <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">Answer</label>
+                                        <span><input class="ps-number-input" type="number" placeholder="Number">
+                                    [unit] out of [value] [unit]</span>
+                                    </div>
+                                    <!-- Answer End-->
+                                </div>
+                            </div>
+                            <!-- Question End -->
+                            <!-- Question Start -->
+                            <div class="ps-question ps-optional-response">
+                                <!-- Question Text -->
+                                <h3>What are your feelings?</h3>
+                                <div class="ps-answers">
+                                    <!-- Answer Start -->
+                                    <div class="ps-answer">
+                                        <textarea class="ps-text-area" rows="4" placeholder="Feelings..."></textarea>
                                     </div>
                                     <!-- Answer End-->
                                 </div>
@@ -86,8 +93,8 @@
                             <!-- Question End -->
                             <div class="center">
                                 <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey" disabled>
-                                    <span>Submit Survey</span></button>
+                                <button type="button" class="button" id="btn-submit-survey">
+                                    <span>Submit Responses</span></button>
                             </div>
                         </form>
                         <!-- Form End -->

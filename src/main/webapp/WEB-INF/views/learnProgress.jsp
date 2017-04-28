@@ -24,7 +24,6 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/survey.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -55,44 +54,7 @@
             </div>
             <div class="col-lg-10 ps-col-right">
                 <!-- Start Content -->
-                <div class="col-lg">
-                    <div class="ps-well">
-                        <!-- Survey Name -->
-                        <h2>Survey Name
-                            <hr>
-                        </h2>
-                        <br>
-                        <br>
-                        <!-- Form Start -->
-                        <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>Question Text</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <!-- Set "id" equal to answer ID -->
-                                        <!-- Set "name" equal to question ID -->
-                                        <input id="radio-1" type="radio" name="r-group-1"/>
-                                        <!-- Answer Text -->
-                                        <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">Answer</label>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <div class="center">
-                                <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey" disabled>
-                                    <span>Submit Survey</span></button>
-                            </div>
-                        </form>
-                        <!-- Form End -->
-                    </div>
-                </div>
+
                 <!-- End Content -->
             </div>
         </div>
