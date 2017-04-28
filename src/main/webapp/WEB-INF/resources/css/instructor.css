@@ -107,3 +107,7 @@ input[type="text"], input[type="number"] {
 #deleteVideoModal {
     height: 250px;
 }
+
+.instructor-video-footer {
+    margin: 10px;
+}

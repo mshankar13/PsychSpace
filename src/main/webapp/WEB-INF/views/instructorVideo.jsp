@@ -71,29 +71,30 @@
                 <div class="right">
                     <button class="instructor-btn" id="btn-add-video">Add Video</button>
                 </div>
-                <table id="edit-video-table" class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Course Key</th>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div id="videos-div">
                     <c:forEach items="${videos}" var="video">
-                        <tr>
-                            <input type="hidden" value="${video.title}" class="video-title"/>
-                            <input type="hidden" value="${video.url}" class="video-link"/>
-                            <input type="hidden" value="${video.videoKey}" class="video-key"/>
-                            <input type="hidden" value="${video.courseKey}" class="video-course-key"/>
-                            <input type="hidden" value="${video.courseTitle}" class="video-course-title"/>
-                            <td>${video.title}</td>
-                            <td>${video.courseTitle}</td>
-                            <td><button class="btn-edit-video instructor-btn-primary" data-toggle="modal" data-target="editVideoModal">Edit</button></td>
-                        </tr>
+                        <div class="col-md-4">
+                            <div class="ps-well ">
+                                <input type="hidden" value="${video.title}" class="video-title" >
+                                <input type="hidden" value="${video.url}" class="video-link" >
+                                <input type="hidden" value="${video.videoKey}" class="video-key" >
+                                <input type="hidden" value="${video.courseKey}" class="video-course-key" >
+                                <input type="hidden" value="${video.courseTitle}" class="video-course-title" >
+                                <!-- Video Title -->
+                                <h2>${video.title}<hr> </h2>
+                                <div class="center">
+                                    <!-- Video Link - change src url -->
+                                    <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0" allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="video-footer">
+                                    <button class="instructor-btn edit-video-btn">Edit</button>
+                                    <button class="instructor-btn delete-video-btn">Delete</button>
+                                </div>
+                            </div>
+                        </div>
                     </c:forEach>
-                    </tbody>
-                </table>
+                </div>
 
                 <%--< Add video modal --%>
                 <div class="modal fade" id="addVideoModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -112,20 +113,20 @@
                                    modelAttribute="video" action="/instructor/${courseKey}/videos/add">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="edit-video-title" class="col-sm-2 control-label">Video Name</label>
+                                    <label for="add-video-title" class="col-sm-2 control-label">Video Name</label>
                                     <div class="col-sm-6">
-                                        <form:input class="form-control" type="text" path="title" id="edit-video-title"/>
+                                        <form:input class="form-control" type="text" path="title" id="add-video-title"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="edit-video-link" class="col-sm-2 control-label">Video Link</label>
+                                    <label for="add-video-link" class="col-sm-2 control-label">Video Link</label>
                                     <div class="col-sm-8">
-                                        <form:input class="form-control" type="text" path="url" id="edit-video-link"/>
+                                        <form:input class="form-control" type="text" path="url" id="add-video-link"/>
                                     </div>
                                 </div>
                                 <form:hidden path="videoKey" value="null" />
                                 <form:hidden path="courseKey" value="${courseKey}" />
-                                <form:hidden path="courseTitle" value="null" />
+                                <form:hidden path="courseTitle" value="" id="edit-video-course-title"/>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
@@ -149,7 +150,7 @@
                             </div>
                         </div>
                         <form:form class="form-horizontal" method="post"
-                                   modelAttribute="video" action="editVideo">
+                                   modelAttribute="video" action="/instructor/${courseKey}/videos/edit">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="edit-video-title" class="col-sm-2 control-label">Video Name</label>
@@ -189,7 +190,7 @@
                             </div>
                         </div>
                         <form:form class="form-horizontal" method="post"
-                                   modelAttribute="video" action="deleteVideo">
+                                   modelAttribute="video" action="/instructor/${courseKey}/videos/delete">
                             <div class="modal-body">
                                 <p>Are you sure you want to delete?</p>
                                 <form:hidden path="videoKey" value="null" id="delete-video-key"/>

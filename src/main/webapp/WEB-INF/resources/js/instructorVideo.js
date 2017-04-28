@@ -8,8 +8,8 @@ $(document).ready(function() {
     $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
 
     $("#btn-add-video").on("click", addVideoModalShow);
-    $("#edit-video-table").on("click", ".btn-edit-video", editVideoModalShow);
-    $("#delete-video-table").on("click", ".btn-delete-video", deleteVideoModalShow);
+    $("#videos-div").on("click", ".edit-video-btn", editVideoModalShow);
+    $("#videos-div").on("click", ".delete-video-btn", deleteVideoModalShow);
 });
 
 function addVideoModalShow() {
@@ -17,37 +17,38 @@ function addVideoModalShow() {
 }
 
 function editVideoModalShow() {
-    var row = $(this).closest("tr");
-    var title = row.find(".video-title").val();
-    var link = row.find(".video-link").val();
-    var videoKey = row.find(".video-key").val();
-    var courseKey = row.find(".video-course-key").val();
-    var courseTitle = row.find(".video-course-title").val();
+    var div = $(this).closest("div");
+    var title = div.parent().find(".video-title").val();
+    var link = div.parent().find(".video-link").val();
+    var videoKey = div.parent().find(".video-key").val();
+    var courseKey = div.parent().find(".video-course-key").val();
+    var courseTitle = div.parent().find(".video-course-title").val();
 
     // set form data
     $("#edit-video-span").text(title);
     $("#edit-video-title").val(title);
     $("#edit-video-link").val(link);
     $("#edit-video-key").val(videoKey);
-
-    $("#edit-video-course-key select").val(courseKey);
+    $("#edit-course-key").val(courseKey);
+    $("#edit-video-course-title").val(courseTitle);
 
     $("#editVideoModal").modal("show");
 }
 
 function deleteVideoModalShow() {
-    var row = $(this).closest("tr");
-    var title = row.find(".video-title").val();
-    var link = row.find(".video-link").val();
-    var videoKey = row.find(".video-key").val();
-    var courseKey = row.find(".course-key").val();
-    var courseTitle = row.find(".course-title").val();
+    var div = $(this).closest("div");
+    var title = div.parent().find(".video-title").val();
+    var link = div.parent().find(".video-link").val();
+    var videoKey = div.parent().find(".video-key").val();
+    var courseKey = div.parent().find(".video-course-key").val();
+    var courseTitle = div.parent().find(".video-course-title").val();
 
+    // set form data
     $("#delete-video-span").text(title);
     $("#delete-video-title").val(title);
     $("#delete-video-link").val(link);
     $("#delete-video-key").val(videoKey);
-    $("#delete-video-course-key").val(courseKey);
+    $("#delete-course-key").val(courseKey);
     $("#delete-video-course-title").val(courseTitle);
 
     $("#deleteVideoModal").modal("show");

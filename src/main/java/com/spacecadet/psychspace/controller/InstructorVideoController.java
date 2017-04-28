@@ -64,6 +64,9 @@ public class InstructorVideoController {
     public ModelAndView addVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         Course course = courseManager.loadSingleCourse(courseKey);
         video.setCourseTitle(course.getTitle());
+        // make sure the video url is the embed one
+        String url = video.getUrl().replace("watch?v=", "embed/");
+        video.setUrl(url);
         videoManager.addVideo(video);
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
