@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<div classs="navbar-wrapper">
+<div class="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
 <header class="ps-feature-header">
@@ -43,19 +43,19 @@
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="row ps-text-content">
-                <div class="col-lg-2">
+                <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <!-- Learn Sidebar -->
                         <%@include file="learn-sidebar.html" %>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 ps-col-right">
                     <!-- Learn Navbar -->
                     <%@include file="learn-navbar.html" %>
-                    <div class="ps-well">
-                        <%@include file="learn-progress.html" %>
-                    </div>
-                    <br>
+                </div>
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Content -->
+                    <%@include file="learn-progress.html" %>
                 </div>
             </div>
             <!-- End course -->

@@ -44,19 +44,19 @@
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="row ps-text-content">
-                <div class="col-lg-2">
+                <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <!-- Learn Sidebar -->
                         <%@include file="learn-sidebar.html" %>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 ps-col-right">
                     <!-- Learn Navbar -->
                     <%@include file="learn-navbar.html" %>
-                    <div class="ps-well">
-                        <%@include file="learn-evaluation.html" %>
-                    </div>
-                    <br>
+                </div>
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Content -->
+                    <%@include file="learn-evaluation.html" %>
                 </div>
             </div>
             <!-- End course -->

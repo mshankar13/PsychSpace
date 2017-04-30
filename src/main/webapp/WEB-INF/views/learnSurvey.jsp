@@ -44,17 +44,21 @@
         <div class="row ps-feature">
             <div class="row ps-text-content">
                 <!-- start course -->
-                <div class="col-lg-2">
+                <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <%@include file="learn-sidebar.html" %>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 ps-col-right">
                     <%@include file="learn-navbar.html" %>
                     <!-- Start Content -->
+                </div>
+                <div class="col-lg-10 ps-col-right">
                     <div class="ps-well">
                         <!-- Survey Name -->
-                        <h2>[Survey Name]<hr></h2>
+                        <h2>[Survey Name]
+                            <hr>
+                        </h2>
                         <br>
                         <br>
                         <!-- Form Start -->
