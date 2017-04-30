@@ -1,56 +1,33 @@
-<header class="ps-feature-header">
-    <div class="ps-feature-content">
-        <div class="row ps-feature">
-            <div class="ps-feature-info">
-                <!-- Course Title -->
-                <h1>Course Title<hr></h1>
-                <br>
+<div class="ps-well">
+    <!-- Survey Name -->
+    <h2>Survey Name<hr> </h2>
+    <br>
+    <br>
+    <!-- Form Start -->
+    <form class="ps-all-questions">
+        <!-- Question Start -->
+        <div class="ps-question">
+            <!-- Question Text -->
+            <h3>Question Text</h3>
+            <div class="ps-answers">
+                <!-- Answer Start -->
+                <div class="ps-answer">
+                    <!-- Answer Button -->
+                    <!-- Set "id" equal to answer ID -->
+                    <!-- Set "name" equal to question ID -->
+                    <input id="radio-1" type="radio" name="r-group-1" />
+                    <!-- Answer Text -->
+                    <!-- Set "for" equal to answer ID -->
+                    <label for="radio-1">Answer</label>
+                </div>
+                <!-- Answer End-->
             </div>
         </div>
-        <div class="row ps-text-content">
-            <div class="col-lg-2 ps-col-left">
-                <div class="ps-well">
-                    <!-- Learn Sidebar -->
-                    <%@include file="learn-sidebar.html"%>
-                </div>
-            </div>
-            <div class="col-lg-10 ps-col-right">
-                <div class="col-lg">
-                    <div class="ps-well">
-                        <!-- Survey Name -->
-                        <h2>Survey Name<hr> </h2>
-                        <br>
-                        <br>
-                        <!-- Form Start -->
-                        <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>Question Text</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <!-- Set "id" equal to answer ID -->
-                                        <!-- Set "name" equal to question ID -->
-                                        <input id="radio-1" type="radio" name="r-group-1" />
-                                        <!-- Answer Text -->
-                                        <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">Answer</label>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <div class="center">
-                                <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey" disabled><span>Submit Survey</span></button>
-                            </div>
-                        </form>
-                        <!-- Form End -->
-                    </div>
-                </div>
-            </div>
+        <!-- Question End -->
+        <div class="center">
+            <!-- Submit Survey Button -->
+            <button type="button" class="button" id="btn-submit-survey" disabled><span>Submit Survey</span></button>
         </div>
-    </div>
-</header>
+    </form>
+    <!-- Form End -->
+</div>

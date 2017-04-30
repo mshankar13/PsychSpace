@@ -32,35 +32,29 @@
 </head>
 
 <body>
-<div classs="navbar-wrapper">
+<div class="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
 <header class="ps-feature-header">
+    <div class="center page-banner">
+        <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
+        <h1 class="absolute-text">[Course Title]</h1>
+    </div>
     <div class="ps-feature-content">
         <div class="row ps-feature">
-            <div class="ps-feature-info">
-                <!-- Course Title -->
-                <h1>Course Title
-                    <hr>
-                </h1>
-                <br>
-            </div>
-        </div>
-        <div class="row ps-text-content">
-            <div class="col-lg-2 ps-col-left">
-                <div class="ps-well">
-                    <!-- Learn Sidebar -->
-                    <%@include file="learn-sidebar.html" %>
+            <div class="row ps-text-content">
+                <!-- start course -->
+                <div class="col-lg-2">
+                    <div class="ps-well">
+                        <%@include file="learn-sidebar.html" %>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-10 ps-col-right">
-                <!-- Start Content -->
-                <div class="col-lg">
+                <div class="col-lg-10">
+                    <%@include file="learn-navbar.html" %>
+                    <!-- Start Content -->
                     <div class="ps-well">
                         <!-- Survey Name -->
-                        <h2>Survey Name
-                            <hr>
-                        </h2>
+                        <h2>[Survey Name]<hr></h2>
                         <br>
                         <br>
                         <!-- Form Start -->
@@ -68,7 +62,7 @@
                             <!-- Question Start -->
                             <div class="ps-question">
                                 <!-- Question Text -->
-                                <h3>Question Text</h3>
+                                <h3>[Question Text]</h3>
                                 <div class="ps-answers">
                                     <!-- Answer Start -->
                                     <div class="ps-answer">
@@ -78,7 +72,7 @@
                                         <input id="radio-1" type="radio" name="r-group-1"/>
                                         <!-- Answer Text -->
                                         <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">Answer</label>
+                                        <label for="radio-1">[Answer]</label>
                                     </div>
                                     <!-- Answer End-->
                                 </div>
@@ -86,15 +80,17 @@
                             <!-- Question End -->
                             <div class="center">
                                 <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey" disabled>
+                                <button type="button" class="button" id="btn-submit-survey">
                                     <span>Submit Survey</span></button>
                             </div>
                         </form>
                         <!-- Form End -->
                     </div>
+                    <!-- End Content -->
+                    <br>
                 </div>
-                <!-- End Content -->
             </div>
+            <!-- End course -->
         </div>
     </div>
 </header>
