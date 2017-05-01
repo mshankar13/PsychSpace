@@ -26,7 +26,7 @@ public class ProgressController {
     public ModelAndView learnCourse(@PathVariable("courseKey") String courseKey) {
         Course course = courseManager.loadSingleCourse(courseKey);
         ModelAndView model = new ModelAndView();
-        model.setViewName("learn");
+        model.setViewName("learnProgress");
 
         return model;
     }
