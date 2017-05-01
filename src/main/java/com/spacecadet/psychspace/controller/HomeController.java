@@ -1,5 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.User;
@@ -18,6 +19,7 @@ public class HomeController {
 
     private UserManager userManager = new UserManager();
     private NewsManager newsManager = new NewsManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * all visit to home page

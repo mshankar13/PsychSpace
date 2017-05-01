@@ -13,7 +13,7 @@ $(document).ready(function(){
     $("#course-a").attr("href", courseBaseUrl);
     $("#survey-a").attr("href", url);
     $("#videos-a").attr("href", courseBaseUrl + "/videos");
-    $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
+    $("#evaluation-a").attr("href", courseBaseUrl + "/dueDates");
 
     // Set selected course
     var currentCourseKey = courseBaseUrl.slice("/");

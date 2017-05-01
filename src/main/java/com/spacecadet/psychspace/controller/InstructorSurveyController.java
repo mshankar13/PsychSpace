@@ -36,7 +36,7 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/survey", method = RequestMethod.GET)
     public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadAllCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         Survey survey = surveyManager.loadSingleCourseSurvey(courseKey);
         String courseSurvey;
         if (survey != null)

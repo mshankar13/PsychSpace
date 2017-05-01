@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.dataManager;
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.*;
 
+import javax.servlet.ServletContextListener;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -38,7 +39,7 @@ public class CourseManager {
      * @return
      */
     public ArrayList<Course> loadAllOpenCourses(){
-        ArrayList<Course> result = new ArrayList<Course>();
+        ArrayList<Course> result = new ArrayList<>();
         ArrayList<Course> list = loadAllCourses();
         for(Course item : list){
             if(item.getStatus().equals("open")){
@@ -312,6 +313,58 @@ public class CourseManager {
         } catch (EntityNotFoundException ex) {
             return false;
         }
+    }
+
+    /**
+     * get the past courses of a given user
+     * @param userKey user key
+     * @return pastCourses of the user
+     */
+    public ArrayList<Course> getPastCourses(String userKey) {
+        ArrayList<Course> pastCourses = new ArrayList<>();
+        ArrayList<Course> courses = loadUserCourses(userKey);
+        Date date = new Date();
+        for (Course course : courses) {
+            if (date.after(helper.stringToDate(course.getEndDate())) == true) {
+                pastCourses.add(course);
+            }
+        }
+        return pastCourses;
+    }
+
+    /**
+     * gets 3 popular courses currently open
+     * @return list of the popular courses
+     */
+    public ArrayList<Course> getPopularCourse() {
+        ArrayList<Course> popularCourses = new ArrayList<>();
+        ArrayList<Course> openCourses = loadAllCourses();
+        int i = 0;
+
+        for (Course course : openCourses) {
+            double enrollStat = Integer.parseInt(course.getCurrSize()) / Integer.parseInt(course.getCapacity());
+            course.setScore(Double.toString(enrollStat));
+        }
+
+        if (openCourses.size() >= 3) {
+            Collections.sort(openCourses, new Comparator<Course>() {
+                @Override
+                public int compare(Course o1, Course o2) {
+                    Double score1 = Double.parseDouble(o1.getScore());
+                    Double score2 = Double.parseDouble(o2.getScore());
+                    if (score1 > score2) return 1;
+                    return 0;
+                }
+            });
+
+            // Might have to change logic in compare from > to <
+            for (int j = 0; j < 3; j++) {
+                popularCourses.add(openCourses.get(j));
+            }
+        } else {
+            popularCourses.addAll(openCourses);
+        }
+        return popularCourses;
     }
 
 }

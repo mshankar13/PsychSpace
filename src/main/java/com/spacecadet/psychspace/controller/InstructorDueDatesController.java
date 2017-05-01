@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by aliao on 4/21/2017.
  */
 @Controller
-public class InstructorEvaluationController {
+public class InstructorDueDatesController {
 
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
@@ -33,7 +33,7 @@ public class InstructorEvaluationController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/evaluations", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadAllCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEvaluation");
         model.addObject("courses", courses);

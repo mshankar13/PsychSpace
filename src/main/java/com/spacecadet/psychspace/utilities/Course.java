@@ -78,4 +78,9 @@ public class Course {
      * course capacity (maximum size)
      */
     private String capacity;
+
+    /**
+     * course score for popularity
+     */
+    private String score;
 }
