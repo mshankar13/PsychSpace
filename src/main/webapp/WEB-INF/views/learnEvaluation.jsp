@@ -31,84 +31,42 @@
 </head>
 
 <body>
-<div classs="navbar-wrapper">
+<div class="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
 
 <header class="ps-feature-header">
+    <div class="center page-banner">
+        <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
+        <!-- Course Title -->
+        <h1 class="absolute-text">[Course Title]</h1>
+    </div>
     <div class="ps-feature-content">
         <div class="row ps-feature">
-            <div class="ps-feature-info">
-                <!-- Course Title -->
-                <h1>Course Title
-                    <hr>
-                </h1>
-                <br>
-            </div>
-        </div>
-        <div class="row ps-text-content">
-            <div class="col-lg-2 ps-col-left">
-                <div class="ps-well">
-                    <!-- Learn Sidebar -->
-                    <%@include file="learn-sidebar.html" %>
-                </div>
-            </div>
-            <div class="col-lg-10 ps-col-right">
-                <!-- Start Content -->
-                <div class="col-lg">
+            <div class="row ps-text-content">
+                <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
-                        <h2>[Goal Name] - Daily Evaluation for [Date]
-                            <hr>
-                        </h2>
-                        <br>
-                        <br>
-                        <!-- Form Start -->
-                        <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>How many [unit] did you complete today?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <span><input class="ps-number-input" type="number" placeholder="Number">
-                                    [unit] out of [value] [unit]</span>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <!-- Question Start -->
-                            <div class="ps-question ps-optional-response">
-                                <!-- Question Text -->
-                                <h3>What are your feelings?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <textarea class="ps-text-area" rows="4" placeholder="Feelings..."></textarea>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <div class="center">
-                                <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey">
-                                    <span>Submit Responses</span></button>
-                            </div>
-                        </form>
-                        <!-- Form End -->
+                        <!-- Learn Sidebar -->
+                        <%@include file="learn-sidebar.html" %>
                     </div>
                 </div>
-                <!-- End Content -->
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Learn Navbar -->
+                    <%@include file="learn-navbar.html" %>
+                </div>
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Content -->
+                    <%@include file="learn-evaluation.html" %>
+                </div>
             </div>
+            <!-- End course -->
         </div>
     </div>
 </header>
 
-
 <%@include file="footer.html" %>
+<%--<script src="${contextPath}/resources/js/style.js"></script>--%>
 <script src="${contextPath}/resources/js/animations.js"></script>
-</body>
 
+</body>
 </html>

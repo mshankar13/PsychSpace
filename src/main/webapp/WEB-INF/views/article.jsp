@@ -32,13 +32,14 @@
 </head>
 
 <body>
-<div classs="navbar-wrapper">
+<div class="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
 
 <header class="ps-feature-header">
     <c:set var="currentUserKey" value="${currentUserKey}" />
     <c:set var="isLoggedIn" value="${isLoggedIn}" />
+    <div class="center page-banner"><!-- Intentionally Empty--></div>
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="ps-feature-info">

@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to admin article related pages
+ * use case: add/edit/delete article
  * Created by aliao on 4/10/2017.
  */
 @Controller

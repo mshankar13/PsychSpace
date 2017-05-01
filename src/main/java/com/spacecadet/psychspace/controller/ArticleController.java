@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to article pages
+ * use case: load single article, comment on article and like on article
  * Created by aliao on 3/27/2017.
  */
 @Controller
@@ -40,23 +42,18 @@ public class ArticleController {
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
         ArrayList<Comment> comments = commentManager.loadComments(key);
-//        for(Comment c : comments){
-//            String name = userManager.loadSingleUser(c.getUsername()).getFirstName() + " " +
-//                    userManager.loadSingleUser(c.getUsername()).getLastName();
-//            c.setUsername(name);
-//        }
         model.addObject("commentList", comments);
         if(WelcomeController.currUser.getUserKey() != null){
-            if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
-                model.addObject("isLiked", "true");
-            }
             model.addObject("isLoggedIn", "true");
         } else {
-            model.addObject("isLiked", "false");
             model.addObject("isLoggedIn", "false");
         }
+        if(likeManager.isLiked(key, WelcomeController.currUser.getUserKey())){
+            model.addObject("isLiked", "true");
+        } else {
+            model.addObject("isLiked", "false");
+        }
         model.addObject("currentUserKey", WelcomeController.currUser.getUserKey());
-        //model.addObject("articleAuthor", userManager.loadSingleUser(news.getAuthor()));
 
         return model;
     }
@@ -69,7 +66,6 @@ public class ArticleController {
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.POST)
     public String addComment(@PathVariable("key") String key, @ModelAttribute Comment comment){
-        News news = newsManager.loadSingleNews(key);
         String fullname = WelcomeController.currUser.getFirstName().concat(" ").concat(WelcomeController.currUser.getLastName());
         if (comment.getState().equals("add")){
             commentManager.addComment(key, fullname, WelcomeController.currUser.getUserKey(),comment.getContent());

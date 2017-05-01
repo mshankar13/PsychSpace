@@ -31,32 +31,34 @@
 </head>
 
 <body>
-<div classs="navbar-wrapper">
+<div class="navbar-wrapper">
     <%@include file="navbar.html" %>
 </div>
 <header class="ps-feature-header">
+    <div class="center page-banner">
+        <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
+        <!-- Course Title -->
+        <h1 class="absolute-text">[Course Title]</h1>
+    </div>
     <div class="ps-feature-content">
         <div class="row ps-feature">
-            <div class="ps-feature-info">
-                <!-- Course Title -->
-                <h1>Course Title
-                    <hr>
-                </h1>
-                <br>
-            </div>
-        </div>
-        <div class="row ps-text-content">
-            <div class="col-lg-2 ps-col-left">
-                <div class="ps-well">
-                    <!-- Learn Sidebar -->
-                    <%@include file="learn-sidebar.html" %>
+            <div class="row ps-text-content">
+                <div class="col-lg-2 ps-col-left">
+                    <div class="ps-well">
+                        <!-- Learn Sidebar -->
+                        <%@include file="learn-sidebar.html" %>
+                    </div>
+                </div>
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Learn Navbar -->
+                    <%@include file="learn-navbar.html" %>
+                </div>
+                <div class="col-lg-10 ps-col-right">
+                    <!-- Content -->
+                    <%@include file="learn-progress.html" %>
                 </div>
             </div>
-            <div class="col-lg-10 ps-col-right">
-                <!-- Start Content -->
-
-                <!-- End Content -->
-            </div>
+            <!-- End course -->
         </div>
     </div>
 </header>

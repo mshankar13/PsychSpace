@@ -54,10 +54,14 @@ public class LikeManager {
                 new Query.FilterPredicate("userKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter newsFilter =
                 new Query.FilterPredicate("newsKey", Query.FilterOperator.EQUAL, newsKey);
-        Query likeQuery = new Query("Like").setFilter(userFilter).setFilter(newsFilter);
+        Query.CompositeFilter newsUserFilter = Query.CompositeFilterOperator.and(userFilter, newsFilter);
+        Query likeQuery = new Query("Like").setFilter(newsUserFilter);
         Entity like = datastore.prepare(likeQuery).asSingleEntity();
         if (like == null) {
             return false;
+        } else {
+            if (like.getProperty("status").toString().equals("unlike"))
+                return false;
         }
         return true;
     }
