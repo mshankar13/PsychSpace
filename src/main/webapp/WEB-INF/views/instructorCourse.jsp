@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
+                                <label for="edit-course-start-date" class="col-sm-2 control-label">Start Date</label>
                                 <div class="col-sm-6">
                                     <form:input class="form-control" type="text" path="startDate" id="edit-course-start-date"/>
                                 </div>
