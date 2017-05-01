@@ -1,7 +1,6 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
-import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.Video;
 
 import java.util.*;

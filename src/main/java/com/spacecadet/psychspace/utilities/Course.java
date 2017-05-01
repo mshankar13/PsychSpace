@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
+ * Datastore Entity: Course
+ * A course offered by an instructor.
  * Created by marleneshankar on 4/14/17.
+ * modified by aliao on 4/28/17.
  */
 
 @Accessors(chain = true)
@@ -14,16 +17,65 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course {
-    private String userKey; //instructor key
+
+    /**
+     * instructor key in course entity created by datastore
+     */
+    private String userKey;
+
+    /**
+     * key in course entity created by datastore
+     */
     private String courseKey;
+
+    /**
+     * title of the course
+     */
     private String title;
-    private String instructor; //instructor name
+
+    /**
+     * name of the instructor
+     */
+    private String instructor;
+
+    /**
+     * description of the course
+     */
     private String description;
+
+    /**
+     * start date of the course
+     */
     private String startDate;
+
+    /**
+     * end date of the course
+     */
     private String endDate;
+
+    /**
+     * enrollment date of the course
+     */
     private String enrollDate;
+
+    /**
+     * drop date of the course
+     */
     private String dropDate;
-    private String status;  //open or closed
+
+    /**
+     * status of the course
+     * cases: open or close
+     */
+    private String status;
+
+    /**
+     * current course size
+     */
     private String currSize;
+
+    /**
+     * course capacity (maximum size)
+     */
     private String capacity;
 }

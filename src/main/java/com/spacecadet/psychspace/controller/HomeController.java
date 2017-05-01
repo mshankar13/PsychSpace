@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 /**
+ * Controller for all visits to student/user home pages.
+ * user cases: load all enrolled courses and past courses.
  * Created by aliao on 3/20/2017.
  */
 @Controller

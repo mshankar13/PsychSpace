@@ -4,6 +4,7 @@ import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.utilities.Course;
 
 /**
+ * Dummy data for catalogue
  * Created by aliao on 4/28/2017.
  */
 public class CatalogTest {

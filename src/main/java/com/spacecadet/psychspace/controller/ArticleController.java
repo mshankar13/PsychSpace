@@ -1,9 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.*;
+import com.spacecadet.psychspace.utilities.Article;
 import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.Like;
-import com.spacecadet.psychspace.utilities.News;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +32,12 @@ public class ArticleController {
      */
     @RequestMapping(value = "/article/{key}", method = RequestMethod.GET)
     public ModelAndView newsDetail(@PathVariable("key") String key) {
-        News news = newsManager.loadSingleNews(key);
+        Article article = newsManager.loadSingleNews(key);
         ModelAndView model = new ModelAndView();
         model.setViewName("article");
-        model.addObject("article", news);
+        model.addObject("article", article);
         model.addObject("like", new Like());
-        News featured = newsManager.getFeatured(newsManager.loadNews());
+        Article featured = newsManager.getFeatured(newsManager.loadNews());
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featured", featured);
         model.addObject("comment", new Comment());
@@ -85,7 +85,7 @@ public class ArticleController {
      */
     @RequestMapping(value = "/article/{key}/+1", method = RequestMethod.POST)
     public String likeArticle(@PathVariable("key") String key, @ModelAttribute Like like){
-        News news = newsManager.loadSingleNews(key);
+        Article article = newsManager.loadSingleNews(key);
         ArrayList<Like> likeList = likeManager.loadLikes(key);
         like.setUserKey(WelcomeController.currUser.getUserKey());
         for(Like l : likeList){
@@ -94,21 +94,21 @@ public class ArticleController {
                 like.setLikeKey(l.getLikeKey());
                 if(l.getStatus().equals("like")){  //if already like, unlike
                     like.setStatus("unlike");
-                    likeManager.editlike(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
-                            news.getContent(), news.getLikesCount(), news.getDate(), like);
+                    likeManager.editlike(newsManager, article.getNewsKey(), article.getTitle(), article.getAuthor(),
+                            article.getContent(), article.getLikesCount(), article.getDate(), like);
                     return "redirect:/article/"+key;
                 } else if (l.getStatus().equals("unlike")){ // if already unlike, like
                     like.setStatus("like");
-                    likeManager.editlike(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
-                            news.getContent(), news.getLikesCount(), news.getDate(), like);
+                    likeManager.editlike(newsManager, article.getNewsKey(), article.getTitle(), article.getAuthor(),
+                            article.getContent(), article.getLikesCount(), article.getDate(), like);
                     return "redirect:/article/"+key;
                 }
             }
         }
         // if data never exists, user is only trying to like
         like.setStatus("like");
-        likeManager.like(newsManager, news.getNewsKey(), news.getTitle(), news.getAuthor(),
-                news.getContent(), news.getLikesCount(), news.getDate(), like);
+        likeManager.like(newsManager, article.getNewsKey(), article.getTitle(), article.getAuthor(),
+                article.getContent(), article.getLikesCount(), article.getDate(), like);
         return "redirect:/article/"+key;
     }
 

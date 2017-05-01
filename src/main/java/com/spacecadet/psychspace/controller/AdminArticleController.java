@@ -3,7 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.News;
+import com.spacecadet.psychspace.utilities.Article;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,22 +31,22 @@ public class AdminArticleController {
     public ModelAndView loadNewList() {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminAddArticle");
-        model.addObject("news", new News());
+        model.addObject("news", new Article());
         return model;
     }
 
     /**
-     * admin page (post) - add new article to news feed
-     * @param news new created article
-     * @return news page
+     * admin page (post) - add new article to article feed
+     * @param article new created article
+     * @return article page
      */
     @RequestMapping(value = "/admin_addArticle", method = RequestMethod.POST)
-    public String addNews(@ModelAttribute("news") News news) {
-        if(news != null) {
-            newsManager.addNews(news.getTitle(), news.getAuthor(), news.getContent(), news.getLikesCount(), news.getDate());
+    public String addNews(@ModelAttribute("news") Article article) {
+        if(article != null) {
+            newsManager.addNews(article.getTitle(), article.getAuthor(), article.getContent(), article.getLikesCount(), article.getDate());
         }
 
-        return "redirect:/news";
+        return "redirect:/article";
     }
 
     /**
@@ -57,9 +57,9 @@ public class AdminArticleController {
     public ModelAndView deleteNews() {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminDeleteArticle");
-        ArrayList<News> newsList = newsManager.loadNews();
-        model.addObject("newsList", newsList);
-        model.addObject("news", new News());
+        ArrayList<Article> articleList = newsManager.loadNews();
+        model.addObject("articleList", articleList);
+        model.addObject("news", new Article());
 
         return model;
     }
@@ -94,28 +94,28 @@ public class AdminArticleController {
 
         ModelAndView model = new ModelAndView();
         model.setViewName("adminEditArticle");
-        ArrayList<News> newsList = newsManager.loadNews();
-        model.addObject("newsList", newsList);
-        model.addObject("news", new News());
+        ArrayList<Article> articleList = newsManager.loadNews();
+        model.addObject("articleList", articleList);
+        model.addObject("news", new Article());
 
         return model;
     }
 
     /**
-     * admin page (post) - edit news article
-     * @param news news edited
+     * admin page (post) - edit article article
+     * @param article article edited
      * @return editNews page
      */
     @RequestMapping(value = "/admin_editArticle", method = RequestMethod.POST)
-    public ModelAndView editNews(@ModelAttribute("news") News news) {
-        if (news != null)
-            newsManager.editNews(news.getNewsKey(), news.getTitle(), news.getAuthor(),
-                    news.getContent(), news.getLikesCount(), news.getDate());
+    public ModelAndView editNews(@ModelAttribute("news") Article article) {
+        if (article != null)
+            newsManager.editNews(article.getNewsKey(), article.getTitle(), article.getAuthor(),
+                    article.getContent(), article.getLikesCount(), article.getDate());
         ModelAndView model = new ModelAndView();
         model.setViewName("adminEditArticle");
-        ArrayList<News> newsList = newsManager.loadNews();
-        model.addObject("newsList", newsList);
-        model.addObject("news", new News());
+        ArrayList<Article> articleList = newsManager.loadNews();
+        model.addObject("articleList", articleList);
+        model.addObject("article", new Article());
 
         return model;
     }
