@@ -43,6 +43,7 @@ public class InstructorCourseController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorCourse");
         model.addObject("course", new Course());
+        model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
         model.addObject("courses", courseManager.loadAllOpenCourses());
 
         return model;
@@ -55,10 +56,13 @@ public class InstructorCourseController {
      */
     @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.POST)
     public ModelAndView editCourse(@PathVariable("courseKey") String courseKey, @ModelAttribute("course") Course course) {
-        if(course != null)
+        if(course != null) {
+            course.setCourseKey(courseKey);
             courseManager.editCourse(course);
+        }
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorCourse");
+        model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
         model.addObject("course", new Course());
         model.addObject("courses",courseManager.loadAllOpenCourses());
 

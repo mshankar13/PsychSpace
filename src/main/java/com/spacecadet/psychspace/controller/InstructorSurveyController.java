@@ -35,9 +35,16 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/instructor/{courseKey}/survey", method = RequestMethod.GET)
     public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadAllCourses();
+        Survey survey = surveyManager.loadSingleCourseSurvey(courseKey);
+        String courseSurvey;
+        if (survey != null)
+            courseSurvey = helperManager.surveyObjectsToJsonString(survey);
+        else
+            courseSurvey = null;
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorSurvey");
         model.addObject("survey", new Survey());
+        model.addObject("courseSurvey", courseSurvey);
         model.addObject("courses", courses);
 
         return model;
@@ -55,7 +62,7 @@ public class InstructorSurveyController {
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
-        return "redirect:/instructor/{courseKey}/addSurvey";
+        return "redirect:/instructor/{courseKey}/survey";
     }
 
 

@@ -63,18 +63,22 @@ public class SurveyManager {
         Query surveyQuery = new Query("Survey").setFilter(propertyFilter1);
         Entity surveyEntity = datastore.prepare(surveyQuery).asSingleEntity();
 
-        survey.setSurveyKey(KeyFactory.keyToString(surveyEntity.getKey()));
-        survey.setCourseKey(surveyEntity.getProperty("CourseKey").toString());
-        survey.setUserKey(surveyEntity.getProperty("UserKey").toString());
-        survey.setTitle(surveyEntity.getProperty("Title").toString());
-        survey.setCourseTitle(surveyEntity.getProperty("CourseTitle").toString());
-        survey.setDueDate(surveyEntity.getProperty("DueDate").toString());
+        if (surveyEntity != null) {
+            survey.setSurveyKey(KeyFactory.keyToString(surveyEntity.getKey()));
+            survey.setCourseKey(surveyEntity.getProperty("CourseKey").toString());
+            survey.setUserKey(surveyEntity.getProperty("UserKey").toString());
+            survey.setTitle(surveyEntity.getProperty("Title").toString());
+            survey.setCourseTitle(surveyEntity.getProperty("CourseTitle").toString());
+            survey.setDueDate(surveyEntity.getProperty("DueDate").toString());
 
-        String key = KeyFactory.keyToString(surveyEntity.getKey());
-        HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(key);
-        survey.setQuestions(questions);
+            String key = KeyFactory.keyToString(surveyEntity.getKey());
+            HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(key);
+            survey.setQuestions(questions);
 
-        return survey;
+            return survey;
+        }
+
+        return null;
     }
 
     /**

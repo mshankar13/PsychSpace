@@ -47,7 +47,8 @@
                                 <option selected="selected" class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
                             </c:when>
                             <c:otherwise>
-                                <option class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
+                                <option class="select-course" value="${course.courseKey}" label="${course.title}"
+                                        href="localhost:8080/instructor/${course.courseKey}/videos">${course.title}</option>
                             </c:otherwise>
                             </c:choose>
                         </c:forEach>

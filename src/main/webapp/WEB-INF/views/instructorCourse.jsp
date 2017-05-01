@@ -15,6 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="${contextPath}/resources/js/jquery.ui.datepicker.validation.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
@@ -30,20 +32,32 @@
 </div>
 <div class="wrapper">
     <div class="row">
+        <%--Left side bar--%>
         <div class="col-md-2">
-
             <div class="list-group">
                 <a href="${contextPath}/instructor" class="list-group-item">Instructor Home</a>
             </div>
         </div>
+
+        <%--Main Content--%>
         <div class="col-md-10">
+            <%--Top: select course option and create course buttn--%>
             <div class="row div-top">
+                <input type="hidden" value="${currentCourse.courseKey}" id="current-course-key">
+                <input type="hidden" value="${currentCourse.title}" id="current-course-title">
+                <input type="hidden" value="${currentCourse.description}" id="current-course-description">
+                <input type="hidden" value="${currentCourse.startDate}" id="current-course-start-date">
+                <input type="hidden" value="${currentCourse.endDate}" id="current-course-end-date">
+                <input type="hidden" value="${currentCourse.enrollDate}" id="current-course-enroll-date">
+                <input type="hidden" value="${currentCourse.dropDate}" id="current-course-drop-date">
+                <input type="hidden" value="${currentCourse.status}" id="current-course-status">
+                <input type="hidden" value="${currentCourse.capacity}" id="current-course-capacity">
                 <div class="col-md-9">
                     <label for="select-course" class="col-md-3 control-label">Select Course</label>
                     <select class="col-md-6" id="select-course">
                         <c:forEach items="${courses}" var="course">
                             <c:choose>
-                                <c:when test="${course.courseKey ==  courseKey}">
+                                <c:when test="${course.courseKey ==  currentCourse.courseKey}">
                                     <option selected="selected" class="select-course" value="${course.courseKey}" label="${course.title}">${course.title}</option>
                                 </c:when>
                                 <c:otherwise>
@@ -58,6 +72,7 @@
                 </div>
             </div>
 
+            <%--Tabs--%>
             <div class="tab">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#" id="course-a">Course</a></li>
@@ -67,62 +82,65 @@
                 </ul>
             </div>
 
+            <%--Course Content--%>
             <div id="edit-course-div">
-                <h1>Edit Course</h1>
-                <form:form class="form-horizontal" method="post"
-                           modelAttribute="course" action="intructor/editCourse">
+                <h1 id="course-title"></h1>
+                <form:form class="form-horizontal" id="edit-course-form" method="post"
+                           modelAttribute="course" action="/instructor/${currentCourse.courseKey}">
                     <div class="form-group">
-                        <label for="add-course-title" class="col-sm-2 control-label">Title</label>
+                        <label for="edit-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
                         <div class="col-sm-6">
-                            <form:input type="text" class="form-control" id="add-course-title" path="title" placeholder="Course Title" />
+                            <form:input class="form-control" type="text" path="enrollDate" id="edit-course-enroll-date"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
+                        <label for="edit-course-start-date" class="col-sm-2 control-label">Start Date</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
+                            <form:input class="form-control" type="text" path="startDate" id="edit-course-start-date" name="startDate"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
+                        <label for="edit-course-end-date" class="col-sm-2 control-label">End Date</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
+                            <form:input class="form-control" type="text" path="endDate" id="edit-course-end-date"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
+                        <label for="edit-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="endDate" id="add-course-end-date"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
-                        <div class="col-sm-6">
-                            <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
+                            <form:input class="form-control" type="text" path="dropDate" id="edit-course-drop-date"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
+                        <label for="edit-course-capacity" class="col-sm-2 control-label">Capacity</label>
                         <div class="col-sm-6">
-                            <form:input class="form-control" type="number" path="capacity" id="add-course-capacity"/>
+                            <form:input class="form-control" type="number" path="capacity" id="edit-course-capacity"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-course-description" class="col-sm-2 control-label">Description</label>
+                        <label for="edit-course-status" class="col-sm-2 control-label">Status</label>
+                        <div class="col-sm-6">
+                            <form:select class="form-control" id="edit-course-status" path="status">
+                                <form:option value="open">Open</form:option>
+                                <form:option value="closed">Closed</form:option>
+                            </form:select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-course-description" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-8">
-                            <form:textarea class="form-control" id="add-course-description" rows="10" path="description" />
+                            <form:textarea class="form-control" id="edit-course-description" rows="10" path="description" />
                         </div>
                     </div>
                     <form:hidden path="userKey" value="null"/>
                     <form:hidden path="courseKey" value="null"/>
                     <form:hidden path="instructor" value="null"/>
-                    <form:hidden path="status" value="open" />
                     <form:hidden path="currSize" value="0" />
                     <button type="submit" class="instructor-btn-primary">Save</button>
                 </form:form>
             </div>
 
-
+            <%--Add Course Modal--%>
             <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog instructor-modal" role="document">
                     <div class="modal-header row">
@@ -136,7 +154,7 @@
                         </div>
                     </div>
                     <form:form class="form-horizontal" method="post"
-                               modelAttribute="course" action="addCourse">
+                               modelAttribute="course" action="/instructor/addCourse">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="add-course-title" class="col-sm-2 control-label">Title</label>
@@ -145,15 +163,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
+                                <label for="edit-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
                                 <div class="col-sm-6">
-                                    <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
+                                    <form:input class="form-control" type="text" path="enrollDate" id="edit-course-enroll-date"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
                                 <div class="col-sm-6">
-                                    <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
+                                    <form:input class="form-control" type="text" path="startDate" id="edit-course-start-date"/>
                                 </div>
                             </div>
                             <div class="form-group">

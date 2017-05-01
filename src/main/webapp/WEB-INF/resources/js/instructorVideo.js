@@ -1,7 +1,11 @@
 $(document).ready(function() {
+    // select course link onclick
+    $("#select-course").change(changeCourse);
+
     // set the tab links
     var url = window.location.pathname;
-    var courseBaseUrl = url.slice(0, url.length-7);
+    var len = "/videos".length;
+    var courseBaseUrl = url.slice(0, url.length-len);
     $("#course-a").attr("href", courseBaseUrl);
     $("#survey-a").attr("href", courseBaseUrl + "/survey");
     $("#videos-a").attr("href", url);
@@ -11,6 +15,26 @@ $(document).ready(function() {
     $("#videos-div").on("click", ".edit-video-btn", editVideoModalShow);
     $("#videos-div").on("click", ".delete-video-btn", deleteVideoModalShow);
 });
+
+function changeCourse() {
+    var currentUrl = window.location.pathname;
+    var urlArr = currentUrl.split("/");
+    var newCourseKey = $(this).val();
+    var newUrl = "/" + urlArr[1] + "/" + newCourseKey + "/videos";
+
+    $.ajax({
+        url: newUrl,
+        type: "GET",
+        timeout : 15000,
+        success: function() {
+            window.location.href = newUrl;
+        },
+        error: function() {
+            console.log("ERROR");
+        }
+    });
+}
+
 
 function addVideoModalShow() {
     $("#addVideoModal").modal("show");

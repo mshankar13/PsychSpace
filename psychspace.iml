@@ -4,11 +4,6 @@
     <facet type="app-engine-standard" name="Google App Engine Standard">
       <configuration />
     </facet>
-    <facet type="google-app-engine" name="Google App Engine">
-      <configuration>
-        <sdk-home-path>$MAVEN_REPOSITORY$/com/google/appengine/appengine-java-sdk/1.9.50/appengine-java-sdk/appengine-java-sdk-1.9.50</sdk-home-path>
-      </configuration>
-    </facet>
     <facet type="web" name="Web">
       <configuration>
         <descriptors>

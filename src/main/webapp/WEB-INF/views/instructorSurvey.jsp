@@ -34,6 +34,8 @@
         </div>
         <div class="col-md-10">
             <div class="row div-top">
+                <input type="hidden" value="${courseKey}" id="course-key">
+                <input type="hidden" value='${courseSurvey}' id="survey">
                 <div class="col-md-9">
                     <label for="select-course" class="col-md-3 control-label">Select Course</label>
                     <select class="col-md-6" id="select-course">
@@ -64,25 +66,25 @@
             </div>
 
             <div>
-                <h1>Create Survey</h1>
+                <h1 id="create-survey-h1">Create Survey</h1>
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="add-survey-title" class="col-sm-2 control-label">Name</label>
+                        <label for="survey-title" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="add-survey-title" placeholder="Survey Name" />
+                            <input type="text" class="form-control" id="survey-title" placeholder="Survey Name" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="add-survey-due-date" class="col-sm-2 control-label">Due Date</label>
+                        <label for="survey-due-date" class="col-sm-2 control-label">Due Date</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="add-survey-due-date"/>
+                            <input class="form-control" type="text" id="survey-due-date"/>
                         </div>
                         <div class="col-sm-6"></div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-questions">Questions</label>
                     </div>
-                    <div id="add-survey-q-group">
+                    <div id="survey-q-group">
                         <div class="question-group">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Question 1</label>
@@ -156,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="instructor-btn-primary" id="add-survey-submit">Create</button>
+                    <button type="submit" class="instructor-btn-primary" id="survey-submit">Create</button>
                 </form>
             </div>
         </div>

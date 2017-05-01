@@ -1,12 +1,15 @@
-//TODO: 1. no course, no survey
 
 var questionCounter = 2;
+var hasSurvey = false;
 $(document).ready(function(){
+    // select course link onclick
+    $("#select-course").change(changeCourse);
+
+    console.log($("#survey").val());
 
     // set the tab links
     var url = window.location.pathname;
     var courseBaseUrl = url.slice(0, url.length-7);
-
     $("#course-a").attr("href", courseBaseUrl);
     $("#survey-a").attr("href", url);
     $("#videos-a").attr("href", courseBaseUrl + "/videos");
@@ -16,15 +19,134 @@ $(document).ready(function(){
     var currentCourseKey = courseBaseUrl.slice("/");
     $("#current-course-key").val(currentCourseKey);
 
+    // check if the course has a survey
+    if ($("#survey").val() != "") {
+        loadSurvey();
+        hasSurvey = true;
+    }
+
+
     $("#btn-survey-add-question").on("click", addQuestion);
-    $("#add-survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
-    $("#add-survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
-    $("#add-survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
-    $("#add-survey-due-date").datepicker();
-    $("#add-survey-submit").on("click", addSurveySubmit);
+    $("#survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
+    $("#survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
+    $("#survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
+    $("#survey-due-date").datepicker();
+    $("#survey-submit").on("click", surveySubmit);
 
     $("edit-survey-btn").on("click", editSurveyModalShow);
 });
+
+
+function changeCourse() {
+    var currentUrl = window.location.pathname;
+    var urlArr = currentUrl.split("/");
+    var newCourseKey = $(this).val();
+    var newUrl = "/" + urlArr[1] + "/" + newCourseKey + "/survey";
+
+    $.ajax({
+        url: newUrl,
+        type: "GET",
+        timeout : 15000,
+        success: function() {
+            window.location.href = newUrl;
+        },
+        error: function() {
+            console.log("ERROR");
+        }
+    });
+}
+
+function loadSurvey() {
+    $("#create-survey-h1").hide();
+
+    var survey = JSON.parse($("#survey").val());
+    var properties = survey["Properties"];
+    var questions = survey["Questions"];
+    var qTotal = survey["QuestionTotal"];
+    var $questionGroups = $(".question-group");
+    var qGroupLen = $questionGroups.length;
+
+    // set title and date
+    $("#survey-title").val(properties["title"]);
+    $("#survey-due-date")
+        .datepicker()
+        .val(properties["dueDate"]);
+
+    // set questions and answers
+    var qCounter = 0;
+    var qGroupCounter = 0;
+    while (qCounter < qTotal) {
+        var question = questions[qCounter];
+        var $qGroup;
+        // question ui is available, set question, type, check answers
+        if (qGroupCounter < qGroupLen) {
+            $qGroup = $questionGroups.eq(qGroupCounter);
+        }
+        // question ui isn't available, add ui, set fields
+        else {
+            addQuestion();
+            // update the groups
+            $questionGroups = $(".question-group");
+            $qGroup = $questionGroups.last();
+        }
+        // get question and type
+        var qContent = question["QuestionProperties"]["content"];
+        var qType = question["QuestionProperties"]["type"];
+        // find input fields
+        var $inputQuestion = $qGroup.find(".input-question");
+        var $inputType = $qGroup.find(".input-type");
+        // set inputs
+        $inputQuestion.val(qContent);
+        $inputType.val(qType);
+
+        // set answer inputs
+        var aTotal = question["AnswerTotal"];
+        var $aGroups = $qGroup.find(".answer-row");
+        var aGroupLen = $aGroups.length;
+        var aCounter = 0;
+        var answers = question["Answers"];
+        while (aCounter < aTotal) {
+            var aAnswer = answers[aCounter];
+            var $aRow;
+            // answer ui available
+            if (aCounter < aGroupLen) {
+                $aRow = $aGroups.eq(aCounter);
+            }
+            // add answer ui
+            else {
+                addAnswer($qGroup);
+                // update the groups
+                $questionGroups = $(".question-group");
+                $aGroups = $qGroup.find(".answer-row");
+                $aRow = $aGroups.last();
+            }
+
+            // get answer and score
+            var answer = aAnswer["answer"];
+            var score = aAnswer["score"];
+            // find input fields
+            var $inputAnswer = $aRow.find(".input-answer");
+            var $inputScore = $aRow.find(".input-score");
+            // set input fields
+            $inputAnswer.val(answer);
+            $inputScore.val(score);
+
+            aCounter++;
+        }
+
+        qCounter++;
+        qGroupCounter++;
+    }
+    if (qGroupLen < qTotal) {
+        for (var i=qGroupLen-1; i<qTotal; i++) {
+            addQuestion();
+        }
+    }
+
+    // change create button to save
+    $("#survey-submit").text("Save");
+
+}
 
 //--------------------------- Add Survey --------------------------
 function addQuestion() {
@@ -63,13 +185,13 @@ function addQuestion() {
                 </div>\
             </div>';
 
-    $("#add-survey-q-group").append(div);
+    $("#survey-q-group").append(div);
 
     questionCounter++;
-    $("#add-survey-q-group div:last-child").find("span.question-number").text(questionCounter);
+    $("#survey-q-group div:last-child").find("span.question-number").text(questionCounter);
 }
 
-function addAnswer() {
+function addAnswer($qGroup) {
     var div = '<div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
                     <div class="col-md-4">\
@@ -86,7 +208,11 @@ function addAnswer() {
                     </div>\
                 </div>';
 
-    $(this).parents().closest(".question-group").append(div);
+    if ($(this).is("button"))
+        $(this).parents().closest(".question-group").append(div);
+    else
+        $qGroup.append(div);
+
 }
 
 function deleteQuestion() {
@@ -106,13 +232,14 @@ function removeAnswer() {
     $(this).parent().closest(".answer-row").remove();
 }
 
-function addSurveySubmit() {
+function surveySubmit() {
+    var courseKey = $("#course-key");
     var survey = {};
     survey["courseKey"] = $('#select-course').find(":selected").val();
     survey["courseTitle"] = $("#select-course").find(":selected").text();
 
-    survey["title"] = $("#add-survey-title").val();
-    survey["date"] = $('#add-survey-due-date').val();
+    survey["title"] = $("#survey-title").val();
+    survey["date"] = $('#survey-due-date').val();
     var questions = {};
 
     survey["questions"] = {};
@@ -139,10 +266,16 @@ function addSurveySubmit() {
     survey["questionTotal"] = qCount;
     survey["questions"] = questions;
 
+    var link = "/instructor/" + courseKey;
+    if (hasSurvey)
+        link = link + "/editSurvey";
+    else
+        link += "/addSurvey";
+
     console.log("Survey", survey);
 
     $.ajax({
-        url: "/addSurvey",
+        url: link,
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

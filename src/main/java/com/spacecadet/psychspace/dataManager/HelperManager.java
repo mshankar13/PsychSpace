@@ -149,9 +149,11 @@ public class HelperManager {
 
             question1.add("QuestionProperties", gson.toJsonTree(question));
             question1.add("Answers", gson.toJsonTree(answers));
+            question1.add("AnswerTotal", gson.toJsonTree(answers.entrySet().size()));
             questions.add(Integer.toString(i), gson.toJsonTree(question1));
             i++;
         }
+        survey1.add("QuestionTotal", gson.toJsonTree(i));
         survey1.add("Questions", gson.toJsonTree(questions));
 //            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
 
