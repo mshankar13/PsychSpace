@@ -46,6 +46,7 @@ public class InstructorSurveyController {
         model.addObject("survey", new Survey());
         model.addObject("courseSurvey", courseSurvey);
         model.addObject("courses", courses);
+        model.addObject("course", new Course());
 
         return model;
     }

@@ -35,6 +35,7 @@ public class InstructorEvaluationController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEvaluation");
         model.addObject("courses", courses);
+        model.addObject("course", new Course());
 
         return model;
     }

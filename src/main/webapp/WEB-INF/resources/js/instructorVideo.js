@@ -11,6 +11,7 @@ $(document).ready(function() {
     $("#videos-a").attr("href", url);
     $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
 
+    $("#btn-add-course").on("click", addCourseModalShow);
     $("#btn-add-video").on("click", addVideoModalShow);
     $("#videos-div").on("click", ".edit-video-btn", editVideoModalShow);
     $("#videos-div").on("click", ".delete-video-btn", deleteVideoModalShow);
@@ -76,4 +77,8 @@ function deleteVideoModalShow() {
     $("#delete-video-course-title").val(courseTitle);
 
     $("#deleteVideoModal").modal("show");
+}
+
+function addCourseModalShow() {
+    $("#addCourseModal").modal("show");
 }

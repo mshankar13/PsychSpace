@@ -1,6 +1,6 @@
 //TODO: check dates with today
 
-
+var today;
 $(document).ready(function(){
     // select course link onclick
     $("#select-course").change(changeCourse);
@@ -22,6 +22,8 @@ $(document).ready(function(){
 
     // enable onclick function calls
     $("#btn-add-course").on("click", addCourseModalShow);
+
+    today = $.datepicker.formatDate('mm/dd/yy', new Date());
 });
 
 function changeCourse() {

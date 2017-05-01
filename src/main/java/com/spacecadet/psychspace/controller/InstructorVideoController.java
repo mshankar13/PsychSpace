@@ -37,21 +37,7 @@ public class InstructorVideoController {
         model.addObject("videos", videos);
         model.addObject("video", new Video());
         model.addObject("courseKey", courseKey);
-
-        return model;
-    }
-
-    /**
-     * instructor page (get) - add new video to course
-     * @return instructor add video page
-     */
-    @RequestMapping(value = "/instructor/{courseKey}/videos/add", method = RequestMethod.GET)
-    public ModelAndView addVideo(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorVideo");
-        model.addObject("video", new Video());
-        model.addObject("courses", courses);
+        model.addObject("course", new Course());
 
         return model;
     }
@@ -61,7 +47,7 @@ public class InstructorVideoController {
      * @return instructor add video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/add", method = RequestMethod.POST)
-    public ModelAndView addVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
+    public String addVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         Course course = courseManager.loadSingleCourse(courseKey);
         video.setCourseTitle(course.getTitle());
         // make sure the video url is the embed one
@@ -73,8 +59,9 @@ public class InstructorVideoController {
         model.setViewName("instructorVideo");
         model.addObject("video", new Video());
         model.addObject("courses", courses);
+        model.addObject("course", new Course());
 
-        return model;
+        return "redirect:/instructor/{courseKey}/videos";
     }
 
     /**
@@ -82,16 +69,17 @@ public class InstructorVideoController {
      * @return instructor edit video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/edit", method = RequestMethod.POST)
-    public ModelAndView editVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
+    public String editVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.editVideo(video);
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
         model.addObject("video", new Video());
         model.addObject("courses", courses);
+        model.addObject("course", new Course());
         model.addObject("videos", videoManager.loadVideos());
 
-        return model;
+        return "redirect:/instructor/{courseKey}/videos";
     }
 
     /**
@@ -99,7 +87,7 @@ public class InstructorVideoController {
      * @return instructor delete video page
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos/delete", method = RequestMethod.POST)
-    public ModelAndView deleteVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
+    public String deleteVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.deleteVideo(video.getVideoKey());
         ArrayList<Course> courses = courseManager.loadAllOpenCourses();
         ModelAndView model = new ModelAndView();
@@ -107,8 +95,9 @@ public class InstructorVideoController {
         model.addObject("video", new Video());
         model.addObject("courses", courses);
         model.addObject("videos", videoManager.loadVideos());
+        model.addObject("course", new Course());
 
-        return model;
+        return "redirect:/instructor/{courseKey}/videos";
     }
 
     /**
