@@ -13,10 +13,16 @@ import java.util.List;
 public class AnswerManager {
     private DatastoreService datastore;
 
+    /** constructor */
     public AnswerManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
+    /**
+     * load instructor answers corresponding to a question
+     * @param questionKey question key
+     * @return list of answers for a given question
+     */
     public ArrayList<Answer> loadAnswers(String questionKey) {
 
         Query.Filter surveyFilter =
@@ -38,6 +44,12 @@ public class AnswerManager {
 
         return answers;
     }
+
+    /**
+     * add answers to the datastore as separate entities
+     * @param questionKey question key to map answers to question
+     * @param answers list of answers for corresponding question
+     */
     public void addAnswers(String questionKey, ArrayList<Answer> answers) {
         Transaction txn = datastore.beginTransaction();
 
