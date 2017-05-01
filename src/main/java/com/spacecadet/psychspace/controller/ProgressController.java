@@ -22,7 +22,7 @@ public class ProgressController {
      * all visit to course learn page
      * @return learn page
      */
-    @RequestMapping(value = "/learn/{courseKey}/progress", method = RequestMethod.GET)
+    @RequestMapping(value = "/learn/{courseKey}/", method = RequestMethod.GET)
     public ModelAndView learnCourse(@PathVariable("courseKey") String courseKey) {
         Course course = courseManager.loadSingleCourse(courseKey);
         ModelAndView model = new ModelAndView();
