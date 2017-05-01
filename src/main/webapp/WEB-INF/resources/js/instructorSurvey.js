@@ -26,14 +26,13 @@ $(document).ready(function(){
     }
 
 
+    $("#btn-add-course").on("click", addCourseModalShow);
     $("#btn-survey-add-question").on("click", addQuestion);
     $("#survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
     $("#survey-due-date").datepicker();
     $("#survey-submit").on("click", surveySubmit);
-
-    $("edit-survey-btn").on("click", editSurveyModalShow);
 });
 
 
@@ -54,6 +53,10 @@ function changeCourse() {
             console.log("ERROR");
         }
     });
+}
+
+function addCourseModalShow() {
+    $("#addCourseModal").modal("show");
 }
 
 function loadSurvey() {
@@ -170,7 +173,7 @@ function addQuestion() {
                 </div>\
                 <div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
-                    <div class="col-md-4">\
+                    <div class="col-md-3">\
                         <input class="input-answer"/>\
                     </div>\
                     <label class="col-sm-1 control-label">Score</label>\
@@ -194,7 +197,7 @@ function addQuestion() {
 function addAnswer($qGroup) {
     var div = '<div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
-                    <div class="col-md-4">\
+                    <div class="col-md-3">\
                         <input class="input-answer"/>\
                     </div>\
                     <label class="col-sm-1 control-label">Score</label>\
@@ -292,14 +295,4 @@ function surveySubmit() {
             console.log("ERROR", e);
         }
     });
-}
-
-//--------------------------- Edit Survey --------------------------
-
-function editSurveyModalShow() {
-
-}
-
-function editSurveySubmit() {
-
 }

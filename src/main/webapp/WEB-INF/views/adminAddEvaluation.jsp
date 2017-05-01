@@ -34,9 +34,9 @@
                        <%--modelAttribute="evaluation" action="admin_addEvaluation">--%>
             <form>
                 <div class="form-group">
-                    <label for="news-title">News Title</label>
-                    <input type="text" class="form-control" id="news-title" placeholder="News Title" />
-                    <%--<form:input type="text" class="form-control" id="news-title" path="title" placeholder="News Title" />--%>
+                    <label for="article-title">News Title</label>
+                    <input type="text" class="form-control" id="article-title" placeholder="News Title" />
+                    <%--<form:input type="text" class="form-control" id="article-title" path="title" placeholder="Article Title" />--%>
                 </div>
                 <div class="form-group">
                     <label for="author">Author</label>
@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="news-content">News Content</label>
-                    <form:textarea class="form-control" id="news-content" rows="10" path="content" />
+                    <label for="article-content">News Content</label>
+                    <form:textarea class="form-control" id="article-content" rows="10" path="content" />
                 </div>
                 <form:hidden path="likesCount" value="0"/>
                 <form:hidden path="newsKey" value="null"/>

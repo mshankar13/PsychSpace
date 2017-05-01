@@ -16,11 +16,17 @@ public class QuestionManager {
     private DatastoreService datastore;
     private AnswerManager answerManager = new AnswerManager();
 
+    /** constructor */
     public QuestionManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
 
+    /**
+     * adds corresponding survey questions to datastore
+     * @param surveyKey survey key
+     * @param questionMap hashmap of questions with corresponding list of answers
+     */
     public void addQuestions(String surveyKey, HashMap<Question, ArrayList<Answer>> questionMap) {
         Transaction txn = datastore.beginTransaction();
 
@@ -48,6 +54,11 @@ public class QuestionManager {
         }
     }
 
+    /**
+     * loads the questions corresponding to a survey
+     * @param surveyKey survey key
+     * @return
+     */
     public HashMap<Question, ArrayList<Answer>> loadQuestions(String surveyKey) {
 
         Query.Filter questionFilter =
@@ -84,6 +95,10 @@ public class QuestionManager {
         }
     }
 
+    /**
+     * deletes a question from datastore
+     * @param questionKey question key
+     */
     public void deleteQuestion(String questionKey) {
         Transaction txn = datastore.beginTransaction();
 

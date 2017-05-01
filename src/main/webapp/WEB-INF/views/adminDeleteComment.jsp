@@ -28,7 +28,7 @@
     <%@include file="admin-sidebar.html" %>
     <div id="page-content-wrapper">
         <h1>Delete Comment</h1>
-        <form:form method="get" action="admin_deleteArticle" modelAttribute="newsList">
+        <form:form method="get" action="admin_deleteArticle" modelAttribute="articleList">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -37,9 +37,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${newsList}" var="news">
+                <c:forEach items="${articleList}" var="article">
                     <tr>
-                        <td>${news.title}</td>
+                        <td>${article.title}</td>
                         <td><button type="submit">See Comments</button></td>
                     </tr>
                 </c:forEach>

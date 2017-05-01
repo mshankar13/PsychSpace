@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller for all visits to instructor course related pages.
+ * use cases: add/edit selected course
  * Created by aliao on 4/15/17.
  */
 @Controller

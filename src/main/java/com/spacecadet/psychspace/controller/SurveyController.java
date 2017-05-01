@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller for all visits to student/user survey pages.
+ * user cases: load survey and submit survey
  * Created by aliao on 4/19/17.
  */
 @Controller

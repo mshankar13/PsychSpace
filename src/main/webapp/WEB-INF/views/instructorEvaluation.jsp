@@ -91,6 +91,81 @@
                 </form>
 
             </div>
+
+
+            <%--Add Course Modal--%>
+            <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog instructor-modal" role="document">
+                    <div class="modal-header row">
+                        <div class="col-sm-10">
+                            <h3 class="modal-title">Create Course</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form:form class="form-horizontal" method="post"
+                               modelAttribute="course" action="instructor/addCourse">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="add-course-title" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-6">
+                                    <form:input type="text" class="form-control form-input" id="add-course-title" path="title" placeholder="Course Title" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-course-enroll-date" class="col-sm-2 control-label">Enroll Date</label>
+                                <div class="col-sm-6">
+                                    <form:input class="form-control" type="text" path="enrollDate" id="add-course-enroll-date"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-course-start-date" class="col-sm-2 control-label">Start Date</label>
+                                <div class="col-sm-6">
+                                    <form:input class="form-control" type="text" path="startDate" id="add-course-start-date"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-course-end-date" class="col-sm-2 control-label">End Date</label>
+                                <div class="col-sm-6">
+                                    <form:input class="form-control" type="text" path="endDate" id="add-course-end-date"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-course-drop-date" class="col-sm-2 control-label">Drop Deadline</label>
+                                <div class="col-sm-6">
+                                    <form:input class="form-control" type="text" path="dropDate" id="add-course-drop-date"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="add-course-capacity" class="col-sm-2 control-label">Capacity</label>
+                                <div class="col-sm-6">
+                                    <form:input class="form-control" type="number" path="capacity" id="add-course-capacity"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-course-description" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-8">
+                                    <form:textarea class="form-control" id="add-course-description" rows="10" path="description" />
+                                </div>
+                            </div>
+                            <form:hidden path="userKey" value="null"/>
+                            <form:hidden path="courseKey" value="null"/>
+                            <form:hidden path="instructor" value="null"/>
+                            <form:hidden path="status" value="open" />
+                            <form:hidden path="currSize" value="0" />
+                        </div> <%--End of modal body--%>
+                        <div class="modal-footer">
+                            <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="instructor-btn-primary">Create</button>
+                        </div>
+
+                    </form:form>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

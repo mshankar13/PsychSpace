@@ -32,7 +32,7 @@
 
     <div id="page-content-wrapper">
         <h1>Edit Article</h1>
-        <form:form method="get" action="admin_editArticle" modelAttribute="news">
+        <form:form method="get" action="admin_editArticle" modelAttribute="article">
             <table id="edit-article-table" class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -42,16 +42,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${newsList}" var="news">
+                <c:forEach items="${articleList}" var="article">
                     <tr>
-                        <form:hidden value="${news.newsKey}" path="newsKey"/>
-                        <form:hidden value="${news.title}" path="title"/>
-                        <form:hidden value="${news.date}" path="date"/>
-                        <form:hidden value="${news.content}" path="content"/>
-                        <form:hidden value="${news.author}" path="author"/>
-                        <form:hidden value="${news.likesCount}" path="likesCount"/>
-                        <td>${news.title}</td>
-                        <td>${news.date}</td>
+                        <form:hidden value="${article.newsKey}" path="newsKey"/>
+                        <form:hidden value="${article.title}" path="title"/>
+                        <form:hidden value="${article.date}" path="date"/>
+                        <form:hidden value="${article.content}" path="content"/>
+                        <form:hidden value="${article.author}" path="author"/>
+                        <form:hidden value="${article.likesCount}" path="likesCount"/>
+                        <td>${article.title}</td>
+                        <td>${article.date}</td>
                         <td><div class="admin-btn btn-edit-article">Edit</div></td>
                     </tr>
                 </c:forEach>
@@ -77,12 +77,12 @@
                 </div>
             </div>
             <form:form class="form-horizontal" method="post"
-                       modelAttribute="news" action="admin_editArticle">
+                       modelAttribute="article" action="admin_editArticle">
             <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="news-title">News Title</label>
-                        <form:input type="text" class="form-control" id="news-title" path="title" />
+                        <label for="article-title">News Title</label>
+                        <form:input type="text" class="form-control" id="article-title" path="title" />
                     </div>
                     <div class="form-group">
                         <label for="author">Author</label>

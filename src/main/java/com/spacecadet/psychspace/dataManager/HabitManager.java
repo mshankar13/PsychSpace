@@ -10,14 +10,19 @@ public class HabitManager {
 
     private DatastoreService datastore;
 
+    /**
+     * constructor for connecting to datastore
+     */
     public HabitManager(){ datastore = DatastoreServiceFactory.getDatastoreService(); }
 
+    /**
+     * create new habbit entity to datastore
+     * @param habit new habbit
+     */
     public void addHabit(Habit habit) {
-
         Transaction txn = datastore.beginTransaction();
         try {
             Entity habit1 = new Entity("Habit");
-            habit1.setProperty("Habit", habit.getHabit());
             habit1.setProperty("UserKey", habit.getUsername());
             habit1.setProperty("Username", habit.getUsername());
             habit1.setProperty("CueKey", habit.getCueKey());
@@ -26,7 +31,6 @@ public class HabitManager {
             habit1.setProperty("Reward", habit.getReward());
             datastore.put(txn, habit1);
             txn.commit();
-
             habit.setHabitKey(KeyFactory.keyToString(habit1.getKey()));
         } finally {
             if (txn.isActive()) {
@@ -35,12 +39,15 @@ public class HabitManager {
         }
     }
 
+    /**
+     * edit existing habbit in datastore
+     * @param habit edited habbit
+     */
     public void editHabit(Habit habit) {
         Transaction txn = datastore.beginTransaction();
         try {
             try {
                 Entity updatedHabit = datastore.get(KeyFactory.stringToKey(habit.getHabitKey()));
-                updatedHabit.setProperty("Habit", habit.getHabit());
                 updatedHabit.setProperty("UserKey", habit.getUsername());
                 updatedHabit.setProperty("Username", habit.getUsername());
                 updatedHabit.setProperty("CueKey", habit.getCueKey());
@@ -61,6 +68,10 @@ public class HabitManager {
         }
     }
 
+    /**
+     * delete habbit from datastore
+     * @param habitKey key of the habbit
+     */
     public void deleteHabit(String habitKey) {
         Transaction txn = datastore.beginTransaction();
         try {

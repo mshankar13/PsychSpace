@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to student/user video pages.
+ * use cases: load videos for selected course.
  * Created by aliao on 4/19/17.
  */
 @Controller

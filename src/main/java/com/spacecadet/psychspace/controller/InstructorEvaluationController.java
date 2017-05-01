@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to instructor evaluation pages.
+ * use cases: set evaluation dates from selected course
  * Created by aliao on 4/21/2017.
  */
 @Controller
@@ -35,6 +37,7 @@ public class InstructorEvaluationController {
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEvaluation");
         model.addObject("courses", courses);
+        model.addObject("course", new Course());
 
         return model;
     }

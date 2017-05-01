@@ -10,10 +10,15 @@ public class GoalManager {
 
     private DatastoreService datastore;
 
+    /** constructor */
     public GoalManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
+    /**
+     * adds a goal to the datastore
+     * @param goal goal object with properties
+     */
     public void addGoal(Goal goal) {
 
         Transaction txn = datastore.beginTransaction();
@@ -36,6 +41,10 @@ public class GoalManager {
         }
     }
 
+    /**
+     * edits a goal and updates datastore
+     * @param goal goal object with updated properties
+     */
     public void editGoal(Goal goal) {
         Transaction txn = datastore.beginTransaction();
         try {
@@ -60,6 +69,10 @@ public class GoalManager {
         }
     }
 
+    /**
+     * deletes a goal from datastore
+     * @param goalKey goal key
+     */
     public void deleteGoal(String goalKey) {
         Transaction txn = datastore.beginTransaction();
         try {

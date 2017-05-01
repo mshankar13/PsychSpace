@@ -25,25 +25,25 @@ public class NewsManager {
     /**
      * Loads the lists of news titles and their likes count
      */
-    public ArrayList<News> loadNews() {
-        Query newsQuery = new Query("News");
+    public ArrayList<Article> loadNews() {
+        Query newsQuery = new Query("Article");
         List<Entity> newsList =
                 datastore.prepare(newsQuery).asList(FetchOptions.Builder.withDefaults());
-        ArrayList<News> loadedNews = new ArrayList<News>();
+        ArrayList<Article> loadedNews = new ArrayList<Article>();
         for (Entity entity : newsList) {
-            News news = new News();
-            news.setTitle(entity.getProperty("Title").toString());
-            news.setAuthor(entity.getProperty("Author").toString());
-            news.setContent(entity.getProperty("Content").toString());
-            news.setLikesCount(entity.getProperty("Likes").toString());
-            news.setDate(entity.getProperty("Date").toString());
-            news.setNewsKey(KeyFactory.keyToString(entity.getKey()));
-            loadedNews.add(news);
+            Article article = new Article();
+            article.setTitle(entity.getProperty("Title").toString());
+            article.setAuthor(entity.getProperty("Author").toString());
+            article.setContent(entity.getProperty("Content").toString());
+            article.setLikesCount(entity.getProperty("Likes").toString());
+            article.setDate(entity.getProperty("Date").toString());
+            article.setNewsKey(KeyFactory.keyToString(entity.getKey()));
+            loadedNews.add(article);
         }
-        // Sort the loaded News by date
-        Collections.sort(loadedNews, new Comparator<News>() {
+        // Sort the loaded Article by date
+        Collections.sort(loadedNews, new Comparator<Article>() {
             @Override
-            public int compare(News o1, News o2) {
+            public int compare(Article o1, Article o2) {
                 Date date1 = helper.stringToDate(o1.getDate());
                 Date date2 = helper.stringToDate(o2.getDate());
                 return date2.compareTo(date1);
@@ -58,20 +58,20 @@ public class NewsManager {
      * @param newsKey single news key
      * @return news utility
      */
-    public News loadSingleNews(String newsKey) {
-        News news = new News();
+    public Article loadSingleNews(String newsKey) {
+        Article article = new Article();
         try {
             Entity singleNews = datastore.get(KeyFactory.stringToKey(newsKey));
-            news.setTitle(singleNews.getProperty("Title").toString());
-            news.setAuthor(singleNews.getProperty("Author").toString());
-            news.setContent(singleNews.getProperty("Content").toString());
-            news.setLikesCount(singleNews.getProperty("Likes").toString());
-            news.setDate(singleNews.getProperty("Date").toString());
-            news.setNewsKey(newsKey);
+            article.setTitle(singleNews.getProperty("Title").toString());
+            article.setAuthor(singleNews.getProperty("Author").toString());
+            article.setContent(singleNews.getProperty("Content").toString());
+            article.setLikesCount(singleNews.getProperty("Likes").toString());
+            article.setDate(singleNews.getProperty("Date").toString());
+            article.setNewsKey(newsKey);
         } catch (EntityNotFoundException ex) {
             ex.printStackTrace();
         }
-        return news;
+        return article;
     }
 
     /**
@@ -85,7 +85,7 @@ public class NewsManager {
     public void addNews(String title, String author, String content, String likesCount, String date) {
         Transaction txn = datastore.beginTransaction();
         try {
-            Entity news = new Entity("News");
+            Entity news = new Entity("Article");
             news.setProperty("Title", title);
             news.setProperty("Author", author);
             news.setProperty("Content", content);
@@ -164,21 +164,21 @@ public class NewsManager {
      * @param allNews arraylist of all news objects
      * @return singel featured news object
      */
-    public News getFeatured(ArrayList<News> allNews) {
-        ArrayList<News> potentialFeatured = new ArrayList<>();
+    public Article getFeatured(ArrayList<Article> allNews) {
+        ArrayList<Article> potentialFeatured = new ArrayList<>();
         Date lastWeek = new DateTime().minusDays(7).toDate();
         Date today = new Date();
         System.out.println(today.after(lastWeek));
-        for (News news : allNews) {
-            Date date = helper.stringToDate(news.getDate());
+        for (Article article : allNews) {
+            Date date = helper.stringToDate(article.getDate());
             if (date.after(lastWeek) == true) {
-                potentialFeatured.add(news);
+                potentialFeatured.add(article);
             }
         }
         if (potentialFeatured.size() != 0) {
-            Collections.sort(potentialFeatured, new Comparator<News>() {
+            Collections.sort(potentialFeatured, new Comparator<Article>() {
                 @Override
-                public int compare(News o1, News o2) {
+                public int compare(Article o1, Article o2) {
                     return Integer.parseInt(o1.getLikesCount()) - Integer.parseInt(o2.getLikesCount());
                 }
             });
@@ -189,40 +189,40 @@ public class NewsManager {
 
     /**
      * search for news with related keyword
-     * @param newsList list of all news
+     * @param articleList list of all news
      * @param keyword  user input keyword
      * @return list of all related news
      */
-    public ArrayList<News> searchNews(ArrayList<News> newsList, String keyword) {
-        ArrayList<News> titleSearch = new ArrayList<>();
-        for (News news : newsList) {
+    public ArrayList<Article> searchNews(ArrayList<Article> articleList, String keyword) {
+        ArrayList<Article> titleSearch = new ArrayList<>();
+        for (Article article : articleList) {
             if (Pattern.compile(Pattern.quote(keyword),
-                    Pattern.CASE_INSENSITIVE).matcher(news.getTitle()).find()) {
-                titleSearch.add(news);
+                    Pattern.CASE_INSENSITIVE).matcher(article.getTitle()).find()) {
+                titleSearch.add(article);
             }
         }
-        Collections.sort(titleSearch, new Comparator<News>() {
+        Collections.sort(titleSearch, new Comparator<Article>() {
             @Override
-            public int compare(News o1, News o2) {
+            public int compare(Article o1, Article o2) {
                 return o1.getTitle().compareTo(o2.getTitle());
             }
         });
-        ArrayList<News> contentSearch = new ArrayList<>();
-        for (News news : newsList) {
+        ArrayList<Article> contentSearch = new ArrayList<>();
+        for (Article article : articleList) {
             if(Pattern.compile(Pattern.quote(keyword),
-                    Pattern.CASE_INSENSITIVE).matcher(news.getContent()).find()){
-                if (!titleSearch.contains(news)) {
-                    contentSearch.add(news);
+                    Pattern.CASE_INSENSITIVE).matcher(article.getContent()).find()){
+                if (!titleSearch.contains(article)) {
+                    contentSearch.add(article);
                 }
             }
         }
-        Collections.sort(contentSearch, new Comparator<News>() {
+        Collections.sort(contentSearch, new Comparator<Article>() {
             @Override
-            public int compare(News o1, News o2) {
+            public int compare(Article o1, Article o2) {
                 return o1.getTitle().compareTo(o2.getTitle());
             }
         });
-        ArrayList<News> results = new ArrayList<>();
+        ArrayList<Article> results = new ArrayList<>();
         results.addAll(titleSearch);
         results.addAll(contentSearch);
         return results;

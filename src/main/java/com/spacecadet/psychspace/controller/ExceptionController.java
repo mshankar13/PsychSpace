@@ -9,6 +9,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Controller for catching exceptions for 404 page not found.
+ * use cases: routing for custom 404 error page
  * Created by aliao on 3/24/2017.
  */
 @Controller

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to student/user learn pages.
+ * use cases: load user currently enrolled courses.
  * Created by aliao on 4/6/2017.
  */
 @Controller
@@ -40,19 +42,6 @@ public class LearnController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learn");
         model.addObject("courses", courses);
-
-        return model;
-    }
-
-    /**
-     * all visit to course learn page
-     * @return learn page
-     */
-    @RequestMapping(value = "/learn/{courseKey}", method = RequestMethod.GET)
-    public ModelAndView learnCourse(@PathVariable("courseKey") String courseKey) {
-        Course course = courseManager.loadSingleCourse(courseKey);
-        ModelAndView model = new ModelAndView();
-        model.setViewName("learn");
 
         return model;
     }

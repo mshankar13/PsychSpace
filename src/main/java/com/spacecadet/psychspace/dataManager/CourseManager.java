@@ -69,6 +69,11 @@ public class CourseManager {
             course.setStatus(singleCourse.getProperty("Status").toString());
             course.setCurrSize(singleCourse.getProperty("CurrSize").toString());
             course.setCapacity(singleCourse.getProperty("Capacity").toString());
+
+            String key = KeyFactory.keyToString(singleCourse.getKey());
+            boolean status = checkCourseStatus(key);
+            if (status) course.setStatus("open");
+            else course.setStatus("closed");
         } catch (EntityNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -131,9 +136,15 @@ public class CourseManager {
             course.setStatus(entity.getProperty("Status").toString());
             course.setCurrSize(entity.getProperty("CurrSize").toString());
             course.setCapacity(entity.getProperty("Capacity").toString());
+
+            String key = KeyFactory.keyToString(courseKey);
+            boolean status = checkCourseStatus(key);
+            if (status) course.setStatus("open");
+            else course.setStatus("closed");
+
             loadedCourses.add(course);
         }
-        // Sort the loaded News by date
+        // Sort the loaded Article by date
         Collections.sort(loadedCourses, new Comparator<Course>() {
             @Override
             public int compare(Course o1, Course o2) {
@@ -168,6 +179,7 @@ public class CourseManager {
             txn.commit();
 
             String courseKey = KeyFactory.keyToString(course.getKey());
+            checkCourseStatus(courseKey);
             initCourse.setCourseKey(courseKey);
         } finally {
             if (txn.isActive()) {
@@ -199,6 +211,9 @@ public class CourseManager {
                 datastore.delete(KeyFactory.stringToKey(course.getCourseKey()));
                 datastore.put(updatedCourse);
                 txn.commit();
+
+                String key = KeyFactory.keyToString(updatedCourse.getKey());
+                checkCourseStatus(key);
             } catch (EntityNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -265,4 +280,38 @@ public class CourseManager {
         results.addAll(descriptionSearch);
         return results;
     }
+
+    /**
+     * Checks the course status and updates if the enroll date has passed
+     * @param courseKey
+     * @return true/false status
+     */
+    public boolean checkCourseStatus (String courseKey) {
+        try {
+            Key key = KeyFactory.stringToKey(courseKey);
+            Entity course = datastore.get(key);
+            String enrollDate = course.getProperty("EnrollDate").toString();
+            Date date = new Date();
+            Date date1 = helper.stringToDate(enrollDate);
+            if (date.after(date1) == true) {
+                Transaction txn = datastore.beginTransaction();
+                try {
+                    course.setProperty("Status", "closed");
+                    datastore.delete(key);
+                    datastore.put(course);
+                    txn.commit();
+                } finally {
+                    if (txn.isActive()) {
+                        txn.rollback();
+                    }
+                }
+                return false;
+            } else {
+                return true;
+            }
+        } catch (EntityNotFoundException ex) {
+            return false;
+        }
+    }
+
 }

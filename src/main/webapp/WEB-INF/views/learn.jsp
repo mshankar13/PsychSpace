@@ -57,7 +57,7 @@
                                     <div>
                                         <div class="center">
                                             <!-- Button for Course Learn -->
-                                            <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
+                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}/"><span>Learn</span></a>
                                         </div>
                                     </div>
                                 </div>

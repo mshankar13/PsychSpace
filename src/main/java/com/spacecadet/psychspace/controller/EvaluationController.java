@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to all visits to user evaluation pages.
+ * user cases: load evaluation, submit evaluation
  * Created by aliao on 4/26/2017.
  */
 @Controller
@@ -25,7 +27,7 @@ public class EvaluationController {
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String coursrKey){
         ModelAndView model = new ModelAndView();
-        model.setViewName("evaluation");
+        model.setViewName("learnEvaluation");
 
         return model;
     }
