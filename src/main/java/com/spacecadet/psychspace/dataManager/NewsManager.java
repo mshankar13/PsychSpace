@@ -158,11 +158,11 @@ public class NewsManager {
     }
 
     /**
-     * Gets the featured article from the list of loaded news
+     * Gets the featured article from the list of loaded articles
      * Returns latest article if there is no article within the week
      *
-     * @param allNews arraylist of all news objects
-     * @return singel featured news object
+     * @param allNews arraylist of all article objects
+     * @return single featured article object
      */
     public Article getFeatured(ArrayList<Article> allNews) {
         ArrayList<Article> potentialFeatured = new ArrayList<>();
