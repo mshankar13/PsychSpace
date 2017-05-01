@@ -31,10 +31,10 @@
         <div class="container-fluid">
         <h1>Add Article</h1>
         <form:form class="form-horizontal" method="post"
-                   modelAttribute="news" action="admin_addArticle">
+                   modelAttribute="article" action="admin_addArticle">
             <div class="form-group">
-                <label for="news-title">News Title</label>
-                <form:input type="text" class="form-control" id="news-title" path="title" placeholder="News Title" />
+                <label for="article-title">News Title</label>
+                <form:input type="text" class="form-control" id="article-title" path="title" placeholder="News Title" />
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="news-content">News Content</label>
-                <form:textarea class="form-control" id="news-content" rows="10" path="content" />
+                <label for="article-content">News Content</label>
+                <form:textarea class="form-control" id="article-content" rows="10" path="content" />
             </div>
             <form:hidden path="likesCount" value="0"/>
             <form:hidden path="newsKey" value="null"/>

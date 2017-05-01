@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * Controller for all visits to instructor survey pages.
+ * use cases: add/edit surveys from selected course
  * Created by aliao on 4/17/2017.
  */
 @Controller
@@ -58,7 +60,6 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/addSurvey", method = RequestMethod.POST)
     public String addSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String survey) {
-        // TODO: add function for parsing
         Survey survey1 = helperManager.surveyStringToSurvey(survey);
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);

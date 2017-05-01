@@ -1,113 +1,14 @@
-package com.spacecadet.psychspace.controller;
+package com.spacecadet.psychspace.testData;
 
-import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
-import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.utilities.News;
-import com.spacecadet.psychspace.utilities.User;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
 
 /**
- * Created by aliao on 3/20/2017.
+ * Dummy data for news
+ * Created by aliao on 4/28/2017.
  */
-@Controller
-public class NewsListController {
+public class NewsTest {
 
     private NewsManager newsManager = new NewsManager();
-    private UserManager userManager = new UserManager();
-    private HelperManager helper = new HelperManager();
-
-    /**
-     * all visit to news page
-     * @return news page
-     */
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public ModelAndView newList() {
-        newsManager = new NewsManager();
-        ModelAndView model = new ModelAndView();
-        model.setViewName("news");
-        ArrayList<News> newsList = newsManager.loadNews();
-        if(newsList.isEmpty()){
-            news_test();
-            newsList = newsManager.loadNews();
-        }
-        for(News news : newsList){
-            if(news.getTitle().length() >= 50){
-                news.setTitle(news.getTitle().substring(0, 50));
-            }
-            if(news.getContent().length() >= 100) {
-                news.setContent(news.getContent().substring(0, 100));
-            }
-        }
-        model.addObject("newsList", newsList);
-        News featured = newsManager.getFeatured(newsList);
-        featured.setContent(featured.getContent().substring(0, 100));
-        model.addObject("featuredNews", featured);
-
-        return model;
-    }
-
-    @RequestMapping(value = "/news/Search", method = RequestMethod.GET)
-    public ModelAndView newsSearch(@RequestParam(value = "search", required = false) String search){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("newsSearch");
-        model.addObject("newsList", newsManager.searchNews(newsManager.loadNews(), search));
-
-        return model;
-    }
-
-    /**
-     * login on news page
-     * @param user user logged on
-     * @return news page
-     */
-    @RequestMapping(value = "/news/login", method = RequestMethod.POST)
-    public String login(@RequestBody String user){
-        User user1 = (User)(helper.stringToJson(user, "User"));
-        user1 = userManager.emailRegistered(user1.getEmail());
-        if (user1 == null) {
-            user1 = userManager.addUser(user1, "User");
-        }
-        userManager.resetCurrentUser(user1);
-        return "redirect:/news";
-    }
-
-    /**
-     * logout on news page
-     * @param user user logged on
-     * @return news page
-     */
-    @RequestMapping(value = "/news/logout", method = RequestMethod.POST)
-    public String logout(@RequestBody String user){
-        userManager.resetCurrentUser(new User());
-        return "redirect:/news";
-    }
-
-    /**
-     * helper method for shortening the content to show in frontend
-     * @return list of news
-     */
-    private ArrayList<News> shortenNews(){
-        ArrayList<News> newsList = newsManager.loadNews();
-        if(newsList.isEmpty()){
-            news_test();
-            newsList = newsManager.loadNews();
-        }
-        for(News news : newsList){
-            if(news.getTitle().length() >= 50)
-                news.setTitle(news.getTitle().substring(0, 50));
-            if(news.getContent().length() >= 100)
-                news.setContent(news.getContent().substring(0, 100));
-        }
-        return newsList;
-    }
 
     /**
      * Provides dummy data for newsfeed.

@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <form:form method="get" action="admin_deleteArticle" modelAttribute="news">
+            <form:form method="get" action="admin_deleteArticle" modelAttribute="article">
                 <table id="delete-article-table" class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -52,19 +52,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${newsList}" var="news">
+                    <c:forEach items="${articleList}" var="article">
                         <tr>
-                            <form:hidden value="${news.newsKey}" path="newsKey"/>
-                            <form:hidden value="${news.title}" path="title"/>
-                            <form:hidden value="${news.date}" path="date"/>
-                            <form:hidden value="${news.content}" path="content"/>
-                            <form:hidden value="${news.author}" path="author"/>
-                            <form:hidden value="${news.likesCount}" path="likesCount"/>
+                            <form:hidden value="${article.newsKey}" path="newsKey"/>
+                            <form:hidden value="${article.title}" path="title"/>
+                            <form:hidden value="${article.date}" path="date"/>
+                            <form:hidden value="${article.content}" path="content"/>
+                            <form:hidden value="${article.author}" path="author"/>
+                            <form:hidden value="${article.likesCount}" path="likesCount"/>
                             <th>
-                                <input type="checkbox" id="${news.newsKey}"/>
+                                <input type="checkbox" id="${article.newsKey}"/>
                             </th>
-                            <td>${news.title}</td>
-                            <td>${news.date}</td>
+                            <td>${article.title}</td>
+                            <td>${article.date}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

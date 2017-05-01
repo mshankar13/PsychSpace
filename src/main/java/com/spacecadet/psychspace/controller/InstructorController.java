@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to instructor pages.
+ * use cases: load instructor courses
  * Created by aliao on 4/26/2017.
  */
 @Controller

@@ -144,7 +144,7 @@ public class CourseManager {
 
             loadedCourses.add(course);
         }
-        // Sort the loaded News by date
+        // Sort the loaded Article by date
         Collections.sort(loadedCourses, new Comparator<Course>() {
             @Override
             public int compare(Course o1, Course o2) {

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller for all visits to single course pages
+ * use case: load course detail, enroll/unenroll from course
  * Created by aliao on 4/5/2017.
  */
 @Controller

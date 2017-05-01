@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to instructor video pages.
+ * use cases: load/add/edit/delete video from selected course
  * Created by aliao on 4/21/2017.
  */
 @Controller

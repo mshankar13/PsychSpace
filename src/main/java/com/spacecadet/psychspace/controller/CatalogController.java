@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 /**
+ * Controller for all visits to catalogue pages
+ * use cases: load all courses, search for courses
  * Created by aliao on 3/27/2017.
  */
 @Controller

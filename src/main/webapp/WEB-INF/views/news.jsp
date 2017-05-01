@@ -35,7 +35,7 @@
                 <div class="center page-banner">
                     <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
                     <h1 class="absolute-text">News</h1>
-                    <form class="ps-search" action="news/Search" method="get">
+                    <form class="ps-search" action="article/Search" method="get">
                         <input type="text" name="search" placeholder="Search...">
                         <input type="submit" value="Search Article">
                     </form>
@@ -83,7 +83,7 @@
 
                         <div class="row ps-text-content">
                             <!-- start course -->
-                            <c:forEach items="${newsList}" var="newsItem">
+                            <c:forEach items="${articleList}" var="newsItem">
                                 <div class="col-lg-4">
                                     <div class="ps-well">
                                         <p><span class="glyphicon glyphicon-time"></span> Posted ${newsItem.date}</p>

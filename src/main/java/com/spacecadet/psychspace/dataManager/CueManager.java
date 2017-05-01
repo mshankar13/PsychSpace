@@ -10,13 +10,14 @@ public class CueManager {
 
     private DatastoreService datastore;
 
+    /** constructor */
     public CueManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
     
     /**
      * adds a cue to datastore
-     * @param cue
+     * @param cue cue trigger for a specific habit, object with properties
      */
     public void addCue(Cue cue) {
         Transaction txn = datastore.beginTransaction();
@@ -40,6 +41,10 @@ public class CueManager {
         }
     }
 
+    /**
+     * updates cue in datastore
+     * @param cue cue trigger for a habit, object with properties
+     */
     public void editCue(Cue cue) {
         Transaction txn = datastore.beginTransaction();
         try {
@@ -68,7 +73,7 @@ public class CueManager {
 
     /**
      * Deletes cue from datastore
-     * @param cueKey
+     * @param cueKey cue key
      */
     public void deleteCue(String cueKey) {
         Transaction txn = datastore.beginTransaction();

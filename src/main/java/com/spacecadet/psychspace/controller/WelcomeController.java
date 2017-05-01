@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spacecadet.psychspace.dataManager.HelperManager;
 
 /**
+ * Controller for all visits to welcome page
  * Created by aliao on 3/20/2017.
  */
 @Controller
