@@ -88,19 +88,23 @@
                     </div>
                     <div id="survey-q-group">
                         <div class="question-group">
+                            <%--Question--%>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Question 1</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input class="form-control input-question"/>
-                                </div>
-                                <label class="col-sm-1 control-label">Type</label>
-                                <div class="col-md-2">
-                                    <input class="form-control input-type"/>
                                 </div>
                                 <div class="col-md-1">
                                     <button type="button" class="btn btn-default btn-sm" id="btn-survey-add-question">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
+                                </div>
+                            </div>
+                            <%--Question Type--%>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">Type</label>
+                                <div class="col-md-2">
+                                    <input class="form-control input-type"/>
                                 </div>
                             </div>
                             <div class="form-group answer-row">
