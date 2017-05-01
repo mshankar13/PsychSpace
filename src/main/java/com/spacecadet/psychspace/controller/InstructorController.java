@@ -30,7 +30,7 @@ public class InstructorController {
      */
     @RequestMapping(value = "/instructor", method = RequestMethod.GET)
     public ModelAndView instructor(){
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructor");
         model.addObject("courses", courses);

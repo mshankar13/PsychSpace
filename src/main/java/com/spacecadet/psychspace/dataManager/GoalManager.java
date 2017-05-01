@@ -16,6 +16,34 @@ public class GoalManager {
     }
 
     /**
+     * loads a single goal with matching user and course
+     * @param courseKey key in course entity
+     * @param userKey key in user entity
+     * @return goal utility object
+     */
+    public Goal loadSingleGoal(String courseKey, String userKey){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query enrollQuery = new Query("Goal").setFilter(userCourseFilter);
+        Entity foundGoal = datastore.prepare(enrollQuery).asSingleEntity();
+        if (foundGoal == null) {
+            return null;
+        }
+        Goal goal = new Goal();
+        goal.setGoalName(foundGoal.getProperty("GoalName").toString());
+        goal.setUserKey(foundGoal.getProperty("UserKay").toString());
+        goal.setUsername(foundGoal.getProperty("UserName").toString());
+        goal.setCourseKey(foundGoal.getProperty("CourseKey").toString());
+        goal.setValue(foundGoal.getProperty("Value").toString());
+        goal.setUnit(foundGoal.getProperty("Unit").toString());
+        goal.setGoalKey(KeyFactory.keyToString(foundGoal.getKey()));
+        return goal;
+    }
+
+    /**
      * adds a goal to the datastore
      * @param goal goal object with properties
      */
@@ -28,6 +56,7 @@ public class GoalManager {
             goal1.setProperty("GoalName", goal.getGoalName());
             goal1.setProperty("Username", goal.getUsername());
             goal1.setProperty("UserKey", goal.getUserKey());
+            goal1.setProperty("CourseKey", goal.getCourseKey());
             goal1.setProperty("Value", goal.getValue());
             goal1.setProperty("Unit", goal.getUnit());
             datastore.put(txn, goal1);
@@ -53,6 +82,7 @@ public class GoalManager {
                 updatedGoal.setProperty("GoalName", goal.getGoalName());
                 updatedGoal.setProperty("Username", goal.getUsername());
                 updatedGoal.setProperty("UserKey", goal.getUserKey());
+                updatedGoal.setProperty("CourseKey", goal.getCourseKey());
                 updatedGoal.setProperty("Value", goal.getValue());
                 updatedGoal.setProperty("Unit", goal.getUnit());
 
@@ -68,21 +98,4 @@ public class GoalManager {
             }
         }
     }
-
-    /**
-     * deletes a goal from datastore
-     * @param goalKey goal key
-     */
-    public void deleteGoal(String goalKey) {
-        Transaction txn = datastore.beginTransaction();
-        try {
-            datastore.delete(KeyFactory.stringToKey(goalKey));
-            txn.commit();
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
-        }
-    }
-
 }

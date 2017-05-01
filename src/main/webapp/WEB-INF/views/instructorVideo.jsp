@@ -64,7 +64,7 @@
                     <li><a href="#" id="course-a">Course</a></li>
                     <li><a href="#" id="survey-a">Survey</a></li>
                     <li class="active"><a href="#" id="videos-a">Videos</a></li>
-                    <li><a href="#" id="evaluation-a">Evaluations</a></li>
+                    <li><a href="#" id="evaluation-a">Due Dates</a></li>
                 </ul>
             </div>
 

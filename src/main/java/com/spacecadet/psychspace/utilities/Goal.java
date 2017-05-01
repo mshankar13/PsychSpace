@@ -47,4 +47,9 @@ public class Goal {
      * unit of the value (chapter, etc.)
      */
     private String unit;
+
+    /**
+     * key in course entity created by datastore
+     */
+    private String courseKey;
 }

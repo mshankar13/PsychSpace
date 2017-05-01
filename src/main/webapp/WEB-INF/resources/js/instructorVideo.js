@@ -9,7 +9,7 @@ $(document).ready(function() {
     $("#course-a").attr("href", courseBaseUrl);
     $("#survey-a").attr("href", courseBaseUrl + "/survey");
     $("#videos-a").attr("href", url);
-    $("#evaluation-a").attr("href", courseBaseUrl + "/evaluations");
+    $("#evaluation-a").attr("href", courseBaseUrl + "/dueDates");
 
     $("#btn-add-course").on("click", addCourseModalShow);
     $("#btn-add-video").on("click", addVideoModalShow);
