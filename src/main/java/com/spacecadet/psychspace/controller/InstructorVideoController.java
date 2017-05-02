@@ -63,7 +63,7 @@ public class InstructorVideoController {
         model.addObject("courses", courses);
         model.addObject("course", new Course());
 
-        return "redirect:/instructor/{courseKey}/videos";
+        return "redirect:/instructor/"+courseKey+"/videos";
     }
 
     /**
@@ -99,7 +99,7 @@ public class InstructorVideoController {
         model.addObject("videos", videoManager.loadVideos());
         model.addObject("course", new Course());
 
-        return "redirect:/instructor/{courseKey}/videos";
+        return "redirect:/instructor/"+courseKey+"/videos";
     }
 
     /**
