@@ -1,15 +1,13 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.EvaluationManager;
 import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.Goal;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -24,6 +22,7 @@ public class EvaluationController {
 
     private UserManager userManager = new UserManager();
     private GoalManager goalManager = new GoalManager();
+    private EvaluationManager evaluationManager = new EvaluationManager();
 
     /**
      * user evaluation page
@@ -33,13 +32,11 @@ public class EvaluationController {
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
         Goal goal = goalManager.loadSingleGoal(courseKey, WelcomeController.currUser.getUserKey());
-        Date today = new Date();
         ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
         Evaluation evaluation = new Evaluation();
-        evaluation.setDate(today.toString());
         model.addObject("goal", goal);
-
+        model.addObject("evaluation", evaluation);
 
         return model;
     }
@@ -50,10 +47,14 @@ public class EvaluationController {
      * @return evaluation page
      */
     @RequestMapping(value = "learn/{courseKey}/evaluation/submit", method = RequestMethod.POST)
-    public ModelAndView submitEvaluation(@PathVariable("courseKey") String courseKey){
+    public ModelAndView submitEvaluation(@ModelAttribute("evaluation") Evaluation evaluation, @PathVariable("courseKey") String courseKey){
+        Date today = new Date();
+        evaluation.setAuthorKey(WelcomeController.currUser.getUserKey());
+        evaluation.setAuthor(WelcomeController.currUser.getFirstName() + " " + WelcomeController.currUser.getLastName());
+        evaluation.setDate(today.toString());
+        evaluationManager.addEvaluation(evaluation);
         ModelAndView model = new ModelAndView();
         model.setViewName("evaluation");
-        // TODO: make sure front end shows no more evaluation for the day
         return model;
     }
 
