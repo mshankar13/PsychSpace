@@ -24,11 +24,12 @@ public class EvaluationManager {
     }
 
     /**
-     * checks whether an user already submitted an evalutaion for the day
+     * load user submitted evalutaion for the day
      * @param userKey user key in datastore
-     * @return true if user already submit an evaluation today
+     * @return evaluation entity
      */
-    public boolean hasEvaluation(String userKey){
+    public Evaluation loadTodaysEvaluation(String userKey){
+        Evaluation evaluation = new Evaluation();
         Date today = new Date();
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("AuthorKey", Query.FilterOperator.EQUAL, userKey);
@@ -38,10 +39,18 @@ public class EvaluationManager {
         for(Entity entity : userEvaluations){
             Date date = helper.stringToDate(entity.getProperty("Date").toString());
             if(date.equals(today)){
-                return true;
+                evaluation.setAuthorKey(entity.getProperty("AuthorKey").toString());
+                evaluation.setAuthor(entity.getProperty("Author").toString());
+                evaluation.setCourseKey(entity.getProperty("CourseKey").toString());
+                evaluation.setContent(entity.getProperty("Content").toString());
+                evaluation.setDate(entity.getProperty("Date").toString());
+                evaluation.setRawScore(entity.getProperty("RawScore").toString());
+                evaluation.setScore(entity.getProperty("Score").toString());
+                evaluation.setEvaluationKey(KeyFactory.keyToString(entity.getKey()));
+                return evaluation;
             }
         }
-        return false;
+        return null;
     }
 
     /**
