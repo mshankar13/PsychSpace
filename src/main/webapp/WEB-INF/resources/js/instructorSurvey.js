@@ -1,4 +1,3 @@
-
 var questionCounter = 2;
 var hasSurvey = false;
 $(document).ready(function(){
@@ -25,14 +24,15 @@ $(document).ready(function(){
         hasSurvey = true;
     }
 
-
+    // Enable onclick functions
     $("#btn-add-course").on("click", addCourseModalShow);
     $("#btn-survey-add-question").on("click", addQuestion);
     $("#survey-q-group").on("click", ".btn-survey-remove-question", deleteQuestion);
     $("#survey-q-group").on("click", ".btn-survey-add-answer", addAnswer);
     $("#survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
-    $("#survey-due-date").datepicker();
     $("#survey-submit").on("click", surveySubmit);
+
+    $("#survey-due-date").datepicker();
 });
 
 
@@ -103,11 +103,11 @@ function loadSurvey() {
         $inputType.val(qType);
 
         // set answer inputs
-        var aTotal = question["AnswerTotal"];
         var $aGroups = $qGroup.find(".answer-row");
         var aGroupLen = $aGroups.length;
         var aCounter = 0;
         var answers = question["Answers"];
+        var aTotal = question["AnswerTotal"];
         while (aCounter < aTotal) {
             var aAnswer = answers[aCounter];
             var $aRow;
@@ -158,23 +158,25 @@ function addQuestion() {
                     <label class="col-sm-2 control-label">Question \
                         <span class="question-number"></span> \
                     </label> \
-                    <div class="col-md-6"> \
+                    <div class="col-md-8"> \
                         <input class="form-control input-question"/>\
                     </div>\
-                    <label class="col-sm-1 control-label">Type</label> \
-                    <div class="col-md-2"> \
-                        <input class="form-control input-type"/> \
-                    </div> \
                     <div class="col-md-1">\
                         <button type="button" class="btn btn-default btn-sm btn-survey-remove-question">\
                             <span class="glyphicon glyphicon-minus"></span>\
                         </button>\
                     </div>\
                 </div>\
+                <div class="form-group">\
+                    <label class="col-sm-1 control-label">Type</label> \
+                    <div class="col-md-2"> \
+                        <input class="form-control input-type"/> \
+                    </div> \
+                </div>\
                 <div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
                     <div class="col-md-3">\
-                        <input class="input-answer"/>\
+                        <input type="text" class="input-answer"/>\
                     </div>\
                     <label class="col-sm-1 control-label">Score</label>\
                     <div class="col-md-3">\
@@ -198,10 +200,10 @@ function addAnswer($qGroup) {
     var div = '<div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
                     <div class="col-md-3">\
-                        <input class="input-answer"/>\
+                        <input type="text" class="input-answer"/>\
                     </div>\
                     <label class="col-sm-1 control-label">Score</label>\
-                    <div class="col-md-3">\
+                    <div class="col-md-2">\
                         <input type="number" class="input-score"/>\
                     </div>\
                     <div class="col-md-2">\

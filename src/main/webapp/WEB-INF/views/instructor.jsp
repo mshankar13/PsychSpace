@@ -33,8 +33,10 @@
 <div class="wrapper">
     <div class="row">
         <div class="col-md-3">
+            <%--Side bar--%>
             <div class="list-group">
                 <a href="${contextPath}/instructor" class="list-group-item active">Instructor Home</a>
+                <a href="${contextPath}/instructor/students" class="list-group-item">Student Activities</a>
             </div>
         </div>
         <div class="col-md-9">
@@ -42,8 +44,9 @@
                 <div class="row ps-feature">
                     <div class="ps-feature-info row">
                         <div class="col-md-9">
-                        <h1>Courses Created By Me<hr></h1>
+                            <h1>Courses Created By Me<hr></h1>
                         </div>
+                        <%--Create course button--%>
                         <div class="col-md-3 right">
                             <button class="instructor-btn-primary" id="btn-add-course">Create Course</button>
                         </div>
@@ -146,6 +149,7 @@
                 </form:form>
             </div>
         </div>
+        <%--End of add course modal--%>
 
     </div>
 </div>

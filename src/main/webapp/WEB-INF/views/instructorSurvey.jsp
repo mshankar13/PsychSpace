@@ -111,13 +111,14 @@
                                 <%--Answer--%>
                                 <label class="col-sm-2 control-label">Answer</label>
                                 <div class="col-md-3">
-                                    <input class="input-answer"/>
+                                    <input type="text" class="input-answer"/>
                                 </div>
                                 <%--Score--%>
                                 <label class="col-sm-1 control-label">Score</label>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <input type="number" class="input-score"/>
                                 </div>
+                                 <%--Add Answer Button--%>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -132,13 +133,8 @@
                                     <span class="question-number">2</span>
                                 </label>
                                 <%--input question--%>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input class="form-control input-question"/>
-                                </div>
-                                <%--input type--%>
-                                <label class="col-sm-1 control-label">Type</label>
-                                <div class="col-md-2">
-                                    <input class="form-control input-type"/>
                                 </div>
                                 <%--remove button--%>
                                 <div class="col-md-1">
@@ -147,15 +143,26 @@
                                     </button>
                                 </div>
                             </div>
+                            <%--Question Type--%>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">Type</label>
+                                <div class="col-md-2">
+                                    <input class="form-control input-type"/>
+                                </div>
+                            </div>
+                            <%--Answer--%>
                             <div class="form-group answer-row">
+                                <%--Answer--%>
                                 <label class="col-sm-2 control-label">Answer</label>
                                 <div class="col-md-3">
-                                    <input class="input-answer"/>
+                                    <input type="text" class="input-answer">
                                 </div>
+                                <%--Score--%>
                                 <label class="col-sm-1 control-label">Score</label>
-                                <div class="col-md-3">
-                                    <input type="number" class="input-score"/>
+                                <div class="col-md-2">
+                                    <input type="number" class="input-score">
                                 </div>
+                                <%--Add Answer Button--%>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-default btn-sm btn-survey-add-answer">
                                         <span class="glyphicon glyphicon-plus"></span>

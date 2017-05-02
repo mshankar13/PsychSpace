@@ -141,12 +141,14 @@ public class HelperManager {
                 answers.add(Integer.toString(index), gson.toJsonTree(answer));
                 index++;
             }
+            question1.add("AnswerTotal", gson.toJsonTree(Integer.toString(index)));
             question1.add("QuestionProperties", gson.toJsonTree(question));
             question1.add("Answers", gson.toJsonTree(answers));
             questions.add(Integer.toString(i), gson.toJsonTree(question1));
             i++;
         }
         survey1.add("Questions", gson.toJsonTree(questions));
+        survey1.add("QuestionTotal", gson.toJsonTree(Integer.toString(i)));
 //            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
 
         System.out.println(res.toString());
