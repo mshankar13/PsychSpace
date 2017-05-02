@@ -56,54 +56,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->
-                    <!-- Start -->
-                    <div class="ps-well">
-                        <h2>Daily Evaluation for [Date]<hr></h2>
-                        <br>
-                        <br>
-                        <!-- Form Start -->
-                        <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>How many [unit] did you complete today?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!--
-                                                        <div class="ps-range-slider-body">
-                                                            <input type="range" min="0" max=$(val) value=$(double-val) />
-                                                        </div>
-                    -->
-                                        <span><input class="ps-number-input" type="number" placeholder="Number">
-                                    [unit] out of [value] [unit]</span>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <!-- Question Start -->
-                            <div class="ps-question ps-optional-response">
-                                <!-- Question Text -->
-                                <h3>What are your feelings?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <textarea class="ps-text-area" rows="4" placeholder="Feelings..."></textarea>
-                                    </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <div class="center">
-                                <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey"><span>Submit Responses</span></button>
-                            </div>
-                        </form>
-                        <!-- Form End -->
-                    </div>
-                    <!-- End -->
-
+                    <%@include file="learn-goal.html" %>
                 </div>
             </div>
             <!-- End course -->

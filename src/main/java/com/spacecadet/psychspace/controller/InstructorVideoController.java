@@ -31,7 +31,7 @@ public class InstructorVideoController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos", method = RequestMethod.GET)
     public ModelAndView loadVideo(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ArrayList<Video> videos = videoManager.loadVideoForCourse(courseKey);
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");

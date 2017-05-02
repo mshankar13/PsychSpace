@@ -1,6 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.Evaluation;
+import com.spacecadet.psychspace.utilities.Goal;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
 
 /**
  * Controller to all visits to user evaluation pages.
@@ -18,16 +23,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class EvaluationController {
 
     private UserManager userManager = new UserManager();
+    private GoalManager goalManager = new GoalManager();
 
     /**
      * user evaluation page
-     * @param coursrKey course key
+     * @param courseKey course key
      * @return evaluation page
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
-    public ModelAndView loadEvaluation(@PathVariable("courseKey") String coursrKey){
+    public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
+        Goal goal = goalManager.loadSingleGoal(courseKey, WelcomeController.currUser.getUserKey());
+        Date today = new Date();
         ModelAndView model = new ModelAndView();
-        model.setViewName("evaluation");
+        model.setViewName("learnEvaluation");
+        Evaluation evaluation = new Evaluation();
+        evaluation.setDate(today.toString());
+        model.addObject("goal", goal);
+
 
         return model;
     }

@@ -12,7 +12,7 @@ $(document).ready(function(){
     $("#course-a").attr("href", url );
     $("#survey-a").attr("href", url + "/survey");
     $("#videos-a").attr("href", url + "/videos");
-    $("#evaluation-a").attr("href", url + "/evaluations");
+    $("#evaluation-a").attr("href", url + "/dueDates");
 
     // enable datepicker function
     $("#add-course-enroll-date").datepicker();

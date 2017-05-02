@@ -28,11 +28,6 @@ public class Evaluation {
     private String author;
 
     /**
-     * title of the evaluation
-     */
-    private String title;
-
-    /**
      * content of the evaluation
      */
     private String content;
@@ -54,7 +49,13 @@ public class Evaluation {
 
     /**
      * score of the evaluation
+     * what the user did divide by the goal
      */
     private String score;
+
+    /**
+     * score amount of user input
+     */
+    private String rawScore;
 }
 
