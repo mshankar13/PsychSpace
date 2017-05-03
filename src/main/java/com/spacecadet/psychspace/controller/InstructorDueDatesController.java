@@ -8,10 +8,7 @@ import com.spacecadet.psychspace.utilities.DueDates;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -30,21 +27,53 @@ public class InstructorDueDatesController {
 
 
     /**
-     * instructor page (get) - evaluations
+     * instructor page (get) - due dates
      *
-     * @return instructor load evaluation page
+     * @return instructor load dueDates page
      */
     @RequestMapping(value = "/instructor/{courseKey}/dueDates", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
-        model.setViewName("instructorEvaluation");
+        model.setViewName("instructorDueDates");
         model.addObject("courses", courses);
         model.addObject("course", new Course());
+        model.addObject("courseKey", courseKey);
+        model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
         DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
         if(dueDates == null){
             dueDates = new DueDates();
         }
+        model.addObject("dueDates", dueDates);
+
+        return model;
+    }
+
+    /**
+     * instructor page (get) - due dates
+     *
+     * @return instructor load dueDates page
+     */
+    @RequestMapping(value = "/instructor/{courseKey}/dueDates", method = RequestMethod.POST)
+    public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey,
+                                       @ModelAttribute("dueDates") DueDates dueDates)
+    {
+        boolean hasHabit = dueDatesManager.loadDueDatesForCourse(courseKey) != null ? true : false;
+        if (hasHabit && dueDates != null) {
+            dueDates.setCourseKey(courseKey);
+            dueDatesManager.editDueDates(dueDates);
+        }
+        else if (!hasHabit && dueDates != null){
+            dueDates.setCourseKey(courseKey);
+            dueDatesManager.addDueDate(dueDates);
+        }
+
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
+        ModelAndView model = new ModelAndView();
+        model.setViewName("instructorDueDates");
+        model.addObject("courses", courses);
+        model.addObject("course", new Course());
+        model.addObject("courseKey", courseKey);
         model.addObject("dueDates", dueDates);
 
         return model;
@@ -56,7 +85,7 @@ public class InstructorDueDatesController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/{courseKey}/evaluations/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/instructor/{courseKey}/dueDates/logout", method = RequestMethod.POST)
     public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";

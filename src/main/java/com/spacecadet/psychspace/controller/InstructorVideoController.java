@@ -40,6 +40,7 @@ public class InstructorVideoController {
         model.addObject("video", new Video());
         model.addObject("courseKey", courseKey);
         model.addObject("course", new Course());
+        model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
 
         return model;
     }
@@ -56,7 +57,7 @@ public class InstructorVideoController {
         String url = video.getUrl().replace("watch?v=", "embed/");
         video.setUrl(url);
         videoManager.addVideo(video);
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
         model.addObject("video", new Video());
@@ -73,7 +74,7 @@ public class InstructorVideoController {
     @RequestMapping(value = "/instructor/{courseKey}/videos/edit", method = RequestMethod.POST)
     public String editVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.editVideo(video);
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
         model.addObject("video", new Video());
@@ -91,7 +92,7 @@ public class InstructorVideoController {
     @RequestMapping(value = "/instructor/{courseKey}/videos/delete", method = RequestMethod.POST)
     public String deleteVideo(@PathVariable("courseKey") String courseKey, @ModelAttribute("video") Video video) {
         videoManager.deleteVideo(video.getVideoKey());
-        ArrayList<Course> courses = courseManager.loadAllOpenCourses();
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
         model.addObject("video", new Video());

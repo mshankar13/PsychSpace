@@ -68,27 +68,30 @@
             </div>
 
             <div>
-                <form class="form-horizontal">
+                <form:form class="form-horizontal" method="post"
+                           modelAttribute="dueDates" action="/instructor/${courseKey}/dueDates">
+                    <form:hidden path="dueDatesKey" value="${dueDates.dueDatesKey}" />
+                    <form:hidden path="courseKey" value="${dueDates.courseKey}" />
                     <div class="form-group">
                         <label for="goal-due-date" class="col-sm-2 control-label">Goal Due Date</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="goal-due-date">
+                        <div class="col-md-2">
+                            <form:input class="form-control" path="goalDueDate" value="${dueDates.goalDueDate}" id="goal-due-date" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="cues-due-date" class="col-sm-2 control-label">Cues Due Date</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="cues-due-date">
+                        <div class="col-md-2">
+                            <form:input class="form-control" path="cuesDueDate" value="${dueDates.cuesDueDate}" id="cues-due-date" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="habit-due-date" class="col-sm-2 control-label">Habit Due Date</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="habit-due-date">
+                        <div class="col-md-2">
+                            <form:input class="form-control" path="habitDueDate" value="${dueDates.habitDueDate}" id="habit-due-date" />
                         </div>
                     </div>
                     <button type="submit" class="instructor-btn-primary" id="evaluations-dates-submit">Save</button>
-                </form>
+                </form:form>
 
             </div>
 
@@ -172,6 +175,6 @@
 </body>
 
 <script src="${contextPath}/resources/js/navbar.js"></script>
-<script src="${contextPath}/resources/js/instructorEvaluation.js"></script>
+<script src="${contextPath}/resources/js/instructorDueDates.js"></script>
 </html>
 
