@@ -24,7 +24,7 @@ public class DueDatesManager {
     public DueDates loadDueDatesForCourse(String courseKey){
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-        Query dueDatesQuery = new Query("DueDates").setFilter(propertyFilter1);
+        Query dueDatesQuery = new Query("DueDate").setFilter(propertyFilter1);
         Entity foundDueDates = datastore.prepare(dueDatesQuery).asSingleEntity();
         if(foundDueDates == null){
             return null;

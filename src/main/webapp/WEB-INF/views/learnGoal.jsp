@@ -75,7 +75,7 @@
                                     <hr>
                                     <input type="hidden" value="${goal}" id="goal">
                                     <form:form class="form-horizontal"  method="post"
-                                               modelAttribute="goal" action="/learn/${courseKey}/goal/submit">
+                                               modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
                                         <div class="form-group ps-well">
                                             <span class="col-md-4">By the end of the course, I want to</span>
                                             <form:input class="col-md-2" type="text" path="goalName" placeholder="Action" id="action" />
