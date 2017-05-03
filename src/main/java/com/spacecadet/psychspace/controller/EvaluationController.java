@@ -31,7 +31,7 @@ public class EvaluationController {
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
-        Goal goal = goalManager.loadSingleGoal(courseKey, WelcomeController.currUser.getUserKey());
+        Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
         Evaluation evaluation = new Evaluation();
