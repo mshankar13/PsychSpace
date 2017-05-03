@@ -172,20 +172,20 @@ h3 {
     color: white;
 }
 
-.ps-search input[type=submit]{
+.ps-search input[type=submit] {
     background-color: var(--baby-powder-color);
     color: var(--space-cadet-color);
     padding: 3px 20px;
     border: 2px solid #ccc;
     border-radius: var(--border-radius-1);
     font-size: 18px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
-.ps-search input[type=submit]:hover{
+
+.ps-search input[type=submit]:hover {
     color: var(--baby-powder-color);
     background-color: var(--eucalyptus-color);
 }
-
 
 
 /*----------- MODAL ---------------*/
@@ -198,9 +198,7 @@ h3 {
     color: var(--dogwood-color);
 }
 
-.ps-modal-dialog {
-    /*height: 40vh;*/
-}
+.ps-modal-dialog {}
 
 .ps-modal-header {
     padding: 2em 2em 0 2em;
@@ -209,10 +207,16 @@ h3 {
 .ps-modal-body {
     padding: 2em;
     margin: 2em;
+    max-height: 70%;
+    overflow-y: auto;
 }
 
 .ps-modal-footer {
     margin: 2em;
+}
+
+.ps-modal-content {
+    height: 80vh;
 }
 
 

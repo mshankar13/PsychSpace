@@ -24,10 +24,15 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
+    <script src="${contextPath}/resources/js/cues.js"></script>
+    <script src="${contextPath}/resources/js/raphael.min.js"></script>
+    <script src="${contextPath}/resources/js/raphael.icons.min.js"></script>
+    <script src="${contextPath}/resources/js/wheelnav.min.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
+    <script src="${contextPath}/resources/js/habit.js"></script>
 </head>
 
 <body>
@@ -56,7 +61,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->
-                    <%@include file="learn-cue.html" %>
+                    <%@include file="learn-cues.html" %>
                 </div>
             </div>
             <!-- End course -->
