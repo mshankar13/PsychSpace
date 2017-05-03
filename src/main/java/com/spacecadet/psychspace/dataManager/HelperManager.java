@@ -155,4 +155,21 @@ public class HelperManager {
         return survey1.toString();
     }
 
+    /**
+     * helper method to shorten the course title and descriptions
+     * @param courses list of courses
+     * @return list of courses with shortened content
+     */
+    public ArrayList<Course> shortenCourseList(ArrayList<Course> courses){
+        for(Course c : courses){
+            if(c.getTitle().length() >= 50){
+                c.setTitle(c.getTitle().substring(0, 50));
+            }
+            if(c.getDescription().length() >= 100){
+                c.setDescription(c.getDescription().substring(0, 100));
+            }
+        }
+        return courses;
+    }
+
 }

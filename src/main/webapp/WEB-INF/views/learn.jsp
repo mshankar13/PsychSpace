@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="row ps-text-content">
-                            <c:forEach items="${courses}" var="course">
+                            <c:forEach items="${myCurrCourses}" var="course">
                             <!-- Start Course -->
                             <div class="col-lg-4">
                                 <div class="ps-well">
@@ -57,7 +57,7 @@
                                     <div>
                                         <div class="center">
                                             <!-- Button for Course Learn -->
-                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}/"><span>Learn</span></a>
+                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -76,24 +76,26 @@
                             <br>
                         </div>
                         <div class="row ps-text-content">
+                            <c:forEach items="${myPastCourses}" var="course">
                             <!-- Start Course -->
                             <div class="col-lg-4">
                                 <div class="ps-well">
                                     <!-- Course Title -->
-                                    <h2 class="ps-feature-info-header"> Course Title<hr> </h2>
+                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
                                     <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
                                     <h3 class="ps-feature-info-header"> Course Description <hr></h3>
                                     <!-- Course Description -->
-                                    <p class="ps-feature-preview">Course Description</p>
+                                    <p class="ps-feature-preview">${course.description}</p>
                                     <div>
                                         <div class="center">
                                             <!-- Button for Course Learn -->
-                                            <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
+                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- End course -->
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

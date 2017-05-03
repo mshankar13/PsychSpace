@@ -333,10 +333,27 @@ public class CourseManager {
     }
 
     /**
+     * get the current courses of a given user
+     * @param userKey user key
+     * @return currCourses of the user
+     */
+    public ArrayList<Course> getCurrCourses(String userKey) {
+        ArrayList<Course> currCourses = new ArrayList<>();
+        ArrayList<Course> courses = loadUserCourses(userKey);
+        Date date = new Date();
+        for (Course course : courses) {
+            if (date.before(helper.stringToDate(course.getEndDate())) == true) {
+                currCourses.add(course);
+            }
+        }
+        return currCourses;
+    }
+
+    /**
      * gets 3 popular courses currently open
      * @return list of the popular courses
      */
-    public ArrayList<Course> getPopularCourse() {
+    public ArrayList<Course> getPopularCourses() {
         ArrayList<Course> popularCourses = new ArrayList<>();
         ArrayList<Course> openCourses = loadAllCourses();
         HashMap<Integer, Double> scores = new HashMap<>();

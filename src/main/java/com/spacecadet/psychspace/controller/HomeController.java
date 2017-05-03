@@ -1,12 +1,16 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
+import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.NewsManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -20,6 +24,7 @@ public class HomeController {
     private UserManager userManager = new UserManager();
     private NewsManager newsManager = new NewsManager();
     private CourseManager courseManager = new CourseManager();
+    private HelperManager helper = new HelperManager();
 
     /**
      * all visit to home page
@@ -30,7 +35,10 @@ public class HomeController {
         ModelAndView model = new ModelAndView();
         model.setViewName("home");
         model.addObject("featuredNews", newsManager.getFeatured(newsManager.loadNews()));
-
+        model.addObject("myCurrCourses", helper.shortenCourseList(
+                courseManager.getCurrCourses(WelcomeController.currUser.getUserKey())));
+        model.addObject("popularCourses", helper.shortenCourseList(
+                courseManager.getPopularCourses()));
         return model;
     }
 
@@ -44,4 +52,6 @@ public class HomeController {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
+
+
 }

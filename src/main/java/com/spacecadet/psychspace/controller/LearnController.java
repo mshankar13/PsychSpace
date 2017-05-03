@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
+import com.spacecadet.psychspace.dataManager.HelperManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
@@ -23,6 +24,7 @@ public class LearnController {
 
     private UserManager  userManager = new UserManager();
     private CourseManager courseManager = new CourseManager();
+    private HelperManager helper = new HelperManager();
 
     /**
      * all visit to learn page
@@ -31,18 +33,12 @@ public class LearnController {
     @RequestMapping(value = "/learn", method = RequestMethod.GET)
     public ModelAndView learn() {
         ArrayList<Course> courses = courseManager.loadUserCourses(WelcomeController.currUser.getUserKey());
-        for(Course c : courses){
-            if(c.getTitle().length() >= 50){
-                c.setTitle(c.getTitle().substring(0, 50));
-            }
-            if(c.getDescription().length() >= 100){
-                c.setDescription(c.getDescription().substring(0, 100));
-            }
-        }
         ModelAndView model = new ModelAndView();
         model.setViewName("learn");
-        model.addObject("courses", courses);
-
+        model.addObject("myCurrCourses", helper.shortenCourseList(
+                courseManager.getCurrCourses(WelcomeController.currUser.getUserKey())));
+        model.addObject("myPastCourses", helper.shortenCourseList(
+                courseManager.getPastCourses(WelcomeController.currUser.getUserKey())));
         return model;
     }
 
