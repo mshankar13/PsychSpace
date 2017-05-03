@@ -292,9 +292,9 @@ public class CourseManager {
             Key key = KeyFactory.stringToKey(courseKey);
             Entity course = datastore.get(key);
             String enrollDate = course.getProperty("EnrollDate").toString();
-            Date date = new Date();
-            Date date1 = helper.stringToDate(enrollDate);
-            if (date.after(date1) == true) {
+            Date today = new Date();
+            Date enrollDay = helper.stringToDate(enrollDate);
+            if (today.after(enrollDay)) {
                 Transaction txn = datastore.beginTransaction();
                 try {
                     course.setProperty("Status", "closed");
