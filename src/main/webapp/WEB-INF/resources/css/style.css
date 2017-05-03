@@ -54,13 +54,18 @@ h4 {
 
 p,
 label,
-input {
+input,
+span {
     font-family: "Open Sans";
 }
 
 p {
     font-size: 13px;
     color: dimgrey;
+}
+
+span {
+    font-size: 12pt;
 }
 
 .col-lg-4 h2.ps-feature-info-header {
@@ -78,6 +83,30 @@ p {
 
 
 /*---------------- BUTTONS ----------------*/
+.ps-btn {
+    background-color: transparent;
+    border: 1px solid var(--space-cadet-color);
+    color: var(--space-cadet-color);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.ps-btn:hover {
+    border: 1px solid var(--tea-rose-color);
+    color: var(--tea-rose-color);
+}
+
+.ps-btn-primary {
+    background-color: var(--yellow-color);
+    border: 1px solid var(--yellow-color);
+    color: var(--space-cadet-color);
+    border-radius: 5px;
+}
+
+.ps-btn-primary:hover {
+    background-color: var(--tea-rose-color);
+    border: 1px solid var(--tea-rose-color);
+}
 
 .button {
     vertical-align: middle;

@@ -64,11 +64,19 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="ps-well">
-                                    <h1>My Goal<hr></h1>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <h1>My Goal</h1>
+                                        </div>
+                                        <div class="col-md-3 right">
+                                            <button class="ps-btn" id="btn-example-goal">See examples</button>
+                                        </div>
+                                    </div>
+                                    <hr>
                                     <input type="hidden" value="${goal}" id="goal">
                                     <form:form class="form-horizontal"  method="post"
                                                modelAttribute="goal" action="/learn/${courseKey}/goal/submit">
-                                        <div class="form-group">
+                                        <div class="form-group ps-well">
                                             <span class="col-md-4">By the end of the course, I want to</span>
                                             <form:input class="col-md-2" type="text" path="goalName" placeholder="Action" id="action" />
                                             <form:input class="col-md-2" type="number" path="value" placeholder="Value" id="value"/>
@@ -118,8 +126,36 @@
                     </div>
                 </div>
             </div>
-            <!-- End course -->
+            <!-- End Learn Page -->
         </div>
+
+        <%--Sample Goals Modal--%>
+        <div class="modal fade" id="exampleGoalsModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="ps-modal-dialog">
+                <div class="ps-modal-content" role="document">
+                    <div class="ps-modal-header row">
+                        <div class="col-sm-10">
+                            <h1 class="modal-title">Example Goals</h1>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ps-modal-body">
+                        <p>I want to study 1 chapter per day.</p>
+                        <p>I want to read 10 pages per day.</p>
+                        <p>I want to do 5 problems per day.</p>
+                        <p>I want to practice Spanish 30 minutes per day.</p>
+                    </div>
+                    <div class="ps-modal-footer right">
+                        <button type="button" class="ps-btn" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </header>
 
