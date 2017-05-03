@@ -1,10 +1,12 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.utilities.Cue;
 import com.spacecadet.psychspace.utilities.Goal;
 
 /**
  * Created by marleneshankar on 4/26/17.
+ * modified by aliao on 5/3/17.
  */
 public class GoalManager {
 
@@ -16,12 +18,35 @@ public class GoalManager {
     }
 
     /**
+     * load single goal by goal key from datastore
+     * @param goalKey goal key in datastore
+     * @return goal utility object
+     */
+    public Goal loadSingleGoal(String goalKey){
+        Goal goal = new Goal();
+        try {
+            Entity foundGoal = datastore.get(KeyFactory.stringToKey(goalKey));
+            goal.setGoalName(foundGoal.getProperty("GoalName").toString());
+            goal.setGoalKey(KeyFactory.keyToString(foundGoal.getKey()));
+            goal.setUserName(foundGoal.getProperty("UserName").toString());
+            goal.setUserKey(foundGoal.getProperty("UserKey").toString());
+            goal.setValue(foundGoal.getProperty("Value").toString());
+            goal.setUnit(foundGoal.getProperty("Unit").toString());
+            goal.setCourseKey(foundGoal.getProperty("CourseKey").toString());
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return goal;
+    }
+
+    /**
      * loads a single goal with matching user and course
      * @param courseKey key in course entity
      * @param userKey key in user entity
      * @return goal utility object
      */
-    public Goal loadSingleGoal(String courseKey, String userKey){
+    public Goal loadUserGoal(String courseKey, String userKey){
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter propertyFilter2 =
@@ -35,7 +60,7 @@ public class GoalManager {
         Goal goal = new Goal();
         goal.setGoalName(foundGoal.getProperty("GoalName").toString());
         goal.setUserKey(foundGoal.getProperty("UserKay").toString());
-        goal.setUsername(foundGoal.getProperty("UserName").toString());
+        goal.setUserName(foundGoal.getProperty("UserName").toString());
         goal.setCourseKey(foundGoal.getProperty("CourseKey").toString());
         goal.setValue(foundGoal.getProperty("Value").toString());
         goal.setUnit(foundGoal.getProperty("Unit").toString());
@@ -54,7 +79,7 @@ public class GoalManager {
 
             Entity goal1 = new Entity("Goal");
             goal1.setProperty("GoalName", goal.getGoalName());
-            goal1.setProperty("Username", goal.getUsername());
+            goal1.setProperty("Username", goal.getUserName());
             goal1.setProperty("UserKey", goal.getUserKey());
             goal1.setProperty("CourseKey", goal.getCourseKey());
             goal1.setProperty("Value", goal.getValue());
@@ -80,7 +105,7 @@ public class GoalManager {
             try {
                 Entity updatedGoal = datastore.get(KeyFactory.stringToKey(goal.getGoalKey()));
                 updatedGoal.setProperty("GoalName", goal.getGoalName());
-                updatedGoal.setProperty("Username", goal.getUsername());
+                updatedGoal.setProperty("Username", goal.getUserName());
                 updatedGoal.setProperty("UserKey", goal.getUserKey());
                 updatedGoal.setProperty("CourseKey", goal.getCourseKey());
                 updatedGoal.setProperty("Value", goal.getValue());
