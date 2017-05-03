@@ -2,8 +2,6 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CueManager;
 import com.spacecadet.psychspace.utilities.Cue;
-import com.spacecadet.psychspace.utilities.Evaluation;
-import com.spacecadet.psychspace.utilities.Goal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,7 @@ public class CueController {
      * @param courseKey course key
      * @return cues page
      */
-    @RequestMapping(value = "/learn/{courseKey}/Cues", method = RequestMethod.GET)
+    @RequestMapping(value = "/learn/{courseKey}/cues", method = RequestMethod.GET)
     public ModelAndView loadCues(@PathVariable("courseKey") String courseKey){
         ModelAndView model = new ModelAndView();
         model.setViewName("learnCues");
