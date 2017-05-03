@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.Goal;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class GoalController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnGoal");
         model.addObject("goal", goal);
+        model.addObject("courseKey", courseKey);
 
         return model;
     }
@@ -43,9 +45,13 @@ public class GoalController {
      * @param courseKey course key
      * @return goal page
      */
-    @RequestMapping(value = "/learn/{courseKey}/goal/submit", method = RequestMethod.GET)
+    @RequestMapping(value = "/learn/{courseKey}/goal/submit", method = RequestMethod.POST)
     public String submitGoal(@ModelAttribute("goal") Goal goal, @PathVariable("courseKey") String courseKey){
-        Goal goal1 = goalManager.loadSingleGoal(courseKey, WelcomeController.currUser.getUserKey());
+        User currUser = WelcomeController.currUser;
+        Goal goal1 = goalManager.loadSingleGoal(courseKey, currUser.getUserKey());
+        goal1.setUserKey(currUser.getUserKey());
+        goal1.setUsername(currUser.getFirstName() + " " + currUser.getLastName());
+        goal1.setGoalName(goal1.getUnit() + " " + goal1.getValue() + " per day.");
         if(goal1 == null){
             goalManager.addGoal(goal);
         } else {

@@ -90,7 +90,7 @@
                         <div class="question-group">
                             <%--Question--%>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Question 1</label>
+                                <label class="col-md-2 control-label">Question 1</label>
                                 <div class="col-md-8">
                                     <input class="form-control input-question"/>
                                 </div>
