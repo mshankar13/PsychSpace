@@ -41,64 +41,29 @@
                     <h1>My Current Courses<hr></h1>
                     <br>
                 </div>
+                <c:forEach items="${myCurrCourses}" var="course">
                 <!-- Start Course -->
                 <div class="row ps-text-content">
                     <!-- start course -->
                     <div class="col-lg-4">
                         <div class="ps-well">
-                            <h2 class="ps-feature-info-header"> Being a Better You<hr> </h2>
+                            <h2 class="ps-feature-info-header"> ${course.title} <hr> </h2>
                             <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
                             <br>
-                            <!-- Topic -->
-                            <h3 class="ps-feature-info-header"> Topics <hr></h3>
+                            <!-- Description -->
+                            <h3 class="ps-feature-info-header"> Description <hr></h3>
                             <p class="ps-feature-preview">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                 ${course.description}</p>
                             <div>
                                 <div class="center">
-                                    <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End course -->
-                    <!-- start course -->
-                    <div class="col-lg-4">
-                        <div class="ps-well">
-                            <h2 class="ps-feature-info-header"> Being a Better You<hr> </h2>
-                            <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
-                            <br>
-                            <!-- Topic -->
-                            <h3 class="ps-feature-info-header"> Topics <hr></h3>
-                            <p class="ps-feature-preview">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                            <div>
-                                <div class="center">
-                                    <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End course -->
-                    <!-- start course -->
-                    <div class="col-lg-4">
-                        <div class="ps-well">
-                            <h2 class="ps-feature-info-header"> Being a Better You<hr> </h2>
-                            <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
-                            <br>
-                            <!-- Topic -->
-                            <h3 class="ps-feature-info-header"> Topics <hr></h3>
-                            <p class="ps-feature-preview">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                            <div>
-                                <div class="center">
-                                    <a class="button fadein btn-read-more" id="button-learn" href=""><span>Learn</span></a>
+                                    <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- End course -->
                 </div>
-
+                </c:forEach>
             </div>
             <br>
             <div class="row ps-feature">
@@ -109,35 +74,36 @@
                 </div>
 
                 <div class="row ps-text-content">
+                    <c:forEach items="${popularCourses}" var="course">
                     <!-- start course -->
                     <div class="col-lg-4">
                         <div class="ps-well">
-                            <h2 class="ps-feature-info-header"> Being a Better You<hr> </h2>
+                            <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
                             <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
                             <br>
                             <h3 class="ps-feature-info-header"> Dates<hr> </h3>
                             <p>
-                                <span class="glyphicon glyphicon-time"></span> Start Date: March 31, 2017 at 12:00 AM</p>
+                                <span class="glyphicon glyphicon-time"></span> Start Date: ${course.startDate}</p>
                             <p>
-                                <span class="glyphicon glyphicon-time"></span> End Date: May 31, 2017 at 11:59 PM
-                            </p>
+                                <span class="glyphicon glyphicon-time"></span> End Date: ${course.endDate}</p>
                             <br>
-                            <!-- Topic -->
-                            <h3 class="ps-feature-info-header"> Topics <hr></h3>
+                            <!-- Description -->
+                            <h3 class="ps-feature-info-header"> Description <hr></h3>
                             <p class="ps-feature-preview">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                ${course.description} </p>
                             <br>
 
                             <div>
                                 <div class="center">
-                                    <a class="button fadein btn-read-more" id="button-read-more" href=""><span>Read More</span></a>
-                                    <a class="button fadein btn-read-more" id="button-enroll" href=""><span>Enroll</span></a>
+                                    <a class="button fadein btn-read-more" id="button-read-more" href="/course/${course.courseKey}"><span>Read More</span></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        <!-- End course -->
+                    </c:forEach>
                 </div>
-                <!-- End course -->
+
             </div>
         </div>
         <!-- end column -->

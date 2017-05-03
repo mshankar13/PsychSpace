@@ -1,8 +1,10 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
+import com.spacecadet.psychspace.dataManager.DueDatesManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
+import com.spacecadet.psychspace.utilities.DueDates;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ public class InstructorDueDatesController {
 
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
+    private DueDatesManager dueDatesManager = new DueDatesManager();
 
 
     /**
@@ -31,13 +34,18 @@ public class InstructorDueDatesController {
      *
      * @return instructor load evaluation page
      */
-    @RequestMapping(value = "/instructor/{courseKey}/evaluations", method = RequestMethod.GET)
+    @RequestMapping(value = "/instructor/{courseKey}/dueDates", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorEvaluation");
         model.addObject("courses", courses);
         model.addObject("course", new Course());
+        DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
+        if(dueDates == null){
+            dueDates = new DueDates();
+        }
+        model.addObject("dueDates", dueDates);
 
         return model;
     }
