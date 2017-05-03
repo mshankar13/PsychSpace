@@ -70,7 +70,7 @@
                                                modelAttribute="goal" action="/learn/${courseKey}/goal/submit">
                                         <div class="form-group">
                                             <span class="col-md-4">By the end of the course, I want to</span>
-                                            <form:input class="col-ma-2" type="text" path="goalName" placeholder="Action" id="action" />
+                                            <form:input class="col-md-2" type="text" path="goalName" placeholder="Action" id="action" />
                                             <form:input class="col-md-2" type="number" path="value" placeholder="Value" id="value"/>
                                             <form:input class="col-md-2" type="text" path="unit" placeholder="Unit" id="unit"/>
                                             <span class="col-md-2">per day.</span>
