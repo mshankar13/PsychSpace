@@ -31,7 +31,7 @@ public class Goal {
     /**
      * name of the user
      */
-    private String username;
+    private String userName;
 
     /**
      * key in user entity created by datastore

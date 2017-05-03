@@ -2,18 +2,199 @@
 <div class="col-lg">
     <div class="ps-well">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="ps-well">
-                    <h1>Negative<hr></h1>
-                    <h2>[Load Negative] </h2>
+                    <h1>New Cue<hr></h1>
+                    <button type="button" class="btn-comment btn btn-primary btn-cue-add">New</button>
                 </div>
             </div>
-            <div class="col-lg-6">
+        </div>
+    </div>
+    <br>
+    <div class="ps-well">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="ps-well">
-                    <h1>Positive<hr></h1>
-                    <h2>[Load Positive]</h2>
+                    <h1>My Cues<hr></h1>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ps-well">
+                                <h2>Negative Cues<hr></h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ps-well">
+                                <h3>[Load Negative] </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ps-well">
+                                <h2>[Name of Cue]<hr></h2>
+                                <div class="left">
+                                    <h4>Where were you?</h4>
+                                    <p>[Location Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What time was it?</h4>
+                                    <p>[Time Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What was your emotional state?</h4>
+                                    <p>[Emotions Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>Who else was around?</h4>
+                                    <p>[Environment Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What action proceeded the cue?</h4>
+                                    <p>[Action Answer] </p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ps-well">
+                                <h2>Positive Cues<hr></h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ps-well">
+                                <h3>[Load Positive] </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ps-well">
+                                <h2>[Name of Cue]<hr></h2>
+                                <div class="left">
+                                    <h4>Where were you?</h4>
+                                    <p>[Location Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What time was it?</h4>
+                                    <p>[Time Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What was your emotional state?</h4>
+                                    <p>[Emotions Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>Who else was around?</h4>
+                                    <p>[Environment Answer] </p>
+                                </div>
+                                <br>
+                                <div class="left">
+                                    <h4>What action proceeded the cue?</h4>
+                                    <p>[Action Answer] </p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ps-well">
+        <div class="row">
+            <div class="col-lg-4 ps-col-left">
+                <div class="ps-well">
+                    <h1>Cue</h1>
+                    <h1>Routine</h1>
+                    <h1>Reward</h1>
+                </div>
+            </div>
+            <div class="col-lg-8 ps-col-right">
+                <div class="ps-well">
+                    <div id='piemenu' data-wheelnav data-wheelnav-slicepath='DonutSlice' data-wheelnav-marker data-wheelnav-markerpath='PieLineMarker' data-wheelnav-rotateoff data-wheelnav-navangle='270' data-wheelnav-cssmode data-wheelnav-init>
+                        <div data-wheelnav-navitemtext='Cue'></div>
+                        <div data-wheelnav-navitemtext='Routine'></div>
+                        <div data-wheelnav-navitemtext='Reward'></div>
+                    </div>
+                    <div class="center">
+                        <h2 id="ps-cue">[d]</h2>
+                        <h2 id="ps-rew">[Logfdtive]</h2>
+                        <h2 id="ps-resp">f</h2>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Add Cue Modal-->
+<div class="modal ps-modal-type-comment fade" id="add-cue-modal" role="dialog">
+    <div class="ps-modal-dialog">
+        <!-- Modal content-->
+        <div class="ps-modal-content">
+            <div class="ps-modal-header">
+                <button type="button" class="ps-type-close close ps-modal-close" data-dismiss="modal">
+                    <h1>X</h1></button>
+                <div class="left">
+                    <h2 class="ps-feature-info-header"> New Cue<hr></h2>
+                </div>
+            </div>
+            <div class="ps-modal-body">
+                <div class="form-group">
+                    <!-- Start Content -->
+                    <div class="left">
+                        <!-- Form -->
+                        <div class="left">
+                            <h4>Positive or Negative Cue?</h4>
+                            <button type="button" class="btn-comment btn btn-primary btn-cue-positive">Positive</button>
+                            <button type="button" class="btn-comment btn btn-primary btn-cue-negative">Negative</button>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>Cue Summary:</h4>
+                            <textarea class="form-control" id="cues-cue-name" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>Where were you?</h4>
+                            <textarea class="form-control" id="cues-cue-location" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>What time was it?</h4>
+                            <textarea class="form-control" id="cues-cue-time" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>What was your emotional state?</h4>
+                            <textarea class="form-control" id="cues-cue-feelings" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>Who else was around?</h4>
+                            <textarea class="form-control" id="cues-cue-environment" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="left">
+                            <h4>What action proceeded the cue?</h4>
+                            <textarea class="form-control" id="cues-cue-action" rows="1"></textarea>
+                        </div>
+                        <br>
+                        <div class="right">
+                            <button id="btn-cue-post" type="submit" class="btn-comment btn btn-primary">Submit
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Modal -->

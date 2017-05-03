@@ -31,12 +31,17 @@ public class EvaluationController {
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
-        Goal goal = goalManager.loadSingleGoal(courseKey, WelcomeController.currUser.getUserKey());
+        Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
-        Evaluation evaluation = new Evaluation();
         model.addObject("goal", goal);
-        model.addObject("evaluation", evaluation);
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+            model.addObject("hasEvaluation", "true");
+        } else {
+            model.addObject("hasEvaluation", "false");
+        }
+        model.addObject("evaluation", new Evaluation());
+        model.addObject("evaluationList", evaluationManager.loadUserEvaluations(courseKey, WelcomeController.currUser.getUserKey()));
 
         return model;
     }
@@ -47,15 +52,14 @@ public class EvaluationController {
      * @return evaluation page
      */
     @RequestMapping(value = "learn/{courseKey}/evaluation/submit", method = RequestMethod.POST)
-    public ModelAndView submitEvaluation(@ModelAttribute("evaluation") Evaluation evaluation, @PathVariable("courseKey") String courseKey){
+    public String submitEvaluation(@ModelAttribute("evaluation") Evaluation evaluation, @PathVariable("courseKey") String courseKey){
         Date today = new Date();
         evaluation.setAuthorKey(WelcomeController.currUser.getUserKey());
         evaluation.setAuthor(WelcomeController.currUser.getFirstName() + " " + WelcomeController.currUser.getLastName());
         evaluation.setDate(today.toString());
         evaluationManager.addEvaluation(evaluation);
-        ModelAndView model = new ModelAndView();
-        model.setViewName("evaluation");
-        return model;
+
+        return "redirect:/learn/"+courseKey+"/evaluation";
     }
 
 

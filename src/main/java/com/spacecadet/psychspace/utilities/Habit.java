@@ -23,6 +23,11 @@ public class Habit {
     private String habitKey;
 
     /**
+     * key in course entity created by datastore
+     */
+    private String courseKey;
+
+    /**
      * key in user entity created by datastore
      */
     private String userKey;
@@ -42,11 +47,6 @@ public class Habit {
      * key in goal entity created by datastore
      */
     private String goalKey;
-
-    /**
-     * name of the goal
-     */
-    private String goalName;
 
     /**
      * reward set by the user when the goal is achieved

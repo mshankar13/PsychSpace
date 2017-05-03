@@ -192,6 +192,10 @@ span {
     text-align: right;
 }
 
+.float {
+    float: left;
+}
+
 
 /*---------------- PAGE BANNER ----------------*/
 
@@ -342,6 +346,8 @@ input[type='radio']:checked + label:hover:after {
 
 
 /* Number input */
+
+
 /*
 .ps-number-input {
     width: 40%;
@@ -369,6 +375,8 @@ input[type='number'] {
 
 
 /*---------------- RANGE SLIDER ----------------*/
+
+
 /*
 .ps-range-slider-body {
     height: 15vh;
@@ -455,6 +463,99 @@ hr {
 
 .pushToBack {
     z-index: -1;
+}
+
+
+/*---------------- HABIT WHEEL ----------------*/
+
+#piemenu > svg {
+    width: 100%;
+    height: 100%;
+}
+
+#piemenu {
+    height: 32vw;
+    width: 32vw;
+    margin: auto;
+}
+
+@media (max-width: 400px) {
+    #piemenu {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+[class|=wheelnav-piemenu-slice-basic-0] {
+    fill: var(--dogwood-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-selected-0] {
+    fill: var(--dogwood-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-hover-0] {
+    fill: var(--dogwood-color);
+    stroke: none;
+    fill-opacity: 0.70;
+    cursor: pointer;
+}
+
+[class|=wheelnav-piemenu-slice-basic-1] {
+    fill: var(--space-cadet-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-selected-1] {
+    fill: var(--space-cadet-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-hover-1] {
+    fill: var(--space-cadet-color);
+    stroke: none;
+    fill-opacity: 0.70;
+    cursor: pointer;
+}
+
+[class|=wheelnav-piemenu-slice-basic-2] {
+    fill: var(--eucalyptus-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-selected-2] {
+    fill: var(--eucalyptus-color);
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-slice-hover-2] {
+    fill: var(--eucalyptus-color);
+    stroke: none;
+    fill-opacity: 0.70;
+    cursor: pointer;
+}
+
+[class|=wheelnav-piemenu-title-basic] {
+    fill: #fff;
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-title-selected] {
+    fill: #fff;
+    stroke: none;
+}
+
+[class|=wheelnav-piemenu-title-hover] {
+    fill: #fff;
+    stroke: none;
+    cursor: pointer;
+}
+
+[class|=wheelnav-piemenu-title] > tspan {
+    font-size: 24px;
+    font-family: "Maven Pro";
 }
 
 

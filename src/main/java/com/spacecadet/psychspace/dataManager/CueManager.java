@@ -3,8 +3,12 @@ package com.spacecadet.psychspace.dataManager;
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.Cue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marleneshankar on 4/26/17.
+ * modified by aliao on 5/3/17.
  */
 public class CueManager {
 
@@ -14,7 +18,62 @@ public class CueManager {
     public CueManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
-    
+
+    /**
+     * load a single cue with cue key in datastore
+     * @param cueKey cue key in datastore
+     * @return cue utility object
+     */
+    public Cue loadSingleCue(String cueKey){
+        Cue cue = new Cue();
+        try {
+            Entity foundCue = datastore.get(KeyFactory.stringToKey(cueKey));
+            cue.setCueKey(KeyFactory.keyToString(foundCue.getKey()));
+            cue.setUserKey(foundCue.getProperty("UserKey").toString());
+            cue.setType(foundCue.getProperty("Type").toString());
+            cue.setLocation(foundCue.getProperty("Location").toString());
+            cue.setTime(foundCue.getProperty("Time").toString());
+            cue.setEmotionalState(foundCue.getProperty("EmotionalState").toString());
+            cue.setEnvironment(foundCue.getProperty("Environment").toString());
+            cue.setAction(foundCue.getProperty("Action").toString());
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return cue;
+    }
+
+    /**
+     * loads a list of all cues for user in specified course
+     * @param userKey user key in datastore
+     * @param courseKey course key in datastore
+     * @return array list of cue utility objects
+     */
+    public ArrayList<Cue> loadUserCues(String userKey, String courseKey){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query cueQuery = new Query("Cue").setFilter(userCourseFilter);
+        List<Entity> cueList =
+                datastore.prepare(cueQuery).asList(FetchOptions.Builder.withDefaults());
+        ArrayList<Cue> cues = new ArrayList<Cue>();
+        for(Entity foundCue : cueList){
+            Cue cue = new Cue();
+            cue.setCueKey(KeyFactory.keyToString(foundCue.getKey()));
+            cue.setUserKey(foundCue.getProperty("UserKey").toString());
+            cue.setType(foundCue.getProperty("Type").toString());
+            cue.setLocation(foundCue.getProperty("Location").toString());
+            cue.setTime(foundCue.getProperty("Time").toString());
+            cue.setEmotionalState(foundCue.getProperty("EmotionalState").toString());
+            cue.setEnvironment(foundCue.getProperty("Environment").toString());
+            cue.setAction(foundCue.getProperty("Action").toString());
+            cues.add(cue);
+        }
+        return cues;
+    }
+
     /**
      * adds a cue to datastore
      * @param cue cue trigger for a specific habit, object with properties

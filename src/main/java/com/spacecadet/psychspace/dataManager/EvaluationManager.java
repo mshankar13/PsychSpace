@@ -5,6 +5,7 @@ import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +25,41 @@ public class EvaluationManager {
     }
 
     /**
-     * load user submitted evalutaion for the day
+     * load list of all past evaluations of user
      * @param userKey user key in datastore
-     * @return evaluation entity
+     * @return array list of evaluation utility objects
      */
-    public Evaluation loadTodaysEvaluation(String userKey){
-        Evaluation evaluation = new Evaluation();
+    public ArrayList<Evaluation> loadUserEvaluations(String courseKey, String userKey){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("AuthorKey", Query.FilterOperator.EQUAL, userKey);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query evaluationQuery = new Query("Evaluation").setFilter(userCourseFilter);
+        List<Entity> userEvaluations =
+                datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
+        ArrayList<Evaluation> evaluations = new ArrayList<Evaluation>();
+        for(Entity entity : userEvaluations){
+            Evaluation evaluation = new Evaluation();
+            evaluation.setAuthorKey(entity.getProperty("AuthorKey").toString());
+            evaluation.setAuthor(entity.getProperty("Author").toString());
+            evaluation.setContent(entity.getProperty("Content").toString());
+            evaluation.setDate(entity.getProperty("Date").toString());
+            evaluation.setCourseKey(entity.getProperty("CourseKey").toString());
+            evaluation.setScore(entity.getProperty("Score").toString());
+            evaluation.setRawScore(entity.getProperty("RawScore").toString());
+            evaluation.setEvaluationKey(KeyFactory.keyToString(entity.getKey()));
+            evaluations.add(evaluation);
+        }
+        return evaluations;
+    }
+
+    /**
+     * chek if user submitted evalutaion for the day
+     * @param userKey user key in datastore
+     * @return true/false
+     */
+    public boolean hasTodaysEvaluation(String userKey){
         Date today = new Date();
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("AuthorKey", Query.FilterOperator.EQUAL, userKey);
@@ -39,18 +69,10 @@ public class EvaluationManager {
         for(Entity entity : userEvaluations){
             Date date = helper.stringToDate(entity.getProperty("Date").toString());
             if(date.equals(today)){
-                evaluation.setAuthorKey(entity.getProperty("AuthorKey").toString());
-                evaluation.setAuthor(entity.getProperty("Author").toString());
-                evaluation.setCourseKey(entity.getProperty("CourseKey").toString());
-                evaluation.setContent(entity.getProperty("Content").toString());
-                evaluation.setDate(entity.getProperty("Date").toString());
-                evaluation.setRawScore(entity.getProperty("RawScore").toString());
-                evaluation.setScore(entity.getProperty("Score").toString());
-                evaluation.setEvaluationKey(KeyFactory.keyToString(entity.getKey()));
-                return evaluation;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     /**
