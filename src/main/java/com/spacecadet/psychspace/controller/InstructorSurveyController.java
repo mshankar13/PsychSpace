@@ -64,7 +64,7 @@ public class InstructorSurveyController {
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
-        return "redirect:/instructor/{courseKey}/survey";
+        return "redirect:/instructor/"+courseKey+"/survey";
     }
 
 

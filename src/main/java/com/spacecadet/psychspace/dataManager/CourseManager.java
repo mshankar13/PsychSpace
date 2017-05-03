@@ -339,31 +339,38 @@ public class CourseManager {
     public ArrayList<Course> getPopularCourse() {
         ArrayList<Course> popularCourses = new ArrayList<>();
         ArrayList<Course> openCourses = loadAllCourses();
+        HashMap<Integer, Double> scores = new HashMap<>();
         int i = 0;
-
-        for (Course course : openCourses) {
-            double enrollStat = Integer.parseInt(course.getCurrSize()) / Integer.parseInt(course.getCapacity());
-            course.setScore(Double.toString(enrollStat));
+        for (Course course : openCourses) { // Calculate all the scores per course and hash to course index
+            double score = Double.parseDouble(course.getCurrSize()) / Double.parseDouble(course.getCapacity());
+            scores.put(i++, score);
         }
 
-        if (openCourses.size() >= 3) {
-            Collections.sort(openCourses, new Comparator<Course>() {
-                @Override
-                public int compare(Course o1, Course o2) {
-                    Double score1 = Double.parseDouble(o1.getScore());
-                    Double score2 = Double.parseDouble(o2.getScore());
-                    if (score1 > score2) return 1;
-                    return 0;
-                }
-            });
+        Comparator<Map.Entry<Integer, Double>> scoreComparator = new Comparator<Map.Entry<Integer,Double>>() {
 
-            // Might have to change logic in compare from > to <
+            @Override
+            public int compare(Map.Entry<Integer, Double> e1, Map.Entry<Integer, Double> e2) {
+                Double v1 = e1.getValue();
+                Double v2 = e2.getValue();
+                return v1.compareTo(v2);
+            }
+        };
+
+        Set<Map.Entry<Integer, Double>> mapEntries = scores.entrySet();
+        List<Map.Entry<Integer, Double>> entries = new ArrayList<>(mapEntries);
+        Collections.sort(entries, scoreComparator);
+
+        Collections.reverse(entries);
+        if (entries.size() >= 3) {
             for (int j = 0; j < 3; j++) {
-                popularCourses.add(openCourses.get(j));
+                popularCourses.add(openCourses.get(entries.get(j).getKey()));
             }
         } else {
-            popularCourses.addAll(openCourses);
+            for(Map.Entry<Integer, Double> entry : entries){
+                popularCourses.add(openCourses.get(entry.getKey()));
+            }
         }
+
         return popularCourses;
     }
 
