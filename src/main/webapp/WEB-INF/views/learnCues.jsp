@@ -24,6 +24,7 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
+    <script src="${contextPath}/resources/js/learnNavbar.js"></script>
     <script src="${contextPath}/resources/js/cues.js"></script>
     <script src="${contextPath}/resources/js/raphael.min.js"></script>
     <script src="${contextPath}/resources/js/raphael.icons.min.js"></script>

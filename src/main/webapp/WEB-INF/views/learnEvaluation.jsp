@@ -24,6 +24,8 @@
     <%--Customized--%>
     <script src="${contextPath}/resources/js/scrollreveal.js"></script>
     <script src="${contextPath}/resources/js/navbar.js"></script>
+    <script src="${contextPath}/resources/js/learnNavbar.js"></script>
+    <script src="${contextPath}/resources/js/evaluation.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -38,7 +40,7 @@
 <header class="ps-feature-header">
     <div class="center page-banner">
         <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
-        <!-- Course Title -->
+        <%--<!-- Course Title -->--%>
         <h1 class="absolute-text">[Course Title]</h1>
     </div>
     <div class="ps-feature-content">
@@ -46,67 +48,90 @@
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
-                        <!-- Learn Sidebar -->
+                        <%--<!-- Learn Sidebar -->--%>
                         <%@include file="learn-sidebar.html" %>
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
-                    <!-- Learn Navbar -->
+                    <%--<!-- Learn Navbar -->--%>
                     <%@include file="learn-navbar.html" %>
                 </div>
                 <div class="col-lg-10 ps-col-right">
-                    <!-- Content -->
-                    <!-- Start -->
-                    <div class="ps-well">
-                        <h2>Daily Evaluation for [Date]<hr></h2>
-                        <br>
-                        <br>
-                        <!-- Form Start -->
-                        <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>How many [unit] did you complete today?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!--
-                                                        <div class="ps-range-slider-body">
-                                                            <input type="range" min="0" max=$(val) value=$(double-val) />
-                                                        </div>
-                    -->
-                                        <span><input class="ps-number-input" type="number" placeholder="Number">
-                                    [unit] out of [value] [unit]</span>
+                    <%--<!-- If Daily Evaluation has not been completed: -->--%>
+                    <input type="hidden" value="${hasEvaluation}" id="hasEvaluation" />
+                    <c:set var="hasEvaluation" value="${hasEvaluation}"/>
+                    <c:choose>
+                        <c:when test="${hasEvaluation == 'false'}">
+                            <%--<!-- Content Start-->--%>
+                            <div class="ps-well">
+                                <h2>Daily Evaluation for [Date]
+                                    <hr>
+                                </h2>
+                                <br>
+                                <br>
+                                <%--<!-- Form Start -->--%>
+                                <form:form method="post" modelAttribute="evaluation"
+                                           action="/learn/${courseKey}/evaluation/submit" class="ps-all-questions">
+                                    <form:hidden path="authorKey" value=""/>
+                                    <form:hidden path="author" value=""/>
+                                    <form:hidden path="date" value=""/>
+                                    <form:hidden path="courseKey" value="${courseKey}"/>
+                                    <form:hidden path="evaluationKey" value=""/>
+                                    <form:hidden path="score" value=""/>
+                                    <%--<!-- Question Start -->--%>
+                                    <div class="ps-question">
+                                        <%--<!-- Question Text -->--%>
+                                        <h3>How many ${goal.unit} did you complete today?</h3>
+                                        <div class="ps-answers">
+                                            <%--<!-- Answer Start -->--%>
+                                            <div class="ps-answer">
+                                                <span><form:input class="ps-number-input" type="number"  min="0" path="rawScore"
+                                                                  placeholder="Number" id="evaluation-rawScore"/>
+                                                ${goal.unit} out of ${goal.value} ${goal.unit}</span>
+                                            </div>
+                                            <%--<!-- Answer End-->--%>
+                                        </div>
                                     </div>
-                                    <!-- Answer End-->
-                                </div>
-                            </div>
-                            <!-- Question End -->
-                            <!-- Question Start -->
-                            <div class="ps-question ps-optional-response">
-                                <!-- Question Text -->
-                                <h3>What are your feelings?</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <textarea class="ps-text-area" rows="4" placeholder="Feelings..."></textarea>
+                                    <%--<!-- Question End -->--%>
+                                    <%--<!-- Question Start -->--%>
+                                    <div class="ps-question ps-optional-response">
+                                        <%--<!-- Question Text -->--%>
+                                        <h3>What are your feelings?</h3>
+                                        <div class="ps-answers">
+                                            <%--<!-- Answer Start -->--%>
+                                            <div class="ps-answer">
+                                                <form:textarea class="ps-text-area" id="evaluation-content" rows="4"
+                                                               path="content"/>
+                                            </div>
+                                            <%--<!-- Answer End-->--%>
+                                        </div>
                                     </div>
-                                    <!-- Answer End-->
-                                </div>
+                                    <%--<!-- Question End -->--%>
+                                    <div class="center">
+                                        <%--<!-- Submit Survey Button -->--%>
+                                        <button type="submit" class="button" id="btn-submit-evaluation">
+                                            <span>Submit Responses</span>
+                                        </button>
+                                    </div>
+                                </form:form>
+                                <%--<!-- Form End -->--%>
                             </div>
-                            <!-- Question End -->
-                            <div class="center">
-                                <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey"><span>Submit Responses</span></button>
+                            <%--<!-- Content End -->--%>
+                            <%--<!-- If End -->--%>
+                        </c:when>
+                        <%--<!-- Else Daily Evaluation has been completed: -->--%>
+                        <c:otherwise>
+                            <div class="ps-well">
+                                <%--<!-- Load the list of completed evaluations -->--%>
+                                <h2>Loading All Evaluations...</h2>
+                                <%--<c:forEach items="${evaluationList}" var="singleEvaluation">--%>
+                                <%--</c:forEach>--%>
                             </div>
-                        </form>
-                        <!-- Form End -->
-                    </div>
-                    <!-- End -->
-
+                            <%--<!-- Else End -->--%>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
-            <!-- End course -->
         </div>
     </div>
 </header>
