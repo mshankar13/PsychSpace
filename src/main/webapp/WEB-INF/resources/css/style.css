@@ -83,6 +83,7 @@ span {
 
 
 /*---------------- BUTTONS ----------------*/
+
 .ps-btn {
     background-color: transparent;
     border: 1px solid var(--space-cadet-color);
@@ -245,6 +246,7 @@ span {
     padding: 1em;
     position: relative;
     margin-bottom: 4em;
+    border-radius: var(--border-radius-1);
 }
 
 .ps-question h3 {
@@ -556,6 +558,35 @@ hr {
 [class|=wheelnav-piemenu-title] > tspan {
     font-size: 24px;
     font-family: "Maven Pro";
+}
+
+
+/*---------------- TABLE ----------------*/
+
+.ps-table {
+    font-family: "Open Sans";
+    color: var(--space-cadet-color);
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: var(--border-radius-1);
+}
+
+.ps-table-key {
+    /*    border: 6px solid #fff;*/
+    text-align: left;
+    padding: 1em 1em 0 .8em;
+    min-width: 150px;
+}
+
+.ps-table-row {
+    /*    border: 6px solid #fff;*/
+    text-align: left;
+    padding: 1em;
+    min-width: 150px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 

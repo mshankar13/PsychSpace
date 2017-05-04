@@ -123,9 +123,26 @@
                         <c:otherwise>
                             <div class="ps-well">
                                 <%--<!-- Load the list of completed evaluations -->--%>
-                                <h2>Loading All Evaluations...</h2>
-                                <%--<c:forEach items="${evaluationList}" var="singleEvaluation">--%>
-                                <%--</c:forEach>--%>
+                                    <h2>My Daily Evaluations<hr></h2>
+                                    <br>
+                                    <%--<!-- Table Start -->--%>
+                                    <table class="ps-table">
+                                        <tr>
+                                            <th class="ps-table-key"><h4>Date</h4></th>
+                                            <th class="ps-table-key"><h4>[Unit] Completed</h4></th>
+                                            <th class="ps-table-key"><h4>Feelings</h4></th>
+                                        </tr>
+                                        <%--<!-- Load all evaluations for the current user -->--%>
+                                            <c:forEach items="${evaluationList}" var="singleEvaluation">
+                                        <tr>
+                                            <td class="ps-table-row">${singleEvaluation.date}</td>
+                                            <td class="ps-table-row">${singleEvaluation.rawScore} ${singleEvaluation.unit}</td>
+                                            <td class="ps-table-row"><p>${singleEvaluation.content}</p></td>
+                                        </tr>
+                                            </c:forEach>
+                                        <%--<!-- End load evaluations -->--%>
+                                    </table>
+                                    <%--<!-- Table End -->--%>
                             </div>
                             <%--<!-- Else End -->--%>
                         </c:otherwise>
