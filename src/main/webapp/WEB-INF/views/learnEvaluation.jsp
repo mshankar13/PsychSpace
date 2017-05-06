@@ -130,13 +130,17 @@
                                         <tr>
                                             <th class="ps-table-key"><h4>Date</h4></th>
                                             <th class="ps-table-key"><h4>How did I do</h4></th>
+                                            <td class="ps-table-key"><h4>Weekly Goal</h4></td>
+                                            <td class="ps-table-key"><h4>Final Goal</h4></td>
                                             <th class="ps-table-key"><h4>Feelings</h4></th>
                                         </tr>
                                         <%--<!-- Load all evaluations for the current user -->--%>
                                             <c:forEach items="${evaluationList}" var="singleEvaluation">
                                         <tr>
                                             <td class="ps-table-row">${singleEvaluation.date}</td>
-                                            <td class="ps-table-row">${singleEvaluation.rawScore} / ${singleEvaluation.score}</td>
+                                            <td class="ps-table-row">${singleEvaluation.score}%</td>
+                                            <td class="ps-table-row">${weeklyGoal.value}</td>
+                                            <td class="ps-table-row">${goal.value}</td>
                                             <td class="ps-table-row"><p>${singleEvaluation.content}</p></td>
                                         </tr>
                                             </c:forEach>
