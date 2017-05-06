@@ -11,9 +11,13 @@ $(document).ready(function () {
 });
 
 function loadGoal(goal) {
+    var action = $("#action").val();
     var value = $("#value").val();
     var unit = $("#unit").val();
 
+    $("#action").val(action);
+    $("#value").val(value);
+    $("#unit").val(unit);
 }
 
 function exampleGoalModalShow() {

@@ -67,8 +67,8 @@ public class EvaluationManager {
         List<Entity> userEvaluations =
                 datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
         for(Entity entity : userEvaluations){
-            Date date = helper.stringToDate(entity.getProperty("Date").toString());
-            if(date.equals(today)){
+            String date = entity.getProperty("Date").toString();
+            if(date.equals(today.toString())){
                 return true;
             }
         }

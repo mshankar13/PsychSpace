@@ -43,7 +43,7 @@
     <div class="center page-banner">
         <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
         <!-- Course Title -->
-        <h1 class="absolute-text">[Course Title]</h1>
+        <h1 class="absolute-text">${courseTitle}</h1>
     </div>
     <div class="ps-feature-content">
         <div class="row ps-feature">
@@ -56,13 +56,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Learn Navbar -->
-                    <ul class="nav nav-tabs">
-                        <li ><a href="${contextPath}/learn/${courseKey}">Home</a></li>
-                        <li class="active"><a href="${contextPath}/learn/${courseKey}/habit">Build My Habit</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/cues">Cues</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/videos">Videos</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/forum">Forum</a></li>
-                    </ul>
+                    <%@include file="learn-navbar.html" %>
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->

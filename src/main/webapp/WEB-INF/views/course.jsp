@@ -122,9 +122,9 @@
                                     <c:when test="${courseStatus == 'open' and isEnrolled == 'false'}">
                                         <a class="button-enroll button" id="button-enroll" href="/course/${course.courseKey}/enroll"><span> Enroll Now</span></a>
                                     </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${courseStatus == 'open' and isEnrolled == 'true'}">
                                         <a class="button-enroll button" id="button-unenroll" href="/course/${course.courseKey}/unenroll"><span> Unenroll</span></a>
-                                    </c:otherwise>
+                                    </c:when>
                                     </c:choose>
                                 </c:when>
                             </c:choose>

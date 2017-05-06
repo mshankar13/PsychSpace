@@ -59,7 +59,7 @@ public class GoalManager {
         }
         Goal goal = new Goal();
         goal.setGoalName(foundGoal.getProperty("GoalName").toString());
-        goal.setUserKey(foundGoal.getProperty("UserKay").toString());
+        goal.setUserKey(foundGoal.getProperty("UserKey").toString());
         goal.setUserName(foundGoal.getProperty("UserName").toString());
         goal.setCourseKey(foundGoal.getProperty("CourseKey").toString());
         goal.setValue(foundGoal.getProperty("Value").toString());
@@ -79,7 +79,7 @@ public class GoalManager {
 
             Entity goal1 = new Entity("Goal");
             goal1.setProperty("GoalName", goal.getGoalName());
-            goal1.setProperty("Username", goal.getUserName());
+            goal1.setProperty("UserName", goal.getUserName());
             goal1.setProperty("UserKey", goal.getUserKey());
             goal1.setProperty("CourseKey", goal.getCourseKey());
             goal1.setProperty("Value", goal.getValue());
@@ -105,7 +105,7 @@ public class GoalManager {
             try {
                 Entity updatedGoal = datastore.get(KeyFactory.stringToKey(goal.getGoalKey()));
                 updatedGoal.setProperty("GoalName", goal.getGoalName());
-                updatedGoal.setProperty("Username", goal.getUserName());
+                updatedGoal.setProperty("UserName", goal.getUserName());
                 updatedGoal.setProperty("UserKey", goal.getUserKey());
                 updatedGoal.setProperty("CourseKey", goal.getCourseKey());
                 updatedGoal.setProperty("Value", goal.getValue());

@@ -1,5 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.CueManager;
 import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.dataManager.HabitManager;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HabitController {
 
+    private CourseManager courseManager = new CourseManager();
     private GoalManager goalManager = new GoalManager();
     private HabitManager habitManager = new HabitManager();
     private CueManager cueManager = new CueManager();
@@ -35,6 +37,7 @@ public class HabitController {
         if(goal == null){
             goal = new Goal();
         }
+        String courseTitle = courseManager.loadSingleCourse(courseKey).getTitle();
         Habit habit = habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey);
         Cue cue;
         if(habit == null){
@@ -44,6 +47,7 @@ public class HabitController {
         }
         ModelAndView model = new ModelAndView();
         model.setViewName("learnHabit");
+        model.addObject("courseTitle", courseTitle);
         model.addObject("goal", goal);
         model.addObject("habit", habit);
         model.addObject("cue", cue);
@@ -60,16 +64,21 @@ public class HabitController {
     @RequestMapping(value = "/learn/{courseKey}/habit/submitGoal", method = RequestMethod.POST)
     public String submitGoal(@ModelAttribute("goal") Goal goal, @PathVariable("courseKey") String courseKey){
         User currUser = WelcomeController.currUser;
-        Goal goal1 = goalManager.loadUserGoal(courseKey, currUser.getUserKey());
-        goal1.setUserKey(currUser.getUserKey());
-        goal1.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
-        goal1.setGoalName(goal1.getUnit() + " " + goal1.getValue() + " per day.");
-        if(goal1 == null){
+        Goal myGoal = goalManager.loadUserGoal(courseKey, currUser.getUserKey());
+        if(myGoal == null){
+            goal.setUserKey(currUser.getUserKey());
+            goal.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
+            goal.setCourseKey(courseKey);
             goalManager.addGoal(goal);
         } else {
-            goalManager.editGoal(goal);
+            myGoal.setUserKey(currUser.getUserKey());
+            myGoal.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
+            myGoal.setGoalName(goal.getGoalName());
+            myGoal.setUnit(goal.getUnit());
+            myGoal.setValue(goal.getValue());
+            goalManager.editGoal(myGoal);
         }
 
-        return "redirect:/learn/"+courseKey+"/goal";
+        return "redirect:/learn/"+courseKey+"/habit";
     }
 }
