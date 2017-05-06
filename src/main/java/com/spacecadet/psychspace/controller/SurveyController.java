@@ -39,7 +39,6 @@ public class SurveyController {
         Survey survey = surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnSurvey");
-        model.addObject("survey", survey);
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
@@ -53,8 +52,10 @@ public class SurveyController {
             hasGoal = "true";
         }
         if(survey != null){
+            survey = surveyManager.loadSingleCourseSurvey(courseKey);
             hasSurvey = "true";
         }
+        model.addObject("survey", survey);
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
