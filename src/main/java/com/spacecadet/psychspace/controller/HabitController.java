@@ -2,12 +2,10 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.CueManager;
+import com.spacecadet.psychspace.dataManager.DueDatesManager;
 import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.dataManager.HabitManager;
-import com.spacecadet.psychspace.utilities.Cue;
-import com.spacecadet.psychspace.utilities.Goal;
-import com.spacecadet.psychspace.utilities.Habit;
-import com.spacecadet.psychspace.utilities.User;
+import com.spacecadet.psychspace.utilities.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +23,7 @@ public class HabitController {
     private GoalManager goalManager = new GoalManager();
     private HabitManager habitManager = new HabitManager();
     private CueManager cueManager = new CueManager();
+    private DueDatesManager dueDatesManager = new DueDatesManager();
 
     /**
      * user habit page
@@ -33,6 +32,7 @@ public class HabitController {
      */
     @RequestMapping(value = "/learn/{courseKey}/habit", method = RequestMethod.GET)
     public ModelAndView loadGoal(@PathVariable("courseKey") String courseKey){
+        DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
         Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         if(goal == null){
             goal = new Goal();
@@ -52,6 +52,7 @@ public class HabitController {
         model.addObject("habit", habit);
         model.addObject("cue", cue);
         model.addObject("courseKey", courseKey);
+        model.addObject("dueDates", dueDates);
 
         return model;
     }
