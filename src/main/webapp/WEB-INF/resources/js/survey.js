@@ -23,7 +23,7 @@ function checkAllAnswers() {
     var isAllAnswered = true;
     $('.ps-question').each(function () {
         if (!$(this).is(".isAnswered")) {
-            console.print("All answers are not checked");
+            console.log("All answers are not checked");
             isAllAnswered = false;
         }
     });
@@ -32,13 +32,29 @@ function checkAllAnswers() {
     }
 }
 
+function createSurvey() {
+    var survey = JSON.parse($("#survey").val());
+    var properties = survey["Properties"];
+    var questions = survey["Questions"];
+    var qTotal = survey["QuestionTotal"];
+    var $questionGroups = $(".question-group");
+    //var qGroupLen = $questionGroups.length;
+}
+
+function addQuestionGroup() {
+
+}
+
+function answerRow() {
+
+}
 
 /*
 function handleQuestions() {
     var answerID, answerName;
     var q, a = 0;
     $(this).find(".ps-question").each(function () {
-        console.print(this);
+        console.log(this);
         $(this).find(".ps-answer").each(function () {
             answerName = "r-group-" + q;
             answerID = "ps-a-" + a;

@@ -45,9 +45,53 @@
         <div class="row ps-feature">
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
+                    <c:set var="hasEvaluation" value="${hasEvaluation}"/>
                     <div class="ps-well">
                         <%--<!-- Learn Sidebar -->--%>
-                        <%@include file="learn-sidebar.html" %>
+                            <h2>To Do:<hr></h2>
+                            <c:choose>
+                                <c:when test="${hasEvaluation == true and hasSurvey == true and hasHasbit == true and hasHabit == true}">
+                                    <h3>Good Job! You currently have no todos.</h3>
+                                </c:when>
+                                <c:otherwise>
+
+                                    <c:choose>
+                                        <!-- Set Goal -->
+                                        <c:when test="${hasGoal == false}">
+                                            <div class="center">
+                                                <a class="button-enroll button fadein" id="button-goal"
+                                                   href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                                </a>
+                                            </div>
+                                        </c:when>
+                                        <!-- Do Daily Evaluation -->
+                                        <c:when test="${hasEvaluation == false}">
+                                            <div class="center">
+                                                <a class="button-enroll button fadein" id="button-evaluation"
+                                                   href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
+                                                </a>
+                                            </div>
+                                        </c:when>
+                                        <!-- Do Survey -->
+                                        <c:when test="${hasEvaluation == false}">
+                                            <div class="center">
+                                                <a class="button-enroll button fadein" id="button-survey"
+                                                   href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                                </a>
+                                            </div>
+                                        </c:when>
+                                        <%--Do Habit--%>
+                                        <c:when test="${hasHabit == false}">
+                                            <div class="center">
+                                                <a class="button-enroll button fadein" id="button-habit"
+                                                   href="${contextPath}/learn/${courseKey}/habit"><span>Set Habit!</span>
+                                                </a>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
+
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
@@ -57,7 +101,6 @@
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- If Daily Evaluation has not been completed: -->--%>
                     <input type="hidden" value="${hasEvaluation}" id="hasEvaluation" />
-                    <c:set var="hasEvaluation" value="${hasEvaluation}"/>
                     <c:choose>
                         <c:when test="${hasEvaluation == 'false'}">
                             <%--<!-- Content Start-->--%>
