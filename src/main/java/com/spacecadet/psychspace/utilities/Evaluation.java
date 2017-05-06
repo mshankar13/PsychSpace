@@ -48,7 +48,7 @@ public class Evaluation {
     private String evaluationKey;
 
     /**
-     * score of the evaluation
+     * percentage score of the evaluation
      * what the user did divide by the goal
      */
     private String score;
