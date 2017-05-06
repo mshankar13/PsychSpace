@@ -77,7 +77,7 @@
                                     <form:hidden path="date" value=""/>
                                     <form:hidden path="courseKey" value="${courseKey}"/>
                                     <form:hidden path="evaluationKey" value=""/>
-                                    <form:hidden path="score" value=""/>
+                                    <form:hidden path="score" value="${goal.unit}"/>
                                     <%--<!-- Question Start -->--%>
                                     <div class="ps-question">
                                         <%--<!-- Question Text -->--%>
@@ -129,14 +129,14 @@
                                     <table class="ps-table">
                                         <tr>
                                             <th class="ps-table-key"><h4>Date</h4></th>
-                                            <th class="ps-table-key"><h4>[Unit] Completed</h4></th>
+                                            <th class="ps-table-key"><h4>How did I do</h4></th>
                                             <th class="ps-table-key"><h4>Feelings</h4></th>
                                         </tr>
                                         <%--<!-- Load all evaluations for the current user -->--%>
                                             <c:forEach items="${evaluationList}" var="singleEvaluation">
                                         <tr>
                                             <td class="ps-table-row">${singleEvaluation.date}</td>
-                                            <td class="ps-table-row">${singleEvaluation.rawScore} ${singleEvaluation.unit}</td>
+                                            <td class="ps-table-row">${singleEvaluation.rawScore} / ${singleEvaluation.score}</td>
                                             <td class="ps-table-row"><p>${singleEvaluation.content}</p></td>
                                         </tr>
                                             </c:forEach>

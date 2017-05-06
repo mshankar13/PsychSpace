@@ -64,7 +64,7 @@ public class EvaluationManager {
         Date rawDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(rawDate);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DATE);
         int year = cal.get(Calendar.YEAR);
         String today = month + "/" + day + "/" + year;
