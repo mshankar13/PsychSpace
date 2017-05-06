@@ -151,9 +151,13 @@ public class SurveyManager {
                 updatedSurvey.setProperty("DueDate", survey.getDueDate());
 
                 datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
+                for(Question q : survey.getQuestions().keySet()){
+                    questionManager.deleteQuestion(q.getQuestionKey());
+                }
                 datastore.put(updatedSurvey);
                 txn.commit();
                 survey.setSurveyKey(KeyFactory.keyToString(updatedSurvey.getKey()));
+                questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
             } catch (EntityNotFoundException ex) {
                 ex.printStackTrace();
             }
