@@ -82,6 +82,36 @@ public class SurveyManager {
     }
 
     /**
+     * load user survey for specified course
+     * @param courseKey course key in datastore
+     * @param userKey user key in datastore
+     * @return survey utility object
+     */
+    public Survey loadUserSurvey(String courseKey, String userKey){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query surveyQuery = new Query("Survey").setFilter(userCourseFilter);
+        Entity foundSurvey = datastore.prepare(surveyQuery).asSingleEntity();
+        if (foundSurvey == null) {
+            return null;
+        }
+        Survey survey = new Survey();
+        survey.setSurveyKey(KeyFactory.keyToString(foundSurvey.getKey()));
+        survey.setUserKey(foundSurvey.getProperty("UserKey").toString());
+        survey.setCourseKey(foundSurvey.getProperty("CourseKey").toString());
+        survey.setCourseTitle(foundSurvey.getProperty("CourseTitle").toString());
+        survey.setTitle(foundSurvey.getProperty("Title").toString());
+        survey.setDueDate(foundSurvey.getProperty("DueDate").toString());
+        String key = KeyFactory.keyToString(foundSurvey.getKey());
+        HashMap<Question, ArrayList<Answer>> questions = questionManager.loadQuestions(key);
+        survey.setQuestions(questions);
+        return survey;
+    }
+
+    /**
      * instructor create new survey to datastore
      * @param survey new survey
      */
@@ -114,12 +144,16 @@ public class SurveyManager {
         try {
             try {
                 Entity updatedSurvey = datastore.get(KeyFactory.stringToKey(survey.getSurveyKey()));
+                updatedSurvey.setProperty("UserKey", survey.getUserKey());
+                updatedSurvey.setProperty("CourseKey", survey.getCourseKey());
+                updatedSurvey.setProperty("CourseTitle", survey.getCourseTitle());
                 updatedSurvey.setProperty("Title", survey.getTitle());
                 updatedSurvey.setProperty("DueDate", survey.getDueDate());
 
                 datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
                 datastore.put(updatedSurvey);
                 txn.commit();
+                survey.setSurveyKey(KeyFactory.keyToString(updatedSurvey.getKey()));
             } catch (EntityNotFoundException ex) {
                 ex.printStackTrace();
             }

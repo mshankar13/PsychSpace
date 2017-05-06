@@ -52,8 +52,8 @@ public class GoalManager {
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
         Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
-        Query enrollQuery = new Query("Goal").setFilter(userCourseFilter);
-        Entity foundGoal = datastore.prepare(enrollQuery).asSingleEntity();
+        Query goalQuery = new Query("Goal").setFilter(userCourseFilter);
+        Entity foundGoal = datastore.prepare(goalQuery).asSingleEntity();
         if (foundGoal == null) {
             return null;
         }

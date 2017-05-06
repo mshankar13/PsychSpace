@@ -84,7 +84,7 @@ public class InstructorSurveyController {
         model.addObject("survey", survey);
         model.addObject("courses", courses);
 
-        return "redirect:/instructor/{courseKey}/survey";
+        return "redirect:/instructor/"+courseKey+"/survey";
     }
 
     /**
