@@ -58,7 +58,7 @@
                     <!-- Learn Navbar -->
                     <ul class="nav nav-tabs">
                         <li ><a href="${contextPath}/learn/${courseKey}">Home</a></li>
-                        <li class="active"><a href="${contextPath}/learn/${courseKey}/goal">Build My Habit</a></li>
+                        <li class="active"><a href="${contextPath}/learn/${courseKey}/habit">Build My Habit</a></li>
                         <li><a href="${contextPath}/learn/${courseKey}/cues">Cues</a></li>
                         <li><a href="${contextPath}/learn/${courseKey}/videos">Videos</a></li>
                         <li><a href="${contextPath}/learn/${courseKey}/forum">Forum</a></li>
@@ -89,7 +89,7 @@
                                             <form:input class="col-md-2" type="text" path="unit" placeholder="Unit" id="unit"/>
                                             <span class="col-md-2">per day.</span>
                                             <form:hidden path="goalKey" value=""/>
-                                            <form:hidden path="username" value=""/>
+                                            <form:hidden path="userName" value=""/>
                                             <form:hidden path="userKey" value=""/>
                                             <form:hidden path="courseKey" value="${courseKey}"/>
                                         </div>

@@ -43,7 +43,7 @@ public class HabitController {
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
         ModelAndView model = new ModelAndView();
-        model.setViewName("learnGoal");
+        model.setViewName("learnHabit");
         model.addObject("goal", goal);
         model.addObject("habit", habit);
         model.addObject("cue", cue);
