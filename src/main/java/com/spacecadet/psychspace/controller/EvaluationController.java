@@ -31,10 +31,12 @@ public class EvaluationController {
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
-        Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
+        Date today = new Date();
+        Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
-        model.addObject("goal", goal);
+        model.addObject("goal", userGoal);
+        model.addObject("todayDate", today.toString());
         if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
             model.addObject("hasEvaluation", "true");
         } else {

@@ -64,7 +64,7 @@
                         <c:when test="${hasEvaluation == 'false'}">
                             <%--<!-- Content Start-->--%>
                             <div class="ps-well">
-                                <h2>Daily Evaluation for [Date]
+                                <h2>Daily Evaluation for ${todayDate}
                                     <hr>
                                 </h2>
                                 <br>
