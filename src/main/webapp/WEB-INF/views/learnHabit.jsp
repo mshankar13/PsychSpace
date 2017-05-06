@@ -16,18 +16,13 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
           rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <%--Customized--%>
-    <script src="${contextPath}/resources/js/scrollreveal.js"></script>
-    <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/learnNavbar.js"></script>
-    <script src="${contextPath}/resources/js/raphael.min.js"></script>
-    <script src="${contextPath}/resources/js/raphael.icons.min.js"></script>
-    <script src="${contextPath}/resources/js/wheelnav.min.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -43,9 +38,10 @@
     <div class="center page-banner">
         <img class="img-responsive" src="http://placehold.it/2000x500" alt="">
         <!-- Course Title -->
-        <h1 class="absolute-text">[Course Title]</h1>
+        <h1 class="absolute-text">${courseTitle}</h1>
     </div>
     <div class="ps-feature-content">
+        <input type="hidden" value="${courseStartDate}" id="course-start-date">
         <div class="row ps-feature">
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
@@ -56,13 +52,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Learn Navbar -->
-                    <ul class="nav nav-tabs">
-                        <li ><a href="${contextPath}/learn/${courseKey}">Home</a></li>
-                        <li class="active"><a href="${contextPath}/learn/${courseKey}/goal">Build My Habit</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/cues">Cues</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/videos">Videos</a></li>
-                        <li><a href="${contextPath}/learn/${courseKey}/forum">Forum</a></li>
-                    </ul>
+                    <%@include file="learn-navbar.html" %>
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->
@@ -80,6 +70,8 @@
                                     </div>
                                     <hr>
                                     <input type="hidden" value="${goal}" id="goal">
+                                    <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
+                                    <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
                                     <form:form class="form-horizontal"  method="post"
                                                modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
                                         <div class="form-group ps-well">
@@ -89,12 +81,12 @@
                                             <form:input class="col-md-2" type="text" path="unit" placeholder="Unit" id="unit"/>
                                             <span class="col-md-2">per day.</span>
                                             <form:hidden path="goalKey" value=""/>
-                                            <form:hidden path="username" value=""/>
+                                            <form:hidden path="userName" value=""/>
                                             <form:hidden path="userKey" value=""/>
                                             <form:hidden path="courseKey" value="${courseKey}"/>
                                         </div>
                                         <div class="right">
-                                            <button type="submit" class="btn-primary">Save</button>
+                                            <button type="submit" class="ps-btn-primary">Save</button>
                                         </div>
                                     </form:form>
                                 </div>
@@ -168,6 +160,10 @@
 <%@include file="footer.html" %>
 <script src="${contextPath}/resources/js/navbar.js"></script>
 <script src="${contextPath}/resources/js/learn.js"></script>
+<script src="${contextPath}/resources/js/learnNavbar.js"></script>
+<script src="${contextPath}/resources/js/raphael.min.js"></script>
+<script src="${contextPath}/resources/js/raphael.icons.min.js"></script>
+<script src="${contextPath}/resources/js/wheelnav.min.js"></script>
 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
 <script src="${contextPath}/resources/js/animations.js"></script>
 

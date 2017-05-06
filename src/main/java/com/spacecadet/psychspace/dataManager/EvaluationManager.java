@@ -6,6 +6,7 @@ import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,15 +61,21 @@ public class EvaluationManager {
      * @return true/false
      */
     public boolean hasTodaysEvaluation(String userKey){
-        Date today = new Date();
+        Date rawDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(rawDate);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int year = cal.get(Calendar.YEAR);
+        String today = month + "/" + day + "/" + year;
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("AuthorKey", Query.FilterOperator.EQUAL, userKey);
         Query evaluationQuery = new Query("Evaluation").setFilter(propertyFilter1);
         List<Entity> userEvaluations =
                 datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
         for(Entity entity : userEvaluations){
-            Date date = helper.stringToDate(entity.getProperty("Date").toString());
-            if(date.equals(today)){
+            String date = entity.getProperty("Date").toString();
+            if(date.equals(today.toString())){
                 return true;
             }
         }

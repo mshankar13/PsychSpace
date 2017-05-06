@@ -1,20 +1,20 @@
 $(document).ready(function(){
+
     setActiveLearnNav();
 });
 
 function setActiveLearnNav() {
+    var today = $.datepicker.formatDate('mm/dd/yy', new Date());
+    var startDate = $('#course-start-date').val();
+
+    if (Date.parse(startDate) > Date.parse(today)) {
+        $("#nav-learn-evaluations").hide();
+    }
+
     var url = window.location.href;
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     console.log(url);
-    if (url == "") {
-        $("#nav-learn-progress").addClass("active");
-        $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
-        $("#nav-learn-evaluations").removeClass("active");
-        $("#nav-learn-videos").removeClass("active");
-        $("#nav-learn-forum").removeClass("active");
-    }
-    else if (url == "habit") {
+    if (url == "habit") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").addClass("active");
         $("#nav-learn-cues").removeClass("active");
@@ -54,8 +54,16 @@ function setActiveLearnNav() {
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").addClass("active");
     }
-    else{
+    else if (url == "survey") {
         $("#nav-learn-progress").removeClass("active");
+        $("#nav-learn-habit").removeClass("active");
+        $("#nav-learn-cues").removeClass("active");
+        $("#nav-learn-evaluations").removeClass("active");
+        $("#nav-learn-videos").removeClass("active");
+        $("#nav-learn-forum").removeClass("active");
+    }
+    else{
+        $("#nav-learn-progress").addClass("active");
         $("#nav-learn-habit").removeClass("active");
         $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").removeClass("active");

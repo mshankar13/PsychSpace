@@ -1,12 +1,11 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.CueManager;
+import com.spacecadet.psychspace.dataManager.DueDatesManager;
 import com.spacecadet.psychspace.dataManager.GoalManager;
 import com.spacecadet.psychspace.dataManager.HabitManager;
-import com.spacecadet.psychspace.utilities.Cue;
-import com.spacecadet.psychspace.utilities.Goal;
-import com.spacecadet.psychspace.utilities.Habit;
-import com.spacecadet.psychspace.utilities.User;
+import com.spacecadet.psychspace.utilities.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HabitController {
 
+    private CourseManager courseManager = new CourseManager();
     private GoalManager goalManager = new GoalManager();
     private HabitManager habitManager = new HabitManager();
     private CueManager cueManager = new CueManager();
+    private DueDatesManager dueDatesManager = new DueDatesManager();
 
     /**
      * user habit page
@@ -31,6 +32,7 @@ public class HabitController {
      */
     @RequestMapping(value = "/learn/{courseKey}/habit", method = RequestMethod.GET)
     public ModelAndView loadGoal(@PathVariable("courseKey") String courseKey){
+        DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
         Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         if(goal == null){
             goal = new Goal();
@@ -43,11 +45,15 @@ public class HabitController {
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
         ModelAndView model = new ModelAndView();
-        model.setViewName("learnGoal");
+        Course course = courseManager.loadSingleCourse(courseKey);
+        model.addObject("courseTitle", course.getTitle());
+        model.addObject("courseStartDate", course.getStartDate());
+        model.setViewName("learnHabit");
         model.addObject("goal", goal);
         model.addObject("habit", habit);
         model.addObject("cue", cue);
         model.addObject("courseKey", courseKey);
+        model.addObject("dueDates", dueDates);
 
         return model;
     }
@@ -60,16 +66,21 @@ public class HabitController {
     @RequestMapping(value = "/learn/{courseKey}/habit/submitGoal", method = RequestMethod.POST)
     public String submitGoal(@ModelAttribute("goal") Goal goal, @PathVariable("courseKey") String courseKey){
         User currUser = WelcomeController.currUser;
-        Goal goal1 = goalManager.loadUserGoal(courseKey, currUser.getUserKey());
-        goal1.setUserKey(currUser.getUserKey());
-        goal1.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
-        goal1.setGoalName(goal1.getUnit() + " " + goal1.getValue() + " per day.");
-        if(goal1 == null){
+        Goal myGoal = goalManager.loadUserGoal(courseKey, currUser.getUserKey());
+        if(myGoal == null){
+            goal.setUserKey(currUser.getUserKey());
+            goal.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
+            goal.setCourseKey(courseKey);
             goalManager.addGoal(goal);
         } else {
-            goalManager.editGoal(goal);
+            myGoal.setUserKey(currUser.getUserKey());
+            myGoal.setUserName(currUser.getFirstName() + " " + currUser.getLastName());
+            myGoal.setGoalName(goal.getGoalName());
+            myGoal.setUnit(goal.getUnit());
+            myGoal.setValue(goal.getValue());
+            goalManager.editGoal(myGoal);
         }
 
-        return "redirect:/learn/"+courseKey+"/goal";
+        return "redirect:/learn/"+courseKey+"/habit";
     }
 }

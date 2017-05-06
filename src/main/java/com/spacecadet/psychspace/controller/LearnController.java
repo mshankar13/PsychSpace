@@ -32,7 +32,6 @@ public class LearnController {
      */
     @RequestMapping(value = "/learn", method = RequestMethod.GET)
     public ModelAndView learn() {
-        ArrayList<Course> courses = courseManager.loadUserCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learn");
         model.addObject("myCurrCourses", helper.shortenCourseList(

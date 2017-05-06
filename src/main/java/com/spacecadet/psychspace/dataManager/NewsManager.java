@@ -167,8 +167,9 @@ public class NewsManager {
     public Article getFeatured(ArrayList<Article> allNews) {
         ArrayList<Article> potentialFeatured = new ArrayList<>();
         Date lastWeek = new DateTime().minusDays(7).toDate();
-        Date today = new Date();
-        System.out.println(today.after(lastWeek));
+        if (allNews.isEmpty()){
+            return null;
+        }
         for (Article article : allNews) {
             Date date = helper.stringToDate(article.getDate());
             if (date.after(lastWeek) == true) {

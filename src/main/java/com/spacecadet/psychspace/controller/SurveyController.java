@@ -1,7 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.SurveyManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Survey;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ public class SurveyController {
 
     private UserManager userManager = new UserManager();
     private SurveyManager surveyManager = new SurveyManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * all visit to survey page
@@ -32,6 +35,9 @@ public class SurveyController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnSurvey");
         model.addObject("survey", survey);
+        Course course = courseManager.loadSingleCourse(courseKey);
+        model.addObject("courseTitle", course.getTitle());
+        model.addObject("courseStartDate", course.getStartDate());
 
         return model;
     }
