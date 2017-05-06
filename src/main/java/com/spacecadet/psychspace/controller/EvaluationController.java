@@ -2,6 +2,7 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.EvaluationManager;
 import com.spacecadet.psychspace.dataManager.GoalManager;
+import com.spacecadet.psychspace.dataManager.SplitGoalManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.Goal;
@@ -24,6 +25,7 @@ public class EvaluationController {
     private UserManager userManager = new UserManager();
     private GoalManager goalManager = new GoalManager();
     private EvaluationManager evaluationManager = new EvaluationManager();
+    private SplitGoalManager splitGoalManager = new SplitGoalManager();
 
     /**
      * user evaluation page
