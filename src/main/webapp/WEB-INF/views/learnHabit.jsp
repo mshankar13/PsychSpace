@@ -75,8 +75,8 @@
                                     </div>
                                     <hr>
                                     <input type="hidden" value="${goal}" id="goal">
-                                    <input type="hidden" value="${dueDates.goalDueDate} id="goal-due-date">
-                                    <input type="hidden" value="${dueDates.habitDueDate} id="habit-due-date">
+                                    <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
+                                    <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
                                     <form:form class="form-horizontal"  method="post"
                                                modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
                                         <div class="form-group ps-well">

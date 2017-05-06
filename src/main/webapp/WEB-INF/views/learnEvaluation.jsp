@@ -139,7 +139,7 @@
                                         <tr>
                                             <td class="ps-table-row">${singleEvaluation.date}</td>
                                             <td class="ps-table-row">${singleEvaluation.score}%</td>
-                                            <td class="ps-table-row">${weeklyGoal.value}</td>
+                                            <td class="ps-table-row">${weeklyGoalValue}</td>
                                             <td class="ps-table-row">${goal.value}</td>
                                             <td class="ps-table-row"><p>${singleEvaluation.content}</p></td>
                                         </tr>
