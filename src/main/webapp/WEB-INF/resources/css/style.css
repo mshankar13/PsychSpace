@@ -72,6 +72,10 @@ span {
     min-height: 85px;
 }
 
+.ps-notice {
+    color: var(--dogwood-color);
+}
+
 
 /*---------------- HTML WRAPPERS ----------------*/
 

@@ -24,9 +24,11 @@ public class ProgressController {
      */
     @RequestMapping(value = "/learn/{courseKey}", method = RequestMethod.GET)
     public ModelAndView learnCourse(@PathVariable("courseKey") String courseKey) {
-        Course course = courseManager.loadSingleCourse(courseKey);
         ModelAndView model = new ModelAndView();
         model.setViewName("learnProgress");
+        Course course = courseManager.loadSingleCourse(courseKey);
+        model.addObject("courseTitle", course.getTitle());
+        model.addObject("courseStartDate", course.getStartDate());
 
         return model;
     }

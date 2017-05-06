@@ -23,12 +23,6 @@
           rel="stylesheet"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <%--Customized--%>
-    <script src="${contextPath}/resources/js/scrollreveal.js"></script>
-    <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/learnNavbar.js"></script>
-    <script src="${contextPath}/resources/js/raphael.min.js"></script>
-    <script src="${contextPath}/resources/js/raphael.icons.min.js"></script>
-    <script src="${contextPath}/resources/js/wheelnav.min.js"></script>
     <link href='${contextPath}/resources/css/animations.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/ps-row-col.css' rel='stylesheet'>
@@ -47,6 +41,7 @@
         <h1 class="absolute-text">${courseTitle}</h1>
     </div>
     <div class="ps-feature-content">
+        <input type="hidden" value="${courseStartDate}" id="course-start-date">
         <div class="row ps-feature">
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
@@ -91,7 +86,7 @@
                                             <form:hidden path="courseKey" value="${courseKey}"/>
                                         </div>
                                         <div class="right">
-                                            <button type="submit" class="btn-primary">Save</button>
+                                            <button type="submit" class="ps-btn-primary">Save</button>
                                         </div>
                                     </form:form>
                                 </div>
@@ -165,6 +160,10 @@
 <%@include file="footer.html" %>
 <script src="${contextPath}/resources/js/navbar.js"></script>
 <script src="${contextPath}/resources/js/learn.js"></script>
+<script src="${contextPath}/resources/js/learnNavbar.js"></script>
+<script src="${contextPath}/resources/js/raphael.min.js"></script>
+<script src="${contextPath}/resources/js/raphael.icons.min.js"></script>
+<script src="${contextPath}/resources/js/wheelnav.min.js"></script>
 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
 <script src="${contextPath}/resources/js/animations.js"></script>
 

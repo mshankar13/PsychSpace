@@ -1,8 +1,16 @@
 $(document).ready(function(){
+
     setActiveLearnNav();
 });
 
 function setActiveLearnNav() {
+    var today = $.datepicker.formatDate('mm/dd/yy', new Date());
+    var startDate = $('#course-start-date').val();
+
+    if (Date.parse(startDate) > Date.parse(today)) {
+        $("#nav-learn-evaluations").hide();
+    }
+
     var url = window.location.href;
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     console.log(url);

@@ -1,7 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
+import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.dataManager.VideoManager;
+import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class VideoController {
 
     private UserManager userManager = new UserManager();
     private VideoManager videoManager = new VideoManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * all visit to video page
@@ -41,6 +44,9 @@ public class VideoController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnVideos");
         model.addObject("videos", videos);
+        Course course = courseManager.loadSingleCourse(courseKey);
+        model.addObject("courseTitle", course.getTitle());
+        model.addObject("courseStartDate", course.getStartDate());
 
         return model;
     }

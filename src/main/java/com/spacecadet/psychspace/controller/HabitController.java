@@ -37,7 +37,6 @@ public class HabitController {
         if(goal == null){
             goal = new Goal();
         }
-        String courseTitle = courseManager.loadSingleCourse(courseKey).getTitle();
         Habit habit = habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey);
         Cue cue;
         if(habit == null){
@@ -46,8 +45,10 @@ public class HabitController {
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
         ModelAndView model = new ModelAndView();
+        Course course = courseManager.loadSingleCourse(courseKey);
+        model.addObject("courseTitle", course.getTitle());
+        model.addObject("courseStartDate", course.getStartDate());
         model.setViewName("learnHabit");
-        model.addObject("courseTitle", courseTitle);
         model.addObject("goal", goal);
         model.addObject("habit", habit);
         model.addObject("cue", cue);

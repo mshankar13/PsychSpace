@@ -79,7 +79,10 @@ public class EvaluationController {
         evaluation.setDate(today);
         Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         double weeklyGoalValue = splitGoalManager.getSplitGoalValue(courseKey, userGoal);
-        double score = Double.parseDouble(evaluation.getRawScore())/weeklyGoalValue * 100.00;
+        double score = (Double.parseDouble(evaluation.getRawScore())/weeklyGoalValue) * 100.00;
+        if(score >= 100){
+            score = 100;
+        }
         DecimalFormat df = new DecimalFormat("#.00");
         evaluation.setScore(Double.toString(Double.valueOf(df.format(score))));
         evaluationManager.addEvaluation(evaluation);

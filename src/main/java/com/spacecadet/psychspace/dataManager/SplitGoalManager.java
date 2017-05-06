@@ -24,6 +24,9 @@ public class SplitGoalManager {
      * @return new goal with weekly value
      */
     public double getSplitGoalValue(String courseKey, Goal goal){
+        if(goal == null){
+            return 0;
+        }
         Course course = courseManager.loadSingleCourse(courseKey);
         Date startDate = helper.stringToDate(course.getStartDate());
         Date endDate = helper.stringToDate(course.getEndDate());
@@ -31,13 +34,13 @@ public class SplitGoalManager {
         double value = Integer.parseInt(goal.getValue());
         double totalWeeks = getTotalWeeks(startDate, endDate);
         int currWeek = 0;
-        while(today.before(endDate)){
+        while(today.after(startDate) && today.before(endDate)){
             currWeek++;
             Date nextWeek= new Date(startDate.getTime()+7*24*60*60*1000);
             if(today.before(nextWeek)){
                 DecimalFormat df = new DecimalFormat("#.00");
-                double time = value/(currWeek/totalWeeks);
-                return Double.valueOf(df.format(time));
+                double newValue = value/(totalWeeks/currWeek);
+                return Double.valueOf(df.format(newValue));
             }
         }
         return 0;
