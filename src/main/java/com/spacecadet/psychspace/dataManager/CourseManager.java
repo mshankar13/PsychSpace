@@ -292,9 +292,11 @@ public class CourseManager {
             Key key = KeyFactory.stringToKey(courseKey);
             Entity course = datastore.get(key);
             String enrollDate = course.getProperty("EnrollDate").toString();
+            int currSize = Integer.parseInt(course.getProperty("CurrSize").toString());
+            int capacity = Integer.parseInt(course.getProperty("Capacity").toString());
             Date today = new Date();
             Date enrollDay = helper.stringToDate(enrollDate);
-            if (today.after(enrollDay)) {
+            if (today.after(enrollDay) || currSize == capacity) {
                 Transaction txn = datastore.beginTransaction();
                 try {
                     course.setProperty("Status", "closed");
