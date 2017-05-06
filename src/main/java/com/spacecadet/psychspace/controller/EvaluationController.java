@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -74,8 +75,12 @@ public class EvaluationController {
         evaluation.setAuthorKey(WelcomeController.currUser.getUserKey());
         evaluation.setAuthor(WelcomeController.currUser.getFirstName() + " " + WelcomeController.currUser.getLastName());
         evaluation.setDate(today);
+        Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
+        Goal weelyGoal = splitGoalManager.getSplitGoal(courseKey, userGoal);
+        double score = Double.parseDouble(evaluation.getRawScore())/Double.parseDouble(weelyGoal.getValue()) * 100.00;
+        DecimalFormat df = new DecimalFormat("#.00");
+        evaluation.setScore(Double.toString(Double.valueOf(df.format(score))));
         evaluationManager.addEvaluation(evaluation);
-
         return "redirect:/learn/"+courseKey+"/evaluation";
     }
 
