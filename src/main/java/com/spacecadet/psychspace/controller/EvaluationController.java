@@ -52,6 +52,8 @@ public class EvaluationController {
         } else {
             model.addObject("hasEvaluation", "false");
         }
+        Goal weeklyGoal = splitGoalManager.getSplitGoal(courseKey, userGoal);
+        model.addObject("weeklyGoal", weeklyGoal);
         model.addObject("evaluation", new Evaluation());
         model.addObject("evaluationList", evaluationManager.loadUserEvaluations(courseKey, WelcomeController.currUser.getUserKey()));
 
@@ -76,8 +78,8 @@ public class EvaluationController {
         evaluation.setAuthor(WelcomeController.currUser.getFirstName() + " " + WelcomeController.currUser.getLastName());
         evaluation.setDate(today);
         Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
-        Goal weelyGoal = splitGoalManager.getSplitGoal(courseKey, userGoal);
-        double score = Double.parseDouble(evaluation.getRawScore())/Double.parseDouble(weelyGoal.getValue()) * 100.00;
+        Goal weeklyGoal = splitGoalManager.getSplitGoal(courseKey, userGoal);
+        double score = Double.parseDouble(evaluation.getRawScore())/Double.parseDouble(weeklyGoal.getValue()) * 100.00;
         DecimalFormat df = new DecimalFormat("#.00");
         evaluation.setScore(Double.toString(Double.valueOf(df.format(score))));
         evaluationManager.addEvaluation(evaluation);
