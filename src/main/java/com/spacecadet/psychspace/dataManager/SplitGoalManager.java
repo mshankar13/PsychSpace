@@ -23,7 +23,7 @@ public class SplitGoalManager {
      * @param goal goal
      * @return new goal with weekly value
      */
-    public Goal getSplitGoal(String courseKey, Goal goal){
+    public double getSplitGoalValue(String courseKey, Goal goal){
         Course course = courseManager.loadSingleCourse(courseKey);
         Date startDate = helper.stringToDate(course.getStartDate());
         Date endDate = helper.stringToDate(course.getEndDate());
@@ -37,11 +37,10 @@ public class SplitGoalManager {
             if(today.before(nextWeek)){
                 DecimalFormat df = new DecimalFormat("#.00");
                 double time = value/(currWeek/totalWeeks);
-                goal.setValue(Double.toString(Double.valueOf(df.format(time))));
-                return goal;
+                return Double.valueOf(df.format(time));
             }
         }
-        return null;
+        return 0;
     }
 
     /**
