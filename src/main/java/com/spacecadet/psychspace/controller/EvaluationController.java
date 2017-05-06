@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -31,12 +32,18 @@ public class EvaluationController {
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
-        Date today = new Date();
+        Date rawDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(rawDate);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DATE);
+        int year = cal.get(Calendar.YEAR);
+        String today = month + "/" + day + "/" + year;
         Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
         model.addObject("goal", userGoal);
-        model.addObject("todayDate", today.toString());
+        model.addObject("todayDate", today);
         if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
             model.addObject("hasEvaluation", "true");
         } else {
@@ -55,10 +62,16 @@ public class EvaluationController {
      */
     @RequestMapping(value = "learn/{courseKey}/evaluation/submit", method = RequestMethod.POST)
     public String submitEvaluation(@ModelAttribute("evaluation") Evaluation evaluation, @PathVariable("courseKey") String courseKey){
-        Date today = new Date();
+        Date rawDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(rawDate);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DATE);
+        int year = cal.get(Calendar.YEAR);
+        String today = month + "/" + day + "/" + year;
         evaluation.setAuthorKey(WelcomeController.currUser.getUserKey());
         evaluation.setAuthor(WelcomeController.currUser.getFirstName() + " " + WelcomeController.currUser.getLastName());
-        evaluation.setDate(today.toString());
+        evaluation.setDate(today);
         evaluationManager.addEvaluation(evaluation);
 
         return "redirect:/learn/"+courseKey+"/evaluation";
