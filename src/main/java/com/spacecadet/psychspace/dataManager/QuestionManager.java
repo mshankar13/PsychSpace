@@ -97,15 +97,20 @@ public class QuestionManager {
 
     /**
      * deletes a question from datastore
-     * @param questionKey question key
+     * @param surveyKey survey key in datastore
      */
-    public void deleteQuestion(String questionKey) {
+    public void deleteQuestion(String surveyKey) {
         Transaction txn = datastore.beginTransaction();
-
         try {
-            datastore.delete(KeyFactory.stringToKey(questionKey));
+            Query.Filter questionFilter =
+                    new Query.FilterPredicate("SurveyKey", Query.FilterOperator.EQUAL, surveyKey);
+            Query questionQuery = new Query("Question").setFilter(questionFilter);
+            List<Entity> surveyQuestions =
+                    datastore.prepare(questionQuery).asList(FetchOptions.Builder.withDefaults());
+            for(Entity entity : surveyQuestions){
+                datastore.delete(entity.getKey());
+            }
             txn.commit();
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();

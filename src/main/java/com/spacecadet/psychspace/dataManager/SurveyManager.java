@@ -151,9 +151,7 @@ public class SurveyManager {
                 updatedSurvey.setProperty("DueDate", survey.getDueDate());
 
                 datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
-                for(Question q : survey.getQuestions().keySet()){
-                    questionManager.deleteQuestion(q.getQuestionKey());
-                }
+                questionManager.deleteQuestion(survey.getSurveyKey());
                 datastore.put(updatedSurvey);
                 txn.commit();
                 survey.setSurveyKey(KeyFactory.keyToString(updatedSurvey.getKey()));

@@ -75,14 +75,12 @@ public class InstructorSurveyController {
     @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.POST)
     public String editSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String surveyStr) {
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
+        Survey initSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
         Survey survey = helperManager.surveyStringToSurvey(surveyStr);
         survey.setCourseKey(courseKey);
         survey.setUserKey(WelcomeController.currUser.getUserKey());
+        survey.setSurveyKey(initSurvey.getSurveyKey());
         surveyManager.editSurvey(survey);
-        ModelAndView model = new ModelAndView();
-        model.setViewName("instructorEditSurvey");
-        model.addObject("survey", survey);
-        model.addObject("courses", courses);
 
         return "redirect:/instructor/"+courseKey+"/survey";
     }

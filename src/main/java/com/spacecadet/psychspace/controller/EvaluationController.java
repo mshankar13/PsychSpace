@@ -1,9 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.EvaluationManager;
-import com.spacecadet.psychspace.dataManager.GoalManager;
-import com.spacecadet.psychspace.dataManager.SplitGoalManager;
-import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.Goal;
 import com.spacecadet.psychspace.utilities.User;
@@ -27,6 +24,8 @@ public class EvaluationController {
     private GoalManager goalManager = new GoalManager();
     private EvaluationManager evaluationManager = new EvaluationManager();
     private SplitGoalManager splitGoalManager = new SplitGoalManager();
+    private HabitManager habitManager = new HabitManager();
+    private SurveyManager surveyManager = new SurveyManager();
 
     /**
      * user evaluation page
@@ -35,6 +34,10 @@ public class EvaluationController {
      */
     @RequestMapping(value = "/learn/{courseKey}/evaluation", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey){
+        String hasHabit = "false";
+        String hasGoal = "false";
+        String hasEvaluation = "false";
+        String hasSurvey = "false";
         Date rawDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(rawDate);
@@ -47,15 +50,26 @@ public class EvaluationController {
         model.setViewName("learnEvaluation");
         model.addObject("goal", userGoal);
         model.addObject("todayDate", today);
-        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
-            model.addObject("hasEvaluation", "true");
-        } else {
-            model.addObject("hasEvaluation", "false");
-        }
         double weeklyGoalValue = splitGoalManager.getSplitGoalValue(courseKey, userGoal);
         model.addObject("weeklyGoalValue", weeklyGoalValue);
         model.addObject("evaluation", new Evaluation());
         model.addObject("evaluationList", evaluationManager.loadUserEvaluations(courseKey, WelcomeController.currUser.getUserKey()));
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+            hasEvaluation = "true";
+        }
+        if(habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey) != null){
+            hasHabit = "true";
+        }
+        if(userGoal != null){
+            hasGoal = "true";
+        }
+        if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasSurvey = "true";
+        }
+        model.addObject("hasSurvey", hasSurvey);
+        model.addObject("hasEvaluation", hasEvaluation);
+        model.addObject("hasHabit", hasHabit);
+        model.addObject("hasGoal", hasGoal);
 
         return model;
     }
