@@ -28,7 +28,7 @@ public class Survey {
     private String surveyKey;
 
     /**
-     * key of the instructor in user entity created by datastore
+     * key of the instructor/student in user entity created by datastore
      */
     private String userKey;
 

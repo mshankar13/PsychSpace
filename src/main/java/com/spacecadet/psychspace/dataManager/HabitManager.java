@@ -52,8 +52,8 @@ public class HabitManager {
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
         Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
-        Query dueDatesQuery = new Query("Habit").setFilter(userCourseFilter);
-        Entity foundHabit = datastore.prepare(dueDatesQuery).asSingleEntity();
+        Query habitQuery = new Query("Habit").setFilter(userCourseFilter);
+        Entity foundHabit = datastore.prepare(habitQuery).asSingleEntity();
         if(foundHabit == null){
             return null;
         }

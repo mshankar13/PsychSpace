@@ -1,10 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.CourseManager;
-import com.spacecadet.psychspace.dataManager.CueManager;
-import com.spacecadet.psychspace.dataManager.DueDatesManager;
-import com.spacecadet.psychspace.dataManager.GoalManager;
-import com.spacecadet.psychspace.dataManager.HabitManager;
+import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +20,8 @@ public class HabitController {
     private HabitManager habitManager = new HabitManager();
     private CueManager cueManager = new CueManager();
     private DueDatesManager dueDatesManager = new DueDatesManager();
+    private EvaluationManager evaluationManager = new EvaluationManager();
+    private SurveyManager surveyManager = new SurveyManager();
 
     /**
      * user habit page
@@ -32,19 +30,29 @@ public class HabitController {
      */
     @RequestMapping(value = "/learn/{courseKey}/habit", method = RequestMethod.GET)
     public ModelAndView loadGoal(@PathVariable("courseKey") String courseKey){
+        String hasGoal = "true";
+        String hasHabit = "false";
+        String hasEvaluation = "false";
+        String hasSurvey = "false";
+        ModelAndView model = new ModelAndView();
         DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
         Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
         if(goal == null){
+            hasGoal = "false";
             goal = new Goal();
         }
         Habit habit = habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey);
         Cue cue;
         if(habit == null){
             cue = new Cue();
+
         } else {
+            hasHabit = "true";
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
-        ModelAndView model = new ModelAndView();
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+            hasEvaluation = "true";
+        }
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
@@ -54,6 +62,13 @@ public class HabitController {
         model.addObject("cue", cue);
         model.addObject("courseKey", courseKey);
         model.addObject("dueDates", dueDates);
+        model.addObject("hasEvaluation", hasEvaluation);
+        model.addObject("hasHabit", hasHabit);
+        model.addObject("hasGoal", hasGoal);
+        if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasSurvey = "true";
+        }
+        model.addObject("hasSurvey", hasSurvey);
 
         return model;
     }

@@ -1,9 +1,8 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.CourseManager;
-import com.spacecadet.psychspace.dataManager.UserManager;
-import com.spacecadet.psychspace.dataManager.VideoManager;
+import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Course;
+import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.User;
 import com.spacecadet.psychspace.utilities.Video;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,10 @@ public class VideoController {
     private UserManager userManager = new UserManager();
     private VideoManager videoManager = new VideoManager();
     private CourseManager courseManager = new CourseManager();
+    private EvaluationManager evaluationManager = new EvaluationManager();
+    private HabitManager habitManager = new HabitManager();
+    private GoalManager goalManager = new GoalManager();
+    private SurveyManager surveyManager = new SurveyManager();
 
     /**
      * all visit to video page
@@ -33,6 +36,10 @@ public class VideoController {
      */
     @RequestMapping(value = "/learn/{courseKey}/videos", method = RequestMethod.GET)
     public ModelAndView video(@PathVariable("courseKey") String courseKey) {
+        String hasHabit = "false";
+        String hasGoal = "false";
+        String hasEvaluation = "false";
+        String hasSurvey = "false";
         ArrayList<Video> videos = videoManager.loadVideos();
         if(videos.size() > 0){
             for(Video v : videos){
@@ -47,6 +54,22 @@ public class VideoController {
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+            hasEvaluation = "true";
+        }
+        if(habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey) != null){
+            hasHabit = "true";
+        }
+        if(goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasGoal = "true";
+        }
+        if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasSurvey = "true";
+        }
+        model.addObject("hasSurvey", hasSurvey);
+        model.addObject("hasEvaluation", hasEvaluation);
+        model.addObject("hasHabit", hasHabit);
+        model.addObject("hasGoal", hasGoal);
 
         return model;
     }

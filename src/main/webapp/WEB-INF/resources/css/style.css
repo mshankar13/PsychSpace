@@ -594,6 +594,51 @@ tr:nth-child(even) {
 }
 
 
+/*---------------- LISTS  ----------------*/
+
+.ps-li {
+    /*
+    border: solid var(--space-cadet-color);
+    border-radius: var(--border-radius-1);
+*/
+    padding: .5em 2em .5em .5em;
+    margin: 1em 0;
+    /*    color: var(--space-cadet-color);
+    */
+    font-family: "Open Sans";
+}
+
+.ps-li-active {
+    /*
+    border: solid var(--eucalyptus-color);
+    background-color: var(--eucalyptus-color);
+*/
+    color: var(--eucalyptus-color);
+}
+
+.ps-li:hover {
+    /*    border: solid var(--dogwood-color);
+    */
+    color: var(--dogwood-color);
+    cursor: pointer;
+}
+
+.ps-li-active:hover {
+    /*
+    border: solid var(--dogwood-color);
+    background-color: var(--dogwood-color);
+*/
+    color: var(--dogwood-color);
+    cursor: pointer;
+}
+
+.ps-ul {
+    list-style-type: circle;
+    margin: 0;
+    padding: 0 2em;
+}
+
+
 /*---------------- SCALABALE ----------------*/
 
 @media only screen and (max-width: 1080px) {
