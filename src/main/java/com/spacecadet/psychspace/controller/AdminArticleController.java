@@ -31,7 +31,7 @@ public class AdminArticleController {
     public ModelAndView loadNewList() {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminAddArticle");
-        model.addObject("news", new Article());
+        model.addObject("article", new Article());
         return model;
     }
 
@@ -59,7 +59,7 @@ public class AdminArticleController {
         model.setViewName("adminDeleteArticle");
         ArrayList<Article> articleList = newsManager.loadNews();
         model.addObject("articleList", articleList);
-        model.addObject("news", new Article());
+        model.addObject("article", new Article());
 
         return model;
     }
@@ -96,7 +96,7 @@ public class AdminArticleController {
         model.setViewName("adminEditArticle");
         ArrayList<Article> articleList = newsManager.loadNews();
         model.addObject("articleList", articleList);
-        model.addObject("news", new Article());
+        model.addObject("article", new Article());
 
         return model;
     }
