@@ -33,7 +33,7 @@
     <div id="page-content-wrapper">
         <h1>Instructor Application</h1>
 
-
+        <h1>Add Admin</h1>
     </div>
 </div>
 

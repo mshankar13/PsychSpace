@@ -36,8 +36,8 @@
             <%--Side bar--%>
             <h3>Profile</h3>
             <div class="list-group">
-                <a href="${contextPath}/${user.userKey}/settings" class="list-group-item">Account Settings</a>
-                <a href="${contextPath}/${user.userKey}/application" class="list-group-item active">My Application</a>
+                <a href="${contextPath}/settings" class="list-group-item">Account Settings</a>
+                <a href="${contextPath}/application" class="list-group-item active">My Application</a>
             </div>
         </div>
         <div class="col-md-9">

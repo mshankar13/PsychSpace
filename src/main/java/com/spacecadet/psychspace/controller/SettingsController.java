@@ -11,26 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Celeste on 5/7/17.
  */
 @Controller
-public class UserSettingsController {
+public class SettingsController {
 
     private UserManager userManager = new UserManager();
 
-    @RequestMapping(value = "/{userKey}/settings", method = RequestMethod.GET)
-    public ModelAndView settings(@PathVariable("userKey") String userKey) {
+    @RequestMapping(value = "/settings", method = RequestMethod.GET)
+    public ModelAndView settings() {
         ModelAndView model = new ModelAndView();
         model.setViewName("setting");
-        model.addObject("user", WelcomeController.currUser);
-
 
         return model;
     }
 
-    @RequestMapping(value = "/{userKey}/application", method = RequestMethod.GET)
-    public ModelAndView application(@PathVariable("userKey") String userKey) {
+    @RequestMapping(value = "/application", method = RequestMethod.GET)
+    public ModelAndView application() {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
-        model.addObject("user", WelcomeController.currUser);
-
 
         return model;
     }
