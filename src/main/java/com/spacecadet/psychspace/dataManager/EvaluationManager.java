@@ -60,7 +60,7 @@ public class EvaluationManager {
      * @param userKey user key in datastore
      * @return true/false
      */
-    public boolean hasTodaysEvaluation(String userKey){
+    public boolean hasTodaysEvaluation(String userKey, String courseKey){
         Date rawDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(rawDate);
@@ -70,7 +70,10 @@ public class EvaluationManager {
         String today = month + "/" + day + "/" + year;
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("AuthorKey", Query.FilterOperator.EQUAL, userKey);
-        Query evaluationQuery = new Query("Evaluation").setFilter(propertyFilter1);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query evaluationQuery = new Query("Evaluation").setFilter(userCourseFilter);
         List<Entity> userEvaluations =
                 datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
         for(Entity entity : userEvaluations){
