@@ -16,7 +16,7 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
@@ -53,37 +53,43 @@
                     <!-- Start Content -->
                 </div>
                 <div class="col-lg-10 ps-col-right">
+                    <input type="hidden" value="${survey}" id="survey">
                     <div class="ps-well">
                         <!-- Survey Name -->
-                        <h2>[Survey Name]
+                        <h2>${survey.title}
                             <hr>
                         </h2>
                         <br>
                         <br>
                         <!-- Form Start -->
                         <form class="ps-all-questions">
-                            <!-- Question Start -->
-                            <div class="ps-question">
-                                <!-- Question Text -->
-                                <h3>[Question Text]</h3>
-                                <div class="ps-answers">
-                                    <!-- Answer Start -->
-                                    <div class="ps-answer">
-                                        <!-- Answer Button -->
-                                        <!-- Set "id" equal to answer ID -->
-                                        <!-- Set "name" equal to question ID -->
-                                        <input id="radio-1" type="radio" name="r-group-1"/>
-                                        <!-- Answer Text -->
-                                        <!-- Set "for" equal to answer ID -->
-                                        <label for="radio-1">[Answer]</label>
+                            <!-- Questions Start -->
+                            <c:forEach items="${survey.questions}" var="question" >
+                                <div class="ps-question">
+                                    <!-- Question Text -->
+                                    <h3>${question.key.content}</h3>
+                                    <div class="ps-answers">
+                                        <!-- Answer Start -->
+                                        <c:forEach items="${question.value}" var="answer">
+                                        <div class="ps-answer">
+                                            <!-- Answer Button -->
+                                            <!-- Set "id" equal to answer key -->
+                                            <!-- Set "name" equal to question key -->
+                                            <input id="${answer.questionKey}${answer.answer}" type="radio" value="${answer.score}" name="${answer.questionKey}"/>
+                                            <!-- Answer Text -->
+                                            <!-- Set "for" equal to answer key -->
+                                            <label for="${answer.questionKey}${answer.answer}">${answer.answer}</label>
+                                        </div>
+                                        </c:forEach>
+                                        <!-- Answer End-->
                                     </div>
-                                    <!-- Answer End-->
                                 </div>
-                            </div>
+                            </c:forEach>
+
                             <!-- Question End -->
                             <div class="center">
                                 <!-- Submit Survey Button -->
-                                <button type="button" class="button" id="btn-submit-survey">
+                                <button type="button" class="ps-btn-primary" id="btn-submit-survey">
                                     <span>Submit Survey</span></button>
                             </div>
                         </form>

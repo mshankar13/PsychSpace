@@ -238,7 +238,7 @@ function removeAnswer() {
 }
 
 function surveySubmit() {
-    var courseKey = $("#course-key");
+    var courseKey = $("#course-key").val();
     var survey = {};
     survey["courseKey"] = $('#select-course').find(":selected").val();
     survey["courseTitle"] = $("#select-course").find(":selected").text();

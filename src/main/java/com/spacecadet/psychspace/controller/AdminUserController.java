@@ -61,6 +61,13 @@ public class AdminUserController {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminAddAdmin");
 
+    }
+
+
+    @RequestMapping(value = "/admin_user", method = RequestMethod.GET)
+    public ModelAndView adminUser() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("adminUser");
         return model;
     }
 }
