@@ -16,6 +16,12 @@ public class AdminUserController {
 
     private UserManager userManager = new UserManager();
 
+    @RequestMapping(value = "/admin_user", method = RequestMethod.GET)
+    public ModelAndView adminUser() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("adminUser");
+        return model;
+    }
     /**
      * admin page (get) - change user to instructor
      * @return add instructor page
@@ -61,13 +67,6 @@ public class AdminUserController {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminAddAdmin");
 
-    }
-
-
-    @RequestMapping(value = "/admin_user", method = RequestMethod.GET)
-    public ModelAndView adminUser() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("adminUser");
         return model;
     }
 }
