@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->
-                    <%@include file="learn-forum.html" %>
+                    <%--<%@include file="learn-forum.html" %>--%>
                     <!-- Content End-->
                 </div>
             </div>

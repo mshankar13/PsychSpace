@@ -62,7 +62,7 @@ public class NewsController {
      * @param search search key word
      * @return search result page with related articles
      */
-    @RequestMapping(value = "/news/Search", method = RequestMethod.GET)
+    @RequestMapping(value = "/news/search", method = RequestMethod.GET)
     public ModelAndView newsSearch(@RequestParam(value = "search", required = false) String search){
         ModelAndView model = new ModelAndView();
         model.setViewName("newsSearch");
