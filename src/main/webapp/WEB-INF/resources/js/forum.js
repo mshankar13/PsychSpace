@@ -3,16 +3,17 @@
  */
 $(document).ready(function () {
     $(".ps-modal-type-comment").addClass("pushToBack");
-    placeholderPositive();
-    $(".btn-forum-add").on("click", addCueModalShow);
+    // placeholderPositive();
+    $(".btn-thread-add").on("click", addThreadModalShow);
     //    $(".btn-cue-positive").on("click", placeholderPositive);
     //    $(".btn-cue-negative").on("click", placeholderNegative);
 });
 
-function addCueModalShow() {
+function addThreadModalShow() {
+    console.log("New Forum");
     $(".ps-modal-type-comment").removeClass("pushToBack");
     $(".ps-modal-type-comment").addClass("pushToFront");
-    $("#add-forum-modal").modal("show");
+    $("#add-thread-modal").modal("show");
 }
 //
 //function placeholderPositive() {
