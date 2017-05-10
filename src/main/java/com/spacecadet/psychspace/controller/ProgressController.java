@@ -2,8 +2,10 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Course;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +23,7 @@ public class ProgressController {
     private HabitManager habitManager = new HabitManager();
     private GoalManager goalManager = new GoalManager();
     private SurveyManager surveyManager = new SurveyManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * all visit to course learn page
@@ -55,5 +58,16 @@ public class ProgressController {
         model.addObject("hasGoal", hasGoal);
 
         return model;
+    }
+
+    /**
+     * logout on learn single course page
+     * @param user user logged out
+     * @return welcome page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/logout", method = RequestMethod.POST)
+    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
     }
 }

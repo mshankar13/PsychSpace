@@ -19,7 +19,6 @@ public class WelcomeController {
     private HelperManager helper = new HelperManager();
     private UserManager userManager = new UserManager();
     public static User currUser = new User();
-    public static User currInstructor = new User();
 
     /**
      * all visit to url "/" to welcome page

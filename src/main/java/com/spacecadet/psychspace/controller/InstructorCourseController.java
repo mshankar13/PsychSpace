@@ -44,13 +44,17 @@ public class InstructorCourseController {
      */
     @RequestMapping(value = "/instructor/{courseKey}", method = RequestMethod.GET)
     public ModelAndView editCourse(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasInstructorAccess()){
+            model.setViewName("404");
+            return model;
+        }
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         model.setViewName("instructorCourse");
         model.addObject("course", new Course());
         model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
         model.addObject("courses", courses);
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 

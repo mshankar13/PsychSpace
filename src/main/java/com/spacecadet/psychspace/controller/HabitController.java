@@ -22,6 +22,7 @@ public class HabitController {
     private DueDatesManager dueDatesManager = new DueDatesManager();
     private EvaluationManager evaluationManager = new EvaluationManager();
     private SurveyManager surveyManager = new SurveyManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * user habit page
@@ -117,5 +118,15 @@ public class HabitController {
         habit.setCueKey(cue.getCueKey());
         habitManager.editHabit(habit);
         return "redirect:/learn/"+courseKey+"/habit";
+    }
+
+    /**
+     * logout on habit pages
+     * @return welcome page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/habit/logout", method = RequestMethod.POST)
+    public String logoutHabitPage() {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
     }
 }

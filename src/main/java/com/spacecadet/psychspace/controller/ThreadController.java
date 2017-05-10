@@ -3,14 +3,13 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.CommentManager;
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.ThreadManager;
+import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Thread;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.Path;
@@ -25,6 +24,7 @@ public class ThreadController {
     private CommentManager commentManager = new CommentManager();
     private ThreadManager threadManager = new ThreadManager();
     private CourseManager courseManager = new CourseManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * all visits to thread page
@@ -91,5 +91,16 @@ public class ThreadController {
             commentManager.deleteComment(comment.getCommentKey());
         }
         return "redirect:/learn/"+courseKey+"forum";
+    }
+
+    /**
+     * logout on learn theard page page
+     * @param user user logged out
+     * @return welcome page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/logout", method = RequestMethod.POST)
+    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
     }
 }

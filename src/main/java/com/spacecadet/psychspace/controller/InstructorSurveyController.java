@@ -36,6 +36,11 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/survey", method = RequestMethod.GET)
     public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
+        ModelAndView model = new ModelAndView();
+        if(!userManager.hasInstructorAccess()){
+            model.setViewName("404");
+            return model;
+        }
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         Survey survey = surveyManager.loadSingleCourseSurvey(courseKey);
         String courseSurvey;
@@ -43,13 +48,12 @@ public class InstructorSurveyController {
             courseSurvey = helperManager.surveyObjectsToJsonString(survey);
         else
             courseSurvey = null;
-        ModelAndView model = new ModelAndView();
         model.setViewName("instructorSurvey");
         model.addObject("survey", new Survey());
         model.addObject("courseSurvey", courseSurvey);
         model.addObject("courses", courses);
         model.addObject("course", new Course());
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 

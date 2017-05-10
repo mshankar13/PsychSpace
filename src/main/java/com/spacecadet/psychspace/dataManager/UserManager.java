@@ -170,4 +170,28 @@ public class UserManager {
         }
         return user;
     }
+
+    /**
+     * check if a user is instructor
+     * @return true/false
+     */
+    public boolean hasInstructorAccess(){
+        User user = WelcomeController.currUser;
+        if(user.getRole().equals("Instructor")){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * check if a user is admin
+     * @return true/false
+     */
+    public boolean hasAdminAccess(){
+        User user = WelcomeController.currUser;
+        if(user.getRole().equals("Admin")){
+            return true;
+        }
+        return false;
+    }
 }

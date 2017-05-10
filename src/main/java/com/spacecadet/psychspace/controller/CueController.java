@@ -3,6 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Cue;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ public class CueController {
     private GoalManager goalManager = new GoalManager();
     private HabitManager habitManager = new HabitManager();
     private SurveyManager surveyManager = new SurveyManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * user cues page
@@ -84,5 +86,15 @@ public class CueController {
     public String editCues(@PathVariable("courseKey") String courseKey, @ModelAttribute("cue") Cue cue){
         cueManager.editCue(cue);
         return "redirect:/learn/"+courseKey+"/cues";
+    }
+
+    /**
+     * logout on cue pages
+     * @return welcome page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/cues/logout", method = RequestMethod.POST)
+    public String logoutCuePage() {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
     }
 }

@@ -2,8 +2,10 @@ package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.CourseManager;
 import com.spacecadet.psychspace.dataManager.ThreadManager;
+import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Thread;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ public class ForumController {
 
     private ThreadManager threadManager = new ThreadManager();
     private CourseManager courseManager = new CourseManager();
+    private UserManager userManager = new UserManager();
 
     /**
      * all visits to course forum page
@@ -51,6 +54,16 @@ public class ForumController {
     public String addThread(@PathVariable("courseKey") String courseKey, @ModelAttribute Thread thread){
         threadManager.addThread(thread);
         return "redirect:/learn/"+courseKey+"forum";
+    }
+
+    /**
+     * logout on forum pages
+     * @return welcome page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/forum/logout", method = RequestMethod.POST)
+    public String logoutForumPage() {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
     }
 
 }

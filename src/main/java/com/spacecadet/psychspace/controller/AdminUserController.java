@@ -3,9 +3,7 @@ package com.spacecadet.psychspace.controller;
 import com.spacecadet.psychspace.dataManager.UserManager;
 import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -21,14 +19,17 @@ public class AdminUserController {
     @RequestMapping(value = "/admin_user", method = RequestMethod.GET)
     public ModelAndView adminUser() {
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasAdminAccess()){
+            model.setViewName("404");
+            return model;
+        }
         model.setViewName("adminUser");
-
         ArrayList<User> instructorApplicants = userManager.loadApplications("instructorApplicant");
         model.addObject("instructorApplicants", instructorApplicants);
         ArrayList<User> adminApplicants = userManager.loadApplications("adminApplicant");
         model.addObject("adminApplicants", adminApplicants);
         model.addObject("user", new User());
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 
@@ -50,4 +51,13 @@ public class AdminUserController {
         return "redirect:/admin_user";
     }
 
+    /**
+     * logout on admin user
+     * @return welcome page
+     */
+    @RequestMapping(value = "/admin_user/logout", method = RequestMethod.POST)
+    public String logoutAdminUser() {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
+    }
 }

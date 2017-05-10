@@ -28,13 +28,16 @@ public class InstructorDueDatesController {
 
     /**
      * instructor page (get) - due dates
-     *
      * @return instructor load dueDates page
      */
     @RequestMapping(value = "/instructor/{courseKey}/dueDates", method = RequestMethod.GET)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey) {
-        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasInstructorAccess()){
+            model.setViewName("404");
+            return model;
+        }
+        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         model.setViewName("instructorDueDates");
         model.addObject("courses", courses);
         model.addObject("course", new Course());
@@ -45,19 +48,17 @@ public class InstructorDueDatesController {
             dueDates = new DueDates();
         }
         model.addObject("dueDates", dueDates);
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 
     /**
      * instructor page (get) - due dates
-     *
      * @return instructor load dueDates page
      */
     @RequestMapping(value = "/instructor/{courseKey}/dueDates", method = RequestMethod.POST)
     public ModelAndView loadEvaluation(@PathVariable("courseKey") String courseKey,
-                                       @ModelAttribute("dueDates") DueDates dueDates)
-    {
+                                       @ModelAttribute("dueDates") DueDates dueDates) {
         boolean hasHabit = dueDatesManager.loadDueDatesForCourse(courseKey) != null ? true : false;
         if (hasHabit && dueDates != null) {
             dueDates.setCourseKey(courseKey);
@@ -67,7 +68,6 @@ public class InstructorDueDatesController {
             dueDates.setCourseKey(courseKey);
             dueDatesManager.addDueDate(dueDates);
         }
-
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("instructorDueDates");
@@ -81,7 +81,6 @@ public class InstructorDueDatesController {
 
     /**
      * logout on instructor evaluation page
-     *
      * @param user user logged out
      * @return welcome page
      */

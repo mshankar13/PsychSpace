@@ -31,9 +31,13 @@ public class InstructorVideoController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/videos", method = RequestMethod.GET)
     public ModelAndView loadVideo(@PathVariable("courseKey") String courseKey) {
+        ModelAndView model = new ModelAndView();
+        if(!userManager.hasInstructorAccess()){
+            model.setViewName("404");
+            return model;
+        }
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         ArrayList<Video> videos = videoManager.loadVideoForCourse(courseKey);
-        ModelAndView model = new ModelAndView();
         model.setViewName("instructorVideo");
         model.addObject("courses", courses);
         model.addObject("videos", videos);
@@ -41,7 +45,7 @@ public class InstructorVideoController {
         model.addObject("courseKey", courseKey);
         model.addObject("course", new Course());
         model.addObject("currentCourse", courseManager.loadSingleCourse(courseKey));
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 

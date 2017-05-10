@@ -30,8 +30,13 @@ public class AdminArticleController {
     @RequestMapping(value = "/admin_addArticle", method = RequestMethod.GET)
     public ModelAndView loadNewList() {
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasAdminAccess()){
+            model.setViewName("404");
+            return model;
+        }
         model.setViewName("adminAddArticle");
         model.addObject("article", new Article());
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 
@@ -56,11 +61,15 @@ public class AdminArticleController {
     @RequestMapping(value = "/admin_deleteArticle", method = RequestMethod.GET)
     public ModelAndView deleteNews() {
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasAdminAccess()){
+            model.setViewName("404");
+            return model;
+        }
         model.setViewName("adminDeleteArticle");
         ArrayList<Article> articleList = newsManager.loadNews();
         model.addObject("articleList", articleList);
         model.addObject("article", new Article());
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 
@@ -91,13 +100,16 @@ public class AdminArticleController {
      */
     @RequestMapping(value = "/admin_editArticle", method = RequestMethod.GET)
     public ModelAndView editNews() {
-
         ModelAndView model = new ModelAndView();
+        if(!userManager.hasAdminAccess()){
+            model.setViewName("404");
+            return model;
+        }
         model.setViewName("adminEditArticle");
         ArrayList<Article> articleList = newsManager.loadNews();
         model.addObject("articleList", articleList);
         model.addObject("article", new Article());
-
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 
