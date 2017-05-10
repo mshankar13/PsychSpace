@@ -37,7 +37,8 @@ public class CueController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnCues");
         model.addObject("cue", new Cue());
-        model.addObject("cueList", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey));
+        model.addObject("negativeCues", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey, "negative"));
+        model.addObject("positiveCues", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey, "positive"));
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
