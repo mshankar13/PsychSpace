@@ -1,6 +1,5 @@
 package com.spacecadet.psychspace.dataManager;
 
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.KeyFactory;
@@ -11,7 +10,6 @@ import com.spacecadet.psychspace.utilities.Article;
 import com.spacecadet.psychspace.utilities.User;
 import com.google.appengine.repackaged.com.google.gson.*;
 import com.spacecadet.psychspace.utilities.*;
-
 
 import java.text.DateFormat;
 import java.text.ParseException;

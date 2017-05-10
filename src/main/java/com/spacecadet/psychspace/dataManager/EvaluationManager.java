@@ -1,12 +1,8 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
-import com.spacecadet.psychspace.utilities.Article;
-import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Evaluation;
-import com.spacecadet.psychspace.utilities.User;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 

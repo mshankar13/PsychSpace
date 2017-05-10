@@ -3,7 +3,6 @@ package com.spacecadet.psychspace.dataManager;
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.*;
 
-import javax.servlet.ServletContextListener;
 import java.util.*;
 import java.util.regex.Pattern;
 

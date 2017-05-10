@@ -1,7 +1,6 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
-import com.spacecadet.psychspace.utilities.Cue;
 import com.spacecadet.psychspace.utilities.Goal;
 
 /**

@@ -1,8 +1,6 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
-import com.spacecadet.psychspace.utilities.Course;
-import com.spacecadet.psychspace.utilities.DueDates;
 import com.spacecadet.psychspace.utilities.Habit;
 
 /**

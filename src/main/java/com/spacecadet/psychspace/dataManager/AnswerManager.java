@@ -3,7 +3,6 @@ package com.spacecadet.psychspace.dataManager;
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.Answer;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 

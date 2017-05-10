@@ -2,7 +2,6 @@ package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.controller.WelcomeController;
-import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.User;
 
 import java.util.ArrayList;
