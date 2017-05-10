@@ -23,7 +23,7 @@ function loadGoal(goal) {
     $("#value").val(value);
     $("#unit").val(unit);
 
-    if (Date.parse(goalDuedate) > Date.parse(today)) {
+    if (Date.parse(goalDuedate) < Date.parse(today)) {
         $("#action").prop("disabled", true);
         $("#value").prop("disabled", true);
         $("#unit").prop("disabled", true);

@@ -46,8 +46,47 @@
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
-                        <!-- Learn Sidebar -->
-                        <%@include file="learn-sidebar.html" %>
+                        <!-- Learn Sidebar for Todos-->
+                        <h2>To Do:<hr></h2>
+                        <c:choose>
+                            <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
+                                <h3>Good Job! You currently have no todos.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Set Goal -->
+                                <c:if test="${hasGoal == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-goal"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Daily Evaluation -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-evaluation"
+                                           href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Survey -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-survey"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <%--Do Habit--%>
+                                <c:if test="${hasHabit == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-habit"
+                                           href="${contextPath}/learn/${courseKey}/habit"><span>Set Habit!</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
@@ -55,78 +94,103 @@
                     <%@include file="learn-navbar.html" %>
                 </div>
                 <div class="col-lg-10 ps-col-right">
-                    <!-- Content -->
-                    <div class="col-lg ps-col-right">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="ps-well">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <h1>My Goal</h1>
-                                        </div>
-                                        <div class="col-md-3 right">
-                                            <button class="ps-btn" id="btn-example-goal">See examples</button>
-                                        </div>
+                    <div class="ps-well">
+                        <%--Goal--%>
+                        <div class="col-lg-12">
+                                <div class="col-md-2">
+                                    <h1>My Goal</h1>
+                                </div>
+                                <div class="col-md-7">
+                                    <h3>Make sure it's set by ${dueDates.goalDueDate}</h3>
+                                </div>
+                                <div class="col-md-3 right">
+                                    <button class="ps-btn" id="btn-example-goal">See examples</button>
+                                </div>
+                                <input type="hidden" value="${goal}" id="goal">
+                                <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
+                                <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
+                                <form:form class="form-horizontal" method="post"
+                                           modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
+                                    <div class="form-group ps-well">
+                                        <span class="col-md-4">By the end of the course, I want to</span>
+                                        <form:input class="col-md-2" type="text" path="goalName" placeholder="Action"
+                                                    id="action"/>
+                                        <form:input class="col-md-2" type="number" path="value" placeholder="Value"
+                                                    id="value"/>
+                                        <form:input class="col-md-2" type="text" path="unit" placeholder="Unit"
+                                                    id="unit"/>
+                                        <span class="col-md-2">per day.</span>
+                                        <form:hidden path="goalKey" value=""/>
+                                        <form:hidden path="userName" value=""/>
+                                        <form:hidden path="userKey" value=""/>
+                                        <form:hidden path="courseKey" value="${courseKey}"/>
                                     </div>
+                                    <div class="right">
+                                        <button type="submit" class="ps-btn-primary">Save</button>
+                                    </div>
+                                </form:form>
+                        </div>
+                            <hr>
+                    </div>
+                </div>
+                <br>
+                    <%--Habit--%>
+                <div class="col-lg-10 ps-col-right">
+                    <div class="ps-well">
+                        <div class="col-lg-12">
+                            <%--Habit Section Title--%>
+                            <div class="col-md-8">
+                                <h1>My Habit<hr></h1>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>Make sure you set by ${dueDates.habitDueDate}</h3>
+                            </div>
+                        </div>
+                        <%--Habit Loop--%>
+                        <div class="col-lg-4">
+                            <div class="ps-well">
+                                <h1>Cue:
                                     <hr>
-                                    <input type="hidden" value="${goal}" id="goal">
-                                    <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
-                                    <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
-                                    <form:form class="form-horizontal"  method="post"
-                                               modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
-                                        <div class="form-group ps-well">
-                                            <span class="col-md-4">By the end of the course, I want to</span>
-                                            <form:input class="col-md-2" type="text" path="goalName" placeholder="Action" id="action" />
-                                            <form:input class="col-md-2" type="number" path="value" placeholder="Value" id="value"/>
-                                            <form:input class="col-md-2" type="text" path="unit" placeholder="Unit" id="unit"/>
-                                            <span class="col-md-2">per day.</span>
-                                            <form:hidden path="goalKey" value=""/>
-                                            <form:hidden path="userName" value=""/>
-                                            <form:hidden path="userKey" value=""/>
-                                            <form:hidden path="courseKey" value="${courseKey}"/>
-                                        </div>
-                                        <div class="right">
-                                            <button type="submit" class="ps-btn-primary">Save</button>
-                                        </div>
-                                    </form:form>
+                                </h1>
+                                <h2>[Go to Library] </h2>
+                                <div class="center">
+                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set Cue
+                                    </button>
+                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change
+                                        Cue
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <h1>Cue:<hr></h1>
-                                    <h2>[Go to Library] </h2>
-                                    <div class="center">
-                                        <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set Cue</button>
-                                        <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change Cue</button>
-                                    </div>
-                                </div>
+                        <div class="col-lg-4">
+                            <div class="ps-well">
+                                <h1>Routine:
+                                    <hr>
+                                </h1>
+                                <h2>[Study 3 hours per day]</h2>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <h1>Routine:<hr></h1>
-                                    <h2>[Study 3 hours per day]</h2>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <h1>Reward:<hr></h1>
-                                    <h2>[Candy from the Trolley] </h2>
-                                    <div class="center">
-                                        <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set Reward</button>
-                                        <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change Reward</button>
-                                    </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ps-well">
+                                <h1>Reward:
+                                    <hr>
+                                </h1>
+                                <h2>[Candy from the Trolley] </h2>
+                                <div class="center">
+                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set
+                                        Reward
+                                    </button>
+                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change
+                                        Reward
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Learn Page -->
         </div>
-
+            <!-- End Learn Page -->
         <%--Sample Goals Modal--%>
         <div class="modal fade" id="exampleGoalsModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="ps-modal-dialog">

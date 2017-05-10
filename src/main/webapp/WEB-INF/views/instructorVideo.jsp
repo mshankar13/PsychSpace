@@ -73,28 +73,39 @@
                     <button class="instructor-btn" id="btn-add-video">Add Video</button>
                 </div>
                 <div id="videos-div">
-                    <c:forEach items="${videos}" var="video">
-                        <div class="col-md-4">
-                            <div class="ps-well ">
-                                <input type="hidden" value="${video.title}" class="video-title" >
-                                <input type="hidden" value="${video.url}" class="video-link" >
-                                <input type="hidden" value="${video.videoKey}" class="video-key" >
-                                <input type="hidden" value="${video.courseKey}" class="video-course-key" >
-                                <input type="hidden" value="${video.courseTitle}" class="video-course-title" >
-                                <!-- Video Title -->
-                                <h2>${video.title}<hr> </h2>
-                                <div class="center">
-                                    <!-- Video Link - change src url -->
-                                    <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0" allowfullscreen>
-                                    </iframe>
+                    <c:set var = "videos" value = "${videos}"/>
+                    <c:choose>
+                        <%--If the course has no video--%>
+                        <c:when test="${empty videos}">
+                            <p>The course currently has no video. </p>
+                        </c:when>
+                        <%--Else load the videos--%>
+                        <c:otherwise>
+                            <c:forEach items="${videos}" var="video">
+                                <div class="col-md-4">
+                                    <div class="ps-well ">
+                                        <input type="hidden" value="${video.title}" class="video-title" >
+                                        <input type="hidden" value="${video.url}" class="video-link" >
+                                        <input type="hidden" value="${video.videoKey}" class="video-key" >
+                                        <input type="hidden" value="${video.courseKey}" class="video-course-key" >
+                                        <input type="hidden" value="${video.courseTitle}" class="video-course-title" >
+                                        <!-- Video Title -->
+                                        <h2>${video.title}<hr> </h2>
+                                        <div class="center">
+                                            <!-- Video Link - change src url -->
+                                            <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0" allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <div class="instructor-video-footer">
+                                            <button class="instructor-btn edit-video-btn">Edit</button>
+                                            <button class="instructor-btn delete-video-btn">Delete</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="instructor-video-footer">
-                                    <button class="instructor-btn edit-video-btn">Edit</button>
-                                    <button class="instructor-btn delete-video-btn">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
 
                 <%--< Add video modal --%>

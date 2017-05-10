@@ -46,8 +46,47 @@
             <div class="row ps-text-content">
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
-                        <!-- Learn Sidebar -->
-                        <%@include file="learn-sidebar.html" %>
+                        <!-- Learn Sidebar for Todos-->
+                        <h2>To Do:<hr></h2>
+                        <c:choose>
+                            <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
+                                <h3>Good Job! You currently have no todos.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Set Goal -->
+                                <c:if test="${hasGoal == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-goal"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Daily Evaluation -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-evaluation"
+                                           href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Survey -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-survey"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <%--Do Habit--%>
+                                <c:if test="${hasHabit == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-habit"
+                                           href="${contextPath}/learn/${courseKey}/habit"><span>Set Habit!</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
@@ -56,23 +95,33 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Start video -->
-                    <c:forEach items="${videos}" var="video">
-                        <div class="col-lg-4">
-                            <div class="ps-well">
-                                <!-- Video Title -->
-                                <h2 class="ps-feature-info-header">${video.title}
-                                    <hr>
-                                </h2>
-                                <br>
-                                <div class="center">
-                                    <!-- Video Link - change src url -->
-                                    <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0"
-                                            allowfullscreen>
-                                    </iframe>
+                    <c:set var = "videos" value = "${videos}"/>
+                    <c:choose>
+                        <%--If the course has no video--%>
+                        <c:when test="${empty videos}">
+                            <p>The course currently has no video.</p>
+                        </c:when>
+                        <%--Else load the videos--%>
+                        <c:otherwise>
+                            <c:forEach items="${videos}" var="video">
+                                <div class="col-lg-4">
+                                    <div class="ps-well">
+                                        <!-- Video Title -->
+                                        <h2 class="ps-feature-info-header">${video.title}
+                                            <hr>
+                                        </h2>
+                                        <br>
+                                        <div class="center">
+                                            <!-- Video Link - change src url -->
+                                            <iframe class="ps-video" width=100% height=auto src="${video.url}" frameborder="0"
+                                                    allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </c:forEach>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                     <!-- End video -->
                 </div>
             </div>

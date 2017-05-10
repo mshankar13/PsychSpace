@@ -31,4 +31,12 @@ public class SettingsController {
         return model;
     }
 
+    @RequestMapping(value = "/application", method = RequestMethod.POST)
+    public ModelAndView applicationSubmit() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("application");
+
+        return model;
+    }
+
 }

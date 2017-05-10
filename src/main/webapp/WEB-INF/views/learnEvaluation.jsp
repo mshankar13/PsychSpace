@@ -48,8 +48,8 @@
                     <c:set var="hasEvaluation" value="${hasEvaluation}"/>
                     <div class="ps-well">
                         <%--<!-- Learn Sidebar -->--%>
-                            <h2>To Do:<hr></h2>
-                            <c:choose>
+                        <h2>To Do:<hr></h2>
+                        <c:choose>
                                 <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
                                     <h3>Good Job! You currently have no todos.</h3>
                                 </c:when>
