@@ -32,6 +32,7 @@ public class ForumController {
         ArrayList<Comment> comments = commentManager.loadComments(courseKey);
         ArrayList<Thread> threads = threadManager.loadCourseThreads(courseKey);
         ModelAndView model = new ModelAndView();
+        model.addObject("currUserKey", WelcomeController.currUser.getUserKey());
         model.addObject("thread", new Thread());
         model.addObject("threads", threads);
         model.setViewName("learnForum");
