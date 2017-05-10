@@ -1,6 +1,9 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.google.appengine.repackaged.org.joda.time.Days;
+import com.google.appengine.repackaged.org.joda.time.DurationFieldType;
+import com.google.appengine.repackaged.org.joda.time.LocalDate;
 import com.spacecadet.psychspace.utilities.Evaluation;
 
 import java.text.SimpleDateFormat;
@@ -61,17 +64,18 @@ public class EvaluationManager {
         if(evaluations.size() > 0){
             Date today = new Date();
             String author = evaluations.get(0).getAuthor();
-            Date min = helper.stringToDate(evaluations.get(0).getDate());
-            Date max = helper.stringToDate(evaluations.get(evaluations.size()-1).getDate());
+            Date max = helper.stringToDate(evaluations.get(0).getDate());
+            Date min = helper.stringToDate(evaluations.get(evaluations.size()-1).getDate());
             SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YYYY");
-            String[] dateList = getAllDates(min.getTime(), max.getTime(), sdf);
-            for(int j = 0; j < dateList.length; j++){
-                if(!dates.contains(dateList[j]) && !dateList.equals(sdf.format(today))){
+            List<LocalDate> dateList = getAllDates(min, max);
+            for(LocalDate date : dateList){
+                String formattedDate = date.getMonthOfYear() + "/" + date.getDayOfMonth() + "/" + date.getYear();
+                if(!dates.contains(formattedDate) && !date.equals(sdf.format(today))){
                     Evaluation evaluation = new Evaluation();
                     evaluation.setAuthorKey(userKey);
                     evaluation.setAuthor(author);
                     evaluation.setContent("");
-                    evaluation.setDate(dateList[j]);
+                    evaluation.setDate(formattedDate);
                     evaluation.setCourseKey(courseKey);
                     evaluation.setScore("0");
                     evaluation.setRawScore("0");
@@ -91,18 +95,22 @@ public class EvaluationManager {
         return evaluations;
     }
 
-    /**
-     * helper method to get a list of dates in between two dates
-     * @param min the first date
-     * @param max the second date
-     * @param sdf date formatter
-     * @return a list of all dates between the two dates
-     */
-    private static String[] getAllDates(long min, long max, SimpleDateFormat sdf){
-        String[] dates = new String[(int) ((max - min)/24L * 3600 * 1000+1)];
-        for(int i=0; i < dates.length; i++)
-            dates[i] = sdf.format(new Date(min + i * 24L * 3600 * 1000));
+    private static List<LocalDate>  getAllDates(Date min, Date max){
+        LocalDate startDate = new LocalDate(min);
+        LocalDate endDate = new LocalDate(max);
+        int days = Math.abs(Days.daysBetween(startDate, endDate).getDays());
+        List<LocalDate> dates = new ArrayList<>(days);  // Set initial capacity to `days`.
+        for (int i=1; i < days; i++) {
+            LocalDate d = startDate.withFieldAdded(DurationFieldType.days(), i);
+            dates.add(d);
+        }
         return dates;
+    }
+
+    private static LocalDate toJoda(LocalDate input) {
+        return new LocalDate(input.getYear(),
+                input.getMonthOfYear(),
+                input.getDayOfMonth());
     }
 
     /**
