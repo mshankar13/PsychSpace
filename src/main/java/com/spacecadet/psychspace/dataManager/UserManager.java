@@ -2,7 +2,11 @@ package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.controller.WelcomeController;
+import com.spacecadet.psychspace.utilities.Evaluation;
 import com.spacecadet.psychspace.utilities.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marleneshankar on 3/24/17.
@@ -16,6 +20,30 @@ public class UserManager {
      */
     public UserManager() {
         datastore = DatastoreServiceFactory.getDatastoreService();
+    }
+
+    /**
+     * load a list of user with specified role
+     * @param role role of the user (admin, instructor, etc)
+     * @return list of users with the specified role
+     */
+    public ArrayList<User> loadApplications(String role){
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("Role", Query.FilterOperator.EQUAL, role);
+        Query evaluationQuery = new Query("User").setFilter(propertyFilter1);
+        List<Entity> applications =
+                datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
+        ArrayList<User> applicants = new ArrayList<User>();
+        for(Entity entity : applications){
+            User user = new User();
+            user.setUserKey(KeyFactory.keyToString(entity.getKey()));
+            user.setEmail(entity.getProperty("Email").toString());
+            user.setFirstName(entity.getProperty("FirstName").toString());
+            user.setLastName(entity.getProperty("LastName").toString());
+            user.setRole(entity.getProperty("Role").toString());
+            applicants.add(user);
+        }
+        return applicants;
     }
 
     /**
@@ -48,6 +76,33 @@ public class UserManager {
             user.setRole(role);
             user.setUserKey(KeyFactory.keyToString(userEntity.getKey()));
             return user;
+        }
+    }
+
+    /**
+     * update user entity with new user
+     * @param user new user utility
+     */
+    public void updateUser(User user){
+        Transaction txn = datastore.beginTransaction();
+        try {
+            try {
+                Entity updatedUser = datastore.get(KeyFactory.stringToKey(user.getUserKey()));
+                updatedUser.setProperty("Email", user.getEmail());
+                updatedUser.setProperty("FirstName", user.getFirstName());
+                updatedUser.setProperty("LastName", user.getLastName());
+                updatedUser.setProperty("Role", user.getRole());
+
+                datastore.delete(KeyFactory.stringToKey(user.getUserKey()));
+                datastore.put(updatedUser);
+                txn.commit();
+            } catch (EntityNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            if (txn.isActive()) {
+                txn.rollback();
+            }
         }
     }
 
