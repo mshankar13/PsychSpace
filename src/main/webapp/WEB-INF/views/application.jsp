@@ -36,13 +36,39 @@
             <%--Side bar--%>
             <h3>Profile</h3>
             <div class="list-group">
-                <a href="${contextPath}/settings" class="list-group-item">Account Settings</a>
                 <a href="${contextPath}/application" class="list-group-item active">My Application</a>
+                <a href="${contextPath}/settings" class="list-group-item">Account Settings</a>
             </div>
         </div>
         <div class="col-md-9">
-            <h2>Apply to be an instructor</h2>
-            <button class="ps-btn-primary">Apply</button>
+
+            <c:set var="userRole" value="${user.role}" />
+            <c:set var="instructorApplicant" value="applyingInstructor" />
+            <c:choose>
+                <c:when test="${userRole == instructorApplicant}">
+                    <p class="ps-notice">You instructor application is waiting to be viewed.</p>
+                </c:when>
+                <c:when test="${userRole == 'instructor'}">
+                    <p class="ps-notice">Congratulations! You are currently an instructor.</p>
+                </c:when>
+                <c:otherwise>
+                    <form:form method="post" action="/application/submit" modelAttribute="user">
+                        <form:hidden path="userKey" value="${user.userKey}" />
+                        <form:hidden path="email" value="${user.email}" />
+                        <form:hidden path="firstName" value="${user.firstName}" />
+                        <form:hidden path="lastName" value="${user.lastName}" />
+                        <h2>I want to apply to be </h2>
+                        <form:select path="role">
+                            <form:option value="instructorApplicant">an instructor</form:option>
+                            <form:option value="instructorApplicant">an admin</form:option>
+                        </form:select>
+                        <div class="right">
+                            <button type = "submit" class="ps-btn-primary">Apply</button>
+                        </div>
+                    </form:form>
+                </c:otherwise>
+            </c:choose>
+            <br>
         </div>
 
     </div>

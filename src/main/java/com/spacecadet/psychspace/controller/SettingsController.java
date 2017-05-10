@@ -1,8 +1,9 @@
 package com.spacecadet.psychspace.controller;
 
 import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.utilities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,16 +28,21 @@ public class SettingsController {
     public ModelAndView application() {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
-
+        model.addObject("user", WelcomeController.currUser);
         return model;
     }
 
-    @RequestMapping(value = "/application", method = RequestMethod.POST)
-    public ModelAndView applicationSubmit() {
+    @RequestMapping(value = "/application/submit", method = RequestMethod.POST)
+    public String applicationInstructorSubmit(@ModelAttribute("user") User user) {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
+        User currUser = WelcomeController.currUser;
+        if (user != null) {
+           currUser.setRole(user.getRole());
+           userManager.updateUser(user);
+        }
 
-        return model;
+        return "redirect:/application";
     }
 
 }

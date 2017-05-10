@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 /**
  * Created by aliao on 5/8/2017.
  */
@@ -20,53 +22,32 @@ public class AdminUserController {
     public ModelAndView adminUser() {
         ModelAndView model = new ModelAndView();
         model.setViewName("adminUser");
+
+        ArrayList<User> instructorApplicants = userManager.loadApplications("instructorApplicant");
+        model.addObject("instructorApplicants", instructorApplicants);
+        ArrayList<User> adminApplicants = userManager.loadApplications("adminApplicant");
+        model.addObject("adminApplicants", adminApplicants);
+        model.addObject("user", new User());
+
         return model;
     }
+
     /**
      * admin page (get) - change user to instructor
      * @return add instructor page
      */
-    @RequestMapping(value = "/admin_addInstructor", method = RequestMethod.GET)
-    public ModelAndView loadAddInstructor() {
+    @RequestMapping(value = "/admin_user/submit", method = RequestMethod.POST)
+    public String loadAddInstructor(@ModelAttribute("user") User user) {
         ModelAndView model = new ModelAndView();
-        model.setViewName("adminAddInstructor");
+        model.setViewName("adminUser");
 
-        return model;
+        if (user != null) {
+            User applicant = userManager.loadSingleUser(user.getUserKey());
+            applicant.setRole(user.getRole());
+            userManager.updateUser(applicant);
+        }
+
+        return "redirect:/admin_user";
     }
 
-    /**
-     * admin page (post) - change user to instructor
-     * @return add instructor page
-     */
-    @RequestMapping(value = "/admin_addInstructor", method = RequestMethod.POST)
-    public ModelAndView addInstructor(@ModelAttribute("user") User user) {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("adminAddInstructor");
-
-        return model;
-    }
-
-    /**
-     * admin page (get) - change user to admin
-     * @return add instructor page
-     */
-    @RequestMapping(value = "/admin_addAdmin", method = RequestMethod.GET)
-    public ModelAndView loadAddAdmin() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("adminAddAdmin");
-
-        return model;
-    }
-
-    /**
-     * admin page (post) - change user to admin
-     * @return add instructor page
-     */
-    @RequestMapping(value = "/admin_addAdmin", method = RequestMethod.POST)
-    public ModelAndView addAdmin(@ModelAttribute("user") User user) {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("adminAddAdmin");
-
-        return model;
-    }
 }

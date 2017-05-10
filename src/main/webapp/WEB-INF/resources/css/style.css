@@ -93,12 +93,11 @@ span {
     border: 1px solid var(--space-cadet-color);
     color: var(--space-cadet-color);
     border-radius: 5px;
-    margin: 10px;
 }
 
 .ps-btn:hover {
     border: 1px solid var(--tea-rose-color);
-    color: var(--tea-rose-color);
+    color: var(--eucalyptus-color);
 }
 
 .ps-btn-primary {

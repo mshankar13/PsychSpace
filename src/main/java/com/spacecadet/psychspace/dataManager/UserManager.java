@@ -29,9 +29,9 @@ public class UserManager {
     public ArrayList<User> loadApplications(String role){
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("Role", Query.FilterOperator.EQUAL, role);
-        Query evaluationQuery = new Query("User").setFilter(propertyFilter1);
+        Query userQuery = new Query("User").setFilter(propertyFilter1);
         List<Entity> applications =
-                datastore.prepare(evaluationQuery).asList(FetchOptions.Builder.withDefaults());
+                datastore.prepare(userQuery).asList(FetchOptions.Builder.withDefaults());
         ArrayList<User> applicants = new ArrayList<User>();
         for(Entity entity : applications){
             User user = new User();
