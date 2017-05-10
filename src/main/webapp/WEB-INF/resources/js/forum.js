@@ -5,31 +5,50 @@ $(document).ready(function () {
     $(".ps-modal-type-comment").addClass("pushToBack");
     // placeholderPositive();
     $(".btn-thread-add").on("click", addThreadModalShow);
-    //    $(".btn-cue-positive").on("click", placeholderPositive);
-    //    $(".btn-cue-negative").on("click", placeholderNegative);
-});
+    $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);
+    $("#ps-comment-section").on("click", ".btn-comment-delete", deleteCommentModalShow);
+    // $(".threadListTitle").on("click", displayThread);
+})
+
+//
+// function displayThread() {
+//     var threadKey = $(this).find(".threadListThreadKey").val();
+//     var courseKey = $(this).find(".threadListCourseKey").val();
+//     var userKey = $(this).find(".threadListUserKey").val();
+//     var inThreadName = $(this).find(".threadListInThreadName").val();
+//     var title = $(this).find(".threadListTitle").val();
+//     var content = $(this).find(".threadListThreadKey").val();
+//     var date = $(this).find(".threadListThreadKey").val();
+// }
 
 function addThreadModalShow() {
-    console.log("New Forum");
+    console.log("New Thread");
     $(".ps-modal-type-comment").removeClass("pushToBack");
     $(".ps-modal-type-comment").addClass("pushToFront");
     $("#add-thread-modal").modal("show");
 }
-//
-//function placeholderPositive() {
-//    $("#cues-cue-name").attr("placeholder","Example: Going to the library.");
-//    $("#cues-cue-location").attr("placeholder","Example: In the library.");
-//    $("#cues-cue-time").attr("placeholder","Example: 2:00pm.");
-//    $("#cues-cue-feelings").attr("placeholder","Example: I felt like I could focus and I was getting work done.");
-//    $("#cues-cue-environment").attr("placeholder"," Example: Other people who were studying.");
-//    $("#cues-cue-action").attr("placeholder","Example: I left my phone in my backpack.");
-//}
-//
-//function placeholderNegative() {
-//    $("#cues-cue-name").attr("placeholder","Example: Being alone in my room.");
-//    $("#cues-cue-location").attr("placeholder","Example: In my room.");
-//    $("#cues-cue-time").attr("placeholder","Example: 1:00am.");
-//    $("#cues-cue-feelings").attr("placeholder","Example: I was stressed that I could not understand the material.");
-//    $("#cues-cue-environment").attr("placeholder"," Example: I was alone.");
-//    $("#cues-cue-action").attr("placeholder","Example: I received a text.");
-//}
+
+function editCommentModalShow() {
+    var commentKey = $(this).parents().closest(".ps-comment").find("input").val();
+    var content = $(this).parent().siblings(".comment-text").text();
+
+    $("#edit-comment-modal-key").val(commentKey);
+    $("#edit-comment-content").val(content);
+
+    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $(".ps-modal-type-comment").addClass("pushToFront");
+    $("#edit-comment-modal").modal("show");
+}
+
+function deleteCommentModalShow() {
+    var commentKey = $(this).parents().closest(".ps-comment").find("input").val();
+    var content = $(this).parent().siblings(".comment-text").text();
+
+    $("#delete-comment-modal-key").val(commentKey);
+    $("#delete-comment-modal-span").text(content);
+
+    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $(".ps-modal-type-comment").addClass("pushToFront");
+    $("#delete-comment-modal").modal("show");
+
+}
