@@ -43,13 +43,18 @@
         <div class="col-md-9">
 
             <c:set var="userRole" value="${user.role}" />
-            <c:set var="instructorApplicant" value="applyingInstructor" />
             <c:choose>
-                <c:when test="${userRole == instructorApplicant}">
-                    <p class="ps-notice">You instructor application is waiting to be viewed.</p>
+                <c:when test="${userRole == 'instructorApplicant'}">
+                    <p class="ps-notice">You instructor application is being reviewed.</p>
+                </c:when>
+                <c:when test="${userRole == 'adminApplicant'}">
+                    <p class="ps-notice">You admin application is being reviewed.</p>
                 </c:when>
                 <c:when test="${userRole == 'instructor'}">
                     <p class="ps-notice">Congratulations! You are currently an instructor.</p>
+                </c:when>
+                <c:when test="${userRole == 'admin'}">
+                    <p class="ps-notice">You are currently an admin.</p>
                 </c:when>
                 <c:otherwise>
                     <form:form method="post" action="/application/submit" modelAttribute="user">

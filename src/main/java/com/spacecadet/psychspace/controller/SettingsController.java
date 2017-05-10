@@ -39,7 +39,7 @@ public class SettingsController {
         User currUser = WelcomeController.currUser;
         if (user != null) {
            currUser.setRole(user.getRole());
-           userManager.updateUser(user);
+           userManager.updateUser(currUser);
         }
 
         return "redirect:/application";
