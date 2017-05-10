@@ -42,11 +42,8 @@ public class HabitController {
             goal = new Goal();
         }
         Habit habit = habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey);
-        Cue cue;
-        if(habit == null){
-            cue = new Cue();
-
-        } else {
+        Cue cue = new Cue();
+        if(habit != null){
             hasHabit = "true";
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
@@ -75,8 +72,9 @@ public class HabitController {
 
     /**
      * submit add/edit goal on habit page
+     * @param goal new/edited goal
      * @param courseKey course key
-     * @return goal page
+     * @return redirect to habit page
      */
     @RequestMapping(value = "/learn/{courseKey}/habit/submitGoal", method = RequestMethod.POST)
     public String submitGoal(@ModelAttribute("goal") Goal goal, @PathVariable("courseKey") String courseKey){
@@ -96,6 +94,28 @@ public class HabitController {
             goalManager.editGoal(myGoal);
         }
 
+        return "redirect:/learn/"+courseKey+"/habit";
+    }
+
+    /**
+     * submit add/edit cue on habit page
+     * @param cue new/edited cue
+     * @param courseKey course key
+     * @return redirect to habit page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/habit/submitCue", method = RequestMethod.POST)
+    public String submitGoal(@ModelAttribute("cue") Cue cue, @PathVariable("courseKey") String courseKey){
+        Habit habit = habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey);
+        Cue userCue = cueManager.loadSingleCue(habit.getCueKey());
+        if(userCue == null){
+            cue.setUserKey(WelcomeController.currUser.getUserKey());
+            cueManager.addCue(cue);
+        } else {
+            cue.setCueKey(userCue.getCueKey());
+            cueManager.editCue(cue);
+        }
+        habit.setCueKey(cue.getCueKey());
+        habitManager.editHabit(habit);
         return "redirect:/learn/"+courseKey+"/habit";
     }
 }

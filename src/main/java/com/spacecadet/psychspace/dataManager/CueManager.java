@@ -49,12 +49,14 @@ public class CueManager {
      * @param courseKey course key in datastore
      * @return array list of cue utility objects
      */
-    public ArrayList<Cue> loadUserCues(String userKey, String courseKey){
+    public ArrayList<Cue> loadUserCues(String userKey, String courseKey, String type){
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, userKey);
         Query.Filter propertyFilter2 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query.Filter propertyFilter3 =
+                new Query.FilterPredicate("Type", Query.FilterOperator.EQUAL, type);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2, propertyFilter3);
         Query cueQuery = new Query("Cue").setFilter(userCourseFilter);
         List<Entity> cueList =
                 datastore.prepare(cueQuery).asList(FetchOptions.Builder.withDefaults());
@@ -91,7 +93,6 @@ public class CueManager {
             cue1.setProperty("Action", cue.getAction());
             datastore.put(txn, cue1);
             txn.commit();
-
             cue.setCueKey(KeyFactory.keyToString(cue1.getKey()));
         } finally {
             if (txn.isActive()) {
@@ -116,10 +117,10 @@ public class CueManager {
                 updatedCue.setProperty("EmotionalState", cue.getEmotionalState());
                 updatedCue.setProperty("Environment", cue.getEnvironment());
                 updatedCue.setProperty("Action", cue.getAction());
-
                 datastore.delete(KeyFactory.stringToKey(cue.getCueKey()));
                 datastore.put(updatedCue);
                 txn.commit();
+                cue.setCueKey(KeyFactory.keyToString(updatedCue.getKey()));
             } catch (EntityNotFoundException ex) {
                 ex.printStackTrace();
             }

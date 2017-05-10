@@ -4,6 +4,7 @@ import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Cue;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +37,8 @@ public class CueController {
         ModelAndView model = new ModelAndView();
         model.setViewName("learnCues");
         model.addObject("cue", new Cue());
-        model.addObject("cueList", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey));
+        model.addObject("negativeCues", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey, "negative"));
+        model.addObject("positiveCues", cueManager.loadUserCues(WelcomeController.currUser.getUserKey(), courseKey, "positive"));
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
@@ -58,5 +60,29 @@ public class CueController {
         model.addObject("hasGoal", hasGoal);
 
         return model;
+    }
+
+    /**
+     * add user cue to cue list
+     * @param courseKey course key in datastore
+     * @param cue new cue created
+     * @return redirect to course cues page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/cues/addCue", method = RequestMethod.POST)
+    public String addCues(@PathVariable("courseKey") String courseKey, @ModelAttribute("cue") Cue cue){
+        cueManager.addCue(cue);
+        return "redirect:/learn/"+courseKey+"/cues";
+    }
+
+    /**
+     *  edit user cue in cue list
+     * @param courseKey course key in datastore
+     * @param cue edited cur
+     * @return redirect to course cue page
+     */
+    @RequestMapping(value = "/learn/{courseKey}/cues/editCue", method = RequestMethod.POST)
+    public String editCues(@PathVariable("courseKey") String courseKey, @ModelAttribute("cue") Cue cue){
+        cueManager.editCue(cue);
+        return "redirect:/learn/"+courseKey+"/cues";
     }
 }
