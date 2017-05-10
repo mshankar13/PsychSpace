@@ -54,7 +54,7 @@ public class EvaluationController {
         model.addObject("weeklyGoalValue", weeklyGoalValue);
         model.addObject("evaluation", new Evaluation());
         model.addObject("evaluationList", evaluationManager.loadUserEvaluations(courseKey, WelcomeController.currUser.getUserKey()));
-        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
             hasEvaluation = "true";
         }
         if(habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey) != null){

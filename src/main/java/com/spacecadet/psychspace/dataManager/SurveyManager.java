@@ -149,7 +149,6 @@ public class SurveyManager {
                 updatedSurvey.setProperty("CourseTitle", survey.getCourseTitle());
                 updatedSurvey.setProperty("Title", survey.getTitle());
                 updatedSurvey.setProperty("DueDate", survey.getDueDate());
-
                 datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
                 questionManager.deleteQuestion(survey.getSurveyKey());
                 datastore.put(updatedSurvey);

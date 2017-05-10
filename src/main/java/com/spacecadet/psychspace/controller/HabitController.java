@@ -50,7 +50,7 @@ public class HabitController {
             hasHabit = "true";
             cue = cueManager.loadSingleCue(habit.getCueKey());
         }
-        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
             hasEvaluation = "true";
         }
         Course course = courseManager.loadSingleCourse(courseKey);

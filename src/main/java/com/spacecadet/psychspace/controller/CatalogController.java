@@ -55,7 +55,7 @@ public class CatalogController {
      * @param search search key word
      * @return search page with searc result
      */
-    @RequestMapping(value = "/catalogue/Search", method = RequestMethod.GET)
+    @RequestMapping(value = "/catalogue/search", method = RequestMethod.GET)
     public ModelAndView catalogSearch(@RequestParam(value = "search", required = false) String search){
         ModelAndView model = new ModelAndView();
         model.setViewName("catalogueSearch");

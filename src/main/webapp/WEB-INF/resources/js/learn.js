@@ -1,7 +1,3 @@
-/**
- * Javascript for all pages /learn*
- */
-
 $(document).ready(function () {
     var goal = $("#goal").val();
     if (goal != "")
@@ -9,6 +5,12 @@ $(document).ready(function () {
 
     $("#btn-example-goal").on("click", exampleGoalModalShow);
 });
+
+function setLearnSidebar() {
+
+}
+
+
 
 function loadGoal(goal) {
     var action = $("#action").val();

@@ -29,6 +29,8 @@ public class WelcomeController {
     public ModelAndView welcome(){
         ModelAndView model = new ModelAndView();
         model.setViewName("welcome");
+        if (currUser.getUserKey() != null)
+            model.addObject("userKey", currUser.getUserKey());
 
         return model;
     }

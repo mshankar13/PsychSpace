@@ -1,6 +1,10 @@
 package com.spacecadet.psychspace.dataManager;
 
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Transaction;
 import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.spacecadet.psychspace.utilities.Comment;
 import com.spacecadet.psychspace.utilities.Article;
@@ -65,6 +69,23 @@ public class HelperManager {
     }
 
     /**
+     * deletes an entity from datastore given the key
+     * @param entityKey entity key
+     */
+    public void deleteEntity(String entityKey) {
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Transaction txn = datastore.beginTransaction();
+        try {
+            datastore.delete(KeyFactory.stringToKey(entityKey));
+            txn.commit();
+        } finally {
+            if (txn.isActive()) {
+                txn.rollback();
+            }
+        }
+    }
+    /**
      * helper for converting survey from string to survey object
      * @param str survey in json string
      * @return survey in survey utility object
@@ -75,7 +96,6 @@ public class HelperManager {
         JsonParser parser = new JsonParser();
         JsonObject o = parser.parse(str).getAsJsonObject();
 
-        System.out.println(str);
         JsonElement courseKey = o.get("courseKey");
         survey.setCourseKey(courseKey.toString().replaceAll("^\"|\"$", ""));
         JsonElement courseTitle = o.get("courseTitle");
@@ -91,6 +111,7 @@ public class HelperManager {
         HashMap<Question, ArrayList<Answer>> questionsMap = new HashMap<>();
 
         int index = 0;
+        // get questions
         while (index < Integer.parseInt(questionTotal.toString())) {
             JsonObject question = questions.getAsJsonObject(Integer.toString(index).replaceAll("^\"|\"$", ""));
 
@@ -103,6 +124,7 @@ public class HelperManager {
             int index1 = 0;
 
             ArrayList<Answer> answerList = new ArrayList<>();
+            // get answers
             while (index1 < Integer.parseInt(answerTotal.toString().replaceAll("^\"|\"$", ""))) {
                 JsonObject answer = answers.getAsJsonObject(Integer.toString(index1).replaceAll("^\"|\"$", ""));
 
@@ -133,10 +155,14 @@ public class HelperManager {
         survey1.add("Properties", gson.toJsonTree(survey));
         JsonObject questions = new JsonObject();
         int i = 0;
+
+        // convert questions
         for (Question question : survey.getQuestions().keySet()) {
             JsonObject question1 = new JsonObject();
             JsonObject answers = new JsonObject();
             int index = 0;
+
+            // convert corresponding answers
             for (Answer answer : survey.getQuestions().get(question)) {
                 answers.add(Integer.toString(index), gson.toJsonTree(answer));
                 index++;
@@ -149,9 +175,7 @@ public class HelperManager {
         }
         survey1.add("Questions", gson.toJsonTree(questions));
         survey1.add("QuestionTotal", gson.toJsonTree(Integer.toString(i)));
-//            res.add(Integer.toString(surveys.indexOf(survey)), survey1);
 
-        System.out.println(res.toString());
         return survey1.toString();
     }
 

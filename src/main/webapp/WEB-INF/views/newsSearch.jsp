@@ -51,7 +51,7 @@
 
                         <div class="row ps-text-content">
                             <!-- start course -->
-                            <c:forEach items="${articleList}" var="newsItem">
+                            <c:forEach items="${newsList}" var="newsItem">
                                 <div class="col-lg-4">
                                     <div class="ps-well">
                                         <p><span class="glyphicon glyphicon-time"></span> Posted ${newsItem.date}</p>

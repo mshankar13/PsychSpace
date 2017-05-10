@@ -54,7 +54,7 @@ public class VideoController {
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
-        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey())){
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
             hasEvaluation = "true";
         }
         if(habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey) != null){

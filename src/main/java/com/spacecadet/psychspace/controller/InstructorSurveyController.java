@@ -74,7 +74,6 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.POST)
     public String editSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String surveyStr) {
-        ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
         Survey initSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
         Survey survey = helperManager.surveyStringToSurvey(surveyStr);
         survey.setCourseKey(courseKey);
