@@ -91,7 +91,6 @@ public class CueManager {
             cue1.setProperty("Action", cue.getAction());
             datastore.put(txn, cue1);
             txn.commit();
-
             cue.setCueKey(KeyFactory.keyToString(cue1.getKey()));
         } finally {
             if (txn.isActive()) {
@@ -116,10 +115,10 @@ public class CueManager {
                 updatedCue.setProperty("EmotionalState", cue.getEmotionalState());
                 updatedCue.setProperty("Environment", cue.getEnvironment());
                 updatedCue.setProperty("Action", cue.getAction());
-
                 datastore.delete(KeyFactory.stringToKey(cue.getCueKey()));
                 datastore.put(updatedCue);
                 txn.commit();
+                cue.setCueKey(KeyFactory.keyToString(updatedCue.getKey()));
             } catch (EntityNotFoundException ex) {
                 ex.printStackTrace();
             }

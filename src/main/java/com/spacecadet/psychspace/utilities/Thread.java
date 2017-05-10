@@ -46,4 +46,9 @@ public class Thread {
      * content of the forum
      */
     private String content;
+
+    /**
+     * date of the forum
+     */
+    private String Date;
 }
