@@ -3,7 +3,6 @@ package com.spacecadet.psychspace.dataManager;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Goal;
 import org.joda.time.DateTime;
-import org.joda.time.Interval;
 import org.joda.time.Weeks;
 
 import java.text.DecimalFormat;
