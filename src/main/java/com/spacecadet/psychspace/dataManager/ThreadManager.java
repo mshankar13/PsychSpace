@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore.*;
 import com.spacecadet.psychspace.utilities.Thread;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marleneshankar on 5/9/17.
@@ -19,13 +20,50 @@ public class ThreadManager {
     public ThreadManager() { datastore = DatastoreServiceFactory.getDatastoreService(); }
 
     /**
-     *
+     * loads a single thread for a given user
+     * @param userKey
+     * @return
+     */
+    public Thread loadSingleThread(String userKey) {
+        Thread thread = new Thread();
+        try {
+            Entity foundHabit = datastore.get(KeyFactory.stringToKey(userKey));
+            thread.setThreadKey(KeyFactory.keyToString(foundHabit.getKey()));
+            thread.setUserKey(userKey);
+            thread.setCourseKey(foundHabit.getProperty("CourseKey").toString());
+            thread.setInThreadName(foundHabit.getProperty("InThreadName").toString());
+            thread.setTitle(foundHabit.getProperty("Title").toString());
+            thread.setContent(foundHabit.getProperty("Content").toString());
+            thread.setContent(foundHabit.getProperty("Date").toString());
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return thread;
+    }
+    /**
+     * loads the threads for a given course
      * @param courseKey
      * @return
      */
     public ArrayList<Thread> loadCourseThreads(String courseKey) {
         ArrayList<Thread> loadedThreads = new ArrayList<>();
+        Query.Filter propertyFilter1 =
+                new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
+        Query threadQuery = new Query("Thread").setFilter(propertyFilter1);
+        List<Entity> foundThreads = datastore.prepare(threadQuery).asList(FetchOptions.Builder.withDefaults());
+        for (Entity thread: foundThreads) {
+            Thread thread1 = new Thread();
+            thread1.setThreadKey(KeyFactory.keyToString(thread.getKey()));
+            thread1.setUserKey(thread.getProperty("UserKey").toString());
+            thread1.setUserKey(thread.getProperty("CourseKey").toString());
+            thread1.setInThreadName(thread.getProperty("InThreadName").toString());
+            thread1.setTitle(thread.getProperty("Title").toString());
+            thread1.setContent(thread.getProperty("Content").toString());
+            thread1.setContent(thread.getProperty("Date").toString());
 
+            loadedThreads.add(thread1);
+        }
         return loadedThreads;
     }
 
@@ -43,6 +81,7 @@ public class ThreadManager {
             thread1.setProperty("InThreadName", thread.getInThreadName());
             thread1.setProperty("Title", thread.getTitle());
             thread1.setProperty("Content", thread.getContent());
+            thread1.setProperty("Date", thread.getDate());
             datastore.put(txn, thread1);
             txn.commit();
 
@@ -69,6 +108,7 @@ public class ThreadManager {
                 updatedThread.setProperty("InThreadName", thread.getInThreadName());
                 updatedThread.setProperty("Title", thread.getTitle());
                 updatedThread.setProperty("Content", thread.getContent());
+                updatedThread.setProperty("Date", thread.getDate());
 
                 datastore.delete(KeyFactory.stringToKey(thread.getThreadKey()));
                 datastore.put(updatedThread);

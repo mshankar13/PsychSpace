@@ -50,5 +50,5 @@ public class Thread {
     /**
      * date of the forum
      */
-    private String Date;
+    private String date;
 }
