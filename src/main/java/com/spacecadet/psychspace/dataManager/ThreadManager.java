@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by marleneshankar on 5/9/17.
+ * modified by aliao on 5/10/17.
  */
 
 public class ThreadManager {
@@ -20,31 +21,32 @@ public class ThreadManager {
     public ThreadManager() { datastore = DatastoreServiceFactory.getDatastoreService(); }
 
     /**
-     * loads a single thread for a given user
-     * @param userKey
-     * @return
+     * loads a single thread for given thread key in datastore
+     * @param threadKey thread key in datastore
+     * @return thread utility object
      */
-    public Thread loadSingleThread(String userKey) {
+    public Thread loadSingleThread(String threadKey) {
         Thread thread = new Thread();
         try {
-            Entity foundHabit = datastore.get(KeyFactory.stringToKey(userKey));
-            thread.setThreadKey(KeyFactory.keyToString(foundHabit.getKey()));
-            thread.setUserKey(userKey);
-            thread.setCourseKey(foundHabit.getProperty("CourseKey").toString());
-            thread.setInThreadName(foundHabit.getProperty("InThreadName").toString());
-            thread.setTitle(foundHabit.getProperty("Title").toString());
-            thread.setContent(foundHabit.getProperty("Content").toString());
-            thread.setContent(foundHabit.getProperty("Date").toString());
+            Entity foundThread = datastore.get(KeyFactory.stringToKey(threadKey));
+            thread.setThreadKey(KeyFactory.keyToString(foundThread.getKey()));
+            thread.setUserKey(foundThread.getProperty("UserKey").toString());
+            thread.setCourseKey(foundThread.getProperty("CourseKey").toString());
+            thread.setInThreadName(foundThread.getProperty("InThreadName").toString());
+            thread.setTitle(foundThread.getProperty("Title").toString());
+            thread.setDate(foundThread.getProperty("Date").toString());
+            thread.setContent(foundThread.getProperty("Content").toString());
         } catch (EntityNotFoundException ex) {
             ex.printStackTrace();
             return null;
         }
         return thread;
     }
+
     /**
      * loads the threads for a given course
-     * @param courseKey
-     * @return
+     * @param courseKey course key in datastore
+     * @return array list of thread with specified course
      */
     public ArrayList<Thread> loadCourseThreads(String courseKey) {
         ArrayList<Thread> loadedThreads = new ArrayList<>();
@@ -74,7 +76,6 @@ public class ThreadManager {
     public void addThread(Thread thread) {
         Transaction txn = datastore.beginTransaction();
         try {
-
             Entity thread1 = new Entity("Thread");
             thread1.setProperty("CourseKey", thread.getCourseKey());
             thread1.setProperty("UserKey", thread.getUserKey());
@@ -84,9 +85,7 @@ public class ThreadManager {
             thread1.setProperty("Date", thread.getDate());
             datastore.put(txn, thread1);
             txn.commit();
-
             thread.setThreadKey(KeyFactory.keyToString(thread1.getKey()));
-
         } finally {
             if (txn.isActive()) {
                 txn.rollback();
@@ -96,7 +95,7 @@ public class ThreadManager {
 
     /**
      * edits a thread in datastore
-     * @param thread
+     * @param thread edited thread
      */
     public void editThread(Thread thread) {
         Transaction txn = datastore.beginTransaction();
@@ -109,7 +108,6 @@ public class ThreadManager {
                 updatedThread.setProperty("Title", thread.getTitle());
                 updatedThread.setProperty("Content", thread.getContent());
                 updatedThread.setProperty("Date", thread.getDate());
-
                 datastore.delete(KeyFactory.stringToKey(thread.getThreadKey()));
                 datastore.put(updatedThread);
                 txn.commit();
@@ -125,7 +123,7 @@ public class ThreadManager {
 
     /**
      * deletes a thread in datastore
-     * @param threadKey
+     * @param threadKey thread key
      */
     public void deleteThread(String threadKey){
         Transaction txn = datastore.beginTransaction();
