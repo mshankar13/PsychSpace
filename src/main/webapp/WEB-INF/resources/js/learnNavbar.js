@@ -1,8 +1,13 @@
-$(document).ready(function(){
+/**
+ * Javascript for the course navigation
+ * set the active tab
+ */
 
+$(document).ready(function(){
     setActiveLearnNav();
 });
 
+// Set the active tab
 function setActiveLearnNav() {
     var today = $.datepicker.formatDate('mm/dd/yy', new Date());
     var startDate = $('#course-start-date').val();

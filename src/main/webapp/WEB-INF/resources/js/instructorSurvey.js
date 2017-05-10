@@ -1,3 +1,9 @@
+/**
+ * Javascript for instructor to add or edir
+ * a survey to a course
+ * @type {number}
+ */
+
 var questionCounter = 2;
 var hasSurvey = false;
 $(document).ready(function(){
@@ -35,7 +41,9 @@ $(document).ready(function(){
     $("#survey-due-date").datepicker();
 });
 
-
+/**
+ * Select option to view by course
+ */
 function changeCourse() {
     var currentUrl = window.location.pathname;
     var urlArr = currentUrl.split("/");
@@ -55,10 +63,16 @@ function changeCourse() {
     });
 }
 
+/**
+ * Display modal for adding a course
+ */
 function addCourseModalShow() {
     $("#addCourseModal").modal("show");
 }
 
+/**
+ * load the survey of the course
+ */
 function loadSurvey() {
     $("#create-survey-h1").hide();
 
@@ -151,7 +165,9 @@ function loadSurvey() {
 
 }
 
-//--------------------------- Add Survey --------------------------
+/**
+ * Add a question div to the page
+ */
 function addQuestion() {
     var div = '<div class="question-group">\
                 <div class="form-group">\
@@ -196,6 +212,10 @@ function addQuestion() {
     $("#survey-q-group div:last-child").find("span.question-number").text(questionCounter);
 }
 
+/**
+ * Add an answer div to a question
+ * @param $qGroup
+ */
 function addAnswer($qGroup) {
     var div = '<div class="form-group answer-row">\
                     <label class="col-sm-2 control-label">Answer</label>\
@@ -220,6 +240,9 @@ function addAnswer($qGroup) {
 
 }
 
+/**
+ * Delete a question div
+ */
 function deleteQuestion() {
     var questionDiv = $(this).closest(".question-group");
     questionDiv.remove();
@@ -233,10 +256,16 @@ function deleteQuestion() {
     });
 }
 
+/**
+ * Delete an answer div
+ */
 function removeAnswer() {
     $(this).parent().closest(".answer-row").remove();
 }
 
+/**
+ * Instructor submits a survey
+ */
 function surveySubmit() {
     var courseKey = $("#course-key").val();
     var survey = {};

@@ -1,3 +1,9 @@
+/**
+ * Javascript for the site navigation bar
+ * set active tab
+ * user login, logout
+ */
+
 var profile;
 
 $(document).ready(function(){
@@ -11,11 +17,17 @@ $(document).ready(function(){
         userSignedOutUI();
     }
 
+    // enable button onclick functions
     $("#btn-sign-in").on("click", onSignIn);
     $("#btn-sign-out").on("click", signOut);
 
 });
 
+/**
+ * when a user clicks the sign in button
+ * @param googleUser
+ * @param authResult
+ */
 function onSignIn(googleUser, authResult) {
     var url = window.location.pathname;
     if (url == "/")
@@ -49,12 +61,10 @@ function onSignIn(googleUser, authResult) {
     userSignedInUI();
 }
 
-function google_signin_callback(authResult){
-    if(authResult.status.method == 'AUTO'){
-        // handle auto sign-in scenario
-    }
-}
-
+/**
+ * check if a user is signed in
+ * @returns {boolean}
+ */
 function checkIfSignedIn()
 {
     if(sessionStorage.getItem('user') == null){
@@ -69,7 +79,9 @@ function checkIfSignedIn()
     }
 }
 
-
+/**
+ * user sign out
+ */
 function signOut() {
     var url = window.location.href;
     url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
@@ -106,6 +118,9 @@ function signOut() {
 
 }
 
+/**
+ * ui change when a user is signed in
+ */
 function userSignedInUI() {
     $("#nav-sign-in").hide();
     $("#nav-profile").show();
@@ -113,6 +128,9 @@ function userSignedInUI() {
     $("#nav-learn").show();
 }
 
+/**
+ * ui change when a user is signed out
+ */
 function userSignedOutUI() {
     $("#nav-sign-in").show();
     $("#nav-profile").hide();
@@ -120,6 +138,9 @@ function userSignedOutUI() {
     $("#nav-learn").hide();
 }
 
+/**
+ * set the tab where the user is currently on
+ */
 function setActiveNav() {
     var url = window.location.href;
     url = url.substring(url.lastIndexOf("/") + 1, url.length);

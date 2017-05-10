@@ -60,7 +60,7 @@
                         <h2>I want to apply to be </h2>
                         <form:select path="role">
                             <form:option value="instructorApplicant">an instructor</form:option>
-                            <form:option value="instructorApplicant">an admin</form:option>
+                            <form:option value="adminApplicant">an admin</form:option>
                         </form:select>
                         <div class="right">
                             <button type = "submit" class="ps-btn-primary">Apply</button>

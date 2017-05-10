@@ -1,3 +1,8 @@
+/**
+ * Javascript for the course video page for
+ * an instructor view
+ */
+
 $(document).ready(function() {
     // select course link onclick
     $("#select-course").change(changeCourse);
@@ -11,12 +16,16 @@ $(document).ready(function() {
     $("#videos-a").attr("href", url);
     $("#evaluation-a").attr("href", courseBaseUrl + "/dueDates");
 
+    // enable the button onclick functions
     $("#btn-add-course").on("click", addCourseModalShow);
     $("#btn-add-video").on("click", addVideoModalShow);
     $("#videos-div").on("click", ".edit-video-btn", editVideoModalShow);
     $("#videos-div").on("click", ".delete-video-btn", deleteVideoModalShow);
 });
 
+/**
+ * Select option to view by course
+ */
 function changeCourse() {
     var currentUrl = window.location.pathname;
     var urlArr = currentUrl.split("/");
@@ -36,11 +45,16 @@ function changeCourse() {
     });
 }
 
-
+/**
+ * Display the modal for adding a video
+ */
 function addVideoModalShow() {
     $("#addVideoModal").modal("show");
 }
 
+/**
+ * Display the modal for editing a video
+ */
 function editVideoModalShow() {
     var div = $(this).closest("div");
     var title = div.parent().find(".video-title").val();
@@ -60,6 +74,9 @@ function editVideoModalShow() {
     $("#editVideoModal").modal("show");
 }
 
+/**
+ * Display the modal for delete a video
+ */
 function deleteVideoModalShow() {
     var div = $(this).closest("div");
     var title = div.parent().find(".video-title").val();
@@ -79,6 +96,9 @@ function deleteVideoModalShow() {
     $("#deleteVideoModal").modal("show");
 }
 
+/**
+ * Display a modal for adding a course
+ */
 function addCourseModalShow() {
     $("#addCourseModal").modal("show");
 }
