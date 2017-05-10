@@ -20,36 +20,22 @@ public class QuestionManager {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
-
     /**
      * adds corresponding survey questions to datastore
      * @param surveyKey survey key
      * @param questionMap hashmap of questions with corresponding list of answers
      */
     public void addQuestions(String surveyKey, HashMap<Question, ArrayList<Answer>> questionMap) {
-        Transaction txn = datastore.beginTransaction();
+        for (Question question : questionMap.keySet()) {
+            Entity question1 = new Entity("Question");
+            question1.setProperty("Content", question.getContent());
+            question1.setProperty("Type", question.getType());
+            question1.setProperty("SurveyKey", surveyKey);
+            datastore.put(question1);
 
-        try {
-            for (Question question : questionMap.keySet()) {
-                if (txn.isActive()) {
-                    txn.rollback();
-                }
-                txn = datastore.beginTransaction();
-                Entity question1 = new Entity("Question");
-                question1.setProperty("Content", question.getContent());
-                question1.setProperty("Type", question.getType());
-                question1.setProperty("SurveyKey", surveyKey);
-                datastore.put(txn, question1);
-                txn.commit();
-
-                String k = KeyFactory.keyToString(question1.getKey());
-                ArrayList<Answer> a = questionMap.get(question);
-                answerManager.addAnswers(k, a);
-            }
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
+            String k = KeyFactory.keyToString(question1.getKey());
+            ArrayList<Answer> a = questionMap.get(question);
+            answerManager.addAnswers(k, a);
         }
     }
 
@@ -82,16 +68,8 @@ public class QuestionManager {
         return questions;
     }
 
-    public void editQuestion() {
-        Transaction txn = datastore.beginTransaction();
+    public void editQuestion(String surveyKey, HashMap<Question, ArrayList<Answer>> questionMap) {
 
-        try {
-
-        } finally {
-            if(txn.isActive()) {
-                txn.rollback();
-            }
-        }
     }
 
     /**
@@ -99,21 +77,24 @@ public class QuestionManager {
      * @param surveyKey survey key in datastore
      */
     public void deleteQuestion(String surveyKey) {
-        Transaction txn = datastore.beginTransaction();
-        try {
-            Query.Filter questionFilter =
-                    new Query.FilterPredicate("SurveyKey", Query.FilterOperator.EQUAL, surveyKey);
-            Query questionQuery = new Query("Question").setFilter(questionFilter);
-            List<Entity> surveyQuestions =
-                    datastore.prepare(questionQuery).asList(FetchOptions.Builder.withDefaults());
-            for(Entity entity : surveyQuestions){
-                datastore.delete(entity.getKey());
+
+        Query.Filter questionFilter =
+                new Query.FilterPredicate("SurveyKey", Query.FilterOperator.EQUAL, surveyKey);
+        Query questionQuery = new Query("Question").setFilter(questionFilter);
+        List<Entity> surveyQuestions =
+                datastore.prepare(questionQuery).asList(FetchOptions.Builder.withDefaults());
+
+        for (Entity question : surveyQuestions) {
+            String key = KeyFactory.keyToString(question.getKey());
+            Query.Filter answerFilter =
+                    new Query.FilterPredicate("QuestionKey", Query.FilterOperator.EQUAL, key);
+            Query answerQuery = new Query("Question").setFilter(answerFilter);
+            List<Entity> questionAnswers =
+                    datastore.prepare(answerQuery).asList(FetchOptions.Builder.withDefaults());
+            for (Entity answer : questionAnswers) {
+                datastore.delete(answer.getKey());
             }
-            txn.commit();
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
+            datastore.delete(question.getKey());
         }
     }
 }

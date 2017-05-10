@@ -116,23 +116,16 @@ public class SurveyManager {
      * @param survey new survey
      */
     public void addSurvey(Survey survey) {
-        Transaction txn = datastore.beginTransaction();
-        try {
-            Entity survey1 = new Entity("Survey");
-            survey1.setProperty("UserKey", survey.getUserKey());
-            survey1.setProperty("CourseKey", survey.getCourseKey());
-            survey1.setProperty("CourseTitle", survey.getCourseTitle());
-            survey1.setProperty("Title", survey.getTitle());
-            survey1.setProperty("DueDate", survey.getDueDate());
-            datastore.put(txn, survey1);
-            txn.commit();
-            survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
-            questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
-        }
+        Entity survey1 = new Entity("Survey");
+        survey1.setProperty("UserKey", survey.getUserKey());
+        survey1.setProperty("CourseKey", survey.getCourseKey());
+        survey1.setProperty("CourseTitle", survey.getCourseTitle());
+        survey1.setProperty("Title", survey.getTitle());
+        survey1.setProperty("DueDate", survey.getDueDate());
+        datastore.put(survey1);
+        survey.setSurveyKey(KeyFactory.keyToString(survey1.getKey()));
+        questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
+
     }
 
     /**
@@ -140,29 +133,23 @@ public class SurveyManager {
      * @param survey edited survey
      */
     public void editSurvey(Survey survey) {
-        Transaction txn = datastore.beginTransaction();
+
         try {
-            try {
-                Entity updatedSurvey = datastore.get(KeyFactory.stringToKey(survey.getSurveyKey()));
-                updatedSurvey.setProperty("UserKey", survey.getUserKey());
-                updatedSurvey.setProperty("CourseKey", survey.getCourseKey());
-                updatedSurvey.setProperty("CourseTitle", survey.getCourseTitle());
-                updatedSurvey.setProperty("Title", survey.getTitle());
-                updatedSurvey.setProperty("DueDate", survey.getDueDate());
-                datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
-                questionManager.deleteQuestion(survey.getSurveyKey());
-                datastore.put(updatedSurvey);
-                txn.commit();
-                survey.setSurveyKey(KeyFactory.keyToString(updatedSurvey.getKey()));
-                questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
-            } catch (EntityNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
+            Entity updatedSurvey = datastore.get(KeyFactory.stringToKey(survey.getSurveyKey()));
+            updatedSurvey.setProperty("UserKey", survey.getUserKey());
+            updatedSurvey.setProperty("CourseKey", survey.getCourseKey());
+            updatedSurvey.setProperty("CourseTitle", survey.getCourseTitle());
+            updatedSurvey.setProperty("Title", survey.getTitle());
+            updatedSurvey.setProperty("DueDate", survey.getDueDate());
+            datastore.delete(KeyFactory.stringToKey(survey.getSurveyKey()));
+            datastore.put(updatedSurvey);
+            questionManager.deleteQuestion(survey.getSurveyKey());
+            survey.setSurveyKey(KeyFactory.keyToString(updatedSurvey.getKey()));
+            questionManager.addQuestions(survey.getSurveyKey(), survey.getQuestions());
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
         }
+
     }
 
     /**

@@ -50,26 +50,15 @@ public class AnswerManager {
      * @param answers list of answers for corresponding question
      */
     public void addAnswers(String questionKey, ArrayList<Answer> answers) {
-        Transaction txn = datastore.beginTransaction();
+        for (Answer answer : answers) {
 
-        try {
-            for (Answer answer : answers) {
-                if (txn.isActive()) {
-                    txn.rollback();
-                }
-                txn = datastore.beginTransaction();
-                Entity answer1 = new Entity("Answer");
-                answer1.setProperty("Answer", answer.getAnswer());
-                answer1.setProperty("Score", answer.getScore());
-                answer1.setProperty("QuestionKey", questionKey);
+            Entity answer1 = new Entity("Answer");
+            answer1.setProperty("Answer", answer.getAnswer());
+            answer1.setProperty("Score", answer.getScore());
+            answer1.setProperty("QuestionKey", questionKey);
 
-                datastore.put(txn, answer1);
-                txn.commit();
-            }
-        } finally {
-            if (txn.isActive()) {
-                txn.rollback();
-            }
+            datastore.put(answer1);
         }
+
     }
 }
