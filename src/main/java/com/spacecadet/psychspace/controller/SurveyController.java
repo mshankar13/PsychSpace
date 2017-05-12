@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Controller for all visits to student/user survey pages.
  * user cases: load survey and submit survey
  * Created by aliao on 4/19/17.
+ * Modified by acerini on 5/11/17
  */
 @Controller
 public class SurveyController {
@@ -22,6 +23,7 @@ public class SurveyController {
     private UserManager userManager = new UserManager();
     private SurveyManager surveyManager = new SurveyManager();
     private CourseManager courseManager = new CourseManager();
+    private HelperManager helperManager = new HelperManager();
     private EvaluationManager evaluationManager = new EvaluationManager();
     private HabitManager habitManager = new HabitManager();
     private GoalManager goalManager = new GoalManager();
@@ -62,6 +64,20 @@ public class SurveyController {
         model.addObject("hasGoal", hasGoal);
 
         return model;
+    }
+
+    /**
+     * add new survey to course
+     * @param survey new survey
+     * @return student submit survey
+     */
+    @RequestMapping(value = "/learn/{courseKey}/survey/submitSurvey", method = RequestMethod.POST)
+    public String addSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String survey) {
+        Survey survey1 = helperManager.surveyStringToSurvey(survey);
+        survey1.setUserKey(WelcomeController.currUser.getUserKey());
+        surveyManager.addSurvey(survey1);
+
+        return "redirect:/learn/" + courseKey;
     }
 
     /**

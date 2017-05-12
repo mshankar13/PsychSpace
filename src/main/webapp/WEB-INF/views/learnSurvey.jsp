@@ -46,46 +46,48 @@
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <%--Learn Sidebar for Todos--%>
-                        <h2>To Do:<hr></h2>
+                        <h2>To Do:
+                            <hr>
+                        </h2>
                         <c:choose>
-                                <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
-                                    <h3>Good Job! You currently have no todos.</h3>
-                                </c:when>
-                                <c:otherwise>
-                                    <!-- Set Goal -->
-                                    <c:if test="${hasGoal == false}">
-                                        <div class="center">
-                                            <a class="button-enroll button fadein" id="button-goal"
-                                               href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
-                                            </a>
-                                        </div>
-                                    </c:if>
-                                    <!-- Do Daily Evaluation -->
-                                    <c:if test="${hasEvaluation == false}">
-                                        <div class="center">
-                                            <a class="button-enroll button fadein" id="button-evaluation"
-                                               href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
-                                            </a>
-                                        </div>
-                                    </c:if>
-                                    <!-- Do Survey -->
-                                    <c:if test="${hasEvaluation == false}">
-                                        <div class="center">
-                                            <a class="button-enroll button fadein" id="button-survey"
-                                               href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
-                                            </a>
-                                        </div>
-                                    </c:if>
-                                    <%--Do Habit--%>
-                                    <c:if test="${hasHabit == false}">
-                                        <div class="center">
-                                            <a class="button-enroll button fadein" id="button-habit"
-                                               href="${contextPath}/learn/${courseKey}/habit"><span>Set Habit!</span>
-                                            </a>
-                                        </div>
-                                    </c:if>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
+                                <h3>Good Job! You currently have no todos.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Set Goal -->
+                                <c:if test="${hasGoal == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-goal"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Daily Evaluation -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-evaluation"
+                                           href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- Do Survey -->
+                                <c:if test="${hasEvaluation == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-survey"
+                                           href="${contextPath}/learn/${courseKey}/survey"><span>Complete Survey</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <%--Do Habit--%>
+                                <c:if test="${hasHabit == false}">
+                                    <div class="center">
+                                        <a class="button-enroll button fadein" id="button-habit"
+                                           href="${contextPath}/learn/${courseKey}/habit"><span>Set Habit!</span>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
@@ -93,7 +95,6 @@
                     <!-- Start Content -->
                 </div>
                 <div class="col-lg-10 ps-col-right">
-                    <input type="hidden" value="${survey}" id="survey">
                     <div class="ps-well">
                         <!-- Survey Name -->
                         <h2>${survey.title}
@@ -101,31 +102,39 @@
                         </h2>
                         <br>
                         <br>
+                        <input type="hidden" value="${survey.courseKey}" id="course-key">
+                        <input type="hidden" value='${survey.courseTitle}' id="course-title">
+                        <input type="hidden" value='${survey.title}' id="survey-title">
+                        <input type="hidden" value='${survey.dueDate}' id="survey-due-date">
                         <!-- Form Start -->
                         <form class="ps-all-questions">
                             <!-- Questions Start -->
-                            <c:forEach items="${survey.questions}" var="question" >
-                                <div class="ps-question">
+                            <c:forEach items="${survey.questions}" var="question">
+                                <div class="ps-question question-group">
                                     <!-- Question Text -->
-                                    <h3>${question.key.content}</h3>
-                                    <div class="ps-answers">
+                                    <h3 class="input-question">${question.key.content}</h3>
+                                    <input type="hidden" class="input-type" value=${question.key.type}>
+                                    <div class="ps-answers answer-row">
                                         <!-- Answer Start -->
                                         <c:forEach items="${question.value}" var="answer">
-                                        <div class="ps-answer">
-                                            <!-- Answer Button -->
-                                            <!-- Set "id" equal to answer key -->
-                                            <!-- Set "name" equal to question key -->
-                                            <input id="${answer.questionKey}${answer.answer}" type="radio" value="${answer.score}" name="${answer.questionKey}"/>
-                                            <!-- Answer Text -->
-                                            <!-- Set "for" equal to answer key -->
-                                            <label for="${answer.questionKey}${answer.answer}">${answer.answer}</label>
-                                        </div>
+                                            <div class="ps-answer">
+                                                <!-- Answer Button -->
+                                                <!-- Set "id" equal to answer key + answer-->
+                                                <!-- Set "name" equal to question key -->
+                                                <!-- Set "value" to score answer score -->
+                                                <input id="${answer.questionKey}${answer.answer}" class="input-score"
+                                                       type="radio" value="${answer.score}"
+                                                       name="${answer.questionKey}"/>
+                                             +   <!-- Answer Text -->
+                                                <!-- Set "for" equal to answer key + answer-->
+                                                <label for="${answer.questionKey}${answer.answer}"
+                                                       class="input-answer">${answer.answer}</label>
+                                            </div>
                                         </c:forEach>
                                         <!-- Answer End-->
                                     </div>
                                 </div>
                             </c:forEach>
-
                             <!-- Question End -->
                             <div class="center">
                                 <!-- Submit Survey Button -->

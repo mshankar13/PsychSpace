@@ -1,24 +1,34 @@
 $(document).ready(function () {
+    // Hide the survey submit button on page load
+    $('#btn-submit-survey').hide();
+
+    // On Click Responses / Functions
     $("input").on("click", markQuestionAsDone);
-    $(".ps-answer").on("click", markAnswerAsChecked)
+    $(".ps-answer").on("click", markAnswerAsChecked);
+    $('#btn-submit-survey').on("click", surveySubmit);
 });
 
-// Add isAnswered class to the completed question when one of its answers are checked
+/**
+ * Add isAnswered class to the completed question when one of its answers are checked
+ */
 function markQuestionAsDone() {
     console.log("clicked");
     $(this).closest(".ps-question").addClass("isAnswered");
     checkAllAnswers();
 }
 
-// Add isChecked class to the checked answer and make sure the class is removed for the previous checked answer
+/**
+ * Add isChecked class to the checked answer and make sure the class is removed for the previous checked answer
+ */
 function markAnswerAsChecked() {
     console.log("label clicked");
     $(this).closest(".ps-question").find(".ps-answer").removeClass('isChecked');
     $(this).addClass("isChecked");
 }
 
-
-// Check that all questions have been answered before making the submit button clickable
+/**
+ * Checks that all questions have been answered before showing the submit button
+ */
 function checkAllAnswers() {
     var isAllAnswered = true;
     $('.ps-question').each(function () {
@@ -28,55 +38,72 @@ function checkAllAnswers() {
         }
     });
     if(isAllAnswered == true){
-        $('#btn-submit-survey').disable(false);
+        $('#btn-submit-survey').show();
+    }
+    else{
+        $('#btn-submit-survey').hide();
     }
 }
 
-function createSurvey() {
-    var survey = JSON.parse($("#survey").val());
-    var properties = survey["Properties"];
-    var questions = survey["Questions"];
-    var qTotal = survey["QuestionTotal"];
-    var $questionGroups = $(".question-group");
-    //var qGroupLen = $questionGroups.length;
-}
+/**
+ * Student submits a survey
+ */
+function surveySubmit() {
+    var courseKey = $("#course-key").val();
+    var survey = {};
+    survey["courseKey"] = courseKey;
+    survey["courseTitle"] = $("#course-title").val();
 
-function addQuestionGroup() {
+    survey["title"] = $("#survey-title").val();
+    survey["date"] = $('#survey-due-date').val();
+    var questions = {};
 
-}
+    survey["questions"] = {};
+    var qCount = 0;
+    $.each($(".question-group"), function(index, value) {
+        var question = {};
+        var answers = {};
+        var aCount = 0;
+        question["question"] = $(value).find(".input-question").text();
+        question["type"] = $(value).find(".input-type").val();
 
-function answerRow() {
-
-}
-
-/*
-function handleQuestions() {
-    var answerID, answerName;
-    var q, a = 0;
-    $(this).find(".ps-question").each(function () {
-        console.log(this);
-        $(this).find(".ps-answer").each(function () {
-            answerName = "r-group-" + q;
-            answerID = "ps-a-" + a;
-            $(this).find("input").attr('id', answerID);
-            $(this).find("input").attr('for', answerID);
-            a = a + 1;
+        // Find answer marked as checked
+        $.each($(this).find(".isAnswered"), function(i, v) {
+            var answer = {};
+            answer["answer"] = $(v).find(".input-answer").text();
+            answer["score"] = $(v).find(".input-score").val();
+            answers[i] = answer;
+            aCount++;
         });
-        a = 0;
-        q = q + 1;
+        question["answers"] = answers;
+        questions[index] = question;
+        question["answerTotal"] = aCount;
+        qCount++;
     });
 
-    
-//    int q = 0
-//    int a = 0
-//    For each ps-question of ps-all-questions
-//        Give id to ps-question: id = ps-q[q]
-//        a = 0
-//        For each ps-answer of ps-question
-//            Give id to input: radio-[a]
-//            Give for to label: radio-[a]
-//            Give name to input: r-group-[q]
-//            a = a + 1
-    
+    survey["questionTotal"] = qCount;
+    survey["questions"] = questions;
+
+    var link = "/learn/" + courseKey + "/survey/submitSurvey";
+
+    console.log("Survey", survey);
+
+    $.ajax({
+        url: link,
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(survey),
+        success: function() {
+            var successAlert = '<div class="alert alert-success alert-dismissible" role="alert"> \
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">\
+                                        <span aria-hidden="true">&times;</span></button> \
+                                        <strong>All set!</strong> Survey Submitted!\
+                                </div>';
+            $(".col-md-9").prepend(successAlert);
+        },
+        error: function(e) {
+            console.log("ERROR", e);
+        }
+    });
 }
-*/
