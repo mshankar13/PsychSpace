@@ -1,6 +1,7 @@
 package com.spacecadet.psychspace.dataManager;
 
 import com.google.appengine.api.datastore.*;
+import com.spacecadet.psychspace.controller.WelcomeController;
 import com.spacecadet.psychspace.utilities.*;
 
 import java.util.*;
@@ -392,7 +393,32 @@ public class CourseManager {
         return popularCourses;
     }
 
+    /**
+     * check if course started or not
+     * @param date stratDate of course in string
+     * @return true/false
+     */
+    public boolean hasStarted(String date){
+        Date today = new Date();
+        Date startDay = helper.stringToDate(date);
+        if(startDay.after(today)){
+            return false;
+        }
+        return true;
+    }
 
+    /**
+     * check if current user owns the course an the instructor
+     * @param instructorKey instructor key in user datastore
+     * @return true/false
+     */
+    public boolean ownsCourse(String instructorKey){
+        String userKey = WelcomeController.currUser.getUserKey();
+        if(instructorKey.equals(userKey)){
+            return true;
+        }
+        return false;
+    }
 }
 
 

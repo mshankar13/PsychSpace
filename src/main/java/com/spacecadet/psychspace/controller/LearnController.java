@@ -38,6 +38,7 @@ public class LearnController {
                 courseManager.getCurrCourses(WelcomeController.currUser.getUserKey())));
         model.addObject("myPastCourses", helper.shortenCourseList(
                 courseManager.getPastCourses(WelcomeController.currUser.getUserKey())));
+        model.addObject("currUser", WelcomeController.currUser);
         return model;
     }
 

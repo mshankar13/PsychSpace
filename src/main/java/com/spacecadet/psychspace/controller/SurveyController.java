@@ -38,6 +38,7 @@ public class SurveyController {
         String hasGoal = "false";
         String hasEvaluation = "false";
         String hasSurvey = "false";
+        String hasStarted = "false";
         Survey survey = surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
         model.setViewName("learnSurvey");
@@ -57,11 +58,16 @@ public class SurveyController {
             survey = surveyManager.loadSingleCourseSurvey(courseKey);
             hasSurvey = "true";
         }
+        if(courseManager.hasStarted(course.getStartDate())){
+            hasStarted = "true";
+        }
         model.addObject("survey", survey);
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
@@ -72,12 +78,12 @@ public class SurveyController {
      * @return student submit survey
      */
     @RequestMapping(value = "/learn/{courseKey}/survey/submitSurvey", method = RequestMethod.POST)
-    public String addSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String survey) {
+    public String submitSurvey(@PathVariable("courseKey") String courseKey, @RequestBody String survey) {
         Survey survey1 = helperManager.surveyStringToSurvey(survey);
         survey1.setUserKey(WelcomeController.currUser.getUserKey());
         surveyManager.addSurvey(survey1);
 
-        return "redirect:/learn/" + courseKey;
+        return "redirect:/learn/"+courseKey+"/survey";
     }
 
     /**

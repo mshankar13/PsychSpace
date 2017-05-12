@@ -30,6 +30,7 @@ public class WelcomeController {
         model.setViewName("welcome");
         if (currUser.getUserKey() != null)
             model.addObject("userKey", currUser.getUserKey());
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

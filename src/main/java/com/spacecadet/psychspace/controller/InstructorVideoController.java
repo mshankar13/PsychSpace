@@ -103,6 +103,7 @@ public class InstructorVideoController {
         model.addObject("courses", courses);
         model.addObject("videos", videoManager.loadVideos());
         model.addObject("course", new Course());
+        model.addObject("currUser", WelcomeController.currUser);
 
         return "redirect:/instructor/"+courseKey+"/videos";
     }

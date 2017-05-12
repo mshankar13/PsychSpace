@@ -54,6 +54,7 @@ public class ArticleController {
             model.addObject("isLiked", "false");
         }
         model.addObject("currentUserKey", WelcomeController.currUser.getUserKey());
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

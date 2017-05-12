@@ -46,6 +46,7 @@ public class CatalogController {
         openCourses = setCourseList(openCourses);
         model.addObject("courseList", courses);
         model.addObject("openCourses", openCourses);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
@@ -60,6 +61,7 @@ public class CatalogController {
         ModelAndView model = new ModelAndView();
         model.setViewName("catalogueSearch");
         model.addObject("courseList", courseManager.searchCourse(courseManager.loadAllCourses(), search));
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

@@ -52,6 +52,12 @@ public class CourseController {
             model.addObject("isEnrolled", "false");
             model.addObject("isLoggedIn", "false");
         }
+        if(courseManager.ownsCourse(course.getUserKey())){
+            model.addObject("ownsCourse", "true");
+        } else {
+            model.addObject("ownsCourse", "false");
+        }
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
