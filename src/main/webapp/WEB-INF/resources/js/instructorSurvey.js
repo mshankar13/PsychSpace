@@ -162,7 +162,6 @@ function loadSurvey() {
 
     // change create button to save
     $("#survey-submit").text("Save");
-
 }
 
 /**
@@ -326,4 +325,6 @@ function surveySubmit() {
             console.log("ERROR", e);
         }
     });
+    
+    location.reload();
 }

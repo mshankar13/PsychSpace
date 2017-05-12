@@ -40,6 +40,7 @@ public class VideoController {
         String hasGoal = "false";
         String hasEvaluation = "false";
         String hasSurvey = "false";
+        String hasStarted = "false";
         ArrayList<Video> videos = videoManager.loadVideos();
         if(videos.size() > 0){
             for(Video v : videos){
@@ -66,10 +67,15 @@ public class VideoController {
         if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasSurvey = "true";
         }
+        if(courseManager.hasStarted(course.getStartDate())){
+            hasStarted = "true";
+        }
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

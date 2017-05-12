@@ -39,6 +39,8 @@ public class HomeController {
                 courseManager.getCurrCourses(WelcomeController.currUser.getUserKey())));
         model.addObject("popularCourses", helper.shortenCourseList(
                 courseManager.getPopularCourses()));
+        model.addObject("currUser", WelcomeController.currUser);
+
         return model;
     }
 

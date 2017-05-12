@@ -53,6 +53,7 @@ public class NewsController {
         Article featured = newsManager.getFeatured(articleList);
         featured.setContent(featured.getContent().substring(0, 100));
         model.addObject("featuredNews", featured);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
@@ -67,6 +68,7 @@ public class NewsController {
         ModelAndView model = new ModelAndView();
         model.setViewName("newsSearch");
         model.addObject("newsList", newsManager.searchNews(newsManager.loadNews(), search));
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

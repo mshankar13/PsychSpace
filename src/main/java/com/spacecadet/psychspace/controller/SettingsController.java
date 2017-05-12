@@ -24,8 +24,20 @@ public class SettingsController {
     public ModelAndView settings() {
         ModelAndView model = new ModelAndView();
         model.setViewName("setting");
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
+    }
+
+    /**
+     * delete account on settings page
+     * @return settings page
+     */
+    @RequestMapping(value = "/settings/deleteAccount", method = RequestMethod.POST)
+    public String deleteAccount() {
+        userManager.deleteUser(WelcomeController.currUser.getUserKey());
+
+        return "redirect:/";
     }
 
     /**
@@ -36,7 +48,8 @@ public class SettingsController {
     public ModelAndView application() {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
-        model.addObject("user", WelcomeController.currUser);
+        model.addObject("currUser", WelcomeController.currUser);
+
         return model;
     }
 

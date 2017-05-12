@@ -35,6 +35,7 @@ public class HabitController {
         String hasHabit = "false";
         String hasEvaluation = "false";
         String hasSurvey = "false";
+        String hasStarted = "false";
         ModelAndView model = new ModelAndView();
         DueDates dueDates = dueDatesManager.loadDueDatesForCourse(courseKey);
         Goal goal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
@@ -52,6 +53,9 @@ public class HabitController {
             hasEvaluation = "true";
         }
         Course course = courseManager.loadSingleCourse(courseKey);
+        if(courseManager.hasStarted(course.getStartDate())){
+            hasStarted = "true";
+        }
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
         model.setViewName("learnHabit");
@@ -63,10 +67,12 @@ public class HabitController {
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
         if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasSurvey = "true";
         }
         model.addObject("hasSurvey", hasSurvey);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

@@ -26,6 +26,7 @@ public class EvaluationController {
     private SplitGoalManager splitGoalManager = new SplitGoalManager();
     private HabitManager habitManager = new HabitManager();
     private SurveyManager surveyManager = new SurveyManager();
+    private CourseManager courseManager = new CourseManager();
 
     /**
      * user evaluation page
@@ -38,6 +39,7 @@ public class EvaluationController {
         String hasGoal = "false";
         String hasEvaluation = "false";
         String hasSurvey = "false";
+        String hasStarted = "false";
         Date rawDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(rawDate);
@@ -66,10 +68,15 @@ public class EvaluationController {
         if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasSurvey = "true";
         }
+        if(courseManager.hasStarted(courseManager.loadSingleCourse(courseKey).getStartDate())){
+            hasStarted = "true";
+        }
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
