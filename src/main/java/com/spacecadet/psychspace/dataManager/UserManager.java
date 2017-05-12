@@ -172,6 +172,22 @@ public class UserManager {
     }
 
     /**
+     * deletes a user in datastore
+     * @param userKey user key
+     */
+    public void deleteUser(String userKey){
+        Transaction txn = datastore.beginTransaction();
+        try {
+            datastore.delete(KeyFactory.stringToKey(userKey));
+            txn.commit();
+        } finally {
+            if (txn.isActive()) {
+                txn.rollback();
+            }
+        }
+    }
+
+    /**
      * check if a user is instructor
      * @return true/false
      */
