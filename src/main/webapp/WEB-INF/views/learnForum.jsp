@@ -45,7 +45,9 @@
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <!-- Learn Sidebar for Todos-->
-                        <h2>To Do:<hr></h2>
+                        <h2>To Do:
+                            <hr>
+                        </h2>
                         <c:choose>
                             <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
                                 <h3>Good Job! You currently have no todos.</h3>
@@ -166,10 +168,9 @@
                                             <!-- Form -->
                                             <form:form method="post" action="/learn/${courseKey}/forum/addThread"
                                                        modelAttribute="thread">
-                                                <form:hidden path="threadKey" value="0" id="edit-comment-modal-key"/>
+                                                <form:hidden path="threadKey" value="0" id="add-thread-modal-key"/>
                                                 <form:hidden path="courseKey" value="0"/>
                                                 <form:hidden path="userKey" value="0"/>
-                                                <form:hidden path="inThreadName" value="0"/>
                                                 <form:hidden path="date" value="0"/>
 
                                                 <div class="left">
@@ -177,8 +178,6 @@
                                                     <form:textarea id="forum-title" path="title" class="form-control"
                                                                    rows="1"
                                                                    autofocus="true"/>
-                                                        <%--<textarea class="form-control" id="forum-thread-name"--%>
-                                                        <%--rows="1"></textarea>--%>
                                                 </div>
                                                 <br>
                                                 <div class="left">
@@ -187,19 +186,22 @@
                                                                    class="form-control"
                                                                    rows="5"
                                                                    autofocus="true"/>
-                                                        <%--<textarea class="form-control" id="forum-thread-content"--%>
-                                                        <%--rows="5"></textarea>--%>
                                                 </div>
                                                 <br>
                                                 <div class="left">
                                                         <%-- Hidden input for anonymity --%>
+                                                    <input type="hidden" id="displayFirstName" value=${user.firstName}/>
+                                                    <input type="hidden" id="displayLastName" value=${user.lastName}/>
                                                     <h4>Display Name or Stay Anonymous?</h4>
-                                                    <button type="button" class="btn-comment btn btn-primary">Display
+                                                    <button type="button" id="displayNameFull"
+                                                            class="btn-comment btn btn-primary ps-btn-primary-active">Display
                                                         Name
                                                     </button>
-                                                    <button type="button" class="btn-comment btn btn-primary">Stay
+                                                    <button type="button" id="displayNameHidden"
+                                                            class="btn-comment btn btn-primary">Stay
                                                         Anonymous
                                                     </button>
+                                                    <form:hidden path="inThreadName" id="add-thread-display-name" value="${user.firstName} ${user.lastName}"/>
                                                 </div>
                                                 <br>
                                                 <div class="right">

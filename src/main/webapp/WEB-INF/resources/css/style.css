@@ -107,6 +107,12 @@ span {
     border-radius: 5px;
 }
 
+.ps-btn-primary-active{
+    background-color: var(--eucalyptus-color);
+    border: 1px solid var(--eucalyptus-color);
+    color: var(--baby-powder-color);
+}
+
 .ps-btn-primary:hover {
     background-color: var(--tea-rose-color);
     border: 1px solid var(--tea-rose-color);
