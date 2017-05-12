@@ -37,7 +37,7 @@ public class SurveyController {
         String hasHabit = "false";
         String hasGoal = "false";
         String hasEvaluation = "false";
-        String hasSurvey = "false";
+        String hasSurvey = "true";
         String hasStarted = "false";
         Survey survey = surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey());
         ModelAndView model = new ModelAndView();
@@ -56,7 +56,7 @@ public class SurveyController {
         }
         if(survey == null){
             survey = surveyManager.loadSingleCourseSurvey(courseKey);
-            hasSurvey = "true";
+            hasSurvey = "false";
         }
         if(courseManager.hasStarted(course.getStartDate())){
             hasStarted = "true";

@@ -106,7 +106,7 @@ function surveySubmit() {
             console.log("ERROR", e);
         }
     });
-    if (url.includes("localhost"))
+    if (link.includes("localhost"))
         window.location.href = "localhost:8080/learn/" + courseKey + "/survey";
     else
         window.location.href = "http://psychspace-160921.appspot.com/learn/" + courseKey + "/survey";
