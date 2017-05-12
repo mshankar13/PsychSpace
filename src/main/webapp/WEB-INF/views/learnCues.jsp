@@ -120,11 +120,6 @@
                                                     <h2>Negative Cues<hr></h2>
                                                 </div>
                                             </div>
-                                            <%--<div class="col-lg-6">--%>
-                                                <%--<div class="ps-well">--%>
-                                                    <%--<h3>[Load Negative]</h3>--%>
-                                                <%--</div>--%>
-                                            <%--</div>--%>
                                             <c:forEach items="${negativeCues}" var="cue">
                                             <div class="col-lg-6">
                                                 <div class="ps-well">
@@ -164,11 +159,6 @@
                                                     <h2>Positive Cues<hr></h2>
                                                 </div>
                                             </div>
-                                            <%--<div class="col-lg-6">--%>
-                                                <%--<div class="ps-well">--%>
-                                                    <%--<h3>[Load Positive] </h3>--%>
-                                                <%--</div>--%>
-                                            <%--</div>--%>
                                             <c:forEach items="${positiveCues}" var="cue">
                                             <div class="col-lg-6">
                                                 <div class="ps-well">
@@ -247,6 +237,8 @@
                                         <h2 class="ps-feature-info-header"> New Cue<hr></h2>
                                     </div>
                                 </div>
+                                <form:form method="post" action="/learn/${courseKey}/cues/addCue"
+                                           modelAttribute="cue">
                                 <div class="ps-modal-body">
                                     <div class="form-group">
                                         <!-- Start Content -->
@@ -296,10 +288,11 @@
                                         <!-- End Content -->
                                     </div>
                                 </div>
+                                </form:form>
                             </div>
                         </div>
                     </div>
-                    <!-- End Edit Modal -->
+                    <!-- End Add Cue Modal -->
                 </div>
             </div>
             <!-- End course -->
