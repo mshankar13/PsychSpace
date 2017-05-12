@@ -5,8 +5,8 @@ $(document).ready(function () {
     $(".ps-modal-type-comment").addClass("pushToBack");
     placeholderPositive();
     $(".btn-cue-add").on("click", addCueModalShow);
-    $(".btn-cue-positive").on("click", placeholderPositive);
-    $(".btn-cue-negative").on("click", placeholderNegative);
+    $(".btn-cue-positive").on("click", setTypePositive);
+    $(".btn-cue-negative").on("click", setTypeNegative);
 });
 
 function addCueModalShow() {
@@ -31,4 +31,22 @@ function placeholderNegative() {
     $("#cues-cue-feelings").attr("placeholder","Example: I was stressed that I could not understand the material.");
     $("#cues-cue-environment").attr("placeholder"," Example: I was alone.");
     $("#cues-cue-action").attr("placeholder","Example: I received a text.");
+}
+
+function setTypePositive() {
+    $(".btn-cue-negative").removeClass("ps-btn-primary-active");
+    $(".btn-cue-positive").addClass("ps-btn-primary-active");
+
+    $("#add-cue-type").val("Positive");
+
+    placeholderPositive();
+}
+
+function setTypeNegative() {
+    $(".btn-cue-positive").removeClass("ps-btn-primary-active");
+    $(".btn-cue-negative").addClass("ps-btn-primary-active");
+
+    $("#add-cue-type").val("Negative");
+
+    placeholderNegative();
 }

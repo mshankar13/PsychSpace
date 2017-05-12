@@ -163,7 +163,7 @@
                                             <c:forEach items="${positiveCues}" var="cue">
                                             <div class="col-lg-6">
                                                 <div class="ps-well">
-                                                    <h2>[Name of Cue]<hr></h2>
+                                                    <%--<h2>[Name of Cue]<hr></h2>--%>
                                                     <div class="left">
                                                         <h4>Where were you?</h4>
                                                         <p>${cue.location}</p>
@@ -247,38 +247,60 @@
                                             <!-- Form -->
                                             <div class="left">
                                                 <h4>Positive or Negative Cue?</h4>
-                                                <button type="button" class="btn-comment btn btn-primary btn-cue-positive">Positive</button>
+                                                <button type="button" class="btn-comment btn btn-primary btn-cue-positive ps-btn-primary-active">Positive</button>
                                                 <button type="button" class="btn-comment btn btn-primary btn-cue-negative">Negative</button>
-                                            </div>
-                                            <br>
-                                            <div class="left">
-                                                <h4>Cue Summary:</h4>
-                                                <textarea class="form-control" id="cues-cue-name" rows="1"></textarea>
+                                                <form:hidden path="type" id="add-cue-type"
+                                                             value="positive"/>
                                             </div>
                                             <br>
                                             <div class="left">
                                                 <h4>Where were you?</h4>
-                                                <textarea class="form-control" id="cues-cue-location" rows="1"></textarea>
+                                                <%--<textarea class="form-control" id="cues-cue-location" rows="1"></textarea>--%>
+                                                <form:textarea id="cues-cue-location"
+                                                        path="location"
+                                                               class="form-control"
+                                                               rows="1"
+                                                               autofocus="true"/>
                                             </div>
                                             <br>
                                             <div class="left">
                                                 <h4>What time was it?</h4>
-                                                <textarea class="form-control" id="cues-cue-time" rows="1"></textarea>
+                                                <%--<textarea class="form-control" id="cues-cue-time" rows="1"></textarea>--%>
+                                                <form:textarea id="cues-cue-time"
+                                                        path="time"
+                                                               class="form-control"
+                                                               rows="1"
+                                                               autofocus="true"/>
                                             </div>
                                             <br>
                                             <div class="left">
                                                 <h4>What was your emotional state?</h4>
-                                                <textarea class="form-control" id="cues-cue-feelings" rows="1"></textarea>
+                                                <%--<textarea class="form-control" id="cues-cue-feelings" rows="1"></textarea>--%>
+                                                <form:textarea id="cues-cue-feelings"
+                                                               path="emotionalState"
+                                                               class="form-control"
+                                                               rows="1"
+                                                               autofocus="true"/>
                                             </div>
                                             <br>
                                             <div class="left">
                                                 <h4>Who else was around?</h4>
-                                                <textarea class="form-control" id="cues-cue-environment" rows="1"></textarea>
+                                                <%--<textarea class="form-control" id="cues-cue-environment" rows="1"></textarea>--%>
+                                                <form:textarea id="cues-cue-environment"
+                                                               path="environment"
+                                                               class="form-control"
+                                                               rows="1"
+                                                               autofocus="true"/>
                                             </div>
                                             <br>
                                             <div class="left">
                                                 <h4>What action proceeded the cue?</h4>
-                                                <textarea class="form-control" id="cues-cue-action" rows="1"></textarea>
+                                                <%--<textarea class="form-control" id="cues-cue-action" rows="1"></textarea>--%>
+                                                <form:textarea id="cues-cue-action"
+                                                               path="action"
+                                                               class="form-control"
+                                                               rows="1"
+                                                               autofocus="true"/>
                                             </div>
                                             <br>
                                             <div class="right">
