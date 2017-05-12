@@ -54,7 +54,7 @@ public class SurveyController {
         if(goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasGoal = "true";
         }
-        if(survey != null){
+        if(survey == null){
             survey = surveyManager.loadSingleCourseSurvey(courseKey);
             hasSurvey = "true";
         }
