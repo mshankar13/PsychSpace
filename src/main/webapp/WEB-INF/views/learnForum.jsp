@@ -95,55 +95,76 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
-                    <c:forEach items="${threads}" var="singleThread">
-                        <c:set var="threadUserKey" value="${singleThread.userKey}"/>
-                        <c:choose>
-                            <%-- If thread was created by the current user--%>
-                            <c:when test="${currUserKey == threadUserKey}">
-                                <%-- My Thread Start --%>
-                                <div class="ps-well">
-                                    <div>
-                                        <h2>My Threads
-                                            <hr>
-                                        </h2>
-                                        <button type="button"
-                                                class="btn-comment btn btn-primary btn-thread-add">+
-                                        </button>
-                                    </div>
-                                    <ul class="ps-ul">
-                                            <%-- Link to thread page --%>
-                                        <li class="ps-li threadListTitle">
-                                            <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
-                                        </li>
-                                    </ul>
+                    <c:set var="threadLists" value="${threads}"/>
 
-                                </div>
-                                <%-- My Threads End--%>
-                                <br>
+                    <%-- My Thread Start --%>
+                    <div class="ps-well">
+                        <div>
+                            <h2>My Threads
+                                <hr>
+                            </h2>
+                            <button type="button"
+                                    class="btn-comment btn btn-primary btn-thread-add">+
+                            </button>
+                        </div>
+                        <c:choose>
+                            <c:when test="${empty threadLists}">
+                                <h2>You have no lists!</h2>
                             </c:when>
                             <c:otherwise>
-                                <%-- Else thread was not created by the user--%>
-                                <%-- Community Thread Start --%>
-                                <div class="col-lg">
-                                    <div class="ps-well">
-                                        <div>
-                                            <h2>Community Threads
-                                                <hr>
-                                            </h2>
-                                        </div>
-                                        <ul class="ps-ul">
-                                                <%-- Link to thread page --%>
-                                            <li class="ps-li">
-                                                <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
-                                            </li>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <%-- Community Threads End--%>
+                                <c:forEach items="${threads}" var="singleThread">
+                                    <c:set var="threadUserKey" value="${singleThread.userKey}"/>
+                                    <c:choose>
+                                        <%-- If thread was created by the current user--%>
+                                        <c:when test="${currUserKey == threadUserKey}">
+                                            <ul class="ps-ul">
+                                                    <%-- Link to thread page --%>
+                                                <li class="ps-li threadListTitle">
+                                                    <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                </li>
+                                            </ul>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
                             </c:otherwise>
                         </c:choose>
-                    </c:forEach>
+
+                    </div>
+                    <%-- My Threads End--%>
+                    <br>
+                    <%-- Community Thread Start --%>
+                    <div class="col-lg">
+                        <div class="ps-well">
+                            <div>
+                                <h2>Community Threads
+                                    <hr>
+                                </h2>
+                            </div>
+                            <c:choose>
+                                <c:when test="${empty threadLists}">
+                                    <h2>There are no community threads!</h2>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach items="${threads}" var="singleThread">
+                                        <c:set var="threadUserKey" value="${singleThread.userKey}"/>
+                                        <c:choose>
+                                            <%-- If thread was created by a community user--%>
+                                            <c:when test="${currUserKey != threadUserKey}">
+                                                <ul class="ps-ul">
+                                                        <%-- Link to thread page --%>
+                                                    <li class="ps-li threadListTitle">
+                                                        <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                    </li>
+                                                </ul>
+                                            </c:when>
+                                        </c:choose>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                    <%-- Community Threads End--%>
+
                     <%-- List Threads End--%>
                     <br>
                     <!-- Add Forum Modal-->
@@ -190,18 +211,22 @@
                                                 <br>
                                                 <div class="left">
                                                         <%-- Hidden input for anonymity --%>
-                                                    <input type="hidden" id="displayFirstName" value=${currUser.firstName}/>
-                                                    <input type="hidden" id="displayLastName" value=${currUser.lastName}/>
+                                                    <input type="hidden" id="displayFirstName"
+                                                           value=${currUser.firstName}/>
+                                                    <input type="hidden" id="displayLastName"
+                                                           value=${currUser.lastName}/>
                                                     <h4>Display Name or Stay Anonymous?</h4>
                                                     <button type="button" id="displayNameFull"
-                                                            class="btn-comment btn btn-primary ps-btn-primary-active">Display
+                                                            class="btn-comment btn btn-primary ps-btn-primary-active">
+                                                        Display
                                                         Name
                                                     </button>
                                                     <button type="button" id="displayNameHidden"
                                                             class="btn-comment btn btn-primary">Stay
                                                         Anonymous
                                                     </button>
-                                                    <form:hidden path="inThreadName" id="add-thread-display-name" value="${user.firstName} ${user.lastName}"/>
+                                                    <form:hidden path="inThreadName" id="add-thread-display-name"
+                                                                 value="${user.firstName} ${user.lastName}"/>
                                                 </div>
                                                 <br>
                                                 <div class="right">
