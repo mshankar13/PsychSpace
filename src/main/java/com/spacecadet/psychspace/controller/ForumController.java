@@ -1,8 +1,6 @@
 package com.spacecadet.psychspace.controller;
 
-import com.spacecadet.psychspace.dataManager.CourseManager;
-import com.spacecadet.psychspace.dataManager.ThreadManager;
-import com.spacecadet.psychspace.dataManager.UserManager;
+import com.spacecadet.psychspace.dataManager.*;
 import com.spacecadet.psychspace.utilities.Course;
 import com.spacecadet.psychspace.utilities.Thread;
 import com.spacecadet.psychspace.utilities.User;
@@ -24,6 +22,10 @@ public class ForumController {
     private ThreadManager threadManager = new ThreadManager();
     private CourseManager courseManager = new CourseManager();
     private UserManager userManager = new UserManager();
+    private EvaluationManager evaluationManager = new EvaluationManager();
+    private HabitManager habitManager = new HabitManager();
+    private GoalManager goalManager = new GoalManager();
+    private SurveyManager surveyManager = new SurveyManager();
 
     /**
      * all visits to course forum page
@@ -32,6 +34,11 @@ public class ForumController {
      */
     @RequestMapping(value = "/learn/{courseKey}/forum", method = RequestMethod.GET)
     public ModelAndView loadForum(@PathVariable("courseKey") String courseKey){
+        String hasHabit = "false";
+        String hasGoal = "false";
+        String hasEvaluation = "false";
+        String hasSurvey = "false";
+        String hasStarted = "false";
         ArrayList<Thread> threads = threadManager.loadCourseThreads(courseKey);
         Course course = courseManager.loadSingleCourse(courseKey);
         ModelAndView model = new ModelAndView();
@@ -40,6 +47,26 @@ public class ForumController {
         model.addObject("threads", threads);
         model.setViewName("learnForum");
         model.addObject("course", course);
+        if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
+            hasEvaluation = "true";
+        }
+        if(habitManager.loadUserHabit(WelcomeController.currUser.getUserKey(), courseKey) != null){
+            hasHabit = "true";
+        }
+        if(goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasGoal = "true";
+        }
+        if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
+            hasSurvey = "true";
+        }
+        if(courseManager.hasStarted(courseManager.loadSingleCourse(courseKey).getStartDate())){
+            hasStarted = "true";
+        }
+        model.addObject("hasSurvey", hasSurvey);
+        model.addObject("hasEvaluation", hasEvaluation);
+        model.addObject("hasHabit", hasHabit);
+        model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
 
         return model;
     }

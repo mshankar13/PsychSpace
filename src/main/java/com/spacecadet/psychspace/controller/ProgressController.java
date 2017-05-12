@@ -35,6 +35,7 @@ public class ProgressController {
         String hasGoal = "false";
         String hasEvaluation = "false";
         String hasSurvey = "false";
+        String hasStarted = "false";
         ModelAndView model = new ModelAndView();
         model.setViewName("learnProgress");
         Course course = courseManager.loadSingleCourse(courseKey);
@@ -52,10 +53,14 @@ public class ProgressController {
         if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasSurvey = "true";
         }
+        if(courseManager.hasStarted(course.getStartDate())){
+            hasStarted = "true";
+        }
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("hasEvaluation", hasEvaluation);
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
+        model.addObject("hasStarted", hasStarted);
 
         return model;
     }
