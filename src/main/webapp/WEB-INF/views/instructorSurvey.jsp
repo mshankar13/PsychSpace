@@ -242,7 +242,7 @@
                         </div> <%--End of modal body--%>
                         <div class="modal-footer">
                             <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="instructor-btn-primary">Create</button>
+                            <button type="submit" class="instructor-btn-primary" disabled="disabled">Create</button>
                         </div>
 
                     </form:form>

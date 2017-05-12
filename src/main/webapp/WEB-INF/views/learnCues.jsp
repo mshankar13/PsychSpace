@@ -49,6 +49,7 @@
                     <div class="ps-well">
                         <!-- Learn Sidebar for Todos-->
                         <h2>To Do:<hr></h2>
+                        <c:set var="hasStarted" value="${hasStarted}" />
                         <c:choose>
                             <c:when test="${hasEvaluation == true and hasSurvey == true and hasHabit == true}">
                                 <h3>Good Job! You currently have no todos.</h3>
@@ -63,7 +64,7 @@
                                     </div>
                                 </c:if>
                                 <!-- Do Daily Evaluation -->
-                                <c:if test="${hasEvaluation == false}">
+                                <c:if test="${hasEvaluation == false and hasStarted == true}">
                                     <div class="center">
                                         <a class="button-enroll button fadein" id="button-evaluation"
                                            href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>

@@ -34,7 +34,15 @@
                             <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">
-                            <li class="menu-item"> <a href="${contextPath}/instructor" class="menu-item-a">Instructor Page </a></li>
+                            <c:set var="currUser" value="${currUser}"/>
+                            <c:choose>
+                                <c:if test="${currUser.role == 'Instructor'}">
+                                    <li class="menu-item"> <a href="${contextPath}/instructor" class="menu-item-a">Instructor Page </a></li>
+                                </c:if>
+                                <c:if test="${currUser.role == 'Admin'}">
+                                    <li class="menu-item"> <a href="${contextPath}/admin_addArticle" class="menu-item-a">Admin Page </a></li>
+                                </c:if>
+                            </c:choose>
                             <li class="menu-item"> <a href="${contextPath}/settings" class="menu-item-a"> Settings </a></li>
                             <li id="btn-sign-out"  class="menu-item"> <a href="#" class="menu-item-a">Sign out </a></li>
                             <li class="menu-item"> <a href="#" class="menu-item-a">Help </a></li>

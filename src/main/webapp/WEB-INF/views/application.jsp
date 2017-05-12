@@ -42,18 +42,18 @@
         </div>
         <div class="col-md-9">
 
-            <c:set var="userRole" value="${user.role}" />
+            <c:set var="userRole" value="${currUser.role}" />
             <c:choose>
-                <c:when test="${userRole == 'instructorApplicant'}">
+                <c:when test="${userRole == 'InstructorApplicant'}">
                     <p class="ps-notice">You instructor application is being reviewed.</p>
                 </c:when>
-                <c:when test="${userRole == 'adminApplicant'}">
+                <c:when test="${userRole == 'AdminApplicant'}">
                     <p class="ps-notice">You admin application is being reviewed.</p>
                 </c:when>
-                <c:when test="${userRole == 'instructor'}">
+                <c:when test="${userRole == 'Instructor'}">
                     <p class="ps-notice">Congratulations! You are currently an instructor.</p>
                 </c:when>
-                <c:when test="${userRole == 'admin'}">
+                <c:when test="${userRole == 'Admin'}">
                     <p class="ps-notice">You are currently an admin.</p>
                 </c:when>
                 <c:otherwise>
@@ -64,8 +64,8 @@
                         <form:hidden path="lastName" value="${user.lastName}" />
                         <h2>I want to apply to be </h2>
                         <form:select path="role">
-                            <form:option value="instructorApplicant">an instructor</form:option>
-                            <form:option value="adminApplicant">an admin</form:option>
+                            <form:option value="InstructorApplicant">an instructor</form:option>
+                            <form:option value="AdminApplicant">an admin</form:option>
                         </form:select>
                         <div class="right">
                             <button type = "submit" class="ps-btn-primary">Apply</button>

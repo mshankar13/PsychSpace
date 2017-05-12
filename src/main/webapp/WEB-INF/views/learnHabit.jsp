@@ -41,6 +41,7 @@
         <h1 class="absolute-text">${courseTitle}</h1>
     </div>
     <div class="ps-feature-content">
+        <c:set var="hasStarted" value="${hasStarted}" />
         <input type="hidden" value="${courseStartDate}" id="course-start-date">
         <div class="row ps-feature">
             <div class="row ps-text-content">
@@ -62,7 +63,7 @@
                                     </div>
                                 </c:if>
                                 <!-- Do Daily Evaluation -->
-                                <c:if test="${hasEvaluation == false}">
+                                <c:if test="${hasEvaluation == false and hasStarted == true}">
                                     <div class="center">
                                         <a class="button-enroll button fadein" id="button-evaluation"
                                            href="${contextPath}/learn/${courseKey}/evaluation"><span>Daily Evaluation</span>
