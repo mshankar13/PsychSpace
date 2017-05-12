@@ -59,6 +59,11 @@ function onSignIn(googleUser, authResult) {
 
     // hide signin button, show the user icon
     userSignedInUI();
+    //refresh the page
+    if (url.includes("localhost"))
+        window.location.href = "localhost:8080";
+    else
+        window.location.href = "http://psychspace-160921.appspot.com/";
 }
 
 /**

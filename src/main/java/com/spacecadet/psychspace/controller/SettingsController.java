@@ -36,7 +36,7 @@ public class SettingsController {
     @RequestMapping(value = "/settings/deleteAccount", method = RequestMethod.POST)
     public String deleteAccount() {
         userManager.deleteUser(WelcomeController.currUser.getUserKey());
-        
+
         return "redirect:/";
     }
 
