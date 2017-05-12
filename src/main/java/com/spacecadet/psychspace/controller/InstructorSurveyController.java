@@ -89,6 +89,17 @@ public class InstructorSurveyController {
     }
 
     /**
+     * logout on instructor survey page
+     * @param user user logged out
+     * @return welcome page
+     */
+    @RequestMapping(value = "/instructor/{courseKey}/survey/logout", method = RequestMethod.POST)
+    public String logoutSurvey(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
+        userManager.resetCurrentUser(new User());
+        return "redirect:/";
+    }
+
+    /**
      * logout on instructor add survey page
      * @param user user logged out
      * @return welcome page

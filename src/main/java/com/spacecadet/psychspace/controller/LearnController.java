@@ -51,15 +51,4 @@ public class LearnController {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
-
-    /**
-     * logout on learn single course page
-     * @param user user logged out
-     * @return welcome page
-     */
-    @RequestMapping(value = "/learn/{courseKey}/logout", method = RequestMethod.POST)
-    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
-        userManager.resetCurrentUser(new User());
-        return "redirect:/";
-    }
 }

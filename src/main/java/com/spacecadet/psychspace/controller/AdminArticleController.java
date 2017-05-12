@@ -48,7 +48,8 @@ public class AdminArticleController {
     @RequestMapping(value = "/admin_addArticle", method = RequestMethod.POST)
     public String addNews(@ModelAttribute("news") Article article) {
         if(article != null) {
-            newsManager.addNews(article.getTitle(), article.getAuthor(), article.getContent(), article.getLikesCount(), article.getDate());
+            newsManager.addNews(article.getTitle(), article.getAuthor(), article.getContent(),
+                    article.getLikesCount(), article.getDate());
         }
 
         return "redirect:/article";

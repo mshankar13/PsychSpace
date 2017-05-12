@@ -57,6 +57,28 @@ public class CourseController {
     }
 
     /**
+     * enroll on course page
+     * @param key course key
+     * @return learn page
+     */
+    @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.GET)
+    public String enroll(@PathVariable("key") String key){
+        enrollManager.enroll(WelcomeController.currUser.getUserKey(), key);
+        return "redirect:/learn";
+    }
+
+    /**
+     * unenroll on course page
+     * @param key course key
+     * @return single course page
+     */
+    @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.GET)
+    public String unenroll(@PathVariable("key") String key){
+        enrollManager.unenroll(WelcomeController.currUser.getUserKey(), key);
+        return "redirect:/course/{key}";
+    }
+
+    /**
      * logout on course page
      * @param key course key
      * @param user user logged out
@@ -82,28 +104,6 @@ public class CourseController {
             user1 = userManager.addUser(user1, "User");
         }
         userManager.resetCurrentUser(user1);
-        return "redirect:/course/{key}";
-    }
-
-    /**
-     * enroll on course page
-     * @param key course key
-     * @return learn page
-     */
-    @RequestMapping(value = "/course/{key}/enroll", method = RequestMethod.GET)
-    public String enroll(@PathVariable("key") String key){
-        enrollManager.enroll(WelcomeController.currUser.getUserKey(), key);
-        return "redirect:/learn";
-    }
-
-    /**
-     * unenroll on course page
-     * @param key course key
-     * @return single course page
-     */
-    @RequestMapping(value = "/course/{key}/unenroll", method = RequestMethod.GET)
-    public String unenroll(@PathVariable("key") String key){
-        enrollManager.unenroll(WelcomeController.currUser.getUserKey(), key);
         return "redirect:/course/{key}";
     }
 }
