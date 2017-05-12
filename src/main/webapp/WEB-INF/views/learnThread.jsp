@@ -55,11 +55,26 @@
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
                     <%-- Start Thread Content --%>
-                    <div class="ps-well">
+                        <input type="hidden" id="currentThreadKey" value="${thread.threadKey}">
+                        <div class="ps-well">
                         <h1 id="currentThreadTitle">
                             ${thread.title}
                             <hr>
                         </h1>
+                            <%--<c:choose>--%>
+                                <%--<c:when test="${currUserKey == thread.userKey}">--%>
+                                    <div class="right">
+                                        <button type="button"
+                                                class="btn-comment btn btn-primary btn-thread-delete">
+                                            Delete
+                                        </button>
+                                        <button type="button"
+                                                class="btn-comment btn btn-primary btn-thread-edit">
+                                            Edit
+                                        </button>
+                                    </div>
+                                <%--</c:when>--%>
+                            <%--</c:choose>--%>
                         <div>
                             <td class="ps-table-row">
                                 ${thread.date}
@@ -76,7 +91,6 @@
                         </div>
                     </div>
                     <%-- End Thread Content --%>
-
                     <br>
                     <%--<!-- Start Comments -->--%>
                     <div class="ps-well">
@@ -233,7 +247,111 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Delete Comment Modal -->
+                    <!-- End Delete Comment Modal
+                    <!-- Delete Thread Modal -->
+                    <div class="modal ps-modal-type-comment fade" id="delete-comment-modal" role="dialog">
+                        <div class="ps-modal-dialog">
+                            <!-- Modal content-->
+                            <div class="ps-modal-content">
+                                <div class="ps-modal-header">
+                                    <button type="button" class="ps-type-close close ps-modal-close"
+                                            data-dismiss="modal">
+                                        <h1>X</h1></button>
+                                    <div class="left">
+                                        <h2 class="ps-feature-info-header"> Delete Thread
+                                            <hr>
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <form:form method="post" action="/learn/${courseKey}/forum/deleteThread"
+                                           modelAttribute="thread">
+                                    <div class="ps-modal-body">
+                                        <form:hidden path="threadKey" value="0" id="delete-thread-modal-key"/>
+                                        <form:hidden path="courseKey" value="0"/>
+                                        <form:hidden path="userKey" value="0"/>
+                                        <form:hidden path="inThreadName" value=""/>
+                                        <form:hidden path="date" value="0"/>
+                                        <form:hidden path="title" value=""/>
+                                        <form:hidden path="content" value=""/>
+
+                                        <h3>Are you sure you want to delete this thread: <span
+                                                id="delete-thread-modal-span"></span>
+                                        </h3>
+                                    </div>
+                                    <div class="ps-modal-footer right">
+                                        <button type="button" class="ps-type-close btn-comment btn btn-primary"
+                                                data-dismiss="modal">No
+                                        </button>
+                                        <button id="btn-thread-update" type="submit"
+                                                class="ps-type-close btn-comment btn btn-primary">Delete
+                                        </button>
+                                    </div>
+                                </form:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Delete Thread Modal
+                    <!-- Edit Thread Modal-->
+                    <div class="modal ps-modal-type-comment fade" id="edit-comment-modal" role="dialog">
+                        <div class="ps-modal-dialog">
+                            <!-- Modal content-->
+                            <div class="ps-modal-content">
+                                <div class="ps-modal-header">
+                                    <button type="button" class="ps-type-close close ps-modal-close"
+                                            data-dismiss="modal">
+                                        <h1>X</h1></button>
+                                    <div class="left">
+                                        <h2 class="ps-feature-info-header"> Edit Thread
+                                            <hr>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <form:form method="post" action="/learn/${courseKey}/forum/editThread"
+                                           modelAttribute="thread">
+                                    <div class="ps-modal-body">
+                                        <form:hidden path="threadKey" value="0" id="edit-thread-modal-key"/>
+                                        <form:hidden path="courseKey" value="0"/>
+                                        <form:hidden path="userKey" value="0"/>
+                                        <form:hidden path="date" value="0"/>
+
+                                        <div class="left">
+                                            <h4>Thread Content</h4>
+                                            <form:textarea id="forum-thread-content" path="content"
+                                                           class="form-control"
+                                                           rows="5"
+                                                           autofocus="true"/>
+                                        </div>
+                                        <br>
+                                        <div class="left">
+                                                <%-- Hidden input for anonymity --%>
+                                            <input type="hidden" id="displayFirstName" value=${currUser.firstName}/>
+                                            <input type="hidden" id="displayLastName" value=${currUser.lastName}/>
+                                            <h4>Display Name or Stay Anonymous?</h4>
+                                            <button type="button" id="displayNameFull"
+                                                    class="btn-comment btn btn-primary">Display
+                                                Name
+                                            </button>
+                                            <button type="button" id="displayNameHidden"
+                                                    class="btn-comment btn btn-primary">Stay
+                                                Anonymous
+                                            </button>
+                                            <form:hidden path="inThreadName" id="edit-thread-display-name" value="${survey.inThreadName}"/>
+                                        </div>
+                                    </div>
+                                    <div class="ps-modal-footer right">
+                                        <button type="button" class="ps-type-close btn btn-default"
+                                                data-dismiss="modal">Close
+                                        </button>
+                                        <button id="btn-thread-edit" type="submit"
+                                                class="ps-type-close btn-comment btn btn-primary">Save
+                                        </button>
+                                    </div>
+                                </form:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Edit Thread Modal -->
                     <!-- Content End-->
                 </div>
             </div>

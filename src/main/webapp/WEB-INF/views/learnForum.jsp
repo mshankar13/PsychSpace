@@ -190,8 +190,8 @@
                                                 <br>
                                                 <div class="left">
                                                         <%-- Hidden input for anonymity --%>
-                                                    <input type="hidden" id="displayFirstName" value=${user.firstName}/>
-                                                    <input type="hidden" id="displayLastName" value=${user.lastName}/>
+                                                    <input type="hidden" id="displayFirstName" value=${currUser.firstName}/>
+                                                    <input type="hidden" id="displayLastName" value=${currUser.lastName}/>
                                                     <h4>Display Name or Stay Anonymous?</h4>
                                                     <button type="button" id="displayNameFull"
                                                             class="btn-comment btn btn-primary ps-btn-primary-active">Display
