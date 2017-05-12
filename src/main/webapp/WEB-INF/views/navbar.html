@@ -29,20 +29,14 @@
                     <li class="dropdown">
                         <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
                             <button type="button" class="btn btn-default btn-profile" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                                <img id="profile-img">
                             </button>
                             <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">
-                            <c:set var="currUser" value="${currUser}"/>
-                            <c:choose>
-                                <c:if test="${currUser.role == 'Instructor'}">
-                                    <li class="menu-item"> <a href="${contextPath}/instructor" class="menu-item-a">Instructor Page </a></li>
-                                </c:if>
-                                <c:if test="${currUser.role == 'Admin'}">
-                                    <li class="menu-item"> <a href="${contextPath}/admin_addArticle" class="menu-item-a">Admin Page </a></li>
-                                </c:if>
-                            </c:choose>
+                            <input type="hidden"  id="user-role" value="${currUser.role}">
+                            <li class="menu-item">Hi ${user.firstName} + ${user.lastName}</li>
                             <li class="menu-item"> <a href="${contextPath}/settings" class="menu-item-a"> Settings </a></li>
                             <li id="btn-sign-out"  class="menu-item"> <a href="#" class="menu-item-a">Sign out </a></li>
                             <li class="menu-item"> <a href="#" class="menu-item-a">Help </a></li>

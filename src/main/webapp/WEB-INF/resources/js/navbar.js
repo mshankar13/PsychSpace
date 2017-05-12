@@ -21,6 +21,17 @@ $(document).ready(function(){
     $("#btn-sign-in").on("click", onSignIn);
     $("#btn-sign-out").on("click", signOut);
 
+    // check the user role show the link accordingly
+    var role = $("#user-role").val();
+    if (role == "Instructor") {
+        var $li = '<li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>';
+        $(".user-dropdown").prepend($li);
+    }
+    else if (role == 'Admin') {
+        var $li = '<li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>';
+        $(".user-dropdown").prepend($li);
+    }
+
 });
 
 /**
@@ -126,6 +137,11 @@ function userSignedInUI() {
     $("#nav-profile").show();
     $("#nav-home").show();
     $("#nav-learn").show();
+
+    $("#profile-img").attr(
+        'src',
+        profile.getImageUrl());
+    );
 }
 
 /**
