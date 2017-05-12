@@ -325,6 +325,6 @@ function surveySubmit() {
             console.log("ERROR", e);
         }
     });
-    
+
     location.reload();
 }

@@ -125,7 +125,7 @@
                                                 <input id="${answer.questionKey}${answer.answer}" class="input-score"
                                                        type="radio" value="${answer.score}"
                                                        name="${answer.questionKey}"/>
-                                             +   <!-- Answer Text -->
+                                                <!-- Answer Text -->
                                                 <!-- Set "for" equal to answer key + answer-->
                                                 <label for="${answer.questionKey}${answer.answer}"
                                                        class="input-answer">${answer.answer}</label>
