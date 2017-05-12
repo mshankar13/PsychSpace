@@ -30,6 +30,17 @@ public class SettingsController {
     }
 
     /**
+     * delete account on settings page
+     * @return settings page
+     */
+    @RequestMapping(value = "/settings/deleteAccount", method = RequestMethod.POST)
+    public String deleteAccount() {
+        userManager.deleteUser(WelcomeController.currUser.getUserKey());
+        
+        return "redirect:/";
+    }
+
+    /**
      * application page for applying to be admin or instructor
      * @return settings page
      */
@@ -38,7 +49,7 @@ public class SettingsController {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
         model.addObject("currUser", WelcomeController.currUser);
-        
+
         return model;
     }
 
