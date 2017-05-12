@@ -22,19 +22,6 @@ $(document).ready(function(){
     $("#btn-sign-in").on("click", onSignIn);
     $("#btn-sign-out").on("click", signOut);
 
-    // check the user role show the link accordingly
-    var role = $("#user-role").val();
-    if (role == "Instructor") {
-        var $li = '<li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>';
-        $li.after($(".user-dropdown"));
-        //$(".user-dropdown").prepend($li);
-    }
-    else if (role == 'Admin') {
-        var $li = '<li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>';
-        $li.after($(".user-dropdown"));
-        // $(".user-dropdown").prepend($li);
-    }
-
 });
 
 /**
@@ -53,29 +40,45 @@ function onSignIn(googleUser, authResult) {
         url = url + "/login";
 
     profile = googleUser.getBasicProfile();
+    profileImgUrl = profile.getImageUrl();
 
-    if(!url.includes("learn") && !url.includes("home")
-        && !url.includes("Course") && !url.includes("Survey")
-       && !url.includes("Video") && !url.includes("instructor")
-       && !url.includes('settings') && !url.includes('application')) {
-        var user = {};
-        user["email"] = profile.getEmail();
-        user["firstName"] = profile.getGivenName();
-        user["lastName"] = profile.getFamilyName();
+    if (!signedIn) {
+        if(!url.includes("learn") && !url.includes("home")
+            && !url.includes("Course") && !url.includes("Survey")
+            && !url.includes("Video") && !url.includes("instructor")
+            && !url.includes('settings') && !url.includes('application')
+            && !url.includes('forum')) {
+            var user = {};
+            user["email"] = profile.getEmail();
+            user["firstName"] = profile.getGivenName();
+            user["lastName"] = profile.getFamilyName();
 
-        $.ajax(url, {
-            type: "POST",
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify(user),
-            success: function() {
-                //refresh the page
-                if (url.includes("localhost"))
-                    window.location.href = "localhost:8080";
-                else
-                    window.location.href = "http://psychspace-160921.appspot.com/";
-            }
-        });
+            $.ajax(url, {
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify(user),
+                success: function() {
+                    //refresh the page
+                    if (url.includes("localhost"))
+                        window.location.href = "localhost:8080";
+                    else
+                        window.location.href = "http://psychspace-160921.appspot.com/";
+                }
+            });
+    }
+
+
+        // // check the user role show the link accordingly
+        // var role = $("#user-role").val();
+        // if (role == "Instructor") {
+        //     var $li = '<li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>';
+        //     $(".user-dropdown:nth-child(1)").append($li);
+        // }
+        // else if (role == 'Admin') {
+        //     var $li = '<li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>';
+        //     $(".user-dropdown:nth-child(1)").append($li);
+        // }
 
         //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
         sessionStorage.setItem('user',JSON.stringify(user));
@@ -118,9 +121,9 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
 
     var user = {};
-    user["email"] = profile.getEmail();
-    user["firstName"] = profile.getGivenName();
-    user["lastName"] = profile.getFamilyName();
+    // user["email"] = profile.getEmail();
+    // user["firstName"] = profile.getGivenName();
+    // user["lastName"] = profile.getFamilyName();
 
     $.ajax(url, {
         type: "POST",
@@ -203,7 +206,6 @@ function setActiveNav() {
         $("#nav-news-a").removeClass("active");
     }
     else if (url == "news") {
-        console.log("news!");
         $("#nav-news-a").addClass("active");
         $("#nav-learn-a").removeClass("active");
         $("#nav-catalogue-a").removeClass("active");

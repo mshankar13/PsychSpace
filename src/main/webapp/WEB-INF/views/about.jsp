@@ -24,7 +24,7 @@
     </head>
 
     <body>
-       <%@include  file="navbar.html" %>
+    <jsp:include page="navbar.jsp" />
         <div id="about-html">
             <div class="about-site">
                 <h1>About PsychSpace</h1>

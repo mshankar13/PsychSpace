@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="navbar-wrapper">
-    <%@include file="navbar.html"%>
+    <jsp:include page="navbar.jsp" />
 </div>
 <header class="ps-feature-header">
     <div class="center page-banner">

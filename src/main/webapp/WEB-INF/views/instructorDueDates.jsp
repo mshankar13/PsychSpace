@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="navbar-wrapper">
-    <%@include file="navbar.html"%>
+    <jsp:include page="navbar.jsp" />
 </div>
 <div class="wrapper">
     <div class="row">
