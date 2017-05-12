@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <nav class="navbar navbar-default" id="nav-top">
         <div class="container-fluid">
@@ -29,8 +31,9 @@
                     <li class="dropdown">
                         <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
                             <button type="button" class="btn btn-default btn-profile" aria-label="Left Align">
+                                Hi ${currUser.firstName}  ${currUser.lastName}!
                                 <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
-                                <img id="profile-img">
+                                <%--<img id="profile-img">--%>
                             </button>
                             <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
@@ -46,7 +49,6 @@
                                     <li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>
                                 </c:when>
                             </c:choose>
-                            <li class="menu-item" id="special-page"><a href="" class="menu-item-a"> </a></li>
                             <li class="menu-item"> <a href="${contextPath}/settings" class="menu-item-a"> Settings </a></li>
                             <li id="btn-sign-out"  class="menu-item"> <a href="" class="menu-item-a">Sign out </a></li>
                             <li class="menu-item"> <a href="#" class="menu-item-a">Help </a></li>

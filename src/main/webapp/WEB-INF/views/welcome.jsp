@@ -26,6 +26,7 @@
         <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
 </head>
 <body>
+
 <div class="welcome-background">
     <div class="navbar-wrapper">
         <jsp:include page="navbar.jsp" />

@@ -52,6 +52,7 @@ function onSignIn(googleUser, authResult) {
             user["email"] = profile.getEmail();
             user["firstName"] = profile.getGivenName();
             user["lastName"] = profile.getFamilyName();
+            //user['imageUrl'] = profile.getImageUrl();
 
             $.ajax(url, {
                 type: "POST",
@@ -67,18 +68,6 @@ function onSignIn(googleUser, authResult) {
                 }
             });
     }
-
-
-        // // check the user role show the link accordingly
-        // var role = $("#user-role").val();
-        // if (role == "Instructor") {
-        //     var $li = '<li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>';
-        //     $(".user-dropdown:nth-child(1)").append($li);
-        // }
-        // else if (role == 'Admin') {
-        //     var $li = '<li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>';
-        //     $(".user-dropdown:nth-child(1)").append($li);
-        // }
 
         //Store the entity object in sessionStorage where it will be accessible from all pages of your site.
         sessionStorage.setItem('user',JSON.stringify(user));
@@ -132,6 +121,10 @@ function signOut() {
         data: JSON.stringify(user),
         success: function() {
             signedIn = false;
+            if (url.includes("localhost"))
+                window.location.href = "localhost:8080";
+            else
+                window.location.href = "http://psychspace-160921.appspot.com/";
         }
     });
 
@@ -141,12 +134,6 @@ function signOut() {
     });
 
     userSignedOutUI();
-
-    if (url.includes("localhost"))
-        window.location.href = "localhost:8080";
-    else
-        window.location.href = "http://psychspace-160921.appspot.com/";
-
 }
 
 /**
@@ -165,9 +152,7 @@ function userSignedInUI() {
     }
 
     $("#user-name").text(userWelcome);
-    $("#profile-img").attr(
-        'src',
-        profileImgUrl);
+    $("#profile-img").attr('src', profileImgUrl);
 }
 
 /**

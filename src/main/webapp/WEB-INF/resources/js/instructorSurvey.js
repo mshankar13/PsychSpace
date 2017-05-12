@@ -41,16 +41,16 @@ $(document).ready(function(){
     // Disable the submit button if any field is empty
     $('input').keyup(function() {
         var empty = false;
-        $('.field input').each(function() {
+        $('input').each(function() {
             if ($(this).val().length == 0) {
                 empty = true;
             }
         });
 
         if (empty) {
-            $('.actions input').attr('disabled', 'disabled');
+            $('#survey-submit').attr('disabled', 'disabled');
         } else {
-            $('.actions input').removeAttr('disabled');
+            $('#survey-submit').removeAttr('disabled');
         }
     });
 
@@ -331,17 +331,13 @@ function surveySubmit() {
         dataType: 'json',
         data: JSON.stringify(survey),
         success: function() {
-            var successAlert = '<div class="alert alert-success alert-dismissible" role="alert"> \
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">\
-                                        <span aria-hidden="true">&times;</span></button> \
-                                        <strong>All set!</strong> Survey Created!\
-                                </div>';
-            $(".col-md-10").prepend(successAlert);
+            if (url.includes("localhost"))
+                window.location.href = "localhost:8080/instructor/" + courseKey + "/survey";
+            else
+                window.location.href = "http://psychspace-160921.appspot.com/instructor/" + courseKey + "/survey";
         },
         error: function(e) {
             console.log("ERROR", e);
         }
     });
-
-    location.reload();
 }
