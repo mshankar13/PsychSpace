@@ -41,9 +41,9 @@
                     <h1>My Current Courses<hr></h1>
                     <br>
                 </div>
-                <c:forEach items="${myCurrCourses}" var="course">
                 <!-- Start Course -->
                 <div class="row ps-text-content">
+                    <c:forEach items="${myCurrCourses}" var="course">
                     <!-- start course -->
                     <div class="col-lg-4">
                         <div class="ps-well">
@@ -61,9 +61,9 @@
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     <!-- End course -->
                 </div>
-                </c:forEach>
             </div>
             <br>
             <div class="row ps-feature">
