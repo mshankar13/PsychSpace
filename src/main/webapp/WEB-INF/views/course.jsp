@@ -31,7 +31,7 @@
 
 <body>
 <div class="navbar-wrapper">
-    <%@include file="navbar.html" %>
+    <jsp:include page="navbar.jsp" />
 </div>
 <header class="ps-feature-header">
     <input type="hidden" id="psIsLoggedIn" value="${isLoggedIn}">
@@ -116,13 +116,14 @@
                             <input type="hidden" value="${isEnrolled}" id="isEnrolled" />
                             <c:set var="courseStatus" value="${course.status}" />
                             <c:set var="isEnrolled" value="${isEnrolled}"/>
+                            <c:set var="ownsCourse" value="${ownsCourse}"/>
                             <c:choose>
                                 <c:when test="${isLoggedIn == 'true'}">
                                     <c:choose>
-                                    <c:when test="${courseStatus == 'open' and isEnrolled == 'false'}">
+                                    <c:when test="${ownsCourse == 'false' and courseStatus == 'open' and isEnrolled == 'false'}">
                                         <a class="button-enroll button" id="button-enroll" href="/course/${course.courseKey}/enroll"><span> Enroll Now</span></a>
                                     </c:when>
-                                    <c:when test="${courseStatus == 'open' and isEnrolled == 'true'}">
+                                    <c:when test="${ownsCourse == 'false' and courseStatus == 'open' and isEnrolled == 'true'}">
                                         <a class="button-enroll button" id="button-unenroll" href="/course/${course.courseKey}/unenroll"><span> Unenroll</span></a>
                                     </c:when>
                                     </c:choose>

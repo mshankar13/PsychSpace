@@ -24,9 +24,9 @@ public class AdminUserController {
             return model;
         }
         model.setViewName("adminUser");
-        ArrayList<User> instructorApplicants = userManager.loadApplications("instructorApplicant");
+        ArrayList<User> instructorApplicants = userManager.loadApplications("InstructorApplicant");
         model.addObject("instructorApplicants", instructorApplicants);
-        ArrayList<User> adminApplicants = userManager.loadApplications("adminApplicant");
+        ArrayList<User> adminApplicants = userManager.loadApplications("AdminApplicant");
         model.addObject("adminApplicants", adminApplicants);
         model.addObject("user", new User());
         model.addObject("currUser", WelcomeController.currUser);

@@ -28,7 +28,7 @@
 
         <body>
             <div class="navbar-wrapper">
-                <%@include file="navbar.html"%>
+                <jsp:include page="navbar.jsp" />
             </div>
             <header class="ps-feature-header">
                 <div class="center page-banner">
@@ -42,29 +42,39 @@
                             <h1>My Current Courses<hr></h1>
                             <br>
                         </div>
-
-                        <div class="row ps-text-content">
-                            <c:forEach items="${myCurrCourses}" var="course">
-                            <!-- Start Course -->
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <!-- Course Title -->
-                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
-                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
-                                    <h3 class="ps-feature-info-header"> Course Description <hr></h3>
-                                    <!-- Course Description-->
-                                    <p class="ps-feature-preview">${course.description}</p>
-                                    <div>
-                                        <div class="center">
-                                            <!-- Button for Course Learn -->
-                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
+                        <c:set var="myCurrCourses" value="${myCurrCourses}" />
+                        <c:choose>
+                            <c:when test="${empty myCurrCourses}" >
+                                <p class="ps-notice">You don't have any current course yet.
+                                    Go to <a href="${contextPath}/catalogue">Catalogue</a> to enroll.
+                                </p>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="row ps-text-content">
+                                    <c:forEach items="${myCurrCourses}" var="course">
+                                        <!-- Start Course -->
+                                        <div class="col-lg-4">
+                                            <div class="ps-well">
+                                                <!-- Course Title -->
+                                                <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
+                                                <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                                <h3 class="ps-feature-info-header"> Course Description <hr></h3>
+                                                <!-- Course Description-->
+                                                <p class="ps-feature-preview">${course.description}</p>
+                                                <div>
+                                                    <div class="center">
+                                                        <!-- Button for Course Learn -->
+                                                        <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <!-- End course -->
+                                    </c:forEach>
                                 </div>
-                            </div>
-                            <!-- End course -->
-                            </c:forEach>
-                        </div>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
                 <!-- End Current Courses -->
@@ -75,28 +85,37 @@
                             <h1> My Past Courses<hr></h1>
                             <br>
                         </div>
-                        <div class="row ps-text-content">
-                            <c:forEach items="${myPastCourses}" var="course">
-                            <!-- Start Course -->
-                            <div class="col-lg-4">
-                                <div class="ps-well">
-                                    <!-- Course Title -->
-                                    <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
-                                    <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
-                                    <h3 class="ps-feature-info-header"> Course Description <hr></h3>
-                                    <!-- Course Description -->
-                                    <p class="ps-feature-preview">${course.description}</p>
-                                    <div>
-                                        <div class="center">
-                                            <!-- Button for Course Learn -->
-                                            <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
+                        <c:set var="myPastCourses" value="${myPastCourses}" />
+                        <c:choose>
+                            <c:when test="${empty myPastCourses}">
+                                <p class="ps-notice">You don't have any past course yet.</p>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="row ps-text-content">
+                                    <c:forEach items="${myPastCourses}" var="course">
+                                        <!-- Start Course -->
+                                        <div class="col-lg-4">
+                                            <div class="ps-well">
+                                                <!-- Course Title -->
+                                                <h2 class="ps-feature-info-header"> ${course.title}<hr> </h2>
+                                                <img class="img-responsive course-img" src="http://placehold.it/900x300" alt="">
+                                                <h3 class="ps-feature-info-header"> Course Description <hr></h3>
+                                                <!-- Course Description -->
+                                                <p class="ps-feature-preview">${course.description}</p>
+                                                <div>
+                                                    <div class="center">
+                                                        <!-- Button for Course Learn -->
+                                                        <a class="button fadein btn-read-more" id="button-learn" href="/learn/${course.courseKey}"><span>Learn</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <!-- End course -->
+                                    </c:forEach>
                                 </div>
-                            </div>
-                            <!-- End course -->
-                            </c:forEach>
-                        </div>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
                 <!-- End Past Courses -->

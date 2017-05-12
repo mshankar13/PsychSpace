@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="navbar-wrapper">
-    <%@include file="navbar.html"%>
+    <jsp:include page="navbar.jsp" />
 </div>
 <div class="wrapper">
     <div class="row" >
@@ -242,7 +242,7 @@
                         </div> <%--End of modal body--%>
                         <div class="modal-footer">
                             <button type="button" class="instructor-btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="instructor-btn-primary">Create</button>
+                            <button type="submit" class="instructor-btn-primary" disabled="disabled">Create</button>
                         </div>
 
                     </form:form>

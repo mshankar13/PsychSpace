@@ -17,7 +17,7 @@
                     <li id="nav-home" class="nav-li nav-user-only" ><a href="${contextPath}/home" id="nav-home-a" class="uib-overrides-nav-a">Home</a></li>
                     <li id="nav-learn" class="nav-li nav-user-only" ><a href="${contextPath}/learn" id="nav-learn-a" class="uib-overrides-nav-a">Learn</a></li>
                     <li class="nav-li"><a href="${contextPath}/catalogue" id="nav-catalogue-a" class="uib-overrides-nav-a">Catalogue</a></li>
-                    <li class="nav-li"><a href="${contextPath}/news" id="nav-article-a" class="uib-overrides-nav-a">News</a></li>
+                    <li class="nav-li"><a href="${contextPath}/news" id="nav-news-a" class="uib-overrides-nav-a">News</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav" id="nav-sign-in">
@@ -29,14 +29,26 @@
                     <li class="dropdown">
                         <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
                             <button type="button" class="btn btn-default btn-profile" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                                <img id="profile-img">
                             </button>
                             <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">
-                            <li class="menu-item"> <a href="${contextPath}/instructor" class="menu-item-a">Instructor Page </a></li>
+                            <input type="hidden"  id="user-role" value="${currUser.role}">
+                            <c:set var="userRole" value="${currUser.role}" />
+                            <li class="menu-item" id="user-name">Hi ${currUser.firstName}  ${currUser.lastName}</li>
+                            <c:choose>
+                                <c:when test="${userRole == 'Instructor'}" >
+                                    <li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>
+                                </c:when>
+                                <c:when test="${userRole == 'Admin'}" >
+                                    <li class="menu-item"> <a href="/admin_addArticle" class="menu-item-a">Admin Page </a></li>
+                                </c:when>
+                            </c:choose>
+                            <li class="menu-item" id="special-page"><a href="" class="menu-item-a"> </a></li>
                             <li class="menu-item"> <a href="${contextPath}/settings" class="menu-item-a"> Settings </a></li>
-                            <li id="btn-sign-out"  class="menu-item"> <a href="#" class="menu-item-a">Sign out </a></li>
+                            <li id="btn-sign-out"  class="menu-item"> <a href="" class="menu-item-a">Sign out </a></li>
                             <li class="menu-item"> <a href="#" class="menu-item-a">Help </a></li>
                         </ul>
                     </li>

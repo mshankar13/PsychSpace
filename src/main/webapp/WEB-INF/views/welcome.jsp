@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <head>
@@ -27,7 +28,7 @@
 <body>
 <div class="welcome-background">
     <div class="navbar-wrapper">
-        <%@include file="navbar.html" %>
+        <jsp:include page="navbar.jsp" />
     </div>
     <header class="welcome-header">
         <div class="header-content">

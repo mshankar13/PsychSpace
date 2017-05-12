@@ -59,7 +59,7 @@ public class WelcomeController {
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(@RequestBody String user){
         userManager.resetCurrentUser(new User());
-        return "/";
+        return "redirect:/";
     }
 
     /**

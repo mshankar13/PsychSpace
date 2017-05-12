@@ -220,12 +220,19 @@ span.abcRioButtonContents {
     background: transparent;
     border-color: transparent;
     color: var(--baby-powder-color);
+    box-shadow: none;
 }
 
 .btn-profile:hover {
     background: transparent;
     border-color: transparent;
     color: var(--baby-powder-color);
+}
+
+#profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 #uib-overrides-caret {

@@ -38,6 +38,23 @@ $(document).ready(function(){
     $("#survey-q-group").on("click", ".btn-survey-remove-answer", removeAnswer);
     $("#survey-submit").on("click", surveySubmit);
 
+    // Disable the submit button if any field is empty
+    $('input').keyup(function() {
+        var empty = false;
+        $('.field input').each(function() {
+            if ($(this).val().length == 0) {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('.actions input').attr('disabled', 'disabled');
+        } else {
+            $('.actions input').removeAttr('disabled');
+        }
+    });
+
+
     $("#survey-due-date").datepicker();
 });
 
@@ -319,7 +336,7 @@ function surveySubmit() {
                                         <span aria-hidden="true">&times;</span></button> \
                                         <strong>All set!</strong> Survey Created!\
                                 </div>';
-            $(".col-md-9").prepend(successAlert);
+            $(".col-md-10").prepend(successAlert);
         },
         error: function(e) {
             console.log("ERROR", e);

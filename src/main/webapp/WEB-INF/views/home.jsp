@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <head>
@@ -26,7 +27,7 @@
 </head>
 <body>
 <div class="navbar-wrapper">
-    <%@include file="navbar.html"%>
+    <jsp:include page="navbar.jsp" />
 </div>
 <header class="ps-feature-header">
     <div class="center page-banner">
@@ -41,9 +42,9 @@
                     <h1>My Current Courses<hr></h1>
                     <br>
                 </div>
-                <c:forEach items="${myCurrCourses}" var="course">
                 <!-- Start Course -->
                 <div class="row ps-text-content">
+                    <c:forEach items="${myCurrCourses}" var="course">
                     <!-- start course -->
                     <div class="col-lg-4">
                         <div class="ps-well">
@@ -61,9 +62,9 @@
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     <!-- End course -->
                 </div>
-                </c:forEach>
             </div>
             <br>
             <div class="row ps-feature">
