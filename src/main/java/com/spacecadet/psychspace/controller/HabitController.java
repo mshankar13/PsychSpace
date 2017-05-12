@@ -72,6 +72,7 @@ public class HabitController {
             hasSurvey = "true";
         }
         model.addObject("hasSurvey", hasSurvey);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

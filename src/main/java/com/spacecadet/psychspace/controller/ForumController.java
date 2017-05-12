@@ -67,6 +67,7 @@ public class ForumController {
         model.addObject("hasHabit", hasHabit);
         model.addObject("hasGoal", hasGoal);
         model.addObject("hasStarted", hasStarted);
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }

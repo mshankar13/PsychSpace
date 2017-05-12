@@ -57,6 +57,7 @@ public class CourseController {
         } else {
             model.addObject("ownsCourse", "false");
         }
+        model.addObject("currUser", WelcomeController.currUser);
 
         return model;
     }
