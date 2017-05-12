@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by aliao on 5/6/2017.
@@ -80,8 +83,13 @@ public class ForumController {
      */
     @RequestMapping(value = "/learn/{courseKey}/forum/addThread", method = RequestMethod.POST)
     public String addThread(@PathVariable("courseKey") String courseKey, @ModelAttribute Thread thread){
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        Date today = new Date();
+        thread.setCourseKey(courseKey);
+        thread.setUserKey(WelcomeController.currUser.getUserKey());
+        thread.setDate(df.format(today).toString());
         threadManager.addThread(thread);
-        return "redirect:/learn/"+courseKey+"forum";
+        return "redirect:/learn/"+courseKey+"/forum";
     }
 
     /**
