@@ -57,7 +57,7 @@ public class ThreadController {
     public String editThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
                              @ModelAttribute Thread thread){
         threadManager.editThread(thread);
-        return "redirect:/learn/"+courseKey+"forum";
+        return "redirect:/learn/"+courseKey+"forum"+threadKey;
     }
 
     /**
@@ -70,7 +70,7 @@ public class ThreadController {
     public String deleteThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
                                @ModelAttribute Thread thread){
         threadManager.deleteThread(thread.getThreadKey());
-        return "redirect:/learn/"+courseKey+"forum";
+        return "redirect:/learn/"+courseKey+"forum"+threadKey;
     }
 
     /**
@@ -90,7 +90,7 @@ public class ThreadController {
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-        return "redirect:/learn/"+courseKey+"forum";
+        return "redirect:/learn/"+courseKey+"forum"+threadKey;
     }
 
     /**
