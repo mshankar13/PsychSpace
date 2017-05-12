@@ -45,12 +45,12 @@
                 <div class="col-lg-2 ps-col-left">
                     <div class="ps-well">
                         <!-- Learn Sidebar -->
-                        <%@include file="learn-sidebar.html" %>
+                        <%@include file="learnSidebar.jsp" %>
                     </div>
                 </div>
                 <div class="col-lg-10 ps-col-right">
-                    <%--<!-- Learn Navbar -->--%>
-                    <%@include file="learn-navbar.html" %>
+                    <%--<!-- Learn Navbar for Todos-->--%>
+                    <jsp:include page="learnSidebar.jsp"/>
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
