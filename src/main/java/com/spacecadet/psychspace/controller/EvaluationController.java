@@ -77,6 +77,7 @@ public class EvaluationController {
         model.addObject("hasGoal", hasGoal);
         model.addObject("hasStarted", hasStarted);
         model.addObject("currUser", WelcomeController.currUser);
+        model.addObject("courseKey", courseKey);
 
         return model;
     }

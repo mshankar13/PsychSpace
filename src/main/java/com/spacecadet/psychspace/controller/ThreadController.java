@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.ws.rs.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class ThreadController {
      * @param threadKey course key in datastore
      * @return course forum page
      */
-    @RequestMapping(value = "/learn/forum/{threadKey}", method = RequestMethod.GET)
-    public ModelAndView loadForum(@PathVariable("threadKey") String threadKey){
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}", method = RequestMethod.GET)
+    public ModelAndView loadForum(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey){
         String hasHabit = "false";
         String hasGoal = "false";
         String hasEvaluation = "false";
@@ -44,8 +43,7 @@ public class ThreadController {
         String hasStarted = "false";
         ArrayList<Comment> comments = commentManager.loadComments(threadKey);
         Thread thread = threadManager.loadSingleThread(threadKey);
-        Course course = courseManager.loadSingleCourse(thread.getCourseKey());
-        String courseKey = course.getCourseKey();
+        Course course = courseManager.loadSingleCourse(courseKey);
         ModelAndView model = new ModelAndView();
         model.addObject("currUserKey", WelcomeController.currUser.getUserKey());
         model.addObject("thread", thread);
@@ -53,6 +51,7 @@ public class ThreadController {
         model.addObject("comments", comments);
         model.addObject("comment", new Comment());
         model.addObject("course", course);
+        model.addObject("courseKey", courseKey);
         if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
             hasEvaluation = "true";
         }
@@ -84,8 +83,8 @@ public class ThreadController {
      * @param thread edited thread
      * @return redirect to course forum page
      */
-    @RequestMapping(value = "/learn/forum/{threadKey}/editThread", method = RequestMethod.POST)
-    public String editThread(@PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/editThread", method = RequestMethod.POST)
+    public String editThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
                              @ModelAttribute Thread thread){
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Date today = new Date();
@@ -102,11 +101,11 @@ public class ThreadController {
      * @param thread deleted thread
      * @return redirect to course forum page
      */
-    @RequestMapping(value = "/learn/forum/{threadKey}/deleteThread", method = RequestMethod.POST)
-    public String deleteThread(@PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/deleteThread", method = RequestMethod.POST)
+    public String deleteThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
                                @ModelAttribute Thread thread){
         threadManager.deleteThread(threadKey);
-        return "redirect:/learn/forum/"+threadKey;
+        return "redirect:/learn/"+thread.getCourseKey()+"forum/";
     }
 
     /**
@@ -115,8 +114,8 @@ public class ThreadController {
      * @param comment add/edit/delete comment
      * @return course forum page
      */
-    @RequestMapping(value = "/learn/forum/{threadKey}/comment", method = RequestMethod.POST)
-    public String addComment(@PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/comment", method = RequestMethod.POST)
+    public String addComment(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
                              @ModelAttribute Comment comment){
         String fullname = WelcomeController.currUser.getFirstName().concat(" ").concat(WelcomeController.currUser.getLastName());
         if (comment.getState().equals("add")){
@@ -134,8 +133,9 @@ public class ThreadController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/learn/forum/{threadKey}/logout", method = RequestMethod.POST)
-    public String logout(@PathVariable("threadKey") String threadKey, @RequestBody String user) {
+    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/logout", method = RequestMethod.POST)
+    public String logout(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
+                         @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }

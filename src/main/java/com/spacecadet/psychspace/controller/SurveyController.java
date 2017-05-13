@@ -45,6 +45,7 @@ public class SurveyController {
         Course course = courseManager.loadSingleCourse(courseKey);
         model.addObject("courseTitle", course.getTitle());
         model.addObject("courseStartDate", course.getStartDate());
+        model.addObject("courseKey", courseKey);
         if(evaluationManager.hasTodaysEvaluation(WelcomeController.currUser.getUserKey(), courseKey)){
             hasEvaluation = "true";
         }
