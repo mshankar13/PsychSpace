@@ -103,7 +103,7 @@
                             <div class="left">
                                 <h4>Leave a Comment:</h4>
                                 <form:form class="form-horizontal" method="post" modelAttribute="comment"
-                                           action="/learn/${courseKey}/forum/${threadKey}/comment">
+                                           action="/learn/forum/${thread.threadKey}/comment">
                                     <form:hidden path="commentKey" value="0"/>
                                     <form:hidden path="username" value="0"/>
                                     <form:hidden path="courseKey" value="0"/>
@@ -177,7 +177,7 @@
                                         </h2>
                                     </div>
                                 </div>
-                                <form:form method="post" action="/learn/${courseKey}/forum/comment"
+                                <form:form method="post" action="/learn/forum/${thread.threadKey}/comment"
                                            modelAttribute="comment">
                                     <div class="ps-modal-body">
                                         <div class="form-group">
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
 
-                                <form:form method="post" action="/learn/${courseKey}/forum/comment"
+                                <form:form method="post" action="/learn/forum/${thread.threadKey}/comment"
                                            modelAttribute="comment">
                                     <div class="ps-modal-body">
                                         <form:hidden path="state" value="delete"/>
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
 
-                                <form:form method="post" action="/learn/${courseKey}/forum/deleteThread"
+                                <form:form method="post" action="/learn/forum/${thread.threadKey}/deleteThread"
                                            modelAttribute="thread">
                                     <div class="ps-modal-body">
                                         <form:hidden path="threadKey" value="0" id="delete-thread-modal-key"/>
@@ -307,7 +307,7 @@
                                         </h2>
                                     </div>
                                 </div>
-                                <form:form method="post" action="/learn/${courseKey}/forum/editThread"
+                                <form:form method="post" action="/learn/forum/${thread.threadKey}/editThread"
                                            modelAttribute="thread">
                                     <div class="ps-modal-body">
                                         <form:hidden path="threadKey" value="0" id="edit-thread-modal-key"/>

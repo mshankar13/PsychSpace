@@ -112,7 +112,7 @@
                                                 <ul class="ps-ul">
                                                         <%-- Link to thread page --%>
                                                     <li class="ps-li threadListTitle">
-                                                        <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                        <a href="/learn/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
                                                     </li>
                                                 </ul>
                                             </c:when>
@@ -185,7 +185,7 @@
                                                         Anonymous
                                                     </button>
                                                     <form:hidden path="inThreadName" id="add-thread-display-name"
-                                                                 value="${user.firstName} ${user.lastName}"/>
+                                                                 value="${currUser.firstName} ${currUser.lastName}"/>
                                                 </div>
                                                 <br>
                                                 <div class="right">

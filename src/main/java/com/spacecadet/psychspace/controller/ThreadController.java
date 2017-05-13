@@ -29,11 +29,11 @@ public class ThreadController {
 
     /**
      * all visits to thread page
-     * @param courseKey course key in datastore
+     * @param threadKey course key in datastore
      * @return course forum page
      */
-    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}", method = RequestMethod.GET)
-    public ModelAndView loadForum(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey){
+    @RequestMapping(value = "/learn/forum/{threadKey}", method = RequestMethod.GET)
+    public ModelAndView loadForum(@PathVariable("threadKey") String threadKey){
         String hasHabit = "false";
         String hasGoal = "false";
         String hasEvaluation = "false";
@@ -41,7 +41,8 @@ public class ThreadController {
         String hasStarted = "false";
         ArrayList<Comment> comments = commentManager.loadComments(threadKey);
         Thread thread = threadManager.loadSingleThread(threadKey);
-        Course course = courseManager.loadSingleCourse(courseKey);
+        Course course = courseManager.loadSingleCourse(thread.getCourseKey());
+        String courseKey = course.getCourseKey();
         ModelAndView model = new ModelAndView();
         model.addObject("currUserKey", WelcomeController.currUser.getUserKey());
         model.addObject("thread", thread);
@@ -76,38 +77,38 @@ public class ThreadController {
 
     /**
      * edit thread on forum page
-     * @param courseKey course key in datastore
+     * @param threadKey thread key in datastore
      * @param thread edited thread
      * @return redirect to course forum page
      */
-    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/editThread", method = RequestMethod.POST)
-    public String editThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/forum/{threadKey}/editThread", method = RequestMethod.POST)
+    public String editThread(@PathVariable("threadKey") String threadKey,
                              @ModelAttribute Thread thread){
         threadManager.editThread(thread);
-        return "redirect:/learn/"+courseKey+"forum"+threadKey;
+        return "redirect:/learn/forum"+threadKey;
     }
 
     /**
      * delete thread on forum page
-     * @param courseKey course key in datastore
+     * @param threadKey thread key in datastore
      * @param thread deleted thread
      * @return redirect to course forum page
      */
-    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/deleteThread", method = RequestMethod.POST)
-    public String deleteThread(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/forum/{threadKey}/deleteThread", method = RequestMethod.POST)
+    public String deleteThread(@PathVariable("threadKey") String threadKey,
                                @ModelAttribute Thread thread){
         threadManager.deleteThread(thread.getThreadKey());
-        return "redirect:/learn/"+courseKey+"forum"+threadKey;
+        return "redirect:/learn/forum"+threadKey;
     }
 
     /**
      * add/edit/delete comment on a thread
-     * @param courseKey courseKey
+     * @param threadKey thread Key in datastore
      * @param comment add/edit/delete comment
      * @return course forum page
      */
-    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/comment", method = RequestMethod.POST)
-    public String addComment(@PathVariable("courseKey") String courseKey, @PathVariable("threadKey") String threadKey,
+    @RequestMapping(value = "/learn/forum/{threadKey}/comment", method = RequestMethod.POST)
+    public String addComment(@PathVariable("threadKey") String threadKey,
                              @ModelAttribute Comment comment){
         String fullname = WelcomeController.currUser.getFirstName().concat(" ").concat(WelcomeController.currUser.getLastName());
         if (comment.getState().equals("add")){
@@ -117,7 +118,7 @@ public class ThreadController {
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-        return "redirect:/learn/"+courseKey+"forum"+threadKey;
+        return "redirect:/learn/forum"+threadKey;
     }
 
     /**
@@ -125,8 +126,8 @@ public class ThreadController {
      * @param user user logged out
      * @return welcome page
      */
-    @RequestMapping(value = "/learn/{courseKey}/forum/{threadKey}/logout", method = RequestMethod.POST)
-    public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
+    @RequestMapping(value = "/learn/forum/{threadKey}/logout", method = RequestMethod.POST)
+    public String logout(@PathVariable("threadKey") String threadKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
     }
