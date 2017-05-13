@@ -205,6 +205,7 @@
                             </div>
                         </div>
                     </div>
+                        <br>
                     <!-- End Edit Comment Modal -->
                     <!-- Delete Comment Modal -->
                     <div class="modal ps-modal-type-comment fade" id="delete-comment-modal" role="dialog">
@@ -248,6 +249,7 @@
                             </div>
                         </div>
                     </div>
+                        <br>
                     <!-- End Delete Comment Modal
                     <!-- Delete Thread Modal -->
                     <div class="modal ps-modal-type-comment fade" id="delete-thread-modal" role="dialog">
@@ -264,7 +266,6 @@
                                         </h2>
                                     </div>
                                 </div>
-
                                 <form:form method="post" action="/learn/forum/${thread.threadKey}/deleteThread"
                                            modelAttribute="thread">
                                     <div class="ps-modal-body">
@@ -292,6 +293,7 @@
                             </div>
                         </div>
                     </div>
+                        <br>
                     <!-- End Delete Thread Modal
                     <!-- Edit Thread Modal-->
                     <div class="modal ps-modal-type-comment fade" id="edit-thread-modal" role="dialog">
