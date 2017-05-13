@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by aliao on 5/10/2017.
@@ -84,6 +87,10 @@ public class ThreadController {
     @RequestMapping(value = "/learn/forum/{threadKey}/editThread", method = RequestMethod.POST)
     public String editThread(@PathVariable("threadKey") String threadKey,
                              @ModelAttribute Thread thread){
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        Date today = new Date();
+        thread.setUserKey(WelcomeController.currUser.getUserKey());
+        thread.setDate(df.format(today).toString());
         threadManager.editThread(thread);
         return "redirect:/learn/forum"+threadKey;
     }

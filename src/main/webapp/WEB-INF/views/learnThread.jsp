@@ -106,7 +106,7 @@
                                            action="/learn/forum/${thread.threadKey}/comment">
                                     <form:hidden path="commentKey" value="0"/>
                                     <form:hidden path="username" value="0"/>
-                                    <form:hidden path="courseKey" value="0"/>
+                                    <form:hidden path="courseKey" value="${thread.courseKey}"/>
                                     <form:hidden path="date" value="0"/>
                                     <form:hidden path="state" value="add"/>
                                     <form:textarea class="form-control" id="thread-comment-create" rows="3"
@@ -268,7 +268,7 @@
                                            modelAttribute="thread">
                                     <div class="ps-modal-body">
                                         <form:hidden path="threadKey" value="0" id="delete-thread-modal-key"/>
-                                        <form:hidden path="courseKey" value="0"/>
+                                        <form:hidden path="courseKey" value="${thread.courseKey}"/>
                                         <form:hidden path="userKey" value="0"/>
                                         <form:hidden path="inThreadName" value=""/>
                                         <form:hidden path="date" value="0"/>
@@ -311,7 +311,7 @@
                                            modelAttribute="thread">
                                     <div class="ps-modal-body">
                                         <form:hidden path="threadKey" value="0" id="edit-thread-modal-key"/>
-                                        <form:hidden path="courseKey" value="0"/>
+                                        <form:hidden path="courseKey" value="${thread.courseKey}"/>
                                         <form:hidden path="userKey" value="0"/>
                                         <form:hidden path="date" value="0"/>
 
