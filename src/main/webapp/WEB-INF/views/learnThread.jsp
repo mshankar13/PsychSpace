@@ -273,7 +273,7 @@
                                         <form:hidden path="userKey" value="0"/>
                                         <form:hidden path="inThreadName" value=""/>
                                         <form:hidden path="date" value="0"/>
-                                        <form:hidden path="title" value=""/>
+                                        <form:hidden path="title" value="${thread.title}"/>
                                         <form:hidden path="content" value=""/>
 
                                         <h3>Are you sure you want to delete this thread: <span
@@ -313,6 +313,7 @@
                                     <div class="ps-modal-body">
                                         <form:hidden path="threadKey" value="0" id="edit-thread-modal-key"/>
                                         <form:hidden path="courseKey" value="${thread.courseKey}"/>
+                                        <form:hidden path="title" value="${thread.title}"/>
                                         <form:hidden path="userKey" value="0"/>
                                         <form:hidden path="date" value="0"/>
 
