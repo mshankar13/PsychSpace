@@ -91,8 +91,9 @@ public class ThreadController {
         Date today = new Date();
         thread.setUserKey(WelcomeController.currUser.getUserKey());
         thread.setDate(df.format(today).toString());
+        thread.setThreadKey(threadKey);
         threadManager.editThread(thread);
-        return "redirect:/learn/forum"+threadKey;
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
@@ -104,8 +105,8 @@ public class ThreadController {
     @RequestMapping(value = "/learn/forum/{threadKey}/deleteThread", method = RequestMethod.POST)
     public String deleteThread(@PathVariable("threadKey") String threadKey,
                                @ModelAttribute Thread thread){
-        threadManager.deleteThread(thread.getThreadKey());
-        return "redirect:/learn/forum"+threadKey;
+        threadManager.deleteThread(threadKey);
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
@@ -125,7 +126,7 @@ public class ThreadController {
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-        return "redirect:/learn/forum"+threadKey;
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
