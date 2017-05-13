@@ -93,7 +93,7 @@ public class ThreadController {
         thread.setDate(df.format(today).toString());
         thread.setThreadKey(threadKey);
         threadManager.editThread(thread);
-        return "redirect:/learn/forum"+threadKey;
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
@@ -106,7 +106,7 @@ public class ThreadController {
     public String deleteThread(@PathVariable("threadKey") String threadKey,
                                @ModelAttribute Thread thread){
         threadManager.deleteThread(threadKey);
-        return "redirect:/learn/forum"+threadKey;
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
@@ -126,7 +126,7 @@ public class ThreadController {
         } else if(comment.getState().equals("delete")){
             commentManager.deleteComment(comment.getCommentKey());
         }
-        return "redirect:/learn/forum"+threadKey;
+        return "redirect:/learn/forum/"+threadKey;
     }
 
     /**
