@@ -6,7 +6,7 @@
 
 var profile;
 var signedIn = false;
-var profileImgUrl;
+var profileImgUrl = "";
 $(document).ready(function(){
 
     setActiveNav();
@@ -30,8 +30,6 @@ $(document).ready(function(){
  * @param authResult
  */
 function onSignIn(googleUser, authResult) {
-    if (signedIn)
-        return true;
 
     var url = window.location.pathname;
     if (url == "/")
@@ -41,6 +39,8 @@ function onSignIn(googleUser, authResult) {
 
     profile = googleUser.getBasicProfile();
     profileImgUrl = profile.getImageUrl();
+    var welcomeMessage = "Hi " + profile.getGivenName() + "!";
+    $("#welcome-message").text(welcomeMessage);
 
     if (!signedIn) {
         if(!url.includes("learn") && !url.includes("home")
@@ -52,7 +52,6 @@ function onSignIn(googleUser, authResult) {
             user["email"] = profile.getEmail();
             user["firstName"] = profile.getGivenName();
             user["lastName"] = profile.getFamilyName();
-            //user['imageUrl'] = profile.getImageUrl();
 
             $.ajax(url, {
                 type: "POST",
@@ -64,7 +63,7 @@ function onSignIn(googleUser, authResult) {
                     if (url.includes("localhost"))
                         window.location.href = "localhost:8080";
                     else
-                        window.location.href = "http://psychspace-160921.appspot.com/";
+                        window.location.href = "http://psychspace-160921.appspot.com";
                 }
             });
     }
@@ -110,9 +109,6 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
 
     var user = {};
-    // user["email"] = profile.getEmail();
-    // user["firstName"] = profile.getGivenName();
-    // user["lastName"] = profile.getFamilyName();
 
     $.ajax(url, {
         type: "POST",
@@ -125,6 +121,7 @@ function signOut() {
                 window.location.href = "localhost:8080";
             else
                 window.location.href = "http://psychspace-160921.appspot.com/";
+            userSignedOutUI();
         }
     });
 
@@ -133,7 +130,7 @@ function signOut() {
         console.log('User signed out.');
     });
 
-    userSignedOutUI();
+
 }
 
 /**

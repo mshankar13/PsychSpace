@@ -31,16 +31,16 @@
                     <li class="dropdown">
                         <a href="#" id="uib-overrides-profile-a" class="dropdown-toggle" data-toggle="dropdown">
                             <button type="button" class="btn btn-default btn-profile" aria-label="Left Align">
-                                Hi ${currUser.firstName}  ${currUser.lastName}!
+                                <%--Hi ${currUser.firstName}  ${currUser.lastName}!--%>
                                 <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
-                                <%--<img id="profile-img">--%>
+                                <img id="profile-img">
                             </button>
                             <b id="uib-overrides-caret" class="caret btn-profile"></b>
                         </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">
                             <input type="hidden"  id="user-role" value="${currUser.role}">
                             <c:set var="userRole" value="${currUser.role}" />
-                            <li class="menu-item" id="user-name">Hi ${currUser.firstName}  ${currUser.lastName}</li>
+                            <li class="menu-item" id="welcome-message"></li>
                             <c:choose>
                                 <c:when test="${userRole == 'Instructor'}" >
                                     <li class="menu-item"> <a href="/instructor" class="menu-item-a">Instructor Page </a></li>

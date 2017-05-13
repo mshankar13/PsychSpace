@@ -25,6 +25,7 @@ public class SettingsController {
         ModelAndView model = new ModelAndView();
         model.setViewName("setting");
         model.addObject("currUser", WelcomeController.currUser);
+        model.addObject("user", new User());
 
         return model;
     }

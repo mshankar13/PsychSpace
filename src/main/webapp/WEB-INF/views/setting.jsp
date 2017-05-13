@@ -21,7 +21,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
     <%--Customized--%>
     <script src="${contextPath}/resources/js/navbar.js"></script>
-    <script src="${contextPath}/resources/js/instructor.js"></script>
+    <script src="${contextPath}/resources/js/settings.js"></script>
     <link href='${contextPath}/resources/css/navbar.css' rel='stylesheet'>
     <link href='${contextPath}/resources/css/style.css' rel='stylesheet'>
     <link href="${contextPath}/resources/css/instructor.css" rel="stylesheet">
@@ -41,9 +41,40 @@
             </div>
         </div>
         <div class="col-md-9">
-            <button class="ps-btn-primary">Delete My Account</button>
+            <input type="hidden" value="${currUser.userKey}" id="user-key">
+            <button type="submit" class="ps-btn-primary" id="delete-account-btn">Delete My Account</button>
         </div>
 
+        <%--Delete account modal--%>
+        <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-header row">
+                    <div class="col-sm-10">
+                        <h3 class="modal-title">Delete Confirmation</h3>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <form:form class="form-horizontal" method="POST"
+                           modelAttribute="user" action="/settings/deleteAccount">
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete your account?</p>
+                        <form:hidden path="userKey" value="" id="set-user-key"/>
+                        <form:hidden path="email" value="" />
+                        <form:hidden path="firstName" value="" />
+                        <form:hidden path="lastName" value="" />
+                        <form:hidden path="role" value="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="ps-btn" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="ps-btn-primary">Delete</button>
+                    </div>
+                </form:form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
