@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Learn Navbar for Todos-->--%>
-                    <jsp:include page="learnSidebar.jsp"/>
+                    <jsp:include page="learn-navbar.html"/>
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
@@ -99,6 +99,7 @@
                         </h2>
                         <br>
                         <%--<!-- Leaving Comments -->--%>
+                        <div id="psLeaveComment" class="col-lg ps-well">
                         <div id="psLeaveComment" class="col-lg ps-well">
                             <div class="left">
                                 <h4>Leave a Comment:</h4>
@@ -249,7 +250,7 @@
                     </div>
                     <!-- End Delete Comment Modal
                     <!-- Delete Thread Modal -->
-                    <div class="modal ps-modal-type-comment fade" id="delete-comment-modal" role="dialog">
+                    <div class="modal ps-modal-type-comment fade" id="delete-thread-modal" role="dialog">
                         <div class="ps-modal-dialog">
                             <!-- Modal content-->
                             <div class="ps-modal-content">
@@ -293,7 +294,7 @@
                     </div>
                     <!-- End Delete Thread Modal
                     <!-- Edit Thread Modal-->
-                    <div class="modal ps-modal-type-comment fade" id="edit-comment-modal" role="dialog">
+                    <div class="modal ps-modal-type-comment fade" id="edit-thread-modal" role="dialog">
                         <div class="ps-modal-dialog">
                             <!-- Modal content-->
                             <div class="ps-modal-content">
@@ -364,7 +365,7 @@
 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
 <script src="${contextPath}/resources/js/navbar.js"></script>
 <script src="${contextPath}/resources/js/learnNavbar.js"></script>
-<script src="${contextPath}/resources/js/forum.js"></script>
+<script src="${contextPath}/resources/js/thread.js"></script>
 <script src="${contextPath}/resources/js/animations.js"></script>
 </body>
 </html>
