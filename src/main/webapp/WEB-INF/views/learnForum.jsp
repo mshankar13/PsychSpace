@@ -79,7 +79,7 @@
                                             <ul class="ps-ul">
                                                     <%-- Link to thread page --%>
                                                 <li class="ps-li threadListTitle">
-                                                    <a href="/learn/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                    <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
                                                 </li>
                                             </ul>
                                         </c:when>
@@ -112,7 +112,7 @@
                                                 <ul class="ps-ul">
                                                         <%-- Link to thread page --%>
                                                     <li class="ps-li threadListTitle">
-                                                        <a href="/learn/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                        <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
                                                     </li>
                                                 </ul>
                                             </c:when>
