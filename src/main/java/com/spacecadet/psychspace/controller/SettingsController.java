@@ -50,6 +50,7 @@ public class SettingsController {
         ModelAndView model = new ModelAndView();
         model.setViewName("application");
         model.addObject("currUser", WelcomeController.currUser);
+        model.addObject("user", new User());
 
         return model;
     }
