@@ -106,7 +106,7 @@
                                            action="/learn/forum/${thread.threadKey}/comment">
                                     <form:hidden path="commentKey" value="0"/>
                                     <form:hidden path="username" value="0"/>
-                                    <form:hidden path="courseKey" value="${thread.courseKey}"/>
+                                    <form:hidden path="newsKey" value="${thread.courseKey}"/>
                                     <form:hidden path="date" value="0"/>
                                     <form:hidden path="state" value="add"/>
                                     <form:textarea class="form-control" id="thread-comment-create" rows="3"
