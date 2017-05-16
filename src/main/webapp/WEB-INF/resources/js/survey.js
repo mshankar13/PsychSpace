@@ -107,7 +107,7 @@ function surveySubmit() {
         }
     });
     if (link.includes("localhost"))
-        window.location.href = "localhost:8080/learn/" + courseKey + "/survey";
+        window.location.href = "localhost:8080/learn/" + courseKey;
     else
-        window.location.href = "http://psychspace-160921.appspot.com/learn/" + courseKey + "/survey";
+        window.location.href = "http://psychspace-160921.appspot.com/learn/" + courseKey;
 }

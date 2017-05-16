@@ -76,7 +76,8 @@ public class ProgressController {
         int year = cal.get(Calendar.YEAR);
         String today = month + "/" + day + "/" + year;
         model.addObject("todayDate", today);
-        model.addObject("courseProgress", getCourseProgress(course));
+        int i = 10;
+        model.addObject("courseProgress", i);
 
         return model;
     }
