@@ -57,59 +57,60 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <c:set value="${hasStarted}" var="hasStarted"/>
+                    <c:set value="${hasGoal}" var="hasGoal"/>
+                    <c:set value="${hasHabit}" var="hasHabit"/>
                     <div class="ps-well">
                         <%--Goal--%>
-                        <div class="col-lg-12">
-                                <div class="col-md-2">
-                                    <h1>My Goal</h1>
-                                </div>
-                                <div class="col-md-7">
+                        <h1>My Goal<hr></h1>
+                        <div class="col-lg-9 left">
+                            <c:choose>
+                                <c:when test="${hasGoal == 'false'}">
                                     <h3>Make sure it's set by ${dueDates.goalDueDate}</h3>
-                                </div>
-                                <div class="col-md-3 right">
-                                    <button class="ps-btn" id="btn-example-goal">See examples</button>
-                                </div>
-                                <input type="hidden" value="${goal}" id="goal">
-                                <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
-                                <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
-                                <c:set value="${dueDates.habitDueDate}" var="habitDueDate"/>
-                                <form:form class="form-horizontal" method="post"
-                                           modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
-                                    <div class="form-group ps-well">
-                                        <span class="col-md-4">By the end of the course, I want to</span>
-                                        <form:input class="col-md-2" type="text" path="goalName" placeholder="Action"
-                                                    id="action"/>
-                                        <form:input class="col-md-2" type="number" path="value" placeholder="Value"
-                                                    id="value"/>
-                                        <form:input class="col-md-2" type="text" path="unit" placeholder="Unit"
-                                                    id="unit"/>
-                                        <span class="col-md-2">per day.</span>
-                                        <form:hidden path="goalKey" value=""/>
-                                        <form:hidden path="userName" value=""/>
-                                        <form:hidden path="userKey" value=""/>
-                                        <form:hidden path="courseKey" value="${courseKey}"/>
-                                    </div>
-                                    <div class="right">
-                                        <button type="submit" class="ps-btn-primary">Save</button>
-                                    </div>
-                                </form:form>
+                                </c:when>
+                            </c:choose>
                         </div>
-                            <hr>
+                        <div class="col-lg-3 right">
+                            <button class="ps-btn" id="btn-example-goal">See examples</button>
+                        </div>
+                        <input type="hidden" value="${goal}" id="goal">
+                        <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
+                        <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
+                        <c:set value="${dueDates.habitDueDate}" var="habitDueDate"/>
+                        <form:form class="form-horizontal" method="post"
+                                   modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
+                            <div class="form-group ps-well">
+                                <span class="col-md-4">By the end of the course, I want to</span>
+                                <form:input class="col-md-2" type="text" path="goalName" placeholder="Action"
+                                            id="action"/>
+                                <form:input class="col-md-2" type="number" path="value" placeholder="Value"
+                                            id="value"/>
+                                <form:input class="col-md-2" type="text" path="unit" placeholder="Unit"
+                                            id="unit"/>
+                                <span class="col-md-2">per day.</span>
+                                <form:hidden path="goalKey" value=""/>
+                                <form:hidden path="userName" value=""/>
+                                <form:hidden path="userKey" value=""/>
+                                <form:hidden path="courseKey" value="${courseKey}"/>
+                            </div>
+                            <div class="right">
+                                <button type="submit" class="ps-btn-primary">Save</button>
+                            </div>
+                        </form:form>
                     </div>
                 </div>
                 <br>
-                    <%--Habit--%>
+                <%--Habit--%>
                 <div class="col-lg-10 ps-col-right">
                     <div class="ps-well">
-                        <div class="col-lg-12">
-                            <%--Habit Section Title--%>
-                            <div class="col-md-8">
-                                <h1>My Habit<hr></h1>
-                            </div>
-                            <div class="col-md-4">
-                                <h3>Make sure you set by ${dueDates.habitDueDate}</h3>
-                            </div>
-                        </div>
+                        <%--Habit Section Title--%>
+                        <h1>My Habit<hr></h1>
+                        <c:choose>
+                            <c:when test="${hasStarted == 'false'}">
+                                <div class="col-md-4">
+                                    <h3>Make sure you set by ${dueDates.habitDueDate}</h3>
+                                </div>
+                            </c:when>
+                        </c:choose>
                         <%--Habit Loop--%>
                         <div class="col-lg-4">
                             <div class="ps-well">
@@ -117,37 +118,37 @@
                                     <hr>
                                 </h1>
                                 <c:set value="${cue.location}" var="hasCue"/>
-                                <c:choose>
-                                    <c:when test="${hasCue == 'true'}">
-                                        <h2>No cue set!</h2>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="left">
-                                            <h4>Where were you?</h4>
-                                            <p>${cue.location}</p>
-                                        </div>
-                                        <br>
-                                        <div class="left">
-                                            <h4>What time was it?</h4>
-                                            <p>${cue.time}</p>
-                                        </div>
-                                        <br>
-                                        <div class="left">
-                                            <h4>What was your emotional state?</h4>
-                                            <p>${cue.emotionalState}</p>
-                                        </div>
-                                        <br>
-                                        <div class="left">
-                                            <h4>Who else was around?</h4>
-                                            <p>${cue.environment}</p>
-                                        </div>
-                                        <br>
-                                        <div class="left">
-                                            <h4>What action proceeded the cue?</h4>
-                                            <p>${cue.action}</p>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${hasCue == ''}">
+                                            <h2>No cue set!</h2>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="left">
+                                                <h4>Where were you?</h4>
+                                                <p>${cue.location}</p>
+                                            </div>
+                                            <br>
+                                            <div class="left">
+                                                <h4>What time was it?</h4>
+                                                <p>${cue.time}</p>
+                                            </div>
+                                            <br>
+                                            <div class="left">
+                                                <h4>What was your emotional state?</h4>
+                                                <p>${cue.emotionalState}</p>
+                                            </div>
+                                            <br>
+                                            <div class="left">
+                                                <h4>Who else was around?</h4>
+                                                <p>${cue.environment}</p>
+                                            </div>
+                                            <br>
+                                            <div class="left">
+                                                <h4>What action proceeded the cue?</h4>
+                                                <p>${cue.action}</p>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                 <c:choose>
                                     <c:when test="${hasStarted == 'false'}">
                                         <div class="center">
@@ -183,14 +184,14 @@
                                     <hr>
                                 </h1>
                                 <c:set value="${habit.reward}" var="reward"/>
-                                <c:choose>
-                                    <c:when test="${reward == ''}">
-                                        <h2>No reward set!</h2>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <h2>${habit.reward}</h2>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${reward == ''}">
+                                            <h2>No reward set!</h2>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h2>${habit.reward}</h2>
+                                        </c:otherwise>
+                                    </c:choose>
                                 <c:choose>
                                     <c:when test="${hasStarted == 'false'}">
                                         <div class="center">
@@ -211,7 +212,6 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-
                                     </c:when>
                                 </c:choose>
                             </div>
