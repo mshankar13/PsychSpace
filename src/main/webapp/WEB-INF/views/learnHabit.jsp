@@ -56,6 +56,7 @@
                     <%@include file="learn-navbar.html" %>
                 </div>
                 <div class="col-lg-10 ps-col-right">
+                    <c:set value="${hasStarted}" var="hasStarted"/>
                     <div class="ps-well">
                         <%--Goal--%>
                         <div class="col-lg-12">
@@ -71,6 +72,7 @@
                                 <input type="hidden" value="${goal}" id="goal">
                                 <input type="hidden" value="${dueDates.goalDueDate}" id="goal-due-date">
                                 <input type="hidden" value="${dueDates.habitDueDate}" id="habit-due-date">
+                                <c:set value="${dueDates.habitDueDate}" var="habitDueDate"/>
                                 <form:form class="form-horizontal" method="post"
                                            modelAttribute="goal" action="/learn/${courseKey}/habit/submitGoal">
                                     <div class="form-group ps-well">
@@ -114,14 +116,57 @@
                                 <h1>Cue:
                                     <hr>
                                 </h1>
-                                <h2>[Go to Library] </h2>
-                                <div class="center">
-                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set Cue
-                                    </button>
-                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change
-                                        Cue
-                                    </button>
-                                </div>
+                                <c:set value="${cue.location}" var="hasCue"/>
+                                <c:choose>
+                                    <c:when test="${hasCue == 'true'}">
+                                        <h2>No cue set!</h2>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="left">
+                                            <h4>Where were you?</h4>
+                                            <p>${cue.location}</p>
+                                        </div>
+                                        <br>
+                                        <div class="left">
+                                            <h4>What time was it?</h4>
+                                            <p>${cue.time}</p>
+                                        </div>
+                                        <br>
+                                        <div class="left">
+                                            <h4>What was your emotional state?</h4>
+                                            <p>${cue.emotionalState}</p>
+                                        </div>
+                                        <br>
+                                        <div class="left">
+                                            <h4>Who else was around?</h4>
+                                            <p>${cue.environment}</p>
+                                        </div>
+                                        <br>
+                                        <div class="left">
+                                            <h4>What action proceeded the cue?</h4>
+                                            <p>${cue.action}</p>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${hasStarted == 'false'}">
+                                        <div class="center">
+                                            <c:choose>
+                                                <c:when test="${habit.cue == ''}">
+                                                    <button type="button"
+                                                            class="btn-comment btn btn-primary btn-comment-edit">Set Cue
+                                                    </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button type="button"
+                                                            class="btn-comment btn btn-primary btn-comment-edit">Change
+                                                        Cue
+                                                    </button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -129,7 +174,7 @@
                                 <h1>Routine:
                                     <hr>
                                 </h1>
-                                <h2>[Study 3 hours per day]</h2>
+                                <h2>${goal.goalName} ${goal.value} ${goal.unit} per day</h2>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -137,22 +182,45 @@
                                 <h1>Reward:
                                     <hr>
                                 </h1>
-                                <h2>[Candy from the Trolley] </h2>
-                                <div class="center">
-                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Set
-                                        Reward
-                                    </button>
-                                    <button type="button" class="btn-comment btn btn-primary btn-comment-edit">Change
-                                        Reward
-                                    </button>
-                                </div>
+                                <c:set value="${habit.reward}" var="reward"/>
+                                <c:choose>
+                                    <c:when test="${reward == ''}">
+                                        <h2>No reward set!</h2>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h2>${habit.reward}</h2>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${hasStarted == 'false'}">
+                                        <div class="center">
+
+                                            <c:choose>
+                                                <c:when test="${habit.reward == ''}">
+                                                    <button type="button"
+                                                            class="btn-comment btn btn-primary btn-comment-edit">Set
+                                                        Reward
+                                                    </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button type="button"
+                                                            class="btn-comment btn btn-primary btn-comment-edit">
+                                                        Change
+                                                        Reward
+                                                    </button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+
+                                    </c:when>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <!-- End Learn Page -->
+        <!-- End Learn Page -->
         <%--Sample Goals Modal--%>
         <div class="modal fade" id="exampleGoalsModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="ps-modal-dialog">
