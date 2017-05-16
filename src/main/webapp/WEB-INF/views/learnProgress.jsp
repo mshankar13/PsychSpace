@@ -55,7 +55,19 @@
                 </div>
                 <div class="col-lg-10 ps-col-right">
                     <!-- Content -->
-                    <%@include file="learn-progress.html" %>
+                    <div class="col-lg">
+                        <div class="ps-well">
+                            <h2>Percentage Through Course<hr></h2>
+                            <input type="hidden" value="${courseProgress}" id="course-progress">
+                            <div class="center progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" ">
+                                    ${courseProgress}% Complete (success)
+                                </div>
+                            </div>
+                        </div>
+                    <br>
+                    </div>
                 </div>
             </div>
             <!-- End course -->
@@ -66,6 +78,7 @@
 
 <%@include file="footer.html" %>
 <script src="${contextPath}/resources/js/navbar.js"></script>
+<script src="${contextPath}/resources/js/learn.js"></script>
 <script src="${contextPath}/resources/js/learnNavbar.js"></script>
 <script src="${contextPath}/resources/js/scrollreveal.js"></script>
 <script src="${contextPath}/resources/js/animations.js"></script>

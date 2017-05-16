@@ -31,6 +31,8 @@ $(document).ready(function(){
  */
 function onSignIn(googleUser, authResult) {
 
+    var path = window.location.pathname;
+    var link = window.location.href;
     var url = window.location.pathname;
     if (url == "/")
         url = url + "login";
@@ -58,12 +60,12 @@ function onSignIn(googleUser, authResult) {
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: JSON.stringify(user),
-                success: function() {
+                complete: function() {
                     //refresh the page
-                    if (url.includes("localhost"))
-                        window.location.href = "localhost:8080";
+                    if (link.includes("localhost"))
+                        window.location.href = "http://localhost:8080" + path;
                     else
-                        window.location.href = "http://psychspace-160921.appspot.com";
+                        window.location.href = "http://psychspace-160921.appspot.com" + path;
                 }
             });
     }
@@ -99,8 +101,8 @@ function checkIfSignedIn()
  * user sign out
  */
 function signOut() {
-    var url = window.location.href;
-    url = "/" + url.substring(url.lastIndexOf("/") + 1, url.length);
+    var address = window.location.href;
+    var url = "/" + address.substring(address.lastIndexOf("/") + 1, address.length);
     if (url == "/")
         url = url + "logout";
     else
@@ -115,10 +117,10 @@ function signOut() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(user),
-        success: function() {
+        complete: function() {
             signedIn = false;
-            if (url.includes("localhost"))
-                window.location.href = "localhost:8080";
+            if (address.includes("localhost"))
+                window.location.href = "http://localhost:8080";
             else
                 window.location.href = "http://psychspace-160921.appspot.com/";
             userSignedOutUI();
