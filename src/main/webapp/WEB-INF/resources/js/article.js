@@ -5,7 +5,8 @@ $(document).ready(function () {
     // On Click functions
     $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);
     $("#ps-comment-section").on("click", ".btn-comment-delete", deleteCommentModalShow);
-    // $("#btn-ps-feature-like").on("click", editLikeShow);
+
+    $(".ps-type-close").on("click", onModalClose);
 });
 
 function editLikeShow() {
@@ -25,7 +26,7 @@ function editCommentModalShow() {
     $("#edit-comment-modal-key").val(commentKey);
     $("#edit-comment-content").val(content);
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#edit-comment-modal").removeClass("pushToBack");
     $("#edit-comment-modal").addClass("pushToFront");
     $("#edit-comment-modal").modal("show");
 }
@@ -37,8 +38,12 @@ function deleteCommentModalShow() {
     $("#delete-comment-modal-key").val(commentKey);
     $("#delete-comment-modal-span").text(content);
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#delete-comment-modal").removeClass("pushToBack");
     $("#delete-comment-modal").addClass("pushToFront");
     $("#delete-comment-modal").modal("show");
+}
 
+function onModalClose(){
+    $(".ps-modal-type-comment").removeClass("pushToFront");
+    $(".ps-modal-type-comment").addClass("pushToBack");
 }
