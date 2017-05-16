@@ -64,7 +64,6 @@
                                     <h1>My Goal</h1>
                                 </div>
                                 <div class="col-md-7" id="goal-reminder">
-
                                     <h3>Make sure it's set by ${dueDates.goalDueDate}</h3>
                                 </div>
                                 <div class="col-md-3 right">

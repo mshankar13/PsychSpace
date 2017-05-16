@@ -30,6 +30,7 @@ function loadGoal(goal) {
 
     // if the set goal deadline has passed, disable the fields
     if (Date.parse(goalDuedate) < Date.parse(today)) {
+        $("#goal-reminder").hide();
         $("#action").prop("disabled", true);
         $("#value").prop("disabled", true);
         $("#unit").prop("disabled", true);

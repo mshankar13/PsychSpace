@@ -47,7 +47,7 @@ $(document).ready(function(){
             }
         });
 
-        if (empty) {
+        if (!empty) {
             $('#survey-submit').attr('disabled', 'disabled');
         } else {
             $('#survey-submit').removeAttr('disabled');
