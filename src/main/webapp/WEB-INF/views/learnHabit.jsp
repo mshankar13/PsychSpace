@@ -97,10 +97,10 @@
                             </div>
                         </form:form>
                     </div>
-                </div>
+                <%--</div>--%>
                 <br>
                 <%--Habit--%>
-                <div class="col-lg-10 ps-col-right">
+                <%--<div class="col-lg-10 ps-col-right">--%>
                     <div class="ps-well">
                         <%--Habit Section Title--%>
                         <h1>My Habit<hr></h1>
