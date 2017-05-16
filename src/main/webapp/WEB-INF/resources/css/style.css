@@ -113,6 +113,10 @@ span {
     color: var(--baby-powder-color);
 }
 
+.ps-btn-primary-active:hover{
+    color: var(--space-cadet-color);
+}
+
 .ps-btn-primary:hover {
     background-color: var(--tea-rose-color);
     border: 1px solid var(--tea-rose-color);

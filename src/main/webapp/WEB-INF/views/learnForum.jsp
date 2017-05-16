@@ -176,14 +176,11 @@
                                                     <input type="hidden" id="displayLastName"
                                                            value="${currUser.lastName}">
                                                     <h4>Display Name or Stay Anonymous?</h4>
-                                                    <button type="button" id="displayNameFull"
-                                                            class="btn-comment btn btn-primary ps-btn-primary-active">
-                                                        Display
-                                                        Name
+                                                    <button type="button" id="displayNameFull" class="btn-comment ps-btn">
+                                                        Display Name
                                                     </button>
-                                                    <button type="button" id="displayNameHidden"
-                                                            class="btn-comment btn btn-primary">Stay
-                                                        Anonymous
+                                                    <button type="button" id="displayNameHidden" class="btn-comment ps-btn">
+                                                        Stay Anonymous
                                                     </button>
                                                     <form:hidden path="inThreadName" id="add-thread-display-name"
                                                                  value="${currUser.firstName} ${currUser.lastName}"/>
