@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: aliao
+  Date: 5/16/2017
+  Time: 4:44 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -43,12 +50,6 @@
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="row ps-text-content">
-                <div class="col-lg-2 ps-col-left">
-                    <div class="ps-well">
-                        <!-- Learn Sidebar for Todos-->
-                        <jsp:include page="learnSidebar.jsp"/>
-                    </div>
-                </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Learn Navbar -->--%>
                     <%@include file="learn-navbar.html" %>
@@ -56,7 +57,6 @@
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
                     <c:set var="threadLists" value="${threads}"/>
-
                     <%-- My Thread Start --%>
                     <div class="ps-well">
                         <div>
@@ -80,7 +80,7 @@
                                             <ul class="ps-ul">
                                                     <%-- Link to thread page --%>
                                                 <li class="ps-li threadListTitle">
-                                                    <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                    <a href="/instructor/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
                                                 </li>
                                             </ul>
                                         </c:when>
@@ -113,7 +113,7 @@
                                                 <ul class="ps-ul">
                                                         <%-- Link to thread page --%>
                                                     <li class="ps-li threadListTitle">
-                                                        <a href="/learn/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
+                                                        <a href="/instructor/${courseKey}/forum/${singleThread.threadKey}"> ${singleThread.title} </a>
                                                     </li>
                                                 </ul>
                                             </c:when>
@@ -153,6 +153,7 @@
                                                 <form:hidden path="courseKey" value="0"/>
                                                 <form:hidden path="userKey" value="0"/>
                                                 <form:hidden path="date" value="0"/>
+                                                <form:hidden path="inThreadName" value="0"/>
 
                                                 <div class="left">
                                                     <h4>Thread Name:</h4>
@@ -167,26 +168,6 @@
                                                                    class="form-control"
                                                                    rows="5"
                                                                    autofocus="true"/>
-                                                </div>
-                                                <br>
-                                                <div class="left">
-                                                        <%-- Hidden input for anonymity --%>
-                                                    <input type="hidden" id="displayFirstName"
-                                                           value="${currUser.firstName}">
-                                                    <input type="hidden" id="displayLastName"
-                                                           value="${currUser.lastName}">
-                                                    <h4>Display Name or Stay Anonymous?</h4>
-                                                    <button type="button" id="displayNameFull"
-                                                            class="btn-comment btn btn-primary ps-btn-primary-active">
-                                                        Display
-                                                        Name
-                                                    </button>
-                                                    <button type="button" id="displayNameHidden"
-                                                            class="btn-comment btn btn-primary">Stay
-                                                        Anonymous
-                                                    </button>
-                                                    <form:hidden path="inThreadName" id="add-thread-display-name"
-                                                                 value="${currUser.firstName} ${currUser.lastName}"/>
                                                 </div>
                                                 <br>
                                                 <div class="right">

@@ -36,6 +36,7 @@
         <div class="col-md-2">
             <div class="list-group">
                 <a href="${contextPath}/instructor" class="list-group-item">Instructor Home</a>
+                <a href="${contextPath}/instructor/${currentCourse.courseKey}/forum" class="list-group-item">Course Forum</a>
             </div>
         </div>
 
