@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Ready conditions
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $(".ps-modal-type-comment").addClass("pushToBack");
 
     // On Click functions
     $("#ps-comment-section").on("click", ".btn-comment-edit", editCommentModalShow);
