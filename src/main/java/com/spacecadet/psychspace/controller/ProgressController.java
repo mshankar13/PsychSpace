@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -76,8 +77,8 @@ public class ProgressController {
         int year = cal.get(Calendar.YEAR);
         String today = month + "/" + day + "/" + year;
         model.addObject("todayDate", today);
-        int i = 10;
-        model.addObject("courseProgress", i);
+        DecimalFormat df = new DecimalFormat("#.00");
+        model.addObject("courseProgress", df.format(getCourseProgress(course)));
 
         return model;
     }
@@ -99,7 +100,7 @@ public class ProgressController {
      * @param course course utility object
      * @return
      */
-    private int getCourseProgress(Course course){
+    private double getCourseProgress(Course course){
         Calendar cal1 = new GregorianCalendar();
         Calendar cal2 = new GregorianCalendar();
         Date today = new Date();
@@ -110,7 +111,7 @@ public class ProgressController {
         double totalDays = daysBetween(cal1.getTime(), cal2.getTime());
         cal2.setTime(today);
         double dayspassed = daysBetween(cal1.getTime(), cal2.getTime());
-        return (int) (dayspassed/totalDays)*100;
+        return (dayspassed/totalDays)*100;
     }
 
     /**
@@ -119,7 +120,7 @@ public class ProgressController {
      * @param d2 last date
      * @return amount of days in between the to dates
      */
-    public int daysBetween(Date d1, Date d2){
-        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    public double daysBetween(Date d1, Date d2){
+        return (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24);
     }
 }
