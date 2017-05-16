@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * Controller for all visits to student/user progress pages.
  * use cases: load user progress for selected course
@@ -24,6 +28,7 @@ public class ProgressController {
     private GoalManager goalManager = new GoalManager();
     private SurveyManager surveyManager = new SurveyManager();
     private UserManager userManager = new UserManager();
+    private HelperManager helper = new HelperManager();
 
     /**
      * all visit to course learn page
@@ -63,6 +68,15 @@ public class ProgressController {
         model.addObject("hasGoal", hasGoal);
         model.addObject("hasStarted", hasStarted);
         model.addObject("currUser", WelcomeController.currUser);
+        Date rawDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(rawDate);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int year = cal.get(Calendar.YEAR);
+        String today = month + "/" + day + "/" + year;
+        model.addObject("todayDate", today);
+        model.addObject("courseProgress", getCourseProgress(course));
 
         return model;
     }
@@ -76,5 +90,35 @@ public class ProgressController {
     public String logout(@PathVariable("courseKey") String courseKey, @RequestBody String user) {
         userManager.resetCurrentUser(new User());
         return "redirect:/";
+    }
+
+    /**
+     * helper method to calculate the progress of course
+     * course total days / passed days
+     * @param course course utility object
+     * @return
+     */
+    private int getCourseProgress(Course course){
+        Calendar cal1 = new GregorianCalendar();
+        Calendar cal2 = new GregorianCalendar();
+        Date today = new Date();
+        Date startDate = helper.stringToDate(course.getStartDate());
+        Date endDate = helper.stringToDate(course.getEndDate());
+        cal1.setTime(startDate);
+        cal2.setTime(endDate);
+        int totalDays = daysBetween(cal1.getTime(), cal2.getTime());
+        cal2.setTime(today);
+        int dayspassed = daysBetween(cal1.getTime(), cal2.getTime());
+        return (dayspassed/totalDays)*100;
+    }
+
+    /**
+     * helper method for calculating days in between
+     * @param d1 first date
+     * @param d2 last date
+     * @return amount of days in between the to dates
+     */
+    public int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
 }

@@ -40,6 +40,7 @@ public class EvaluationController {
         String hasEvaluation = "false";
         String hasSurvey = "false";
         String hasStarted = "false";
+        ModelAndView model = new ModelAndView();
         Date rawDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(rawDate);
@@ -47,11 +48,10 @@ public class EvaluationController {
         int day = cal.get(Calendar.DATE);
         int year = cal.get(Calendar.YEAR);
         String today = month + "/" + day + "/" + year;
+        model.addObject("todayDate", today);
         Goal userGoal = goalManager.loadUserGoal(courseKey, WelcomeController.currUser.getUserKey());
-        ModelAndView model = new ModelAndView();
         model.setViewName("learnEvaluation");
         model.addObject("goal", userGoal);
-        model.addObject("todayDate", today);
         double weeklyGoalValue = splitGoalManager.getSplitGoalValue(courseKey, userGoal);
         model.addObject("weeklyGoalValue", weeklyGoalValue);
         model.addObject("evaluation", new Evaluation());
