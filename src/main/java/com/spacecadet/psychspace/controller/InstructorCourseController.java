@@ -46,7 +46,7 @@ public class InstructorCourseController {
     public ModelAndView editCourse(@PathVariable("courseKey") String courseKey) {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasInstructorAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());

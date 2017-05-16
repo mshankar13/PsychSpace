@@ -40,7 +40,7 @@
                     <div class="error-logo fadein-once">
                         <img class="error-img-text" src="${contextPath}/resources/img/logo_text.png" alt="PsychSpace">
                     </div>
-                    <h1 class="fadein-once">404 (Not Found) : This page is not found.</h1>
+                    <h1 class="fadein-once">403 (Forbidden): Access Denied.</h1>
                 </div>
             </div>
             <div class="error-header-content-inner-buttons fadein-once">

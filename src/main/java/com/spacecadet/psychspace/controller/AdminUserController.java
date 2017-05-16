@@ -20,7 +20,7 @@ public class AdminUserController {
     public ModelAndView adminUser() {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasAdminAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         model.setViewName("adminUser");
