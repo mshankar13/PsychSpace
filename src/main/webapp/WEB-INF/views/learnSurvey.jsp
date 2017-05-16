@@ -76,7 +76,7 @@
                                     <div class="ps-answers answer-row">
                                         <!-- Answer Start -->
                                         <c:forEach items="${question.value}" var="answer">
-                                            <div class="ps-answer">
+                                            <div class="ps-answer left">
                                                 <!-- Answer Button -->
                                                 <!-- Set "id" equal to answer key + answer-->
                                                 <!-- Set "name" equal to question key -->
