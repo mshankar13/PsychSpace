@@ -31,7 +31,7 @@ public class AdminArticleController {
     public ModelAndView loadNewList() {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasAdminAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         model.setViewName("adminAddArticle");
@@ -63,7 +63,7 @@ public class AdminArticleController {
     public ModelAndView deleteNews() {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasAdminAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         model.setViewName("adminDeleteArticle");
@@ -103,7 +103,7 @@ public class AdminArticleController {
     public ModelAndView editNews() {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasAdminAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         model.setViewName("adminEditArticle");

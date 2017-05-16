@@ -38,7 +38,7 @@ public class InstructorSurveyController {
     public ModelAndView addSurveyPost(@PathVariable("courseKey") String courseKey) {
         ModelAndView model = new ModelAndView();
         if(!userManager.hasInstructorAccess()){
-            model.setViewName("404");
+            model.setViewName("403");
             return model;
         }
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
