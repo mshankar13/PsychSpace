@@ -27,6 +27,7 @@ function setInThreadNameFull() {
     var displayFirstName = $("#displayFirstName").val();
     var displayLastName = $("#displayLastName").val();
 
+
     $("#add-thread-display-name").val(displayFirstName + " " + displayLastName);
 
 }

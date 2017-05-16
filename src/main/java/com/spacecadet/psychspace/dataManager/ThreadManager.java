@@ -58,11 +58,11 @@ public class ThreadManager {
             Thread thread1 = new Thread();
             thread1.setThreadKey(KeyFactory.keyToString(thread.getKey()));
             thread1.setUserKey(thread.getProperty("UserKey").toString());
-            thread1.setUserKey(thread.getProperty("CourseKey").toString());
+            thread1.setCourseKey(thread.getProperty("CourseKey").toString());
             thread1.setInThreadName(thread.getProperty("InThreadName").toString());
             thread1.setTitle(thread.getProperty("Title").toString());
             thread1.setContent(thread.getProperty("Content").toString());
-            thread1.setContent(thread.getProperty("Date").toString());
+            thread1.setDate(thread.getProperty("Date").toString());
 
             loadedThreads.add(thread1);
         }
@@ -102,7 +102,7 @@ public class ThreadManager {
         try {
             try {
                 Entity updatedThread = datastore.get(KeyFactory.stringToKey(thread.getThreadKey()));
-                updatedThread.setProperty("CoruseKey", thread.getCourseKey());
+                updatedThread.setProperty("CourseKey", thread.getCourseKey());
                 updatedThread.setProperty("UserKey", thread.getUserKey());
                 updatedThread.setProperty("InThreadName", thread.getInThreadName());
                 updatedThread.setProperty("Title", thread.getTitle());

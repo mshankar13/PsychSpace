@@ -16,6 +16,7 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
@@ -73,6 +74,8 @@
                             <c:otherwise>
                                 <c:forEach items="${threads}" var="singleThread">
                                     <c:set var="threadUserKey" value="${singleThread.userKey}"/>
+                                    <c:out value="${singleThread.userKey}" />
+                                    <c:out value="${currUserKey}" />
                                     <c:choose>
                                         <%-- If thread was created by the current user--%>
                                         <c:when test="${currUserKey == threadUserKey}">
@@ -171,9 +174,9 @@
                                                 <div class="left">
                                                         <%-- Hidden input for anonymity --%>
                                                     <input type="hidden" id="displayFirstName"
-                                                           value=${currUser.firstName}/>
+                                                           value="${currUser.firstName}">
                                                     <input type="hidden" id="displayLastName"
-                                                           value=${currUser.lastName}/>
+                                                           value="${currUser.lastName}">
                                                     <h4>Display Name or Stay Anonymous?</h4>
                                                     <button type="button" id="displayNameFull"
                                                             class="btn-comment btn btn-primary ps-btn-primary-active">

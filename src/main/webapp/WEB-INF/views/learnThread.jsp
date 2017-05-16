@@ -16,6 +16,7 @@
     <link href='http://fonts.googleapis.com/css?family=Maven Pro' rel='stylesheet'>
     <%--jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <%--Bootstrap--%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
@@ -207,7 +208,7 @@
                             <button type="button" class="ps-type-close btn btn-default"
                                     data-dismiss="modal">Close
                             </button>
-                            <button id="btn-comment-edit" type="submit"
+                            <button type="submit"
                                     class="ps-type-close btn-comment btn btn-primary">Save
                             </button>
                         </div>
@@ -217,6 +218,7 @@
         </div>
         <br>
         <!-- End Edit Comment Modal -->
+
         <!-- Delete Comment Modal -->
         <div class="modal ps-modal-type-comment fade" id="delete-comment-modal" role="dialog">
             <div class="ps-modal-dialog">
@@ -252,7 +254,7 @@
                             <button type="button" class="ps-type-close btn-comment btn btn-primary"
                                     data-dismiss="modal">No
                             </button>
-                            <button id="btn-comment-update" type="submit"
+                            <button type="submit"
                                     class="ps-type-close btn-comment btn btn-primary">Delete
                             </button>
                         </div>
@@ -262,6 +264,7 @@
         </div>
         <br>
         <!-- End Delete Comment Modal
+
         <!-- Delete Thread Modal -->
         <div class="modal ps-modal-type-comment fade" id="delete-thread-modal" role="dialog">
             <div class="ps-modal-dialog">
@@ -297,7 +300,7 @@
                             <button type="button" class="ps-type-close btn-comment btn btn-primary"
                                     data-dismiss="modal">No
                             </button>
-                            <button id="btn-thread-update" type="submit"
+                            <button type="submit"
                                     class="ps-type-close btn-comment btn btn-primary">Delete
                             </button>
                         </div>
@@ -306,7 +309,8 @@
             </div>
         </div>
         <br>
-        <!-- End Delete Thread Modal
+        <!-- End Delete Thread Modal -->
+
         <!-- Edit Thread Modal-->
         <div class="modal ps-modal-type-comment fade" id="edit-thread-modal" role="dialog">
             <div class="ps-modal-dialog">
@@ -342,8 +346,8 @@
                             <br>
                             <div class="left">
                                     <%-- Hidden input for anonymity --%>
-                                <input type="hidden" id="displayFirstName" value=${currUser.firstName}/>
-                                <input type="hidden" id="displayLastName" value=${currUser.lastName}/>
+                                <input type="hidden" id="displayFirstName" value=${currUser.firstName}>
+                                <input type="hidden" id="displayLastName" value=${currUser.lastName}>
                                 <h4>Display Name or Stay Anonymous?</h4>
                                 <button type="button" id="displayNameFull"
                                         class="btn-comment btn btn-primary">Display
@@ -361,7 +365,7 @@
                             <button type="button" class="ps-type-close btn btn-default"
                                     data-dismiss="modal">Close
                             </button>
-                            <button id="btn-thread-edit" type="submit"
+                            <button type="submit"
                                     class="ps-type-close btn-comment btn btn-primary">Save
                             </button>
                         </div>
@@ -377,10 +381,10 @@
 </header>
 
 <%@include file="footer.html" %>
-<script src="${contextPath}/resources/js/scrollreveal.js"></script>
 <script src="${contextPath}/resources/js/navbar.js"></script>
 <script src="${contextPath}/resources/js/learnNavbar.js"></script>
 <script src="${contextPath}/resources/js/thread.js"></script>
 <script src="${contextPath}/resources/js/animations.js"></script>
+<script src="${contextPath}/resources/js/scrollreveal.js"></script>
 </body>
 </html>
