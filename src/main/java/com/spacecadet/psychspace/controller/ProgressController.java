@@ -106,10 +106,10 @@ public class ProgressController {
         Date endDate = helper.stringToDate(course.getEndDate());
         cal1.setTime(startDate);
         cal2.setTime(endDate);
-        int totalDays = daysBetween(cal1.getTime(), cal2.getTime());
+        double totalDays = daysBetween(cal1.getTime(), cal2.getTime());
         cal2.setTime(today);
-        int dayspassed = daysBetween(cal1.getTime(), cal2.getTime());
-        return (dayspassed/totalDays)*100;
+        double dayspassed = daysBetween(cal1.getTime(), cal2.getTime());
+        return (int) (dayspassed/totalDays)*100;
     }
 
     /**

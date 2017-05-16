@@ -9,6 +9,8 @@ $(document).ready(function () {
     if (goal != "")
         loadGoal(goal);
 
+    setProgress();
+
     $("#btn-example-goal").on("click", exampleGoalModalShow);
 });
 
@@ -28,6 +30,7 @@ function loadGoal(goal) {
 
     // if the set goal deadline has passed, disable the fields
     if (Date.parse(goalDuedate) < Date.parse(today)) {
+        $("#goal-reminder").hide();
         $("#action").prop("disabled", true);
         $("#value").prop("disabled", true);
         $("#unit").prop("disabled", true);
@@ -37,4 +40,10 @@ function loadGoal(goal) {
 // prop a modal of example goals
 function exampleGoalModalShow() {
     $("#exampleGoalsModal").modal("show");
+}
+
+// set the progress bar on learn/progress page
+function setProgress() {
+    var progress = $("#course-progress").val() + "%";
+    $(".progress-bar").css("width", progress);
 }

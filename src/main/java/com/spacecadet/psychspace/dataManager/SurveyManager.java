@@ -55,12 +55,14 @@ public class SurveyManager {
      * @param courseKey course key
      * @return
      */
-    public Survey loadSingleCourseSurvey(String courseKey) {
+    public Survey loadSingleCourseSurvey(String courseKey, String instructorKey) {
         Survey survey = new Survey();
         Query.Filter propertyFilter1 =
                 new Query.FilterPredicate("CourseKey", Query.FilterOperator.EQUAL, courseKey);
-
-        Query surveyQuery = new Query("Survey").setFilter(propertyFilter1);
+        Query.Filter propertyFilter2 =
+                new Query.FilterPredicate("UserKey", Query.FilterOperator.EQUAL, instructorKey);
+        Query.CompositeFilter userCourseFilter = Query.CompositeFilterOperator.and(propertyFilter1, propertyFilter2);
+        Query surveyQuery = new Query("Survey").setFilter(userCourseFilter);
         Entity surveyEntity = datastore.prepare(surveyQuery).asSingleEntity();
 
         if (surveyEntity != null) {

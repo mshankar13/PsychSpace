@@ -42,7 +42,7 @@ public class InstructorSurveyController {
             return model;
         }
         ArrayList<Course> courses = courseManager.loadInstructorCourses(WelcomeController.currUser.getUserKey());
-        Survey survey = surveyManager.loadSingleCourseSurvey(courseKey);
+        Survey survey = surveyManager.loadSingleCourseSurvey(courseKey, WelcomeController.currUser.getUserKey());
         String courseSurvey;
         if (survey != null)
             courseSurvey = helperManager.surveyObjectsToJsonString(survey);
@@ -78,7 +78,7 @@ public class InstructorSurveyController {
      */
     @RequestMapping(value = "/instructor/{courseKey}/editSurvey", method = RequestMethod.POST)
     public String editSurveyGet(@PathVariable("courseKey") String courseKey, @RequestBody String surveyStr) {
-        Survey initSurvey = surveyManager.loadSingleCourseSurvey(courseKey);
+        Survey initSurvey = surveyManager.loadSingleCourseSurvey(courseKey, WelcomeController.currUser.getUserKey());
         Survey survey = helperManager.surveyStringToSurvey(surveyStr);
         survey.setCourseKey(courseKey);
         survey.setUserKey(WelcomeController.currUser.getUserKey());

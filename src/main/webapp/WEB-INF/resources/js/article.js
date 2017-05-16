@@ -26,7 +26,7 @@ function editCommentModalShow() {
     $("#edit-comment-content").val(content);
 
     $(".ps-modal-type-comment").removeClass("pushToBack");
-    $(".ps-modal-type-comment").addClass("pushToFront");
+    $("#edit-comment-modal").addClass("pushToFront");
     $("#edit-comment-modal").modal("show");
 }
 
@@ -38,7 +38,7 @@ function deleteCommentModalShow() {
     $("#delete-comment-modal-span").text(content);
 
     $(".ps-modal-type-comment").removeClass("pushToBack");
-    $(".ps-modal-type-comment").addClass("pushToFront");
+    $("#delete-comment-modal").addClass("pushToFront");
     $("#delete-comment-modal").modal("show");
 
 }

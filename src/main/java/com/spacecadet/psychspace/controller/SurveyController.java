@@ -56,7 +56,7 @@ public class SurveyController {
             hasGoal = "true";
         }
         if(survey == null){
-            survey = surveyManager.loadSingleCourseSurvey(courseKey);
+            survey = surveyManager.loadSingleCourseSurvey(courseKey, course.getUserKey());
             hasSurvey = "false";
         }
         if(courseManager.hasStarted(course.getStartDate())){

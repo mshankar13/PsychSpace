@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: aliao
+  Date: 5/16/2017
+  Time: 4:56 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -43,16 +50,6 @@
     <div class="ps-feature-content">
         <div class="row ps-feature">
             <div class="row ps-text-content">
-                <div class="col-lg-2 ps-col-left">
-                    <div class="ps-well">
-                        <!-- Learn Sidebar -->
-                        <%@include file="learnSidebar.jsp" %>
-                    </div>
-                </div>
-                <div class="col-lg-10 ps-col-right">
-                    <%--<!-- Learn Navbar for Todos-->--%>
-                    <jsp:include page="learn-navbar.html"/>
-                </div>
                 <div class="col-lg-10 ps-col-right">
                     <%--<!-- Content -->--%>
                     <%-- Start Thread Content --%>
@@ -344,20 +341,6 @@
                                                autofocus="true"/>
                             </div>
                             <br>
-                            <div class="left">
-                                    <%-- Hidden input for anonymity --%>
-                                <input type="hidden" id="displayFirstName" value=${currUser.firstName}>
-                                <input type="hidden" id="displayLastName" value=${currUser.lastName}>
-                                <h4>Display Name or Stay Anonymous?</h4>
-                                <button type="button" id="displayNameFull" class="btn-comment ps-btn">
-                                    Display Name
-                                </button>
-                                <button type="button" id="displayNameHidden" class="btn-comment ps-btn">
-                                    Stay Anonymous
-                                </button>
-                                <form:hidden path="inThreadName" id="edit-thread-display-name"
-                                             value="${survey.inThreadName}"/>
-                            </div>
                         </div>
                         <div class="ps-modal-footer right">
                             <button type="button" class="ps-type-close btn btn-default"

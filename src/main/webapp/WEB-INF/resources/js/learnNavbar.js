@@ -22,15 +22,6 @@ function setActiveLearnNav() {
     if (url == "habit") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").addClass("active");
-        $("#nav-learn-cues").removeClass("active");
-        $("#nav-learn-evaluations").removeClass("active");
-        $("#nav-learn-videos").removeClass("active");
-        $("#nav-learn-forum").removeClass("active");
-    }
-    else if (url == "cues") {
-        $("#nav-learn-progress").removeClass("active");
-        $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").addClass("active");
         $("#nav-learn-evaluations").removeClass("active");
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").removeClass("active");
@@ -38,7 +29,6 @@ function setActiveLearnNav() {
     else if (url == "evaluation") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").addClass("active");
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").removeClass("active");
@@ -46,7 +36,6 @@ function setActiveLearnNav() {
     else if (url == "videos") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").removeClass("active");
         $("#nav-learn-videos").addClass("active");
         $("#nav-learn-forum").removeClass("active");
@@ -54,7 +43,6 @@ function setActiveLearnNav() {
     else if (url == "forum") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").removeClass("active");
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").addClass("active");
@@ -62,7 +50,6 @@ function setActiveLearnNav() {
     else if (url == "survey") {
         $("#nav-learn-progress").removeClass("active");
         $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").removeClass("active");
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").removeClass("active");
@@ -70,7 +57,6 @@ function setActiveLearnNav() {
     else{
         $("#nav-learn-progress").addClass("active");
         $("#nav-learn-habit").removeClass("active");
-        $("#nav-learn-cues").removeClass("active");
         $("#nav-learn-evaluations").removeClass("active");
         $("#nav-learn-videos").removeClass("active");
         $("#nav-learn-forum").removeClass("active");

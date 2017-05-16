@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by aliao on 5/1/2017.
  */
@@ -71,6 +74,14 @@ public class HabitController {
         if(surveyManager.loadUserSurvey(courseKey, WelcomeController.currUser.getUserKey()) != null){
             hasSurvey = "true";
         }
+        Date rawDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(rawDate);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int year = cal.get(Calendar.YEAR);
+        String today = month + "/" + day + "/" + year;
+        model.addObject("todayDate", today);
         model.addObject("hasSurvey", hasSurvey);
         model.addObject("currUser", WelcomeController.currUser);
 
