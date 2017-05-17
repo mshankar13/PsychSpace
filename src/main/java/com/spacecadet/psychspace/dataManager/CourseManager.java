@@ -207,7 +207,7 @@ public class CourseManager {
                 updatedCourse.setProperty("EnrollDate", course.getEnrollDate());
                 updatedCourse.setProperty("DropDate", course.getDropDate());
                 updatedCourse.setProperty("Status", course.getStatus());
-                updatedCourse.setProperty("CurrSize", updatedCourse.getProperty("CurrSize").toString());
+                updatedCourse.setProperty("CurrSize", course.getCurrSize());
                 updatedCourse.setProperty("Capacity", course.getCapacity());
                 datastore.delete(KeyFactory.stringToKey(course.getCourseKey()));
                 datastore.put(updatedCourse);
