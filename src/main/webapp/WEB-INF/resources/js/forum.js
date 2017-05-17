@@ -9,14 +9,15 @@ $(document).ready(function (){
     $("#displayNameFull").on("click", setInThreadNameFull);
     $("#displayNameHidden").on("click", setInThreadNameHidden);
 
+    $(".ps-type-close").on("click", onModalClose);
 
 });
 
 
 function addThreadModalShow() {
     console.log("New Thread");
-    $(".ps-modal-type-comment").removeClass("pushToBack");
-    $(".ps-modal-type-comment").addClass("pushToFront");
+    $("#add-thread-modal").removeClass("pushToBack");
+    $("#add-thread-modal").addClass("pushToFront");
     $("#add-thread-modal").modal("show");
 
 }
@@ -37,6 +38,10 @@ function setInThreadNameHidden() {
     $("#displayNameHidden").addClass("ps-btn-primary-active");
 
     $("#add-thread-display-name").val("Anonymous");
+}
 
+function onModalClose(){
+    $(".ps-modal-type-comment").removeClass("pushToFront");
+    $(".ps-modal-type-comment").addClass("pushToBack");
 }
 

@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#displayNameHidden").on("click", setInThreadNameHidden);
 
 
+    $(".ps-type-close").on("click", onModalClose);
 
 });
 
@@ -34,7 +35,7 @@ function editCommentModalShow() {
         $("#displayNameFull").addClass("ps-btn-primary-active");
     }
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#edit-comment-modal").removeClass("pushToBack");
     $("#edit-comment-modal").addClass("pushToFront");
     $("#edit-comment-modal").modal("show");
 }
@@ -46,7 +47,7 @@ function deleteCommentModalShow() {
     $("#delete-comment-modal-key").val(commentKey);
     $("#delete-comment-modal-span").text(content);
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#delete-comment-modal").removeClass("pushToBack");
     $("#delete-comment-modal").addClass("pushToFront");
     $("#delete-comment-modal").modal("show");
 
@@ -59,7 +60,7 @@ function editThreadModalShow() {
     $("#edit-thread-modal-key").val(threadKey);
     $("#edit-thread-modal-span").text(content);
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#edit-thread-modal").removeClass("pushToBack");
     $("#edit-thread-modal").addClass("pushToFront");
     $("#edit-thread-modal").modal("show");
 }
@@ -71,7 +72,7 @@ function deleteThreadModalShow() {
     $("#edit-thread-modal-key").val(threadKey);
     $("#edit-thread-modal-span").text(content);
 
-    $(".ps-modal-type-comment").removeClass("pushToBack");
+    $("#delete-thread-modal").removeClass("pushToBack");
     $("#delete-thread-modal").addClass("pushToFront");
     $("#delete-thread-modal").modal("show");
 }
@@ -93,4 +94,9 @@ function setInThreadNameHidden() {
 
     $("#edit-thread-display-name").val("Anonymous");
 
+}
+
+function onModalClose(){
+    $(".ps-modal-type-comment").removeClass("pushToFront");
+    $(".ps-modal-type-comment").addClass("pushToBack");
 }
